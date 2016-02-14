@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.Tracing", "Raven.Rpc.Tracing\Raven.Rpc.Tracing.csproj", "{1FE6DF36-A193-4E21-968B-77A970B6E42F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.Tracing.Test", "test\Raven.Rpc.Tracing.Test\Raven.Rpc.Tracing.Test.csproj", "{361F1CBD-D45D-4E38-8A1B-ED906A2D394C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.AspNet.WebApiExtensions.Tracing", "Raven.AspNet.WebApiExtensions.Tracing\Raven.AspNet.WebApiExtensions.Tracing.csproj", "{579DB6C5-3BAF-406F-81AB-551F5F885A7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.HttpProtocol.Tracing", "Raven.Rpc.HttpProtocol.Tracing\Raven.Rpc.HttpProtocol.Tracing.csproj", "{3413E680-837E-4BD8-9C37-728359B32C13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FE6DF36-A193-4E21-968B-77A970B6E42F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FE6DF36-A193-4E21-968B-77A970B6E42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FE6DF36-A193-4E21-968B-77A970B6E42F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FE6DF36-A193-4E21-968B-77A970B6E42F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{361F1CBD-D45D-4E38-8A1B-ED906A2D394C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{361F1CBD-D45D-4E38-8A1B-ED906A2D394C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{361F1CBD-D45D-4E38-8A1B-ED906A2D394C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{361F1CBD-D45D-4E38-8A1B-ED906A2D394C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{579DB6C5-3BAF-406F-81AB-551F5F885A7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579DB6C5-3BAF-406F-81AB-551F5F885A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579DB6C5-3BAF-406F-81AB-551F5F885A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{579DB6C5-3BAF-406F-81AB-551F5F885A7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3413E680-837E-4BD8-9C37-728359B32C13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3413E680-837E-4BD8-9C37-728359B32C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3413E680-837E-4BD8-9C37-728359B32C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3413E680-837E-4BD8-9C37-728359B32C13}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{361F1CBD-D45D-4E38-8A1B-ED906A2D394C} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
+	EndGlobalSection
+EndGlobal

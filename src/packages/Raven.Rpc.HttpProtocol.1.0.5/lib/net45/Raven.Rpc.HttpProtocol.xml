@@ -1,0 +1,581 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.Rpc.HttpProtocol</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.Rpc.HttpProtocol.Formatters.MsgPackTypeFormatter">
+            <summary>
+            MediaType:"application/msgpack"
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.Formatters.MsgPackTypeFormatter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.Formatters.MsgPackTypeFormatter.CanReadType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.Formatters.MsgPackTypeFormatter.CanWriteType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.Formatters.MsgPackTypeFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,System.Net.Http.Formatting.IFormatterLogger)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="readStream"></param>
+            <param name="content"></param>
+            <param name="formatterLogger"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.Formatters.MsgPackTypeFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="value"></param>
+            <param name="writeStream"></param>
+            <param name="content"></param>
+            <param name="transportContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.IRpcHttpClient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Send``2(System.String,``1,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="httpMethod"></param>
+            <param name="urlParameters"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Get``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Post``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TData">提交数据类型</typeparam>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Post``1(System.String,System.Byte[],System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Post``1(System.String,System.Byte[],System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="offset">偏移</param>
+            <param name="count">数量</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Post``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Put``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Put
+            </summary>
+            <typeparam name="TData">提交数据类型</typeparam>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Put``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Put
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">url parameter 数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Delete``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Delete
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.SendAsync``2(System.String,``1,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="httpMethod"></param>
+            <param name="urlParameters"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.GetAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            GetAsync
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.PostAsync``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TData">提交数据类型</typeparam>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.PostAsync``1(System.String,System.Byte[],System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.PostAsync``1(System.String,System.Byte[],System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="offset">偏移</param>
+            <param name="count">数量</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.PostAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.PutAsync``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Put
+            </summary>
+            <typeparam name="TData">提交数据类型</typeparam>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.PutAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Put
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">url parameter 数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.DeleteAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Delete
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="baseUrl"></param>
+            <param name="mediaType"></param>
+            <param name="timeout">超时时间（毫秒）</param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.CreateMediaTypeFormatter(System.String)">
+            <summary>
+            创建MediaTypeFormatter
+            </summary>
+            <param name="mediaType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.InitHttpClient(System.Nullable{System.Int32},System.Net.Http.HttpClient)">
+            <summary>
+            HttpClient初始化
+            </summary>
+            <param name="timeout"></param>
+            <param name="client"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.SendAsync``2(System.String,``1,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="httpMethod"></param>
+            <param name="urlParameters"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Send``2(System.String,``1,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="httpMethod"></param>
+            <param name="urlParameters"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Get``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.GetAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Post``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TData">提交数据类型</typeparam>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.PostAsync``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TData">提交数据类型</typeparam>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Post``1(System.String,System.Byte[],System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.PostAsync``1(System.String,System.Byte[],System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Post``1(System.String,System.Byte[],System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="offset">偏移</param>
+            <param name="count">数量</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.PostAsync``1(System.String,System.Byte[],System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="offset">偏移</param>
+            <param name="count">数量</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout">超时时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Post``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.PostAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Post
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Put``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Put
+            </summary>
+            <typeparam name="TData">提交数据类型</typeparam>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.PutAsync``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Put
+            </summary>
+            <typeparam name="TData">提交数据类型</typeparam>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Put``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Put
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">url parameter 数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.PutAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Put
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="data">url parameter 数据</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Delete``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Delete
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.DeleteAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+            <summary>
+            Delete
+            </summary>
+            <typeparam name="TResult">返回数据类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="urlParameters">url parameter 数据</param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.CreateUrlParams(System.Collections.Generic.IDictionary{System.String,System.String},System.String@)">
+            <summary>
+            创建参数
+            </summary>
+            <param name="urlParameters"></param>
+            <param name="baseUrl"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.CreateContent``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TData"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.GetResult``1(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            获取Result对象
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.GetResultAsync``1(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            获取Result对象
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.AddDefaultUrlParameters(System.Collections.Generic.IDictionary{System.String,System.String}@)">
+            <summary>
+            添加默认参数
+            </summary>
+            <param name="urlParameters"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultRequestHeadersHandler(System.Net.Http.Headers.HttpRequestHeaders)">
+            <summary>
+            请求前，请求header定义
+            </summary>
+            <param name="headers"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.ErrorResponseHandler``1(``0@,System.Net.Http.HttpResponseMessage)">
+            <summary>
+            异常处理
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="result"></param>
+            <param name="httpResponse"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersHandler(System.Collections.Generic.IDictionary{System.String,System.String}@)">
+            <summary>
+            Url默认参数处理
+            </summary>
+            <param name="urlParameters"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.RequestContentDataHandler(System.Object@)">
+            <summary>
+            请求数据处理
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Finalize">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>
