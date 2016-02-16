@@ -24,7 +24,7 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 服务器IP
         /// </summary>
-        public string MachineIP { get; set; }
+        public string MachineAddr { get; set; }
 
         /// <summary>
         /// 请求开始时间
@@ -51,15 +51,25 @@ namespace Raven.Rpc.Tracing
         /// </summary>
         public int Code { get; set; }
 
-        /// <summary>
-        /// 响应内容
-        /// </summary>
-        public byte[] SendContent { get; set; }
+        ///// <summary>
+        ///// 响应内容
+        ///// </summary>
+        //public byte[] SendContent { get; set; }
+
+        ///// <summary>
+        ///// 内容类型
+        ///// </summary>
+        //public string ContentType { get; set; }
 
         /// <summary>
-        /// 内容类型
+        /// 调用ID
         /// </summary>
-        public string ContentType { get; set; }
+        public string InvokeID { get; set; }
+
+        /// <summary>
+        /// 调用ID
+        /// </summary>
+        public string ServerHost { get; set; }
 
         /// <summary>
         /// 扩展

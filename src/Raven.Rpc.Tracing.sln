@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.AspNet.WebApiExtensio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.HttpProtocol.Tracing", "Raven.Rpc.HttpProtocol.Tracing\Raven.Rpc.HttpProtocol.Tracing.csproj", "{3413E680-837E-4BD8-9C37-728359B32C13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.Tracing.Owin", "Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.csproj", "{D3ACD237-2F03-4909-AC7D-7C9F0DB8B909}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{3413E680-837E-4BD8-9C37-728359B32C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3413E680-837E-4BD8-9C37-728359B32C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3413E680-837E-4BD8-9C37-728359B32C13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3ACD237-2F03-4909-AC7D-7C9F0DB8B909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3ACD237-2F03-4909-AC7D-7C9F0DB8B909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3ACD237-2F03-4909-AC7D-7C9F0DB8B909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3ACD237-2F03-4909-AC7D-7C9F0DB8B909}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

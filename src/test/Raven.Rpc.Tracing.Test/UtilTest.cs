@@ -26,5 +26,11 @@ namespace Raven.Rpc.Tracing.Test
             res = Util.VersionIncr("1.2.");
             StringAssert.Equals(res, "1.2.1");
         }
+
+        [TestMethod]
+        public void GetUniqueCode16()
+        {
+            var res = Util.GetUniqueCode22();
+        }
     }
 }

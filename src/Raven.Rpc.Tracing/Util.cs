@@ -2,13 +2,38 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Raven.Rpc.Tracing
 {
-    public class Util
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class Util
     {
+        private static Lazy<IHttpHelper> _httpHelper = new Lazy<IHttpHelper>(() => ServiceContainer.Resolve<IHttpHelper>());
+        /// <summary>
+        /// 
+        /// </summary>
+        public static IHttpHelper HttpHelper
+        {
+            get
+            {
+                return _httpHelper.Value;
+            }
+        }
+
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="httpHelper"></param>
+        public static void Register(IHttpHelper httpHelper)
+        {
+            ServiceContainer.Register(httpHelper);
+        }
+
         /// <summary>
         /// 获取32位唯一字符串
         /// </summary>
@@ -20,6 +45,17 @@ namespace Raven.Rpc.Tracing
             var token1 = Convert.ToBase64String(guid1.ToByteArray()).TrimEnd('=').Replace("/", "_").Replace("+", "-");
             var token2 = Convert.ToBase64String(guid2.ToByteArray()).TrimEnd('=').Replace("/", "_").Replace("+", "-");
             return (token1 + token2).Substring(0, 32);
+        }
+
+        /// <summary>
+        /// 获取32位唯一字符串
+        /// </summary>
+        /// <returns></returns>
+        public static string GetUniqueCode22()
+        {
+            var guid1 = Guid.NewGuid();
+            var token1 = Convert.ToBase64String(guid1.ToByteArray()).TrimEnd('=').Replace("/", "_").Replace("+", "-");
+            return token1;
         }
 
         /// <summary>
@@ -51,5 +87,15 @@ namespace Raven.Rpc.Tracing
                 return (int.Parse(val) + 1).ToString();
             }
         }
+
+        //public static string GetServerAddress(HttpRequestMessage request)
+        //{
+        //    //is owin
+        //    if (System.Web.HttpContext.Current == null)
+        //    {
+        //        request.GetOwinContext()
+        //    }
+        //}
+
     }
 }
