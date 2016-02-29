@@ -15,16 +15,16 @@ namespace Raven.Rpc.Tracing
     {
         private const string RequestHeaderKey = "__raven_RequestHeader";
         private const string SubRpcIDKey = "__raven_SubRpcID";
+        //private const string TrackIDKey = "__raven_TrackID";
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="request"></param>
         /// <returns></returns>
-        public static Rpc.IContractModel.Header GetRequestHeader(HttpRequestMessage request)
+        public static Rpc.IContractModel.Header GetRequestHeader()
         {
             //var requestHeader = HttpContext.Current.Items[RequestHeaderKey];
-            var requestHeader = Util.HttpHelper.GetHttpContextItem<Rpc.IContractModel.Header>(request, RequestHeaderKey);
+            var requestHeader = Util.HttpHelper.GetHttpContextItem<Rpc.IContractModel.Header>(RequestHeaderKey);
             if (requestHeader != null)
                 return requestHeader as Rpc.IContractModel.Header;
             else return null;
@@ -33,26 +33,23 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="request"></param>
         /// <param name="header"></param>
-        public static void SetRequestHeader(HttpRequestMessage request, Rpc.IContractModel.Header header)
+        public static void SetRequestHeader(Rpc.IContractModel.Header header)
         {
-            Util.HttpHelper.SetHttpContextItem(request, RequestHeaderKey, header);
+            Util.HttpHelper.SetHttpContextItem(RequestHeaderKey, header);
         }
-
-
+        
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="request"></param>
         /// <returns></returns>
-        public static string GetSubRpcID(HttpRequestMessage request)
+        public static string GetSubRpcID()
         {
-            var subRpcID = Util.HttpHelper.GetHttpContextItem<string>(request, SubRpcIDKey);
+            var subRpcID = Util.HttpHelper.GetHttpContextItem<string>(SubRpcIDKey);
             if (subRpcID == null)
             {
                 subRpcID = "0";
-                Util.HttpHelper.SetHttpContextItem(request, SubRpcIDKey, subRpcID);
+                Util.HttpHelper.SetHttpContextItem(SubRpcIDKey, subRpcID);
                 //HttpContext.Current.Items[SubRpcIDKey] = subRpcID;
             }
             return subRpcID.ToString();
@@ -61,12 +58,30 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="request"></param>
         /// <param name="val"></param>
-        public static void SetSubRpcID(HttpRequestMessage request, string val)
+        public static void SetSubRpcID(string val)
         {
-            Util.HttpHelper.SetHttpContextItem(request, SubRpcIDKey, val);
+            Util.HttpHelper.SetHttpContextItem(SubRpcIDKey, val);
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetTrackID()
+        //{
+        //    var trackId = Util.HttpHelper.GetHttpContextItem<string>(TrackIDKey);
+        //    return trackId;
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="val"></param>
+        //public static void SetTrackID(string val)
+        //{
+        //    Util.HttpHelper.SetHttpContextItem(TrackIDKey, val);
+        //}
 
         /// <summary>
         /// 
@@ -76,7 +91,7 @@ namespace Raven.Rpc.Tracing
         {
             return new Rpc.IContractModel.Header()
             {
-                //RpcID = "0",
+                RpcID = "0",
                 TrackID = Util.GetUniqueCode32()
             };
         }
@@ -84,6 +99,7 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="header"></param>
         /// <returns></returns>
         public static Rpc.IContractModel.Header CloneRequestHeader(Rpc.IContractModel.Header header)
         {

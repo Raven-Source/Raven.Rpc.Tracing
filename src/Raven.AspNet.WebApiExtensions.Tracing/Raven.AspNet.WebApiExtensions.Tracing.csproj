@@ -46,8 +46,8 @@
       <HintPath>..\packages\OwinRequestScopeContext.1.0.1\lib\NET45\OwinRequestScopeContext.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Rpc.IContractModel, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Rpc.IContractModel.1.0.4\lib\net45\Raven.Rpc.IContractModel.dll</HintPath>
+    <Reference Include="Raven.Rpc.IContractModel, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Rpc.IContractModel.1.0.5\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -73,7 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpHelper.cs" />
     <Compile Include="NonTracingAttribute.cs" />
     <Compile Include="TracingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -31,8 +31,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MsgPack, Version=0.6.0.0, Culture=neutral, PublicKeyToken=a2625990d5dc0167, processorArchitecture=MSIL">
+      <HintPath>..\packages\MsgPack.Cli.0.6.7\lib\net45\MsgPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.6.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.3.6.0\lib\net45\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.RabbitMQClient.1.0.0\lib\net45\Raven.RabbitMQClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Raven.Rpc.IContractModel.1.0.5\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Serializer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Serializer.1.0.1\lib\net45\Raven.Serializer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Serializer.WithMsgPack, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Serializer.WithMsgPack.1.0.1\lib\net45\Raven.Serializer.WithMsgPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -48,9 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientSR.cs" />
+    <Compile Include="Helpers\DictionaryHelper.cs" />
     <Compile Include="HttpContentData.cs" />
     <Compile Include="IHttpHelper.cs" />
+    <Compile Include="Record\ITracingRecord.cs" />
     <Compile Include="KeyValue.cs" />
+    <Compile Include="Record\TracingRecordRabbitmq.cs" />
     <Compile Include="ServiceContainer.cs" />
     <Compile Include="ServerRS.cs" />
     <Compile Include="Util.cs" />

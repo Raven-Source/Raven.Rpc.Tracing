@@ -25,14 +25,14 @@ namespace Raven.Rpc.Tracing
             }
         }
 
-        /// <summary>
-        /// 注册
-        /// </summary>
-        /// <param name="httpHelper"></param>
-        public static void Register(IHttpHelper httpHelper)
-        {
-            ServiceContainer.Register(httpHelper);
-        }
+        ///// <summary>
+        ///// 注册
+        ///// </summary>
+        ///// <param name="httpHelper"></param>
+        //public static void Register(IHttpHelper httpHelper)
+        //{
+        //    ServiceContainer.Register(httpHelper);
+        //}
 
         /// <summary>
         /// 获取32位唯一字符串
@@ -87,6 +87,35 @@ namespace Raven.Rpc.Tracing
                 return (int.Parse(val) + 1).ToString();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        public static string GetFullExceptionMessage(Exception ex)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (ex != null)
+            {
+                sb.Append(ex.Message);
+            }
+
+            var temp = ex;
+            while (temp.InnerException != null)
+            {
+                temp = temp.InnerException;
+                sb.Append("\r\n" + temp.Message);
+            }
+
+            return sb.ToString();
+        }
+
+        public const string TrackClientSRQueueName = "raven_track_csr";
+        public const string TrackServerRSQueueName = "raven_track_srs";
+        public const string ExceptionKey = "Exception";
+        public const string ParamsKey = "ParamsKey";
+        public const string ResultKey = "ResultKey";
 
         //public static string GetServerAddress(HttpRequestMessage request)
         //{

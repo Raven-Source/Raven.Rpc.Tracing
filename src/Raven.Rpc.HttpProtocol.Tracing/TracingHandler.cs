@@ -19,13 +19,11 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// <param name="data"></param>
         public static void RegistTracing(ref object data)
         {
-
-
             var model = (data as RequestModel);
             if (model != null && model.Header != null)
             {
                 var header = model.Header;
-                header.RpcID = Util.VersionIncr(HttpContentData.SetSubRpcID());
+                header.RpcID = Util.VersionIncr(HttpContentData.GetSubRpcID());
             }
         }
     }

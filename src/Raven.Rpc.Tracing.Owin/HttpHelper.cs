@@ -23,12 +23,21 @@ namespace Raven.Rpc.Tracing.Owin
             if (string.IsNullOrWhiteSpace(key))
                 return default(T);
 
-            var obj = OwinRequestScopeContext.Current.Environment[key];
-            if (obj == null)
+            object obj;
+            if (OwinRequestScopeContext.Current.Environment.TryGetValue(key, out obj) && obj != null)
+            {
+                return (T)obj;
+            }
+            else
             {
                 return default(T);
             }
-            return (T)obj;
+            //var obj = OwinRequestScopeContext.Current.Environment[key];
+            //if (obj == null)
+            //{
+            //    return default(T);
+            //}
+            //return (T)obj;
         }
 
         /// <summary>
@@ -39,9 +48,9 @@ namespace Raven.Rpc.Tracing.Owin
         /// <param name="val"></param>
         public void SetHttpContextItem(string key, object val)
         {
-            if (request == null || string.IsNullOrWhiteSpace(key))
+            if (string.IsNullOrWhiteSpace(key))
                 return;
-            
+
             OwinRequestScopeContext.Current.Environment[key] = val;
         }
 
@@ -55,15 +64,18 @@ namespace Raven.Rpc.Tracing.Owin
         {
             string res = string.Empty;
             //is owin
-            if (System.Web.HttpContext.Current == null)
-            {
-                var environment = request.GetOwinEnvironment();
-                res = string.Concat(environment["server.LocalIpAddress"].ToString(), ":", environment["server.LocalPort"].ToString());
-            }
-            else
-            {
-                return System.Web.HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"];
-            }
+            //if (System.Web.HttpContext.Current == null)
+            //{
+            //    var environment = OwinRequestScopeContext.Current.Environment;
+            //    res = string.Concat(environment["server.LocalIpAddress"], ":", environment["server.LocalPort"]);
+            //}
+            //else
+            //{
+            //    return System.Web.HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"];
+            //}
+
+            var environment = OwinRequestScopeContext.Current.Environment;
+            res = string.Concat(environment["server.LocalIpAddress"], ":", environment["server.LocalPort"]);
 
             return res;
         }
