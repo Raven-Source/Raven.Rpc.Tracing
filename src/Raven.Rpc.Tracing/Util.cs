@@ -114,8 +114,8 @@ namespace Raven.Rpc.Tracing
         public const string TrackClientSRQueueName = "raven_track_csr";
         public const string TrackServerRSQueueName = "raven_track_srs";
         public const string ExceptionKey = "Exception";
-        public const string ParamsKey = "ParamsKey";
-        public const string ResultKey = "ResultKey";
+        public const string ParamsKey = "Params";
+        public const string ResultKey = "Result";
 
         //public static string GetServerAddress(HttpRequestMessage request)
         //{

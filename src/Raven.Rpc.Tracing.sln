@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.HttpProtocol.Trac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.AspNet.WebApiExtensions.Tracing.TestConsole", "test\Raven.AspNet.WebApiExtensions.Tracing.TestConsole\Raven.AspNet.WebApiExtensions.Tracing.TestConsole.csproj", "{46B0CDCC-6298-4741-9D99-F611C3E5A17E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.RabbitMQClient", "..\..\Raven.RabbitMQClient\src\Raven.RabbitMQClient\Raven.RabbitMQClient.csproj", "{39A443AB-1751-49BF-9D0A-44802AC6E735}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracingToLogConsole", "test\TracingToLogConsole\TracingToLogConsole.csproj", "{26705861-6C59-4636-BFFF-62F1315B2D93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,10 +55,10 @@ Global
 		{46B0CDCC-6298-4741-9D99-F611C3E5A17E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46B0CDCC-6298-4741-9D99-F611C3E5A17E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46B0CDCC-6298-4741-9D99-F611C3E5A17E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39A443AB-1751-49BF-9D0A-44802AC6E735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39A443AB-1751-49BF-9D0A-44802AC6E735}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39A443AB-1751-49BF-9D0A-44802AC6E735}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39A443AB-1751-49BF-9D0A-44802AC6E735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26705861-6C59-4636-BFFF-62F1315B2D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26705861-6C59-4636-BFFF-62F1315B2D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26705861-6C59-4636-BFFF-62F1315B2D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26705861-6C59-4636-BFFF-62F1315B2D93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +67,6 @@ Global
 		{361F1CBD-D45D-4E38-8A1B-ED906A2D394C} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 		{EAB6D763-0F2C-422E-8F97-917E5C4F6312} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 		{46B0CDCC-6298-4741-9D99-F611C3E5A17E} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
-		{39A443AB-1751-49BF-9D0A-44802AC6E735} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
+		{26705861-6C59-4636-BFFF-62F1315B2D93} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 	EndGlobalSection
 EndGlobal

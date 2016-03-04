@@ -42,7 +42,7 @@ namespace Raven.Rpc.Tracing.Record
         /// <param name="data"></param>
         public void RecordClientSR(ClientSR data)
         {
-            rabbitMQClient.EnqueueAysnc(Util.TrackClientSRQueueName ,data);
+            rabbitMQClient.Send(Util.TrackClientSRQueueName, data, true, true);
         }
 
         /// <summary>
@@ -51,24 +51,9 @@ namespace Raven.Rpc.Tracing.Record
         /// <param name="data"></param>
         public void RecordServerRS(ServerRS data)
         {
-            rabbitMQClient.EnqueueAysnc(Util.TrackServerRSQueueName, data);
+            rabbitMQClient.Send(Util.TrackServerRSQueueName, data, true, true);
         }
 
-        public class User
-        {
-            public string Name;
-            public int ID;
-            public DateTime Time;
 
-        }
-
-        public void Test(object obj)
-        {
-            User user = new User();
-            user.ID = 124;
-            user.Name = "dagds大公司gg";
-            user.Time = DateTime.Now;
-            rabbitMQClient.EnqueueAysnc(Util.TrackServerRSQueueName, user);
-        }
     }
 }

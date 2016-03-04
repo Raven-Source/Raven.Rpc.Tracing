@@ -10,6 +10,7 @@ using System.Web.Http.Filters;
 using System.Net.Http;
 using Raven.Rpc.Tracing;
 using Raven.Rpc.Tracing.Record;
+using Newtonsoft.Json;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing
 {
@@ -17,7 +18,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
     /// Tracing
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public class TracingAttribute : ActionFilterAttribute, IExceptionFilter
+    public class TracingAttribute : ActionFilterAttribute
     {
         private const string ServerRSKey = "__raven_ServerRS";
         private ITracingRecord record = ServiceContainer.Resolve<ITracingRecord>();
@@ -84,11 +85,12 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.MachineAddr = Util.HttpHelper.GetServerAddress(actionContext.Request);
                     srs.TraceId = reqHeader.TrackID;
                     srs.RpcId = reqHeader.RpcID;
+                    srs.ServerHost = actionContext.Request.RequestUri.Host;
 
-                    srs.InvokeID = string.Format("{0}_{1}", actionContext.ControllerContext.ControllerDescriptor.ControllerName.ToLower(), actionContext.ActionDescriptor.ActionName);
+                    srs.InvokeID = string.Format("{0}_{1}", actionContext.ControllerContext.ControllerDescriptor.ControllerName.ToLower(), actionContext.ActionDescriptor.ActionName.ToLower());
                     if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
                     {
-                        srs.Extension.Add(Util.ParamsKey, actionContext.ActionArguments);
+                        srs.Extension.Add(Util.ParamsKey, JsonConvert.SerializeObject(actionContext.ActionArguments));
                     }
 
                     //ServerRS Log Data TODO
@@ -121,10 +123,18 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.IsSuccess = true;
 
                     IResponseModel value = null;
-                    if (actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out value))
+                    if (actionExecutedContext.Response != null && actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out value))
                     {
-                        srs.Code = value.ToString();
+                        srs.Code = value.GetCode();
                         srs.Extension.Add(Util.ResultKey, value);
+                    }
+
+                    //Exception
+                    if (actionExecutedContext.Exception != null)
+                    {
+                        srs.IsException = true;
+                        srs.IsSuccess = false;
+                        srs.Extension.Add(Util.ExceptionKey, Util.GetFullExceptionMessage(actionExecutedContext.Exception));
                     }
 
                     Record(srs);
@@ -132,36 +142,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
             }
 
             return base.OnActionExecutedAsync(actionExecutedContext, cancellationToken);
-        }        
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="actionExecutedContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
-        {
-            if (actionExecutedContext.ActionContext.ActionDescriptor.GetCustomAttributes<NotToLogAttribute>().Count == 0)
-            {
-                var request = actionExecutedContext.Request;
-                var srs = Util.HttpHelper.GetHttpContextItem<ServerRS>(ServerRSKey);
-
-                srs.EndTime = DateTime.Now;
-                srs.TimeLength = (srs.EndTime - srs.StartTime).TotalMilliseconds;
-                srs.IsException = true;
-                srs.IsSuccess = false;
-
-                if (actionExecutedContext.Exception != null)
-                {
-                    srs.Extension.Add(Util.ExceptionKey, Util.GetFullExceptionMessage(actionExecutedContext.Exception));
-                }
-
-                Record(srs);
-            }
-
-            return Task.FromResult<object>(null);
-        }
+        }     
 
 
         /// <summary>

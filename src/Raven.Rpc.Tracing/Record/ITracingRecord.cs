@@ -11,7 +11,6 @@ namespace Raven.Rpc.Tracing.Record
         void RecordClientSR(ClientSR data);
 
         void RecordServerRS(ServerRS data);
-
-        void Test(object obj);
+        
     }
 }

@@ -48,9 +48,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
 
     public class Loger : ILoger
     {
-        public void LogError(string message, Exception ex)
+        public void LogError(Exception ex, object dataObj)
         {
-            ;
+            Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.StackTrace);
         }
     }
 
@@ -78,11 +79,11 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
 
             appBuilder.UseTracingContext(new TracingRecordRabbitmq(new MessageQueue.WithRabbitMQ.Options()
             {
-                SerializerType = SerializerType.MsgPack,
+                SerializerType = SerializerType.NewtonsoftJson,
                 HostName = hostName,
                 Password = password,
                 UserName = username,
-                MaxQueueCount = 100000,
+                //MaxQueueCount = 100000,
                 Loger = new Loger()
             }));
             appBuilder.UseWebApi(config);

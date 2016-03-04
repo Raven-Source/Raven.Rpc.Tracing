@@ -4,17 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
+using Raven.Rpc.HttpProtocol.Tracing;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
 {
     [Tracing]
     public class TestController : ApiController
     {
+        Rpc.HttpProtocol.RpcHttpClient client = new Rpc.HttpProtocol.RpcHttpClient("http://127.0.0.1:9001/");
+
         // GET api/values/5
         [HttpGet]
         public ResponseModel<User> Get()
         {
-            return new ResponseModel<User>() { Data = new User { Name = "ResponseModel-Get" }, Code = 123 };
+            client.RegistTracing();
+
+            var res = client.Send<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get2", new Rpc.IContractModel.RequestModel());
+            return new ResponseModel<User>() { Data = new User { Name = "ResponseModel-Get", Desc = res.Data }, Code = 123 };
+        }
+
+
+        [HttpPost]
+        public ResponseModel<string> Get2()
+        {
+            return new ResponseModel<string>() { Data = Guid.NewGuid().ToString() };
         }
     }
 
@@ -39,5 +53,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
         }
 
         public string Name { get; set; }
+
+        public string Desc { get; set; }
     }
 }

@@ -32,6 +32,11 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             var reqModel = data as IRequestModel<Header>;
             if (reqModel != null)
             {
+                if (reqModel.Header == null)
+                {
+                    reqModel.Header = new Header();
+                }
+
                 var modelHeader = HttpContentData.GetRequestHeader();
                 reqModel.Header.RpcID = Util.VersionIncr(HttpContentData.GetSubRpcID());
                 HttpContentData.SetSubRpcID(reqModel.Header.RpcID);

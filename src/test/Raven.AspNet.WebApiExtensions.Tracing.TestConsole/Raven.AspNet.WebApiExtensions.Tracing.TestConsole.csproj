@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Jil, Version=2.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Jil.2.12.1\lib\net45\Jil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Owin, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Owin.2.0.2\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
@@ -56,8 +60,14 @@
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RabbitMQ.Client, Version=3.6.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+    <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.6.0\lib\net45\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.RabbitMQClient">
+      <HintPath>..\..\packages\Raven.RabbitMQClient.1.0.0\lib\net45\Raven.RabbitMQClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Rpc.HttpProtocol, Version=1.1.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.1.1.1\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
@@ -68,8 +78,20 @@
       <HintPath>..\..\packages\Raven.Serializer.1.0.1\lib\net45\Raven.Serializer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Raven.Serializer.WithJil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Serializer.WithJil.1.0.0\lib\net45\Raven.Serializer.WithJil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Raven.Serializer.WithMsgPack, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Raven.Serializer.WithMsgPack.1.0.1\lib\net45\Raven.Serializer.WithMsgPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Serializer.WithNewtonsoft.1.0.0\lib\net45\Raven.Serializer.WithNewtonsoft.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sigil, Version=4.5.0.0, Culture=neutral, PublicKeyToken=2d06c3494341c8ab, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sigil.4.5.0\lib\net45\Sigil.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -79,6 +101,7 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
@@ -104,13 +127,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Raven.RabbitMQClient\src\Raven.RabbitMQClient\Raven.RabbitMQClient.csproj">
-      <Project>{39a443ab-1751-49bf-9d0a-44802ac6e735}</Project>
-      <Name>Raven.RabbitMQClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Raven.AspNet.WebApiExtensions.Tracing\Raven.AspNet.WebApiExtensions.Tracing.csproj">
       <Project>{579db6c5-3baf-406f-81ab-551f5f885a7a}</Project>
       <Name>Raven.AspNet.WebApiExtensions.Tracing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Raven.Rpc.HttpProtocol.Tracing\Raven.Rpc.HttpProtocol.Tracing.csproj">
+      <Project>{3413e680-837e-4bd8-9c37-728359b32c13}</Project>
+      <Name>Raven.Rpc.HttpProtocol.Tracing</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.csproj">
       <Project>{d3acd237-2f03-4909-ac7d-7c9f0db8b909}</Project>

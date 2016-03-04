@@ -44,6 +44,11 @@
             
             </summary>
         </member>
+        <member name="F:Raven.MessageQueue.WithRabbitMQ.Options.DefaultMaxQueueCount">
+            <summary>
+            默认最大队列数
+            </summary>
+        </member>
         <member name="P:Raven.MessageQueue.WithRabbitMQ.Options.HostName">
             <summary>
             
@@ -79,6 +84,11 @@
             
             </summary>
         </member>
+        <member name="T:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.queueWorkThread">
             <summary>
             队列工作线程
@@ -95,7 +105,6 @@
             <param name="maxQueueCount"></param>
             <param name="serializerType"></param>
             <param name="loger"></param>
-            <param name="waitMillisecondsTimeout"></param>
         </member>
         <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.GetInstance(Raven.MessageQueue.WithRabbitMQ.Options)">
             <summary>
@@ -110,48 +119,101 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Dequeue``1(System.String,System.Boolean)">
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.ReceiveBatch``1(System.String,System.String)">
             <summary>
-            出对
+            批量接收
             </summary>
             <typeparam name="T"></typeparam>
             <param name="queueName">队列名</param>
-            <param name="isDurable">是否持久化队列</param>
             <returns></returns>
         </member>
-        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Enqueue``1(System.String,``0,Raven.MessageQueue.WithRabbitMQ.ExchangeType)">
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.ReceiveSingle``1(System.String,System.String)">
             <summary>
-            入队
+            批量接收
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="queueName">队列名</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Send(System.String,System.Object,System.Boolean,System.Boolean)">
+            <summary>
+            异步入队
+            </summary>
+            <param name="queueName">队列名</param>
+            <param name="dataObj">入队数据</param>
+            <param name="persistent">数据是否持久化</param>
+            <param name="durableQueue">队列是否持久化</param>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Subscribe``1(System.String,System.Action{``0})">
+            <summary>
+            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="queueName"></param>
-            <param name="dataObj"></param>
-            <param name="exchangeType">默认为空，值为fanout是支持订阅发布模型</param>
+            <param name="callback"></param>
         </member>
-        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.EnqueueAysnc``1(System.String,``0,Raven.MessageQueue.WithRabbitMQ.ExchangeType)">
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.BasicDequeueBatch(System.String,System.String,Raven.MessageQueue.WithRabbitMQ.ExchangeType)">
             <summary>
-            是否异步调用入队的方法
+            
             </summary>
-            <typeparam name="T">入队的数据类型</typeparam>
-            <param name="queueName">队列名</param>
-            <param name="dataObj">入队数据</param>
-            <param name="exchangeType">通道</param>
+            <param name="queueName"></param>
+            <param name="exchangeType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.BasicDequeue(System.String,System.String,Raven.MessageQueue.WithRabbitMQ.ExchangeType)">
+            <summary>
+            
+            </summary>
+            <param name="queueName"></param>
+            <param name="exchangeType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.BasicQueueBind(System.String,System.EventHandler{RabbitMQ.Client.Events.BasicDeliverEventArgs})">
+            <summary>
+            
+            </summary>
+            <param name="queueName"></param>
+            <param name="exchangeType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.BasicEnqueue(System.String,System.String,System.Object,System.Boolean,System.Boolean,Raven.MessageQueue.WithRabbitMQ.ExchangeType)">
+            <summary>
+            入队
+            </summary>
+            <param name="queueName"></param>
+            <param name="dataObj"></param>
+            <param name="persistent">数据是否持久化</param>
+            <param name="durableQueue">队列是否持久化</param>
+            <param name="exchangeType">默认为空，值为fanout是支持订阅发布模型</param>
         </member>
         <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.QueueToWrite">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.RecordException(System.Exception)">
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.RecordException(System.Exception,System.Object)">
             <summary>
             记录异常
             </summary>
             <param name="ex"></param>
+            <param name="dataObj"></param>
         </member>
         <member name="T:Raven.MessageQueue.WithRabbitMQ.QueueMessage">
             <summary>
             队列消息
             </summary>
+        </member>
+        <member name="T:Raven.MessageQueue.ILoger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.MessageQueue.ILoger.LogError(System.Exception,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="ex"></param>
+            <param name="dataObj">1.Dequeue(出队时为BasicGetResult的Body,byte[]类型 或 null);2.Enqueue(入队时为传的dataObj)</param>
         </member>
     </members>
 </doc>
