@@ -15,13 +15,9 @@ namespace Raven.TracingRecord
 
     public class RecordHandle : Handle
     {
-        private static readonly string hostName = ConfigurationManager.AppSettings["RabbitMQHost"];
-        private static readonly string username = "liangyi";
-        private static readonly string password = "123456";
-
         #region GetInstance
 
-        private static Lazy<RecordHandle> _instance = new Lazy<RecordHandle>(() => new RecordHandle("ItemCoupon"));
+        private static Lazy<RecordHandle> _instance = new Lazy<RecordHandle>(() => new RecordHandle("Raven.TracingRecord"));
 
         public static RecordHandle GetInstance
         {
@@ -34,7 +30,7 @@ namespace Raven.TracingRecord
         {
             get
             {
-                throw new NotImplementedException();
+                return ProcessResetAwardData;
             }
         }
 
@@ -45,14 +41,14 @@ namespace Raven.TracingRecord
         ClientSRLogsRep clientSRlogRep;
 
         public RecordHandle(string serverName)
-            : base(serverName, 5)
+            : base(serverName, 5000)
         {
             rabbitMQOptions = new Raven.MessageQueue.WithRabbitMQ.Options()
             {
                 SerializerType = SerializerType.NewtonsoftJson,
-                HostName = hostName,
-                Password = password,
-                UserName = username,
+                HostName = RabbitMQConfig.hostName,
+                Password = RabbitMQConfig.password,
+                UserName = RabbitMQConfig.username,
                 //MaxQueueCount = 100000,
                 Loger = new Loger()
             };

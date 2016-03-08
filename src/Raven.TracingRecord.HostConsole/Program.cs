@@ -13,6 +13,7 @@ namespace Raven.TracingRecord.HostConsole
             RecordHandle.GetInstance.Run();
 
             Console.WriteLine("start...");
+            Console.ReadLine();
             RecordHandle.GetInstance.Stop();
             Console.WriteLine("stop...");
 

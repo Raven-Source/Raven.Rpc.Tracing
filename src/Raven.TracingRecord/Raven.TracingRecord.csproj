@@ -97,6 +97,7 @@
     <Compile Include="Handle.cs" />
     <Compile Include="Loger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RabbitMQConfig.cs" />
     <Compile Include="RecordHandle.cs" />
     <Compile Include="ServerRSLogs.cs" />
     <Compile Include="ServerRSLogsRep.cs" />
