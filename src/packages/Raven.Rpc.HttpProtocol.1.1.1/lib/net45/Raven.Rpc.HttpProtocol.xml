@@ -54,7 +54,7 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Send``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Invoke``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
             <summary>
             
             </summary>
@@ -67,7 +67,7 @@
             <param name="timeout"></param>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Send``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClient.Invoke``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
             <summary>
             
             </summary>
@@ -173,7 +173,7 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.SendAsync``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.InvokeAsync``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
             <summary>
             
             </summary>
@@ -181,6 +181,17 @@
             <typeparam name="TResult"></typeparam>
             <param name="url"></param>
             <param name="data"></param>
+            <param name="httpMethod"></param>
+            <param name="urlParameters"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.IRpcHttpClientAsync.InvokeAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="url"></param>
             <param name="httpMethod"></param>
             <param name="urlParameters"></param>
             <param name="timeout"></param>
@@ -289,6 +300,11 @@
             <param name="mediaType"></param>
             <param name="timeout">超时时间（毫秒）</param>
         </member>
+        <member name="P:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultRequestHeaders">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.CreateMediaTypeFormatter(System.String)">
             <summary>
             创建MediaTypeFormatter
@@ -303,7 +319,7 @@
             <param name="timeout"></param>
             <param name="client"></param>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.SendAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.InvokeAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
             <summary>
             
             </summary>
@@ -314,7 +330,7 @@
             <param name="timeout"></param>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.SendAsync``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.InvokeAsync``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
             <summary>
             
             </summary>
@@ -327,7 +343,7 @@
             <param name="timeout"></param>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Send``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Invoke``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
             <summary>
             
             </summary>
@@ -338,7 +354,7 @@
             <param name="timeout"></param>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Send``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Invoke``2(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.String},System.Net.Http.HttpMethod,System.Nullable{System.Int32})">
             <summary>
             
             </summary>
@@ -568,6 +584,80 @@
             </summary>
             <param name="urlParameters"></param>
         </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnRequest">
+            <summary>
+            请求前
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnRequestDelegate">
+            <summary>
+            
+            </summary>
+            <param name="request">HttpRequestMessage</param>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnResponse">
+            <summary>
+            响应后
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnResponseDelegate">
+            <summary>
+            
+            </summary>
+            <param name="response">HttpResponseMessage</param>
+            <param name="rpcContext">rpcContext</param>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnError">
+            <summary>
+            OnError
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnErrorDelegate">
+            <summary>
+            后续是否抛出异常
+            </summary>
+            <param name="ex">Exception</param>
+            <param name="request">HttpResponseMessage</param>
+            <param name="rpcContext">rpcContext</param>
+            <returns></returns>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.ErrorResponseHandler">
+            <summary>
+            异常情况返回数据处理
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.ErrorResponseDelegate">
+            <summary>
+            result
+            </summary>
+            <param name="ex">Exception</param>
+            <param name="rpcContext">rpcContext</param>
+            <returns></returns>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersHandler">
+            <summary>
+            Url默认参数处理 事件
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersDelegate">
+            <summary>
+            Url默认参数处理
+            </summary>
+            <param name="urlParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.RequestContentDataHandler">
+            <summary>
+            请求数据处理 事件
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.RequestContentDataDelegate">
+            <summary>
+            请求数据处理
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Dispose">
             <summary>
             
@@ -584,61 +674,50 @@
             
             </summary>
         </member>
-        <member name="P:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultRequestHeaders">
+        <member name="T:Raven.Rpc.HttpProtocol.RpcContext">
             <summary>
             
             </summary>
         </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnRequest">
+        <member name="F:Raven.Rpc.HttpProtocol.RpcContext.SendStartTime">
             <summary>
-            请求前,
-            arg1 HttpRequestMessage
+            请求开始时间
             </summary>
         </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnResponse">
+        <member name="F:Raven.Rpc.HttpProtocol.RpcContext.ReceiveEndTime">
             <summary>
-            响应后,
-            arg1 HttpResponseMessage,
-            arg2 响应数据对象
+            响应时间
             </summary>
         </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnError">
+        <member name="F:Raven.Rpc.HttpProtocol.RpcContext.ExceptionTime">
             <summary>
-            OnError,
-            arg1 Exception,
-            res 后续是否抛出异常
+            
             </summary>
         </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.ErrorResponseHandler">
+        <member name="F:Raven.Rpc.HttpProtocol.RpcContext.RequestModel">
             <summary>
-            异常情况返回数据处理,
-            arg1 Exception,
-            res TResult
+            Request Model
             </summary>
         </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersHandler">
+        <member name="F:Raven.Rpc.HttpProtocol.RpcContext.ResponseModel">
             <summary>
-            Url默认参数处理 事件
+            Response Model
             </summary>
         </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.RequestContentDataHandler">
+        <member name="F:Raven.Rpc.HttpProtocol.RpcContext.ResponseSize">
             <summary>
-            请求数据处理 事件
+            Response Size
             </summary>
         </member>
-        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersDelegate">
+        <member name="F:Raven.Rpc.HttpProtocol.RpcContext.ExceptionHandled">
             <summary>
-            Url默认参数处理
+            是否已处理异常
             </summary>
-            <param name="urlParameters"></param>
-            <returns></returns>
         </member>
-        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.RequestContentDataDelegate">
+        <member name="M:Raven.Rpc.HttpProtocol.RpcContext.#ctor">
             <summary>
-            请求数据处理
+            
             </summary>
-            <param name="data"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>

@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.AspNet.WebApiExtensio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracingToLogConsole", "test\TracingToLogConsole\TracingToLogConsole.csproj", "{26705861-6C59-4636-BFFF-62F1315B2D93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.AspNet.WebApiExtensions.Tracing.Test", "test\Raven.AspNet.WebApiExtensions.Tracing.Test\Raven.AspNet.WebApiExtensions.Tracing.Test.csproj", "{D513F936-0B2F-45E1-9361-3A52A202860D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.Tracing.WebHost", "Raven.Rpc.Tracing.WebHost\Raven.Rpc.Tracing.WebHost.csproj", "{DDC360C4-BE39-4EA5-8E23-AA068596E125}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,14 @@ Global
 		{26705861-6C59-4636-BFFF-62F1315B2D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26705861-6C59-4636-BFFF-62F1315B2D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26705861-6C59-4636-BFFF-62F1315B2D93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D513F936-0B2F-45E1-9361-3A52A202860D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D513F936-0B2F-45E1-9361-3A52A202860D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D513F936-0B2F-45E1-9361-3A52A202860D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D513F936-0B2F-45E1-9361-3A52A202860D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC360C4-BE39-4EA5-8E23-AA068596E125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC360C4-BE39-4EA5-8E23-AA068596E125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC360C4-BE39-4EA5-8E23-AA068596E125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC360C4-BE39-4EA5-8E23-AA068596E125}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,5 +80,6 @@ Global
 		{EAB6D763-0F2C-422E-8F97-917E5C4F6312} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 		{46B0CDCC-6298-4741-9D99-F611C3E5A17E} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 		{26705861-6C59-4636-BFFF-62F1315B2D93} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
+		{D513F936-0B2F-45E1-9361-3A52A202860D} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 	EndGlobalSection
 EndGlobal

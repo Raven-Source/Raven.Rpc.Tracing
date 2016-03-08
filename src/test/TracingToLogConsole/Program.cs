@@ -45,6 +45,8 @@ namespace TracingToLogConsole
             };
             rabbitMQClient = RabbitMQClient.GetInstance(rabbitMQOptions);
             ServerRSLogsRep serverRSlogRep = new ServerRSLogsRep();
+            ClientSRLogsRep clientSRlogRep = new ClientSRLogsRep();
+
 
             while (true)
             {
@@ -67,7 +69,7 @@ namespace TracingToLogConsole
                                 }
                                 else
                                 {
-                                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonDocument.Create(kv.Value));
+                                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonValue.Create(kv.Value));
                                 }
                             }
                             l.Extension = null;
@@ -85,6 +87,43 @@ namespace TracingToLogConsole
                     serverRSlogRep.InsertBatch(list);
                 }
 
+                var list2 = rabbitMQClient.ReceiveBatch<ClientSRLogs>(Util.TrackClientSRQueueName);
+
+                if (list2 != null && list2.Count > 0)
+                {
+                    for (var i = 0; i < list2.Count; i++)
+                    {
+                        var l = list2[i];
+                        //List<string> jsonObjectKey = new List<string>();
+                        if (l.Extension != null)
+                        {
+                            foreach (var kv in l.Extension)
+                            {
+                                if (kv.Value.GetType().FullName == "Newtonsoft.Json.Linq.JObject")//"Jil.DeserializeDynamic.JsonObject")
+                                {
+                                    var str = Newtonsoft.Json.JsonConvert.SerializeObject(kv.Value);
+                                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonDocument.Parse(str));
+                                }
+                                else
+                                {
+                                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonValue.Create(kv.Value));
+                                }
+                            }
+                            l.Extension = null;
+                            //if (jsonObjectKey.Count > 0)
+                            //{
+                            //    foreach (var k in jsonObjectKey)
+                            //    {
+                            //        var value = l.Extension[k];
+                            //        var str = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+                            //        l.Extension[k] = MongoDB.Bson.BsonDocument.Parse(str);
+                            //    }
+                            //}
+                        }
+                    }
+                    clientSRlogRep.InsertBatch(list2);
+                }
+
                 Console.WriteLine(list.Count);
                 Thread.Sleep(10000);
             }
@@ -97,6 +136,16 @@ namespace TracingToLogConsole
         private static readonly string dbName = "RavenLogs";
 
         public ServerRSLogsRep() :
+            base(connString, dbName)
+        { }
+    }
+
+    public class ClientSRLogsRep : MongoRepository<ClientSRLogs, string>
+    {
+        private static readonly string connString = System.Configuration.ConfigurationManager.AppSettings["MongoDB_RavenLogs"];
+        private static readonly string dbName = "RavenLogs";
+
+        public ClientSRLogsRep() :
             base(connString, dbName)
         { }
     }
@@ -128,4 +177,36 @@ namespace TracingToLogConsole
             Extensions = new MongoDB.Bson.BsonDocument();
         }
     }
+
+    public class ClientSRLogs : ClientSR, IEntity<string>
+    {
+        [MongoDB.Bson.Serialization.Attributes.BsonId]
+        [MongoDB.Bson.Serialization.Attributes.BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+        [MsgPack.Serialization.MessagePackIgnore]
+        public string ID
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 扩展
+        /// </summary>
+        [MongoDB.Bson.Serialization.Attributes.BsonIgnore]
+        public override Dictionary<string, object> Extension { get; set; }
+
+        /// <summary>
+        /// 扩展
+        /// </summary>
+        public MongoDB.Bson.BsonDocument Extensions;
+
+        public ClientSRLogs()
+        {
+            Extensions = new MongoDB.Bson.BsonDocument();
+        }
+
+
+    }
+
+
 }

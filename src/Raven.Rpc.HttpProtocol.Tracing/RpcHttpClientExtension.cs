@@ -21,6 +21,11 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// <param name="client"></param>
         public static void RegistTracing(this RpcHttpClient client)
         {
+            client.RequestContentDataHandler -= Client_RequestContentDataHandler;
+            client.OnRequest -= Client_OnRequest;
+            client.OnResponse -= Client_OnResponse;
+            client.OnError -= Client_OnError;
+
             client.RequestContentDataHandler += Client_RequestContentDataHandler;
             client.OnRequest += Client_OnRequest;
             client.OnResponse += Client_OnResponse;
@@ -38,6 +43,12 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 }
 
                 var modelHeader = HttpContentData.GetRequestHeader();
+                if (modelHeader == null)
+                {
+                    modelHeader = HttpContentData.GetDefaultRequestHeader();
+                    HttpContentData.SetRequestHeader(modelHeader);
+                    HttpContentData.SetSubRpcID(modelHeader.RpcID + ".0");
+                }
                 reqModel.Header.RpcID = Util.VersionIncr(HttpContentData.GetSubRpcID());
                 HttpContentData.SetSubRpcID(reqModel.Header.RpcID);
                 reqModel.Header.TrackID = modelHeader.TrackID;

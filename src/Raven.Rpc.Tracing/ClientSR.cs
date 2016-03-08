@@ -68,7 +68,8 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 扩展
         /// </summary>
-        public Dictionary<string, object> Extension;
+        public virtual Dictionary<string, object> Extension
+        { get; set; }
 
         /// <summary>
         /// 
