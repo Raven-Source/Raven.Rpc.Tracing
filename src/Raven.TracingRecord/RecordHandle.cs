@@ -1,9 +1,7 @@
-﻿using MongoDB.Repository;
-using Raven.MessageQueue;
+﻿using Raven.MessageQueue;
 using Raven.MessageQueue.WithRabbitMQ;
 using Raven.Rpc.Tracing;
 using Raven.Serializer;
-using Repository.IEntity;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,29 +10,44 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-
-namespace TracingToLogConsole
+namespace Raven.TracingRecord
 {
-    public class Loger : ILoger
-    {
-        public void LogError(Exception ex, object dataObj)
-        {
-            Console.WriteLine(ex.Message);
-            Console.WriteLine(ex.StackTrace);
-        }
-    }
 
-    class Program
+    public class RecordHandle : Handle
     {
         private static readonly string hostName = ConfigurationManager.AppSettings["RabbitMQHost"];
         private static readonly string username = "liangyi";
         private static readonly string password = "123456";
 
-        private static RabbitMQClient rabbitMQClient = null;
+        #region GetInstance
 
-        static void Main(string[] args)
+        private static Lazy<RecordHandle> _instance = new Lazy<RecordHandle>(() => new RecordHandle("ItemCoupon"));
+
+        public static RecordHandle GetInstance
         {
-            var rabbitMQOptions = new Raven.MessageQueue.WithRabbitMQ.Options()
+            get { return _instance.Value; }
+        }
+
+        #endregion
+        
+        protected override Action ProcessWorkAction
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        Options rabbitMQOptions;
+        RabbitMQClient rabbitMQClient;
+
+        ServerRSLogsRep serverRSlogRep;
+        ClientSRLogsRep clientSRlogRep;
+
+        public RecordHandle(string serverName)
+            : base(serverName, 5)
+        {
+            rabbitMQOptions = new Raven.MessageQueue.WithRabbitMQ.Options()
             {
                 SerializerType = SerializerType.NewtonsoftJson,
                 HostName = hostName,
@@ -44,13 +57,21 @@ namespace TracingToLogConsole
                 Loger = new Loger()
             };
             rabbitMQClient = RabbitMQClient.GetInstance(rabbitMQOptions);
-            ServerRSLogsRep serverRSlogRep = new ServerRSLogsRep();
-            ClientSRLogsRep clientSRlogRep = new ClientSRLogsRep();
 
 
-            while (true)
+            serverRSlogRep = new ServerRSLogsRep();
+            clientSRlogRep = new ClientSRLogsRep();
+        }
+
+        /// <summary>
+        /// 调用方法
+        /// </summary>
+        public void ProcessResetAwardData()
+        {
+
+            try
             {
-                var list = rabbitMQClient.ReceiveBatch<ServerRSLogs>(Util.TrackServerRSQueueName);
+                var list = rabbitMQClient.ReceiveBatch<ServerRSLogs>(Config.TrackServerRSQueueName);
 
                 if (list != null && list.Count > 0)
                 {
@@ -87,7 +108,7 @@ namespace TracingToLogConsole
                     serverRSlogRep.InsertBatch(list);
                 }
 
-                var list2 = rabbitMQClient.ReceiveBatch<ClientSRLogs>(Util.TrackClientSRQueueName);
+                var list2 = rabbitMQClient.ReceiveBatch<ClientSRLogs>(Config.TrackClientSRQueueName);
 
                 if (list2 != null && list2.Count > 0)
                 {
@@ -123,90 +144,11 @@ namespace TracingToLogConsole
                     }
                     clientSRlogRep.InsertBatch(list2);
                 }
-
-                Console.WriteLine(list.Count);
-                Thread.Sleep(10000);
+            }
+            catch (Exception ex)
+            {
+                Loger.GetInstance.LogError(ex, null);
             }
         }
     }
-
-    public class ServerRSLogsRep : MongoRepository<ServerRSLogs, string>
-    {
-        private static readonly string connString = System.Configuration.ConfigurationManager.AppSettings["MongoDB_RavenLogs"];
-        private static readonly string dbName = "RavenLogs";
-
-        public ServerRSLogsRep() :
-            base(connString, dbName)
-        { }
-    }
-
-    public class ClientSRLogsRep : MongoRepository<ClientSRLogs, string>
-    {
-        private static readonly string connString = System.Configuration.ConfigurationManager.AppSettings["MongoDB_RavenLogs"];
-        private static readonly string dbName = "RavenLogs";
-
-        public ClientSRLogsRep() :
-            base(connString, dbName)
-        { }
-    }
-
-    public class ServerRSLogs : ServerRS, IEntity<string>
-    {
-        [MongoDB.Bson.Serialization.Attributes.BsonId]
-        [MongoDB.Bson.Serialization.Attributes.BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        [MsgPack.Serialization.MessagePackIgnore]
-        public string ID
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 扩展
-        /// </summary>
-        [MongoDB.Bson.Serialization.Attributes.BsonIgnore]
-        public override Dictionary<string, object> Extension { get; set; }
-
-        /// <summary>
-        /// 扩展
-        /// </summary>
-        public MongoDB.Bson.BsonDocument Extensions;
-
-        public ServerRSLogs()
-        {
-            Extensions = new MongoDB.Bson.BsonDocument();
-        }
-    }
-
-    public class ClientSRLogs : ClientSR, IEntity<string>
-    {
-        [MongoDB.Bson.Serialization.Attributes.BsonId]
-        [MongoDB.Bson.Serialization.Attributes.BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        [MsgPack.Serialization.MessagePackIgnore]
-        public string ID
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 扩展
-        /// </summary>
-        [MongoDB.Bson.Serialization.Attributes.BsonIgnore]
-        public override Dictionary<string, object> Extension { get; set; }
-
-        /// <summary>
-        /// 扩展
-        /// </summary>
-        public MongoDB.Bson.BsonDocument Extensions;
-
-        public ClientSRLogs()
-        {
-            Extensions = new MongoDB.Bson.BsonDocument();
-        }
-
-
-    }
-
-
 }

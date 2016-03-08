@@ -90,7 +90,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.InvokeID = string.Format("{0}_{1}", actionContext.ControllerContext.ControllerDescriptor.ControllerName.ToLower(), actionContext.ActionDescriptor.ActionName.ToLower());
                     if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
                     {
-                        srs.Extension.Add(Util.ParamsKey, JsonConvert.SerializeObject(actionContext.ActionArguments));
+                        srs.Extension.Add(Config.ParamsKey, JsonConvert.SerializeObject(actionContext.ActionArguments));
                     }
 
                     //ServerRS Log Data TODO
@@ -126,7 +126,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     if (actionExecutedContext.Response != null && actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out value))
                     {
                         srs.Code = value.GetCode();
-                        srs.Extension.Add(Util.ResultKey, value);
+                        srs.Extension.Add(Config.ResultKey, value);
                     }
 
                     //Exception
@@ -134,7 +134,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     {
                         srs.IsException = true;
                         srs.IsSuccess = false;
-                        srs.Extension.Add(Util.ExceptionKey, Util.GetFullExceptionMessage(actionExecutedContext.Exception));
+                        srs.Extension.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(actionExecutedContext.Exception));
                     }
 
                     Record(srs);

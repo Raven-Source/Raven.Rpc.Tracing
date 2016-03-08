@@ -42,7 +42,7 @@ namespace Raven.Rpc.Tracing.Record
         /// <param name="data"></param>
         public void RecordClientSR(ClientSR data)
         {
-            rabbitMQClient.Send(Util.TrackClientSRQueueName, data, true, true);
+            rabbitMQClient.Send(Config.TrackClientSRQueueName, data, true, true);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Raven.Rpc.Tracing.Record
         /// <param name="data"></param>
         public void RecordServerRS(ServerRS data)
         {
-            rabbitMQClient.Send(Util.TrackServerRSQueueName, data, true, true);
+            rabbitMQClient.Send(Config.TrackServerRSQueueName, data, true, true);
         }
 
 
