@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.Rpc.Tracing.Owin</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.Rpc.Tracing.Owin.AppBuilderExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Owin.AppBuilderExtension.UseTracingContext(Owin.IAppBuilder,Raven.Rpc.Tracing.Record.ITracingRecord)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Owin.HttpHelper.GetHttpContextItem``1(System.String)">
+            <summary>
+            获取 HttpContextItem
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="request"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Owin.HttpHelper.SetHttpContextItem(System.String,System.Object)">
+            <summary>
+            设置 HttpContextItem
+            </summary>
+            <param name="request"></param>
+            <param name="key"></param>
+            <param name="val"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Owin.HttpHelper.GetServerAddress(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

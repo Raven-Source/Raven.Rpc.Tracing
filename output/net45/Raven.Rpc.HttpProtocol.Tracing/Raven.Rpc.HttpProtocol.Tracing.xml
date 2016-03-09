@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.Rpc.HttpProtocol.Tracing</name>
+    </assembly>
+    <members>
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.RegistTracing(Raven.Rpc.HttpProtocol.RpcHttpClient)">
+            <summary>
+            
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.FillClientSR(Raven.Rpc.Tracing.ClientSR,System.Net.Http.HttpRequestMessage,Raven.Rpc.HttpProtocol.RpcContext)">
+            <summary>
+            
+            </summary>
+            <param name="sr"></param>
+            <param name="request"></param>
+            <param name="rpcContext"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.Record(Raven.Rpc.Tracing.ClientSR)">
+            <summary>
+            
+            </summary>
+            <param name="sr"></param>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.Tracing.TracingHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.TracingHandler.RegistTracing(System.Object@)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+    </members>
+</doc>

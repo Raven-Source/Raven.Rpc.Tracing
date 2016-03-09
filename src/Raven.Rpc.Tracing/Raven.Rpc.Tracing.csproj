@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Raven.Rpc.Tracing.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MsgPack, Version=0.6.0.0, Culture=neutral, PublicKeyToken=a2625990d5dc0167, processorArchitecture=MSIL">

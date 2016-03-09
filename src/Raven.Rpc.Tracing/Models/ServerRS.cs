@@ -71,9 +71,19 @@ namespace Raven.Rpc.Tracing
         public string InvokeID;
 
         /// <summary>
-        /// 调用ID
+        /// server host
         /// </summary>
         public string ServerHost;
+
+        /// <summary>
+        /// 系统ID
+        /// </summary>
+        public string SystemID;
+
+        /// <summary>
+        /// 系统名称
+        /// </summary>
+        public string SystemName;
 
         ///// <summary>
         ///// 扩展

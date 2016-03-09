@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.Rpc.IContractModel</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.Rpc.IContractModel.IRequestModel`1">
+            <summary>
+            IRequestModel
+            </summary>
+            <typeparam name="THeader"></typeparam>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.IRequestModel`1.Header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.IContractModel.RequestModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.RequestModel.Header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.IContractModel.Header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.Header.Token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.Header.RpcID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.Header.TrackID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.Header.UUID">
+            <summary>
+            UUID
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.IContractModel.IResponseModel`1">
+            <summary>
+            IResponseModel
+            </summary>
+            <typeparam name="TCode"></typeparam>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.IResponseModel`1.Code">
+            <summary>
+            结果编码，1为成功
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.IContractModel.IResponseModel`2">
+            <summary>
+            IResponseModel
+            </summary>
+            <typeparam name="TData"></typeparam>
+            <typeparam name="TCode"></typeparam>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.IResponseModel`2.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.IContractModel.ResponseModel`1">
+            <summary>
+            ResponseModel
+            </summary>
+            <typeparam name="TCode"></typeparam>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.ResponseModel`1.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.ResponseModel`1.Extension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.ResponseModel`1.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.IContractModel.ResponseModel`2">
+            <summary>
+            ResponseModel
+            </summary>
+            <typeparam name="TData"></typeparam>
+            <typeparam name="TCode"></typeparam>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.ResponseModel`2.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.IContractModel.KeyValue`2">
+            <summary>
+            键值对结构
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:Raven.Rpc.IContractModel.KeyValue`2.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.IContractModel.KeyValue`2.#ctor(`0,`1)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.KeyValue`2.Key">
+            <summary>
+            获取键/值对中的键
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.IContractModel.KeyValue`2.Value">
+            <summary>
+            获取键/值对中的值
+            </summary>
+        </member>
+    </members>
+</doc>

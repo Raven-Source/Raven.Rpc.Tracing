@@ -107,7 +107,17 @@ namespace Raven.Rpc.HttpProtocol.Tracing
 
             sr.SendSTime = rpcContext.SendStartTime;
             sr.ReceiveETime = rpcContext.ReceiveEndTime;
-            sr.TimeLength = sr.ReceiveETime.HasValue ? (sr.ReceiveETime.Value - sr.SendSTime).TotalMilliseconds : 0D;
+            sr.ExceptionTime = rpcContext.ExceptionTime;
+
+            if (sr.ReceiveETime.HasValue)
+            {
+                sr.TimeLength = (sr.ReceiveETime.Value - sr.SendSTime).TotalMilliseconds;
+            }
+            else if (sr.ExceptionTime.HasValue)
+            {
+                sr.TimeLength = (sr.ExceptionTime.Value - sr.SendSTime).TotalMilliseconds;
+            }
+            //sr.TimeLength = sr.ReceiveETime.HasValue ? (sr.ReceiveETime.Value - sr.SendSTime).TotalMilliseconds : 0D;
             sr.RpcId = modelHeader.RpcID;
             sr.TraceId = modelHeader.TrackID;            
 

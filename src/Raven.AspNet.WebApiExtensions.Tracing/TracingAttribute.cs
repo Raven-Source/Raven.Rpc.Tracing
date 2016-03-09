@@ -22,6 +22,27 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
     {
         private const string ServerRSKey = "__raven_ServerRS";
         private ITracingRecord record = ServiceContainer.Resolve<ITracingRecord>();
+        
+        /// <summary>
+        /// 系统ID
+        /// </summary>
+        public string systemID;
+
+        /// <summary>
+        /// 系统名称
+        /// </summary>
+        public string systemName;
+
+        ///// <summary>
+        ///// 构造函数
+        ///// </summary>
+        ///// <param name="systemID"></param>
+        ///// <param name="systemName"></param>
+        //public TracingAttribute(string systemID = "", string systemName = "")
+        //{
+        //    this.systemID = systemID;
+        //    this.systemName = systemName;
+        //}
 
         /// <summary>
         /// 
@@ -86,6 +107,9 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.TraceId = reqHeader.TrackID;
                     srs.RpcId = reqHeader.RpcID;
                     srs.ServerHost = actionContext.Request.RequestUri.Host;
+
+                    srs.SystemID = this.systemID;
+                    srs.SystemName = this.systemName;
 
                     srs.InvokeID = string.Format("{0}_{1}", actionContext.ControllerContext.ControllerDescriptor.ControllerName.ToLower(), actionContext.ActionDescriptor.ActionName.ToLower());
                     if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)

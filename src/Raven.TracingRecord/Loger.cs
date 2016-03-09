@@ -15,7 +15,7 @@ namespace Raven.TracingRecord
 
         public Loger()
         {
-            root.Remove(root.LastIndexOf('\\') + 1);
+            root = root.Remove(root.LastIndexOf('\\') + 1);
 
             var date = DateTime.Now.Date.AddDays(-7);
             string path = root + "Log/";

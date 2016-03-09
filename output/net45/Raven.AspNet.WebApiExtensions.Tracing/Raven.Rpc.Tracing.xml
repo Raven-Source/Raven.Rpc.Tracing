@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.Rpc.Tracing</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.Rpc.Tracing.ClientSR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.TraceId">
+            <summary>
+            跟踪ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.RpcId">
+            <summary>
+            远程服务ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.SendSTime">
+            <summary>
+            请求开始时间
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.ReceiveETime">
+            <summary>
+            响应时间
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.ExceptionTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.TimeLength">
+            <summary>
+            TotalMilliseconds
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Raven.Rpc.Tracing.ClientSR.IsSuccess" -->
+        <member name="F:Raven.Rpc.Tracing.ClientSR.IsException">
+            <summary>
+            是否运行异常,true|异常,false|未异常
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.Code">
+            <summary>
+            返回状态值
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.ServiceMethod">
+            <summary>
+            服务方法/url
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.Protocol">
+            <summary>
+            协议
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ClientSR.Extension">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ClientSR.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.DictionaryHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.DictionaryHelper.GetKeyValueList``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dict"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.HttpContentData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.HttpContentData.GetRequestHeader">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.HttpContentData.SetRequestHeader(Raven.Rpc.IContractModel.Header)">
+            <summary>
+            
+            </summary>
+            <param name="header"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.HttpContentData.GetSubRpcID">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.HttpContentData.SetSubRpcID(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.HttpContentData.GetDefaultRequestHeader">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.HttpContentData.CloneRequestHeader(Raven.Rpc.IContractModel.Header)">
+            <summary>
+            
+            </summary>
+            <param name="header"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.IHttpHelper.GetHttpContextItem``1(System.String)">
+            <summary>
+            获取 HttpContextItem
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.IHttpHelper.SetHttpContextItem(System.String,System.Object)">
+            <summary>
+            设置 HttpContextItem
+            </summary>
+            <param name="key"></param>
+            <param name="val"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.IHttpHelper.GetServerAddress(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.#ctor(Raven.MessageQueue.WithRabbitMQ.Options)">
+            <summary>
+            
+            </summary>
+            <param name="rabbitMQOptions"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.RecordClientSR(Raven.Rpc.Tracing.ClientSR)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.RecordServerRS(Raven.Rpc.Tracing.ServerRS)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.KeyValue`2">
+            <summary>
+            键值对结构
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.KeyValue`2.Key">
+            <summary>
+            获取键/值对中的键
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.KeyValue`2.Value">
+            <summary>
+            获取键/值对中的值
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.KeyValue`2.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.KeyValue`2.#ctor(`0,`1)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ServiceContainer">
+            <summary>
+            容器
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ServiceContainer.Register``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="service"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ServiceContainer.Register``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ServiceContainer.Register``1(System.Func{System.Object})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="function"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ServiceContainer.Resolve``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ServerRS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.TraceId">
+            <summary>
+            TraceId
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.RpcId">
+            <summary>
+            RpcId
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.MachineAddr">
+            <summary>
+            服务器IP
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.StartTime">
+            <summary>
+            请求开始时间
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.EndTime">
+            <summary>
+            响应时间
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.TimeLength">
+            <summary>
+            TotalMilliseconds
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Raven.Rpc.Tracing.ServerRS.IsSuccess" -->
+        <member name="F:Raven.Rpc.Tracing.ServerRS.IsException">
+            <summary>
+            是否运行异常,true|异常,false|未异常
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.Code">
+            <summary>
+            返回状态值
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.InvokeID">
+            <summary>
+            调用ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.ServerHost">
+            <summary>
+            server host
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.SystemID">
+            <summary>
+            系统ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.SystemName">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ServerRS.Extension">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ServerRS.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Util">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.Util.HttpHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.GetUniqueCode32">
+            <summary>
+            获取32位唯一字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.GetUniqueCode22">
+            <summary>
+            获取32位唯一字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.VersionIncr(System.String)">
+            <summary>
+            版本号自增（eg:1.4.3）
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.GetFullExceptionMessage(System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
