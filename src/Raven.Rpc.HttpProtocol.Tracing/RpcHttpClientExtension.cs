@@ -32,7 +32,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             client.OnError += Client_OnError;
         }
 
-        private static object Client_RequestContentDataHandler(object data)
+        private static void Client_RequestContentDataHandler(ref object data)
         {
             var reqModel = data as IRequestModel<Header>;
             if (reqModel != null)
@@ -54,8 +54,6 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 reqModel.Header.TrackID = modelHeader.TrackID;
                 reqModel.Header.UUID = modelHeader.UUID;
             }
-
-            return data;
         }
 
         private static void Client_OnRequest(System.Net.Http.HttpRequestMessage request)

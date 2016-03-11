@@ -300,11 +300,6 @@
             <param name="mediaType"></param>
             <param name="timeout">超时时间（毫秒）</param>
         </member>
-        <member name="P:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultRequestHeaders">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.CreateMediaTypeFormatter(System.String)">
             <summary>
             创建MediaTypeFormatter
@@ -584,80 +579,6 @@
             </summary>
             <param name="urlParameters"></param>
         </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnRequest">
-            <summary>
-            请求前
-            </summary>
-        </member>
-        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnRequestDelegate">
-            <summary>
-            
-            </summary>
-            <param name="request">HttpRequestMessage</param>
-        </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnResponse">
-            <summary>
-            响应后
-            </summary>
-        </member>
-        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnResponseDelegate">
-            <summary>
-            
-            </summary>
-            <param name="response">HttpResponseMessage</param>
-            <param name="rpcContext">rpcContext</param>
-        </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnError">
-            <summary>
-            OnError
-            </summary>
-        </member>
-        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnErrorDelegate">
-            <summary>
-            后续是否抛出异常
-            </summary>
-            <param name="ex">Exception</param>
-            <param name="request">HttpResponseMessage</param>
-            <param name="rpcContext">rpcContext</param>
-            <returns></returns>
-        </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.ErrorResponseHandler">
-            <summary>
-            异常情况返回数据处理
-            </summary>
-        </member>
-        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.ErrorResponseDelegate">
-            <summary>
-            result
-            </summary>
-            <param name="ex">Exception</param>
-            <param name="rpcContext">rpcContext</param>
-            <returns></returns>
-        </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersHandler">
-            <summary>
-            Url默认参数处理 事件
-            </summary>
-        </member>
-        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersDelegate">
-            <summary>
-            Url默认参数处理
-            </summary>
-            <param name="urlParameters"></param>
-            <returns></returns>
-        </member>
-        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.RequestContentDataHandler">
-            <summary>
-            请求数据处理 事件
-            </summary>
-        </member>
-        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.RequestContentDataDelegate">
-            <summary>
-            请求数据处理
-            </summary>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
         <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.Dispose">
             <summary>
             
@@ -673,6 +594,85 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="P:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultRequestHeaders">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnRequest">
+            <summary>
+            请求前
+            </summary>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnResponse">
+            <summary>
+            响应后
+            </summary>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.OnError">
+            <summary>
+            OnError
+            </summary>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.ErrorResponseHandler">
+            <summary>
+            异常情况返回数据处理
+            </summary>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersHandler">
+            <summary>
+            Url默认参数处理 事件
+            </summary>
+        </member>
+        <member name="E:Raven.Rpc.HttpProtocol.RpcHttpClient.RequestContentDataHandler">
+            <summary>
+            请求数据处理 事件
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnRequestDelegate">
+            <summary>
+            
+            </summary>
+            <param name="request">HttpRequestMessage</param>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnResponseDelegate">
+            <summary>
+            
+            </summary>
+            <param name="response">HttpResponseMessage</param>
+            <param name="rpcContext">rpcContext</param>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnErrorDelegate">
+            <summary>
+            后续是否抛出异常
+            </summary>
+            <param name="ex">Exception</param>
+            <param name="request">HttpResponseMessage</param>
+            <param name="rpcContext">rpcContext</param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.ErrorResponseDelegate">
+            <summary>
+            result
+            </summary>
+            <param name="ex">Exception</param>
+            <param name="rpcContext">rpcContext</param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersDelegate">
+            <summary>
+            Url默认参数处理
+            </summary>
+            <param name="urlParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.RequestContentDataDelegate">
+            <summary>
+            请求数据处理
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
         </member>
         <member name="T:Raven.Rpc.HttpProtocol.RpcContext">
             <summary>
@@ -717,6 +717,12 @@
         <member name="M:Raven.Rpc.HttpProtocol.RpcContext.#ctor">
             <summary>
             
+            </summary>
+        </member>
+        <member name="T:Raven.AspNet.WebApiExtensions.Util.CompressionType">
+            <summary>
+            Compression Type
+            deflate,gzip,zlib
             </summary>
         </member>
     </members>

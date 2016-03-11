@@ -50,6 +50,17 @@
             UUID
             </summary>
         </member>
+        <member name="T:Raven.Rpc.IContractModel.IResponseModel">
+            <summary>
+            IResponseModel
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.IContractModel.IResponseModel.GetCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Raven.Rpc.IContractModel.IResponseModel`1">
             <summary>
             IResponseModel
@@ -78,6 +89,17 @@
             ResponseModel
             </summary>
             <typeparam name="TCode"></typeparam>
+        </member>
+        <member name="M:Raven.Rpc.IContractModel.ResponseModel`1.GetCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.IContractModel.ResponseModel`1.#ctor">
+            <summary>
+            
+            </summary>
         </member>
         <member name="P:Raven.Rpc.IContractModel.ResponseModel`1.Code">
             <summary>
