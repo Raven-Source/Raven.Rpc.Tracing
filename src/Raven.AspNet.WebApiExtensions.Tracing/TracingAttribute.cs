@@ -83,6 +83,14 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 if (reqModel != null && reqModel.Header != null)
                 {
                     reqHeader = reqModel.Header;
+                    if (string.IsNullOrWhiteSpace(reqHeader.TrackID))
+                    {
+                        reqHeader.TrackID = Util.GetUniqueCode32();
+                    }
+                    if (string.IsNullOrWhiteSpace(reqHeader.RpcID))
+                    {
+                        reqHeader.RpcID = "0";
+                    }
 
                     //HttpContentData.SetTrackID(reqHeader.TrackID);
                     //HttpContentData.SubRpcID = reqHeader.RpcID + ".0";
@@ -151,6 +159,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     {
                         srs.Code = value.GetCode();
                         srs.Extension.Add(Config.ResultKey, value);
+                        srs.Extension.Add(nameof(Raven.Rpc.IContractModel.Header.TrackID), HttpContentData.GetRequestHeader().TrackID);
                     }
 
                     //Exception
