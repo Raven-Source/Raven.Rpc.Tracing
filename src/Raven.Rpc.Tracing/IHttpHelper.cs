@@ -31,6 +31,6 @@ namespace Raven.Rpc.Tracing
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        string GetServerAddress(HttpRequestMessage request);
+        string GetServerAddress();
     }
 }

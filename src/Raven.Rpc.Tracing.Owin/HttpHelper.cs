@@ -58,9 +58,8 @@ namespace Raven.Rpc.Tracing.Owin
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="request"></param>
         /// <returns></returns>
-        public string GetServerAddress(HttpRequestMessage request)
+        public string GetServerAddress()
         {
             string res = string.Empty;
             //is owin

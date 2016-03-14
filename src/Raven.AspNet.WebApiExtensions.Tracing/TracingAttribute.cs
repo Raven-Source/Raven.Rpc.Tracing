@@ -20,9 +20,8 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public class TracingAttribute : ActionFilterAttribute
     {
-        private const string ServerRSKey = "__raven_ServerRS";
         private ITracingRecord record = ServiceContainer.Resolve<ITracingRecord>();
-        
+
         /// <summary>
         /// 系统ID
         /// </summary>
@@ -111,7 +110,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 {
                     ServerRS srs = new ServerRS();
                     srs.StartTime = DateTime.Now;
-                    srs.MachineAddr = Util.HttpHelper.GetServerAddress(actionContext.Request);
+                    srs.MachineAddr = Util.HttpHelper.GetServerAddress();
                     srs.TraceId = reqHeader.TrackID;
                     srs.RpcId = reqHeader.RpcID;
                     srs.ServerHost = actionContext.Request.RequestUri.Host;
@@ -122,12 +121,12 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.InvokeID = string.Format("{0}_{1}", actionContext.ControllerContext.ControllerDescriptor.ControllerName.ToLower(), actionContext.ActionDescriptor.ActionName.ToLower());
                     if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
                     {
-                        srs.Extension.Add(Config.ParamsKey, JsonConvert.SerializeObject(actionContext.ActionArguments));
+                        srs.Extension.Add(Config.ParamsKey, actionContext.ActionArguments);
                     }
 
                     //ServerRS Log Data TODO
 
-                    Util.HttpHelper.SetHttpContextItem(ServerRSKey, srs);
+                    Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, srs);
                 }
             }
             await base.OnActionExecutingAsync(actionContext, cancellationToken);
@@ -147,19 +146,24 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 if (actionExecutedContext.ActionContext.ActionDescriptor.GetCustomAttributes<NotToLogAttribute>().Count == 0)
                 {
                     var request = actionExecutedContext.Request;
-                    var srs = Util.HttpHelper.GetHttpContextItem<ServerRS>(ServerRSKey);
+                    var srs = Util.HttpHelper.GetHttpContextItem<ServerRS>(Config.ServerRSKey);
 
                     srs.EndTime = DateTime.Now;
                     srs.TimeLength = (srs.EndTime - srs.StartTime).TotalMilliseconds;
                     srs.IsException = false;
                     srs.IsSuccess = true;
 
-                    IResponseModel value = null;
-                    if (actionExecutedContext.Response != null && actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out value))
+                    IResponseModel responseModel = null;
+                    if (actionExecutedContext.Response != null && actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out responseModel))
                     {
-                        srs.Code = value.GetCode();
-                        srs.Extension.Add(Config.ResultKey, value);
-                        srs.Extension.Add(nameof(Raven.Rpc.IContractModel.Header.TrackID), HttpContentData.GetRequestHeader().TrackID);
+                        srs.Code = responseModel.GetCode();
+                        srs.Extension.Add(Config.ResultKey, responseModel);
+
+                        if (responseModel.Extension == null)
+                        {
+                            responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
+                        }
+                        responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TrackID), HttpContentData.GetRequestHeader().TrackID));
                     }
 
                     //Exception
@@ -172,10 +176,13 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
 
                     Record(srs);
                 }
+
             }
 
+
+
             return base.OnActionExecutedAsync(actionExecutedContext, cancellationToken);
-        }     
+        }
 
 
         /// <summary>

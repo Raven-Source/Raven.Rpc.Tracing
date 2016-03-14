@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.TracingRecord", "Rave
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.TracingRecord.HostConsole", "Raven.TracingRecord.HostConsole\Raven.TracingRecord.HostConsole.csproj", "{1F22B3A0-8A84-45B6-9994-73478969FBEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.AspNet.MvcExtensions.Tracing", "Raven.AspNet.MvcExtensions.Tracing\Raven.AspNet.MvcExtensions.Tracing.csproj", "{D27AA486-C4E5-4F1A-A61F-2A26AAB93966}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.AspNet.MvcExtensions.Tracing.Test", "test\Raven.AspNet.MvcExtensions.Tracing.Test\Raven.AspNet.MvcExtensions.Tracing.Test.csproj", "{106ED743-8A25-4EB6-9A78-945FC5E4848F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,14 @@ Global
 		{1F22B3A0-8A84-45B6-9994-73478969FBEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F22B3A0-8A84-45B6-9994-73478969FBEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F22B3A0-8A84-45B6-9994-73478969FBEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D27AA486-C4E5-4F1A-A61F-2A26AAB93966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D27AA486-C4E5-4F1A-A61F-2A26AAB93966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D27AA486-C4E5-4F1A-A61F-2A26AAB93966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D27AA486-C4E5-4F1A-A61F-2A26AAB93966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{106ED743-8A25-4EB6-9A78-945FC5E4848F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{106ED743-8A25-4EB6-9A78-945FC5E4848F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{106ED743-8A25-4EB6-9A78-945FC5E4848F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{106ED743-8A25-4EB6-9A78-945FC5E4848F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,5 +104,6 @@ Global
 		{EAB6D763-0F2C-422E-8F97-917E5C4F6312} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 		{46B0CDCC-6298-4741-9D99-F611C3E5A17E} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 		{D513F936-0B2F-45E1-9361-3A52A202860D} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
+		{106ED743-8A25-4EB6-9A78-945FC5E4848F} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 	EndGlobalSection
 EndGlobal

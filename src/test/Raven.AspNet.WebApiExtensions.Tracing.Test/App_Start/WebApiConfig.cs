@@ -28,15 +28,8 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.Test
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            
-            TracingConfig.UseTracingContext(new TracingRecordRabbitmq(new MessageQueue.WithRabbitMQ.Options()
-            {
-                SerializerType = SerializerType.NewtonsoftJson,
-                HostName = hostName,
-                Password = password,
-                UserName = username,
-                //MaxQueueCount = 100000,
-            }));
+
+            TracingConfig.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()));
         }
     }
 

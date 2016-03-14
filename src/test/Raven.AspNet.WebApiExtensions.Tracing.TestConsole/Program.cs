@@ -77,15 +77,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
             // 默认返回Json数据
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
-            appBuilder.UseTracingContext(new TracingRecordRabbitmq(new MessageQueue.WithRabbitMQ.Options()
-            {
-                SerializerType = SerializerType.NewtonsoftJson,
-                HostName = hostName,
-                Password = password,
-                UserName = username,
-                //MaxQueueCount = 100000,
-                Loger = new Loger()
-            }));
+            appBuilder.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()));
             appBuilder.UseWebApi(config);
 
             //CallContext

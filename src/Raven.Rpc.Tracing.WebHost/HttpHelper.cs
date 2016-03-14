@@ -58,7 +58,7 @@ namespace Raven.Rpc.Tracing.WebHost
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public string GetServerAddress(HttpRequestMessage request)
+        public string GetServerAddress()
         {
             string res = string.Empty;
             //is owin
