@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.AspNet.MvcExtensions.Tracing</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.AspNet.MvcExtensions.Tracing.NonTracingAttribute">
+            <summary>
+            NonTracing
+            </summary>
+        </member>
+        <member name="T:Raven.AspNet.MvcExtensions.Tracing.NotToLogAttribute">
+            <summary>
+            Not To Log
+            </summary>
+        </member>
+        <member name="F:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.systemID">
+            <summary>
+            系统ID
+            </summary>
+        </member>
+        <member name="F:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.systemName">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="M:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="M:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.OnActionExecuted(System.Web.Mvc.ActionExecutedContext)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="M:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.Record(Raven.Rpc.Tracing.ServerRS)">
+            <summary>
+            
+            </summary>
+            <param name="sr"></param>
+        </member>
+    </members>
+</doc>

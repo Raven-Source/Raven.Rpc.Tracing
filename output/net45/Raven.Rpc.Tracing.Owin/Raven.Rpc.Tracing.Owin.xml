@@ -32,11 +32,10 @@
             <param name="key"></param>
             <param name="val"></param>
         </member>
-        <member name="M:Raven.Rpc.Tracing.Owin.HttpHelper.GetServerAddress(System.Net.Http.HttpRequestMessage)">
+        <member name="M:Raven.Rpc.Tracing.Owin.HttpHelper.GetServerAddress">
             <summary>
             
             </summary>
-            <param name="request"></param>
             <returns></returns>
         </member>
     </members>

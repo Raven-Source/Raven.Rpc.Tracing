@@ -141,7 +141,7 @@
             <param name="key"></param>
             <param name="val"></param>
         </member>
-        <member name="M:Raven.Rpc.Tracing.IHttpHelper.GetServerAddress(System.Net.Http.HttpRequestMessage)">
+        <member name="M:Raven.Rpc.Tracing.IHttpHelper.GetServerAddress">
             <summary>
             
             </summary>
@@ -153,7 +153,7 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.#ctor(Raven.MessageQueue.WithRabbitMQ.Options)">
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.#ctor(System.String,System.String,System.String,Raven.MessageQueue.ILoger)">
             <summary>
             
             </summary>

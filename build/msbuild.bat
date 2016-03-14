@@ -21,5 +21,8 @@ set msbuild=%fdir%\msbuild.exe
 set msbuild=%fdir%\msbuild.exe
 %msbuild% ../src/Raven.AspNet.WebApiExtensions.Tracing/Raven.AspNet.WebApiExtensions.Tracing.csproj /t:Clean;Rebuild /p:Configuration=Release;VisualStudioVersion=12.0;OutputPath="..\..\output\net45\Raven.AspNet.WebApiExtensions.Tracing"
 
+set msbuild=%fdir%\msbuild.exe
+%msbuild% ../src/Raven.AspNet.MvcExtensions.Tracing/Raven.AspNet.MvcExtensions.Tracing.csproj /t:Clean;Rebuild /p:Configuration=Release;VisualStudioVersion=12.0;OutputPath="..\..\output\net45\Raven.AspNet.MvcExtensions.Tracing"
+
 
 pause

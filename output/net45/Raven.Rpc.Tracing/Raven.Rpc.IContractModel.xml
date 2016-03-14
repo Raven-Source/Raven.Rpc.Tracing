@@ -61,6 +61,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:Raven.Rpc.IContractModel.IResponseModel.Extension">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Raven.Rpc.IContractModel.IResponseModel`1">
             <summary>
             IResponseModel
