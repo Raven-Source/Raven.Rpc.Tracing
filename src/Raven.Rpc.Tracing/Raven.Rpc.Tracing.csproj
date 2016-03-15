@@ -40,7 +40,7 @@
       <HintPath>..\packages\RabbitMQ.Client.3.6.0\lib\net45\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="Raven.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.RabbitMQClient.1.0.0\lib\net45\Raven.RabbitMQClient.dll</HintPath>
+      <HintPath>..\packages\Raven.RabbitMQClient.1.0.1\lib\net45\Raven.RabbitMQClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">

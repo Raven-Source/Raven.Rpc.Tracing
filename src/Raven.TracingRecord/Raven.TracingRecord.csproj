@@ -59,7 +59,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.RabbitMQClient.1.0.0\lib\net45\Raven.RabbitMQClient.dll</HintPath>
+      <HintPath>..\packages\Raven.RabbitMQClient.1.0.1\lib\net45\Raven.RabbitMQClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Serializer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

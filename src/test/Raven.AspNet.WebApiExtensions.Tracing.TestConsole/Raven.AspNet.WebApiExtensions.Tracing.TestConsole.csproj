@@ -63,11 +63,12 @@
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.6.0\lib\net45\RabbitMQ.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.RabbitMQClient">
-      <HintPath>..\..\packages\Raven.RabbitMQClient.1.0.0\lib\net45\Raven.RabbitMQClient.dll</HintPath>
+    <Reference Include="Raven.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.RabbitMQClient.1.0.1\lib\net45\Raven.RabbitMQClient.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.2.0.1\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
+    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.2.0.2\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">

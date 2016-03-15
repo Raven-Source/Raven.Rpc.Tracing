@@ -34,6 +34,11 @@ namespace Raven.Rpc.HttpProtocol.Tracing
 
         private static void Client_RequestContentDataHandler(ref object data)
         {
+            if (data == null)
+            {
+                data = new RequestModel();
+            }
+
             var reqModel = data as IRequestModel<Header>;
             if (reqModel != null)
             {
