@@ -53,7 +53,10 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     srs.SystemID = this.systemID;
                     srs.SystemName = this.systemName;
 
-                    srs.InvokeID = string.Format("{0}_{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower(), filterContext.ActionDescriptor.ActionName.ToLower());
+                    //srs.InvokeID = string.Format("{0}_{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower(), filterContext.ActionDescriptor.ActionName.ToLower());
+
+                    srs.InvokeID = request.Url.AbsolutePath;
+                    srs.Extension.Add(nameof(request.Url.PathAndQuery), request.Url.PathAndQuery);
 
                     if (filterContext.ActionParameters != null && filterContext.ActionParameters.Count > 0)
                     {

@@ -52,9 +52,13 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 {
                     modelHeader = HttpContentData.GetDefaultRequestHeader();
                     HttpContentData.SetRequestHeader(modelHeader);
-                    HttpContentData.SetSubRpcID(modelHeader.RpcID + ".0");
+                    //HttpContentData.SetSubRpcID(modelHeader.RpcID + ".0");
+                    reqModel.Header.RpcID = modelHeader.RpcID + ".0";
                 }
-                reqModel.Header.RpcID = Util.VersionIncr(HttpContentData.GetSubRpcID());
+                else
+                {
+                    reqModel.Header.RpcID = Util.VersionIncr(HttpContentData.GetSubRpcID());
+                }
                 HttpContentData.SetSubRpcID(reqModel.Header.RpcID);
                 reqModel.Header.TrackID = modelHeader.TrackID;
                 reqModel.Header.UUID = modelHeader.UUID;
@@ -70,7 +74,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             ClientSR sr = new ClientSR();
             sr.IsSuccess = true;
             sr.IsException = false;
-            FillClientSR(sr,response.RequestMessage, rpcContext);
+            FillClientSR(sr, response.RequestMessage, rpcContext);
 
             Record(sr);
         }
@@ -121,15 +125,20 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 sr.TimeLength = (sr.ExceptionTime.Value - sr.SendSTime).TotalMilliseconds;
             }
             //sr.TimeLength = sr.ReceiveETime.HasValue ? (sr.ReceiveETime.Value - sr.SendSTime).TotalMilliseconds : 0D;
-            sr.RpcId = modelHeader.RpcID;
-            sr.TraceId = modelHeader.TrackID;            
+            //sr.RpcId = modelHeader.RpcID;
+            var reqModel = rpcContext.RequestModel as IRequestModel<Header>;
+            if (reqModel != null && reqModel.Header != null)
+            {
+                sr.RpcId = reqModel.Header.RpcID;
+            }
+            sr.TraceId = modelHeader.TrackID;
 
             if (rpcContext.ResponseModel != null)
             {
-                var reqModel = rpcContext.ResponseModel as IResponseModel;
-                if (reqModel != null)
+                var resModel = rpcContext.ResponseModel as IResponseModel;
+                if (resModel != null)
                 {
-                    sr.Code = reqModel.GetCode();
+                    sr.Code = resModel.GetCode();
                 }
             }
 

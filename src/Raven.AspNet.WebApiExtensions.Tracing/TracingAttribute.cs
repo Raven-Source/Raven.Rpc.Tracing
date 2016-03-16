@@ -118,11 +118,15 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.SystemID = this.systemID;
                     srs.SystemName = this.systemName;
 
-                    srs.InvokeID = string.Format("{0}_{1}", actionContext.ControllerContext.ControllerDescriptor.ControllerName.ToLower(), actionContext.ActionDescriptor.ActionName.ToLower());
-                    if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
-                    {
-                        srs.Extension.Add(Config.ParamsKey, actionContext.ActionArguments);
-                    }
+                    srs.InvokeID = request.RequestUri.AbsolutePath;
+                    srs.Extension.Add(nameof(request.RequestUri.PathAndQuery), request.RequestUri.PathAndQuery);
+
+                    //srs.InvokeID = string.Format("{0}_{1}", actionContext.ControllerContext.ControllerDescriptor.ControllerName.ToLower(), actionContext.ActionDescriptor.ActionName.ToLower());
+
+                    //if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
+                    //{
+                    //    srs.Extension.Add(Config.ParamsKey, actionContext.ActionArguments);
+                    //}
 
                     //ServerRS Log Data TODO
 
