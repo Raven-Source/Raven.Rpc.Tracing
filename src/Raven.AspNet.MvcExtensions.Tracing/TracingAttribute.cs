@@ -31,41 +31,39 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <param name="filterContext"></param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var attrs = filterContext.ActionDescriptor.GetCustomAttributes(typeof(NonTracingAttribute), false);
+            if (!filterContext.HasMarkerAttribute<NonTracingAttribute>())
             {
-                if (attrs.Length == 0)
+                var request = filterContext.HttpContext.Request;
+                var response = filterContext.HttpContext.Response;
+
+                Header reqHeader = HttpContentData.GetDefaultRequestHeader();
+
+                HttpContentData.SetSubRpcID(reqHeader.RpcID + ".0");
+                HttpContentData.SetRequestHeader(reqHeader);
+
+                if (!filterContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
-                    var request = filterContext.HttpContext.Request;
-                    var response = filterContext.HttpContext.Response;
+                    ServerRS srs = new ServerRS();
+                    srs.StartTime = DateTime.Now;
+                    srs.MachineAddr = Util.HttpHelper.GetServerAddress();
+                    srs.TraceId = reqHeader.TrackID;
+                    srs.RpcId = reqHeader.RpcID;
+                    srs.ServerHost = request.Url.Host;
 
-                    Header reqHeader = HttpContentData.GetDefaultRequestHeader();
+                    srs.SystemID = this.systemID;
+                    srs.SystemName = this.systemName;
 
-                    HttpContentData.SetSubRpcID(reqHeader.RpcID + ".0");
-                    HttpContentData.SetRequestHeader(reqHeader);
+                    srs.InvokeID = string.Format("{0}_{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower(), filterContext.ActionDescriptor.ActionName.ToLower());
 
-                    if (filterContext.ActionDescriptor.GetCustomAttributes(typeof(NotToLogAttribute), false).Length == 0)
+                    if (filterContext.ActionParameters != null && filterContext.ActionParameters.Count > 0)
                     {
-                        ServerRS srs = new ServerRS();
-                        srs.StartTime = DateTime.Now;
-                        srs.MachineAddr = Util.HttpHelper.GetServerAddress();
-                        srs.TraceId = reqHeader.TrackID;
-                        srs.RpcId = reqHeader.RpcID;
-                        srs.ServerHost = request.Url.Host;
-
-                        srs.SystemID = this.systemID;
-                        srs.SystemName = this.systemName;
-
-                        srs.InvokeID = string.Format("{0}_{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower(), filterContext.ActionDescriptor.ActionName.ToLower());
-
-                        if (filterContext.ActionParameters != null && filterContext.ActionParameters.Count > 0)
-                        {
-                            srs.Extension.Add(Config.ParamsKey, filterContext.ActionParameters);
-                        }
-
-                        Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, srs);
+                        srs.Extension.Add(Config.ParamsKey, filterContext.ActionParameters);
                     }
+
+                    Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, srs);
                 }
             }
+
 
             base.OnActionExecuting(filterContext);
         }
@@ -76,48 +74,47 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <param name="filterContext"></param>
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            var attrs = filterContext.ActionDescriptor.GetCustomAttributes(typeof(NonTracingAttribute), false);
+            if (!filterContext.HasMarkerAttribute<NonTracingAttribute>())
             {
-                if (attrs.Length == 0)
+                if (!filterContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
-                    if (filterContext.ActionDescriptor.GetCustomAttributes(typeof(NotToLogAttribute), false).Length == 0)
+                    var request = filterContext.HttpContext.Request;
+                    var srs = Util.HttpHelper.GetHttpContextItem<ServerRS>(Config.ServerRSKey);
+
+                    srs.EndTime = DateTime.Now;
+                    srs.TimeLength = (srs.EndTime - srs.StartTime).TotalMilliseconds;
+                    srs.IsException = false;
+                    srs.IsSuccess = true;
+
+                    var jResult = filterContext.Result as JsonResult;
+                    if (jResult != null)
                     {
-                        var request = filterContext.HttpContext.Request;
-                        var srs = Util.HttpHelper.GetHttpContextItem<ServerRS>(Config.ServerRSKey);
-
-                        srs.EndTime = DateTime.Now;
-                        srs.TimeLength = (srs.EndTime - srs.StartTime).TotalMilliseconds;
-                        srs.IsException = false;
-                        srs.IsSuccess = true;
-
-                        var jResult = filterContext.Result as JsonResult;
-                        if (jResult != null)
+                        var responseModel = jResult.Data as IResponseModel;
+                        if (responseModel != null)
                         {
-                            var responseModel = jResult.Data as IResponseModel;
-                            if (responseModel != null)
-                            {
-                                srs.Code = responseModel.GetCode();
+                            srs.Code = responseModel.GetCode();
+                            srs.Extension.Add(Config.ResultKey, jResult.Data);
 
-                                if (responseModel.Extension == null)
-                                {
-                                    responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
-                                }
-                                responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TrackID), HttpContentData.GetRequestHeader().TrackID));
+                            //if (responseModel.Extension == null)
+                            //{
+                            //    responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
+                            //}
+                            //responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TrackID), HttpContentData.GetRequestHeader().TrackID));
 
-                                srs.Extension.Add(Config.ResultKey, jResult.Data);
-                            }
+                            filterContext.HttpContext.Response.Headers.Add(Config.ResponseHeaderTrackKey, HttpContentData.GetRequestHeader().TrackID);
+
                         }
-
-                        //Exception
-                        if (filterContext.Exception != null)
-                        {
-                            srs.IsException = true;
-                            srs.IsSuccess = false;
-                            srs.Extension.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(filterContext.Exception));
-                        }
-
-                        Record(srs);
                     }
+
+                    //Exception
+                    if (filterContext.Exception != null)
+                    {
+                        srs.IsException = true;
+                        srs.IsSuccess = false;
+                        srs.Extension.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(filterContext.Exception));
+                    }
+
+                    Record(srs);
                 }
             }
 

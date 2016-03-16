@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
 
 namespace Raven.Rpc.Tracing.Test
 {
@@ -30,7 +31,14 @@ namespace Raven.Rpc.Tracing.Test
         [TestMethod]
         public void GetUniqueCode16()
         {
-            var res = Util.GetUniqueCode22();
+            string res = null;
+            res = Util.GetUniqueCode22();
+
+            res = new Guid(Util.GetGuidArray()).ToString();
+            res = new Guid(Util.GetGuidArray()).ToString();
+            res = new Guid(Util.GetGuidArray()).ToString();
+            res = new Guid(Util.GetGuidArray()).ToString();
+            res = new Guid(Util.GetGuidArray()).ToString();
         }
     }
 }

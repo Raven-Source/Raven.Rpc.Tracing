@@ -40,10 +40,10 @@ namespace Raven.Rpc.Tracing
         /// <returns></returns>
         public static string GetUniqueCode32()
         {
-            var guid1 = Guid.NewGuid();
-            var guid2 = Guid.NewGuid();
-            var token1 = Convert.ToBase64String(guid1.ToByteArray()).TrimEnd('=').Replace("/", "_").Replace("+", "-");
-            var token2 = Convert.ToBase64String(guid2.ToByteArray()).TrimEnd('=').Replace("/", "_").Replace("+", "-");
+            var guid1 = GetGuidArray();
+            var guid2 = GetGuidArray();
+            var token1 = Convert.ToBase64String(guid1).TrimEnd('=').Replace("/", "_").Replace("+", "-");
+            var token2 = Convert.ToBase64String(guid2).TrimEnd('=').Replace("/", "_").Replace("+", "-");
             return (token1 + token2).Substring(0, 32);
         }
 
@@ -53,9 +53,34 @@ namespace Raven.Rpc.Tracing
         /// <returns></returns>
         public static string GetUniqueCode22()
         {
-            var guid1 = Guid.NewGuid();
-            var token1 = Convert.ToBase64String(guid1.ToByteArray()).TrimEnd('=').Replace("/", "_").Replace("+", "-");
+            var guid1 = GetGuidArray();
+            var token1 = Convert.ToBase64String(guid1).TrimEnd('=').Replace("/", "_").Replace("+", "-");
             return token1;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static byte[] GetGuidArray()
+        {
+            byte[] guidArray = Guid.NewGuid().ToByteArray();
+
+            var baseDate = new DateTime(1900, 1, 1);
+            DateTime now = DateTime.Now;
+            var days = new TimeSpan(now.Ticks - baseDate.Ticks);
+            TimeSpan msecs = now.TimeOfDay;
+
+            byte[] daysArray = BitConverter.GetBytes(days.Days);
+            byte[] msecsArray = BitConverter.GetBytes((long)(msecs.TotalMilliseconds / 3.333333));
+
+            Array.Reverse(daysArray);
+            Array.Reverse(msecsArray);
+
+            Array.Copy(daysArray, daysArray.Length - 2, guidArray, guidArray.Length - 6, 2);
+            Array.Copy(msecsArray, msecsArray.Length - 4, guidArray, guidArray.Length - 4, 4);
+
+            return guidArray;
         }
 
         /// <summary>

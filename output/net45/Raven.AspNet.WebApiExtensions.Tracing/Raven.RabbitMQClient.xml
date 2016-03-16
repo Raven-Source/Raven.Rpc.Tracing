@@ -39,6 +39,18 @@
             exchangeType对应数值表
             </summary>
         </member>
+        <member name="T:Raven.MessageQueue.ILoger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.MessageQueue.ILoger.LogError(System.Exception,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="ex"></param>
+            <param name="dataObj">1.Dequeue(出队时为BasicGetResult的Body,byte[]类型 或 null);2.Enqueue(入队时为传的dataObj)</param>
+        </member>
         <member name="T:Raven.MessageQueue.WithRabbitMQ.Options">
             <summary>
             
@@ -202,18 +214,6 @@
             <summary>
             队列消息
             </summary>
-        </member>
-        <member name="T:Raven.MessageQueue.ILoger">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Raven.MessageQueue.ILoger.LogError(System.Exception,System.Object)">
-            <summary>
-            
-            </summary>
-            <param name="ex"></param>
-            <param name="dataObj">1.Dequeue(出队时为BasicGetResult的Body,byte[]类型 或 null);2.Enqueue(入队时为传的dataObj)</param>
         </member>
     </members>
 </doc>

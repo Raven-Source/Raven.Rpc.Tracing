@@ -48,6 +48,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Raven.Rpc.Tracing\Raven.Rpc.Tracing.csproj">
+      <Project>{1fe6df36-a193-4e21-968b-77a970b6e42f}</Project>
+      <Name>Raven.Rpc.Tracing</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

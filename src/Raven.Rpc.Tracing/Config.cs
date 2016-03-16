@@ -17,6 +17,6 @@ namespace Raven.Rpc.Tracing
 
 
         public const string ServerRSKey = "__raven_ServerRS";
-        //public const string ResponseHeaderTrackKey = "RavenTrackId";
+        public const string ResponseHeaderTrackKey = "RavenTrackId";
     }
 }

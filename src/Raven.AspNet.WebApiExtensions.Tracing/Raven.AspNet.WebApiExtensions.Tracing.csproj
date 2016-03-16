@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpActionContextExtensions.cs" />
     <Compile Include="NonTracingAttribute.cs" />
     <Compile Include="TracingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
