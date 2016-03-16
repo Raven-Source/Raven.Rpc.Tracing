@@ -153,19 +153,20 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.IsException = false;
                     srs.IsSuccess = true;
 
+                    string trackId = HttpContentData.GetRequestHeader().TrackID;
                     IResponseModel responseModel = null;
                     if (actionExecutedContext.Response != null && actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out responseModel))
                     {
                         srs.Code = responseModel.GetCode();
                         srs.Extension.Add(Config.ResultKey, responseModel);
 
-                        //if (responseModel.Extension == null)
-                        //{
-                        //    responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
-                        //}
-                        //responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TrackID), HttpContentData.GetRequestHeader().TrackID));
-                        actionExecutedContext.Response.Headers.Add(Config.ResponseHeaderTrackKey, HttpContentData.GetRequestHeader().TrackID);
+                        if (responseModel.Extension == null)
+                        {
+                            responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
+                        }
+                        responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TrackID), trackId));
                     }
+                    actionExecutedContext.Response.Headers.Add(Config.ResponseHeaderTrackKey, trackId);
 
                     //Exception
                     if (actionExecutedContext.Exception != null)
