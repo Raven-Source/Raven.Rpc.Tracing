@@ -74,7 +74,8 @@ namespace Raven.Rpc.Tracing.WebHost
 
             //return System.Web.HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"];
             var environment = System.Web.HttpContext.Current.Request.ServerVariables;
-            res = environment["LOCAL_ADDR"];
+            //res = environment["LOCAL_ADDR"] + System.Web.HttpContext.Current.Request.Url.Port;
+            res = string.Concat(environment["LOCAL_ADDR"], ":", System.Web.HttpContext.Current.Request.Url.Port);
 
             return res;
         }
