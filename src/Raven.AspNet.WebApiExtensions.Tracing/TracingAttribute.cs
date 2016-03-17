@@ -120,6 +120,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
 
                     srs.InvokeID = request.RequestUri.AbsolutePath;
                     srs.Extension.Add(nameof(request.RequestUri.PathAndQuery), request.RequestUri.PathAndQuery);
+                    if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
+                    {
+                        srs.Extension.Add(Config.ParamsKey, actionContext.ActionArguments);
+                    }
 
                     //srs.InvokeID = string.Format("{0}_{1}", actionContext.ControllerContext.ControllerDescriptor.ControllerName.ToLower(), actionContext.ActionDescriptor.ActionName.ToLower());
 
