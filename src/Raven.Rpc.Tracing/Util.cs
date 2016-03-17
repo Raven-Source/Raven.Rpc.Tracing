@@ -123,16 +123,30 @@ namespace Raven.Rpc.Tracing
             StringBuilder sb = new StringBuilder();
             if (ex != null)
             {
-                sb.Append(ex.Message);
+                if (!string.IsNullOrWhiteSpace(ex.Message))
+                {
+                    sb.Append(ex.Message + "\r\n");
+                }
+                if (!string.IsNullOrWhiteSpace(ex.StackTrace))
+                {
+                    sb.Append(ex.StackTrace + "\r\n");
+                }
             }
 
-            var temp = ex;
-            while (temp.InnerException != null)
+            if (ex is AggregateException)
             {
-                temp = temp.InnerException;
-                sb.Append("\r\n" + temp.Message);
+                var exList = ex as AggregateException;
+                foreach (var e in exList.InnerExceptions)
+                {
+                    sb.Append(GetFullExceptionMessage(e));
+                }
             }
 
+            if (ex.InnerException != null)
+            {
+                sb.Append(GetFullExceptionMessage(ex.InnerException));
+            }
+            
             return sb.ToString();
         }
 

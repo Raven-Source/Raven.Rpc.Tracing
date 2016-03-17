@@ -104,7 +104,10 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                             //}
                             //responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TrackID), HttpContentData.GetRequestHeader().TrackID));
                         }
+                    }
 
+                    if (filterContext.HttpContext.Response != null)
+                    {
                         filterContext.HttpContext.Response.Headers.Add(Config.ResponseHeaderTrackKey, HttpContentData.GetRequestHeader().TrackID);
                     }
 

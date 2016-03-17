@@ -25,6 +25,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
         }
 
 
+        [HttpGet]
         [HttpPost]
         public ResponseModel<string> Get2()
         {
@@ -33,10 +34,12 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
             return new ResponseModel<string>() { Data = Guid.NewGuid().ToString() };
         }
 
+        [HttpGet]
         [HttpPost]
-        public ResponseModel<string> Get3()
+        public Task<ResponseModel<string>> Get3()
         {
-            return new ResponseModel<string>() { Data = Guid.NewGuid().ToString() };
+            throw new Exception();
+            return Task.FromResult<ResponseModel<string>>(new ResponseModel<string>() { Data = Guid.NewGuid().ToString() });
         }
     }
 
