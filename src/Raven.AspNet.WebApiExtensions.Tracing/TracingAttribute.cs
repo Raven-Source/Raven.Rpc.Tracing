@@ -82,16 +82,16 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 if (reqModel != null && reqModel.Header != null)
                 {
                     reqHeader = reqModel.Header;
-                    if (string.IsNullOrWhiteSpace(reqHeader.TrackID))
+                    if (string.IsNullOrWhiteSpace(reqHeader.TraceID))
                     {
-                        reqHeader.TrackID = Util.GetUniqueCode32();
+                        reqHeader.TraceID = Util.GetUniqueCode32();
                     }
                     if (string.IsNullOrWhiteSpace(reqHeader.RpcID))
                     {
                         reqHeader.RpcID = "0";
                     }
 
-                    //HttpContentData.SetTrackID(reqHeader.TrackID);
+                    //HttpContentData.SetTrackID(reqHeader.TraceID);
                     //HttpContentData.SubRpcID = reqHeader.RpcID + ".0";
                     //var header = HttpContentData.CloneRequestHeader(reqModel.Header);
                     //header.RpcID = header.RpcID + ".0";
@@ -99,7 +99,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 else
                 {
                     reqHeader = HttpContentData.GetDefaultRequestHeader();
-                    //HttpContentData.SetTrackID(reqHeader.TrackID);
+                    //HttpContentData.SetTrackID(reqHeader.TraceID);
                 }
                 HttpContentData.SetSubRpcID(reqHeader.RpcID + ".0");
                 HttpContentData.SetRequestHeader(reqHeader);
@@ -111,7 +111,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     ServerRS srs = new ServerRS();
                     srs.StartTime = DateTime.Now;
                     srs.MachineAddr = Util.HttpHelper.GetServerAddress();
-                    srs.TraceId = reqHeader.TrackID;
+                    srs.TraceId = reqHeader.TraceID;
                     srs.RpcId = reqHeader.RpcID;
                     srs.ServerHost = actionContext.Request.RequestUri.Host;
 
@@ -157,7 +157,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.IsException = false;
                     srs.IsSuccess = true;
 
-                    string trackId = HttpContentData.GetRequestHeader().TrackID;
+                    string traceId = HttpContentData.GetRequestHeader().TraceID;
                     if (actionExecutedContext.Response != null)
                     {
                         IResponseModel responseModel = null;
@@ -170,9 +170,9 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                             {
                                 responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
                             }
-                            responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TrackID), trackId));
+                            responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TraceID), traceId));
                         }
-                        actionExecutedContext.Response.Headers.Add(Config.ResponseHeaderTrackKey, trackId);
+                        actionExecutedContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, traceId);
                     }
 
                     //Exception

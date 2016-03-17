@@ -63,26 +63,7 @@ namespace Raven.Rpc.Tracing
         {
             Util.HttpHelper.SetHttpContextItem(SubRpcIDKey, val);
         }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <returns></returns>
-        //public static string GetTrackID()
-        //{
-        //    var trackId = Util.HttpHelper.GetHttpContextItem<string>(TrackIDKey);
-        //    return trackId;
-        //}
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="val"></param>
-        //public static void SetTrackID(string val)
-        //{
-        //    Util.HttpHelper.SetHttpContextItem(TrackIDKey, val);
-        //}
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -92,7 +73,7 @@ namespace Raven.Rpc.Tracing
             return new Rpc.IContractModel.Header()
             {
                 RpcID = "0",
-                TrackID = Util.GetUniqueCode32()
+                TraceID = Util.GetUniqueCode32()
             };
         }
 
@@ -106,7 +87,7 @@ namespace Raven.Rpc.Tracing
             return new Rpc.IContractModel.Header()
             {
                 RpcID = header.RpcID,
-                TrackID = header.TrackID,
+                TraceID = header.TraceID,
                 Token = header.Token,
                 UUID = header.UUID,
             };

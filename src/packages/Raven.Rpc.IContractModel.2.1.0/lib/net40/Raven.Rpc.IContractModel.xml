@@ -40,7 +40,7 @@
             
             </summary>
         </member>
-        <member name="P:Raven.Rpc.IContractModel.Header.TrackID">
+        <member name="P:Raven.Rpc.IContractModel.Header.TraceID">
             <summary>
             
             </summary>

@@ -8,8 +8,8 @@ namespace Raven.Rpc.Tracing
 {
     public static class Config
     {
-        public const string TrackClientSRQueueName = "raven_track_csr";
-        public const string TrackServerRSQueueName = "raven_track_srs";
+        public const string TraceClientSRQueueName = "raven_trace_csr";
+        public const string TraceServerRSQueueName = "raven_trace_srs";
 
         public const string ExceptionKey = "Exception";
         public const string ParamsKey = "Params";
@@ -17,6 +17,6 @@ namespace Raven.Rpc.Tracing
 
 
         public const string ServerRSKey = "__raven_ServerRS";
-        public const string ResponseHeaderTrackKey = "RavenTraceId";
+        public const string ResponseHeaderTraceKey = "RavenTraceId";
     }
 }

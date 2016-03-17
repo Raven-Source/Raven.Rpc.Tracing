@@ -67,7 +67,7 @@ namespace Raven.TracingRecord
 
             try
             {
-                var list = rabbitMQClient.ReceiveBatch<ServerRSLogs>(Config.TrackServerRSQueueName);
+                var list = rabbitMQClient.ReceiveBatch<ServerRSLogs>(Config.TraceServerRSQueueName);
 
                 if (list != null && list.Count > 0)
                 {
@@ -104,7 +104,7 @@ namespace Raven.TracingRecord
                     serverRSlogRep.InsertBatch(list);
                 }
 
-                var list2 = rabbitMQClient.ReceiveBatch<ClientSRLogs>(Config.TrackClientSRQueueName);
+                var list2 = rabbitMQClient.ReceiveBatch<ClientSRLogs>(Config.TraceClientSRQueueName);
 
                 if (list2 != null && list2.Count > 0)
                 {

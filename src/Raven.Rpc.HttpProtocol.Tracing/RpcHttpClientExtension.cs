@@ -60,7 +60,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                     reqModel.Header.RpcID = Util.VersionIncr(HttpContentData.GetSubRpcID());
                 }
                 HttpContentData.SetSubRpcID(reqModel.Header.RpcID);
-                reqModel.Header.TrackID = modelHeader.TrackID;
+                reqModel.Header.TraceID = modelHeader.TraceID;
                 reqModel.Header.UUID = modelHeader.UUID;
             }
         }
@@ -131,7 +131,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             {
                 sr.RpcId = reqModel.Header.RpcID;
             }
-            sr.TraceId = modelHeader.TrackID;
+            sr.TraceId = modelHeader.TraceID;
 
             if (rpcContext.ResponseModel != null)
             {
