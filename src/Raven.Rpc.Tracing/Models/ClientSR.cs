@@ -55,10 +55,20 @@ namespace Raven.Rpc.Tracing
         /// </summary>
         public string Code;
 
+        ///// <summary>
+        ///// 服务方法/url
+        ///// </summary>
+        //public string ServiceMethod;
+
         /// <summary>
-        /// 服务方法/url
+        /// 调用服务方法/url
         /// </summary>
-        public string ServiceMethod;
+        public string InvokeID;
+
+        /// <summary>
+        /// server host
+        /// </summary>
+        public string ServerHost;
 
         /// <summary>
         /// 协议

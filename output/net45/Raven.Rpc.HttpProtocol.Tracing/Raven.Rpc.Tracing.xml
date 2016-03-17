@@ -50,9 +50,14 @@
             返回状态值
             </summary>
         </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.ServiceMethod">
+        <member name="F:Raven.Rpc.Tracing.ClientSR.InvokeID">
             <summary>
-            服务方法/url
+            调用服务方法/url
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.ServerHost">
+            <summary>
+            server host
             </summary>
         </member>
         <member name="F:Raven.Rpc.Tracing.ClientSR.Protocol">

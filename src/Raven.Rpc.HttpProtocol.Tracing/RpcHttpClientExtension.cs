@@ -101,10 +101,23 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         {
             var modelHeader = HttpContentData.GetRequestHeader();
             var uri = request.RequestUri;
-            sr.ServiceMethod = uri.AbsoluteUri;
-            sr.Extension.Add(nameof(uri.AbsolutePath), uri.AbsolutePath);
+
+            int index = uri.AbsoluteUri.IndexOf("?");
+            //if (index > 0)
+            //{
+            //    sr.ServiceMethod = uri.AbsoluteUri.Substring(0, index);
+            //}
+            //else
+            //{
+            //    sr.ServiceMethod = uri.AbsoluteUri;
+            //}
+
+            sr.InvokeID = uri.AbsolutePath;
+            sr.ServerHost = uri.Authority;
+
+            //sr.Extension.Add(nameof(uri.AbsolutePath), uri.AbsolutePath);
             sr.Extension.Add(nameof(uri.PathAndQuery), uri.PathAndQuery);
-            sr.Extension.Add(nameof(uri.Host), uri.Host);
+            //sr.Extension.Add(nameof(uri.Host), uri.Host);
 
             sr.Extension.Add(nameof(rpcContext.RequestModel), rpcContext.RequestModel);
             sr.Extension.Add(nameof(rpcContext.ResponseModel), rpcContext.ResponseModel);
