@@ -114,6 +114,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.TraceId = reqHeader.TraceID;
                     srs.RpcId = reqHeader.RpcID;
                     srs.ServerHost = actionContext.Request.RequestUri.Authority;
+                    srs.Protocol = actionContext.Request.RequestUri.Scheme;
 
                     srs.SystemID = this.systemID;
                     srs.SystemName = this.systemName;

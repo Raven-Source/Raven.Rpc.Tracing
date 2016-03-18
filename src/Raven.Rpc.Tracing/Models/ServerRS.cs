@@ -85,6 +85,11 @@ namespace Raven.Rpc.Tracing
         /// </summary>
         public string SystemName;
 
+        /// <summary>
+        /// 协议
+        /// </summary>
+        public string Protocol;
+
         ///// <summary>
         ///// 扩展
         ///// </summary>

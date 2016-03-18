@@ -19,6 +19,11 @@
             远程服务ID
             </summary>
         </member>
+        <member name="F:Raven.Rpc.Tracing.ClientSR.MachineAddr">
+            <summary>
+            服务器IP
+            </summary>
+        </member>
         <member name="F:Raven.Rpc.Tracing.ClientSR.SendSTime">
             <summary>
             请求开始时间
@@ -301,6 +306,11 @@
         <member name="F:Raven.Rpc.Tracing.ServerRS.SystemName">
             <summary>
             系统名称
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ServerRS.Protocol">
+            <summary>
+            协议
             </summary>
         </member>
         <member name="P:Raven.Rpc.Tracing.ServerRS.Extension">

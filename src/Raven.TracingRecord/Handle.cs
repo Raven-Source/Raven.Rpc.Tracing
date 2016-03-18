@@ -81,7 +81,14 @@ namespace Raven.TracingRecord
         /// </summary>
         public void ProcessWork()
         {
-            Reset2.Reset();
+            if (isRun)
+            {
+                Reset2.Reset();
+            }
+            else
+            {
+                return;
+            }
             while (isRun)
             {
                 try

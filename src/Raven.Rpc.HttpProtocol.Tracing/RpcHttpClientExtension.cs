@@ -102,7 +102,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             var modelHeader = HttpContentData.GetRequestHeader();
             var uri = request.RequestUri;
 
-            int index = uri.AbsoluteUri.IndexOf("?");
+            //int index = uri.AbsoluteUri.IndexOf("?");
             //if (index > 0)
             //{
             //    sr.ServiceMethod = uri.AbsoluteUri.Substring(0, index);
@@ -111,6 +111,8 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             //{
             //    sr.ServiceMethod = uri.AbsoluteUri;
             //}
+
+            sr.MachineAddr = Util.HttpHelper.GetServerAddress();
 
             sr.InvokeID = uri.AbsolutePath;
             sr.ServerHost = uri.Authority;

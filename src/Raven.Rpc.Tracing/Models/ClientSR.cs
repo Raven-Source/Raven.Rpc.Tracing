@@ -22,6 +22,11 @@ namespace Raven.Rpc.Tracing
         public string RpcId;
 
         /// <summary>
+        /// 服务器IP
+        /// </summary>
+        public string MachineAddr;
+
+        /// <summary>
         /// 请求开始时间
         /// </summary>
         public DateTime SendSTime;

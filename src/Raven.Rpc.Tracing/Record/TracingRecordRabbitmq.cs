@@ -34,7 +34,7 @@ namespace Raven.Rpc.Tracing.Record
         public TracingRecordRabbitmq(string host, string userName, string pwd, MessageQueue.ILoger loger = null)
         {
             Raven.MessageQueue.WithRabbitMQ.Options rabbitMQOptions = new Options();
-            rabbitMQOptions.SerializerType = SerializerType.NewtonsoftJson;
+            rabbitMQOptions.SerializerType = SerializerType.Jil;
             rabbitMQOptions.HostName = host;
             rabbitMQOptions.UserName = userName;
             rabbitMQOptions.Password = pwd;

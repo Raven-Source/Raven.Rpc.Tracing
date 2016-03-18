@@ -49,6 +49,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     srs.TraceId = reqHeader.TraceID;
                     srs.RpcId = reqHeader.RpcID;
                     srs.ServerHost = request.Url.Authority;
+                    srs.Protocol = request.Url.Scheme;
 
                     srs.SystemID = this.systemID;
                     srs.SystemName = this.systemName;
