@@ -76,7 +76,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 if (reqModel == null)
                 {
                     reqModel = await actionContext.Request.Content.ReadAsAsync<RequestModel>();
-                    actionContext.ActionArguments.Add(Guid.NewGuid().ToString("N"), reqModel);
+                    if (reqModel != null)
+                    {
+                        actionContext.ActionArguments.Add(Guid.NewGuid().ToString("N"), reqModel);
+                    }
                 }
 
                 if (reqModel != null && reqModel.Header != null)
