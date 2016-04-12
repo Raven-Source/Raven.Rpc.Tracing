@@ -11,27 +11,28 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.Test.Controllers
     [Tracing]
     public class TestController : ApiController
     {
-        Rpc.HttpProtocol.RpcHttpClient client = new Rpc.HttpProtocol.RpcHttpClient("http://127.0.0.1:1688/");
+        Rpc.HttpProtocol.RpcHttpClient client = new Rpc.HttpProtocol.RpcHttpClient("http://localhost:1688/", timeout:10000000);
 
         // GET api/values/5
         [HttpGet]
         public ResponseModel<User> Get()
         {
             client.RegistTracing();
-
             var res = client.Invoke<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get2", new Rpc.IContractModel.RequestModel());
             return new ResponseModel<User>() { Data = new User { Name = "ResponseModel-Get", Desc = res.Data }, Code = 123 };
         }
 
 
+        //[HttpGet]
         [HttpPost]
         public ResponseModel<string> Get2()
         {
-            //client.RegistTracing();
-            //var res = client.Invoke<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get3", new Rpc.IContractModel.RequestModel());
+            client.RegistTracing();
+            var res = client.Invoke<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get3", new Rpc.IContractModel.RequestModel());
             return new ResponseModel<string>() { Data = Guid.NewGuid().ToString() };
         }
 
+        [HttpGet]
         [HttpPost]
         public ResponseModel<string> Get3()
         {

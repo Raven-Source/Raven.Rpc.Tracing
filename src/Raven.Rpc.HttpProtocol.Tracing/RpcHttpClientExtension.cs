@@ -47,19 +47,19 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                     reqModel.Header = new Header();
                 }
 
-                var modelHeader = HttpContentData.GetRequestHeader();
+                var modelHeader = HttpContextData.GetRequestHeader();
                 if (modelHeader == null)
                 {
-                    modelHeader = HttpContentData.GetDefaultRequestHeader();
-                    HttpContentData.SetRequestHeader(modelHeader);
+                    modelHeader = HttpContextData.GetDefaultRequestHeader();
+                    HttpContextData.SetRequestHeader(modelHeader);
                     //HttpContentData.SetSubRpcID(modelHeader.RpcID + ".0");
                     reqModel.Header.RpcID = modelHeader.RpcID + ".0";
                 }
                 else
                 {
-                    reqModel.Header.RpcID = Util.VersionIncr(HttpContentData.GetSubRpcID());
+                    reqModel.Header.RpcID = Util.VersionIncr(HttpContextData.GetSubRpcID());
                 }
-                HttpContentData.SetSubRpcID(reqModel.Header.RpcID);
+                HttpContextData.SetSubRpcID(reqModel.Header.RpcID);
                 reqModel.Header.TraceID = modelHeader.TraceID;
                 reqModel.Header.UUID = modelHeader.UUID;
             }
@@ -99,7 +99,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// <param name="rpcContext"></param>
         private static void FillClientSR(ClientSR sr, HttpRequestMessage request, RpcContext rpcContext)
         {
-            var modelHeader = HttpContentData.GetRequestHeader();
+            var modelHeader = HttpContextData.GetRequestHeader();
             var uri = request.RequestUri;
 
             //int index = uri.AbsoluteUri.IndexOf("?");

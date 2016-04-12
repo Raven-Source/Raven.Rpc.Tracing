@@ -34,3 +34,7 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: InternalsVisibleTo("Raven.Rpc.Tracing.Owin")]
+[assembly: InternalsVisibleTo("Raven.Rpc.Tracing.WebHost")]
+[assembly: InternalsVisibleTo("Raven.AspNet.MvcExtensions.Tracing")]
+[assembly: InternalsVisibleTo("Raven.AspNet.WebApiExtensions.Tracing")]

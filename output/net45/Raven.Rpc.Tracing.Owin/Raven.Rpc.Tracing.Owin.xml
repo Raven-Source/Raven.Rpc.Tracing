@@ -14,8 +14,17 @@
             
             </summary>
             <param name="app"></param>
+            <param name="tracingRecord"></param>
         </member>
-        <member name="M:Raven.Rpc.Tracing.Owin.HttpHelper.GetHttpContextItem``1(System.String)">
+        <member name="M:Raven.Rpc.Tracing.Owin.AppBuilderExtension.UseRequestScopeContext(Owin.IAppBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="app">Owin app.</param>
+            <param name="isThreadsafeItem">OwinRequestScopeContext.Item is threadsafe or not. Default is threadsafe.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Owin.HttpContextHelper.GetHttpContextItem``1(System.String)">
             <summary>
             获取 HttpContextItem
             </summary>
@@ -24,7 +33,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.Tracing.Owin.HttpHelper.SetHttpContextItem(System.String,System.Object)">
+        <member name="M:Raven.Rpc.Tracing.Owin.HttpContextHelper.SetHttpContextItem(System.String,System.Object)">
             <summary>
             设置 HttpContextItem
             </summary>
@@ -32,11 +41,25 @@
             <param name="key"></param>
             <param name="val"></param>
         </member>
-        <member name="M:Raven.Rpc.Tracing.Owin.HttpHelper.GetServerAddress">
+        <member name="M:Raven.Rpc.Tracing.Owin.HttpContextHelper.GetServerAddress">
             <summary>
             
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Owin.InitRequestScopeContext.BeginRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="tracingRecord"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Owin.InitRequestScopeContext.EndRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="tracingRecord"></param>
         </member>
     </members>
 </doc>

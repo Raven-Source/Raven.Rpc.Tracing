@@ -1,5 +1,6 @@
 ﻿using Raven.Rpc.IContractModel;
 using Raven.Rpc.Tracing;
+using Raven.Rpc.Tracing.ContextData;
 using Raven.Rpc.Tracing.Record;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,6 @@ namespace Raven.AspNet.MvcExtensions.Tracing
 {
     public class TracingAttribute : ActionFilterAttribute
     {
-        private ITracingRecord record = ServiceContainer.Resolve<ITracingRecord>();
-
         /// <summary>
         /// 系统ID
         /// </summary>
@@ -31,15 +30,17 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <param name="filterContext"></param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            ServiceContainer.Resolve<IInitRequestScopeContext>().BeginRequest(filterContext.HttpContext.Request);
+
             if (!filterContext.HasMarkerAttribute<NonTracingAttribute>())
             {
                 var request = filterContext.HttpContext.Request;
                 var response = filterContext.HttpContext.Response;
 
-                Header reqHeader = HttpContentData.GetDefaultRequestHeader();
+                Header reqHeader = HttpContextData.GetDefaultRequestHeader();
 
-                HttpContentData.SetSubRpcID(reqHeader.RpcID + ".0");
-                HttpContentData.SetRequestHeader(reqHeader);
+                HttpContextData.SetSubRpcID(reqHeader.RpcID + ".0");
+                HttpContextData.SetRequestHeader(reqHeader);
 
                 if (!filterContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
@@ -109,7 +110,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
 
                     if (filterContext.HttpContext.Response != null)
                     {
-                        filterContext.HttpContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, HttpContentData.GetRequestHeader().TraceID);
+                        filterContext.HttpContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, HttpContextData.GetRequestHeader().TraceID);
                     }
 
                     //Exception
@@ -124,6 +125,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                 }
             }
 
+            ServiceContainer.Resolve<IInitRequestScopeContext>().EndRequest(filterContext.HttpContext.Request);
             base.OnActionExecuted(filterContext);
         }
 
@@ -131,10 +133,10 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sr"></param>
+        /// <param name="srs"></param>
         private void Record(ServerRS srs)
         {
-            record.RecordServerRS(srs);
+            ServiceContainer.Resolve<ITracingRecord>().RecordServerRS(srs);
         }
     }
 }

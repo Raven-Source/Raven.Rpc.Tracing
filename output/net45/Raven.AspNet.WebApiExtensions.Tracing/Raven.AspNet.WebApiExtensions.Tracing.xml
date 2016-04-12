@@ -29,27 +29,11 @@
             系统名称
             </summary>
         </member>
-        <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.OnActionExecutingAsync(System.Web.Http.Controllers.HttpActionContext,System.Threading.CancellationToken)">
-            <summary>
-            
-            </summary>
-            <param name="actionContext"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.OnActionExecutedAsync(System.Web.Http.Filters.HttpActionExecutedContext,System.Threading.CancellationToken)">
-            <summary>
-            
-            </summary>
-            <param name="actionExecutedContext"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
         <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.Record(Raven.Rpc.Tracing.ServerRS)">
             <summary>
             
             </summary>
-            <param name="sr"></param>
+            <param name="srs"></param>
         </member>
     </members>
 </doc>

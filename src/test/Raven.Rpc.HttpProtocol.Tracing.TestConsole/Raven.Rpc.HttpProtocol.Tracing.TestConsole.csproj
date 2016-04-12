@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Raven.Rpc.HttpProtocol">
+      <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.2.0.2\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

@@ -4,7 +4,7 @@
         <name>Raven.Rpc.Tracing.WebHost</name>
     </assembly>
     <members>
-        <member name="M:Raven.Rpc.Tracing.WebHost.HttpHelper.GetHttpContextItem``1(System.String)">
+        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.GetHttpContextItem``1(System.String)">
             <summary>
             获取 HttpContextItem
             </summary>
@@ -13,7 +13,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.Tracing.WebHost.HttpHelper.SetHttpContextItem(System.String,System.Object)">
+        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.SetHttpContextItem(System.String,System.Object)">
             <summary>
             设置 HttpContextItem
             </summary>
@@ -21,18 +21,32 @@
             <param name="key"></param>
             <param name="val"></param>
         </member>
-        <member name="M:Raven.Rpc.Tracing.WebHost.HttpHelper.GetServerAddress">
+        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.GetServerAddress">
             <summary>
             
             </summary>
-            <param name="request"></param>
             <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.WebHost.InitRequestScopeContext.BeginRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="tracingRecord"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.WebHost.InitRequestScopeContext.EndRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="tracingRecord"></param>
         </member>
         <member name="M:Raven.Rpc.Tracing.WebHost.TracingConfig.UseTracingContext(Raven.Rpc.Tracing.Record.ITracingRecord)">
             <summary>
             
             </summary>
             <param name="app"></param>
+            <param name="tracingRecord"></param>
         </member>
     </members>
 </doc>

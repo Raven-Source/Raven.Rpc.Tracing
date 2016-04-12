@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Raven.Rpc.Tracing;
 using Owin;
+using Raven.Rpc.Tracing.ContextData;
 
 namespace Raven.Rpc.Tracing.Owin
 {
-    public class HttpHelper : IHttpHelper
+    public class HttpContextHelper : IHttpHelper
     {
         /// <summary>
         /// 获取 HttpContextItem
@@ -24,7 +25,7 @@ namespace Raven.Rpc.Tracing.Owin
                 return default(T);
 
             object obj;
-            if (OwinRequestScopeContext.Current.Environment.TryGetValue(key, out obj) && obj != null)
+            if (RequestScopeContext.Current != null && RequestScopeContext.Current.Items.TryGetValue(key, out obj) && obj != null)
             {
                 return (T)obj;
             }
@@ -48,10 +49,10 @@ namespace Raven.Rpc.Tracing.Owin
         /// <param name="val"></param>
         public void SetHttpContextItem(string key, object val)
         {
-            if (string.IsNullOrWhiteSpace(key))
+            if (string.IsNullOrWhiteSpace(key) || RequestScopeContext.Current == null)
                 return;
 
-            OwinRequestScopeContext.Current.Environment[key] = val;
+            RequestScopeContext.Current.Items[key] = val;
         }
 
 
@@ -73,8 +74,14 @@ namespace Raven.Rpc.Tracing.Owin
             //    return System.Web.HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"];
             //}
 
-            var environment = OwinRequestScopeContext.Current.Environment;
-            res = string.Concat(environment["server.LocalIpAddress"], ":", environment["server.LocalPort"]);
+            if (RequestScopeContext.Current != null)
+            {
+                var environment = RequestScopeContext.Current.Environment as IDictionary<string, object>;
+                if (environment != null)
+                {
+                    res = string.Concat(environment.GetValue("server.LocalIpAddress"), ":", environment.GetValue("server.LocalPort"));
+                }
+            }
 
             return res;
         }

@@ -72,9 +72,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="ContextData\IInitRequestScopeContext.cs" />
+    <Compile Include="ContextData\IRequestScopeContext.cs" />
     <Compile Include="Models\ClientSR.cs" />
     <Compile Include="Helpers\DictionaryHelper.cs" />
-    <Compile Include="HttpContentData.cs" />
+    <Compile Include="HttpContextData.cs" />
     <Compile Include="IHttpHelper.cs" />
     <Compile Include="Record\ITracingRecord.cs" />
     <Compile Include="KeyValue.cs" />

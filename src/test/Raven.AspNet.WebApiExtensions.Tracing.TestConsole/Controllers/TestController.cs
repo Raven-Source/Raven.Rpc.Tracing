@@ -27,10 +27,15 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
 
         [HttpGet]
         [HttpPost]
-        public ResponseModel<string> Get2()
+        public async Task<ResponseModel<string>> Get2()
+        {
+            return await GetGet();
+        }
+
+        private async Task<ResponseModel<string>> GetGet()
         {
             client.RegistTracing();
-            var res = client.Invoke<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get3", new Rpc.IContractModel.RequestModel());
+            var res = await client.InvokeAsync<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get3", new Rpc.IContractModel.RequestModel()).ConfigureAwait(false);
             return new ResponseModel<string>() { Data = Guid.NewGuid().ToString() };
         }
 
@@ -38,7 +43,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
         [HttpPost]
         public Task<ResponseModel<string>> Get3()
         {
-            throw new Exception();
+            //throw new Exception();
             return Task.FromResult<ResponseModel<string>>(new ResponseModel<string>() { Data = Guid.NewGuid().ToString() });
         }
     }

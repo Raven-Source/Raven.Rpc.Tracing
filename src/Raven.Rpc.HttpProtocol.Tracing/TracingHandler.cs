@@ -23,7 +23,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             if (model != null && model.Header != null)
             {
                 var header = model.Header;
-                header.RpcID = Util.VersionIncr(HttpContentData.GetSubRpcID());
+                header.RpcID = Util.VersionIncr(HttpContextData.GetSubRpcID());
             }
         }
     }

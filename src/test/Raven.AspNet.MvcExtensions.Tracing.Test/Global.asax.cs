@@ -21,9 +21,8 @@ namespace Raven.AspNet.MvcExtensions.Tracing.Test
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
             TracingConfig.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()));
-        }
+        }        
     }
 
     public class Loger : ILoger

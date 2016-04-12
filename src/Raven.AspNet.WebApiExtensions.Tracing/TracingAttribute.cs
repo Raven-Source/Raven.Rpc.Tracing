@@ -11,6 +11,7 @@ using System.Net.Http;
 using Raven.Rpc.Tracing;
 using Raven.Rpc.Tracing.Record;
 using Newtonsoft.Json;
+using Raven.Rpc.Tracing.ContextData;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing
 {
@@ -20,8 +21,6 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public class TracingAttribute : ActionFilterAttribute
     {
-        private ITracingRecord record = ServiceContainer.Resolve<ITracingRecord>();
-
         /// <summary>
         /// 系统ID
         /// </summary>
@@ -31,7 +30,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         /// 系统名称
         /// </summary>
         public string systemName;
-
+        
         ///// <summary>
         ///// 构造函数
         ///// </summary>
@@ -41,16 +40,13 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         //{
         //    this.systemID = systemID;
         //    this.systemName = systemName;
-        //}
+        //}        
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="actionContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public override async Task OnActionExecutingAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
+
+        public override void OnActionExecuting(HttpActionContext actionContext)
         {
+            ServiceContainer.Resolve<IInitRequestScopeContext>().BeginRequest(actionContext.Request);
+
             if (!actionContext.HasMarkerAttribute<NonTracingAttribute>())
             {
                 var request = actionContext.Request;
@@ -75,7 +71,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 }
                 if (reqModel == null)
                 {
-                    reqModel = await actionContext.Request.Content.ReadAsAsync<RequestModel>();
+                    reqModel = actionContext.Request.Content.ReadAsAsync<RequestModel>().Result;
                     if (reqModel != null)
                     {
                         actionContext.ActionArguments.Add(Guid.NewGuid().ToString("N"), reqModel);
@@ -101,11 +97,11 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 }
                 else
                 {
-                    reqHeader = HttpContentData.GetDefaultRequestHeader();
+                    reqHeader = HttpContextData.GetDefaultRequestHeader();
                     //HttpContentData.SetTrackID(reqHeader.TraceID);
                 }
-                HttpContentData.SetSubRpcID(reqHeader.RpcID + ".0");
-                HttpContentData.SetRequestHeader(reqHeader);
+                HttpContextData.SetSubRpcID(reqHeader.RpcID + ".0");
+                HttpContextData.SetRequestHeader(reqHeader);
                 //HttpContentData.RequestHeader = reqHeader;
 
                 //Not To Log
@@ -141,16 +137,11 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, srs);
                 }
             }
-            await base.OnActionExecutingAsync(actionContext, cancellationToken);
+
+            base.OnActionExecuting(actionContext);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="actionExecutedContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public override Task OnActionExecutedAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
+        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             var actionContext = actionExecutedContext.ActionContext;
             if (!actionContext.HasMarkerAttribute<NonTracingAttribute>())
@@ -165,7 +156,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.IsException = false;
                     srs.IsSuccess = true;
 
-                    string traceId = HttpContentData.GetRequestHeader().TraceID;
+                    string traceId = HttpContextData.GetRequestHeader().TraceID;
                     if (actionExecutedContext.Response != null)
                     {
                         IResponseModel responseModel = null;
@@ -196,19 +187,17 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
 
             }
 
-
-
-            return base.OnActionExecutedAsync(actionExecutedContext, cancellationToken);
+            ServiceContainer.Resolve<IInitRequestScopeContext>().EndRequest(actionContext.Request);
+            base.OnActionExecuted(actionExecutedContext);
         }
-
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sr"></param>
+        /// <param name="srs"></param>
         private void Record(ServerRS srs)
         {
-            record.RecordServerRS(srs);
+            ServiceContainer.Resolve<ITracingRecord>().RecordServerRS(srs);
         }
 
     }

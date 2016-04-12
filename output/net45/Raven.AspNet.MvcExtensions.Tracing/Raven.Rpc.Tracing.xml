@@ -4,6 +4,35 @@
         <name>Raven.Rpc.Tracing</name>
     </assembly>
     <members>
+        <member name="M:Raven.Rpc.Tracing.ContextData.IInitRequestScopeContext.BeginRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="tracingRecord"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ContextData.IInitRequestScopeContext.EndRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="tracingRecord"></param>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.IRequestScopeContext.Environment">
+            <summary>
+            Raw Owin Environment dictionary.
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.IRequestScopeContext.Items">
+            <summary>
+            Gets a key/value collection that can be used to organize and share data during an HTTP request.
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.IRequestScopeContext.Timestamp">
+            <summary>
+            Gets the initial timestamp of the current HTTP request.
+            </summary>
+        </member>
         <member name="T:Raven.Rpc.Tracing.ClientSR">
             <summary>
             
@@ -85,7 +114,7 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.Tracing.DictionaryHelper.GetKeyValueList``2(System.Collections.Generic.Dictionary{``0,``1})">
+        <member name="M:Raven.Rpc.Tracing.DictionaryHelper.GetKeyValueList``2(System.Collections.Generic.IDictionary{``0,``1})">
             <summary>
             
             </summary>
@@ -94,42 +123,62 @@
             <param name="dict"></param>
             <returns></returns>
         </member>
-        <member name="T:Raven.Rpc.Tracing.HttpContentData">
+        <member name="M:Raven.Rpc.Tracing.DictionaryHelper.GetValue``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dict"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.DictionaryHelper.GetValue``1(System.Collections.IDictionary,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dict"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.HttpContextData">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.Tracing.HttpContentData.GetRequestHeader">
+        <member name="M:Raven.Rpc.Tracing.HttpContextData.GetRequestHeader">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.Tracing.HttpContentData.SetRequestHeader(Raven.Rpc.IContractModel.Header)">
+        <member name="M:Raven.Rpc.Tracing.HttpContextData.SetRequestHeader(Raven.Rpc.IContractModel.Header)">
             <summary>
             
             </summary>
             <param name="header"></param>
         </member>
-        <member name="M:Raven.Rpc.Tracing.HttpContentData.GetSubRpcID">
+        <member name="M:Raven.Rpc.Tracing.HttpContextData.GetSubRpcID">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.Tracing.HttpContentData.SetSubRpcID(System.String)">
+        <member name="M:Raven.Rpc.Tracing.HttpContextData.SetSubRpcID(System.String)">
             <summary>
             
             </summary>
             <param name="val"></param>
         </member>
-        <member name="M:Raven.Rpc.Tracing.HttpContentData.GetDefaultRequestHeader">
+        <member name="M:Raven.Rpc.Tracing.HttpContextData.GetDefaultRequestHeader">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.Tracing.HttpContentData.CloneRequestHeader(Raven.Rpc.IContractModel.Header)">
+        <member name="M:Raven.Rpc.Tracing.HttpContextData.CloneRequestHeader(Raven.Rpc.IContractModel.Header)">
             <summary>
             
             </summary>

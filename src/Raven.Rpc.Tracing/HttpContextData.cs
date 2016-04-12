@@ -11,7 +11,7 @@ namespace Raven.Rpc.Tracing
     /// <summary>
     /// 
     /// </summary>
-    public static class HttpContentData
+    public static class HttpContextData
     {
         private const string RequestHeaderKey = "__raven_RequestHeader";
         private const string SubRpcIDKey = "__raven_SubRpcID";

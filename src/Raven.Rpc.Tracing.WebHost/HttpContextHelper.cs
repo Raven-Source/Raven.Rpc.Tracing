@@ -1,28 +1,31 @@
-﻿using System;
+﻿using Raven.Rpc.Tracing.ContextData;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Raven.Rpc.Tracing;
 
 namespace Raven.Rpc.Tracing.WebHost
 {
-    public class HttpHelper : IHttpHelper
-    {/// <summary>
-     /// 获取 HttpContextItem
-     /// </summary>
-     /// <typeparam name="T"></typeparam>
-     /// <param name="request"></param>
-     /// <param name="key"></param>
-     /// <returns></returns>
+    public class HttpContextHelper : IHttpHelper
+    {
+        /// <summary>
+        /// 获取 HttpContextItem
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="request"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public T GetHttpContextItem<T>(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 return default(T);
 
             object obj;
-            obj = System.Web.HttpContext.Current.Items[key];
-            if (obj != null)
+            if (RequestScopeContext.Current != null && RequestScopeContext.Current.Items.TryGetValue(key, out obj) && obj != null)
             {
                 return (T)obj;
             }
@@ -46,17 +49,16 @@ namespace Raven.Rpc.Tracing.WebHost
         /// <param name="val"></param>
         public void SetHttpContextItem(string key, object val)
         {
-            if (string.IsNullOrWhiteSpace(key))
+            if (string.IsNullOrWhiteSpace(key) || RequestScopeContext.Current == null)
                 return;
 
-            System.Web.HttpContext.Current.Items[key] = val;
+            RequestScopeContext.Current.Items[key] = val;
         }
 
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="request"></param>
         /// <returns></returns>
         public string GetServerAddress()
         {
@@ -73,9 +75,17 @@ namespace Raven.Rpc.Tracing.WebHost
             //}
 
             //return System.Web.HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"];
-            var environment = System.Web.HttpContext.Current.Request.ServerVariables;
-            //res = environment["LOCAL_ADDR"] + System.Web.HttpContext.Current.Request.Url.Port;
-            res = string.Concat(environment["LOCAL_ADDR"], ":", System.Web.HttpContext.Current.Request.Url.Port);
+            //var environment = System.Web.HttpContext.Current.Request.ServerVariables;
+
+            if (RequestScopeContext.Current != null)
+            {
+                var environment = RequestScopeContext.Current.Environment as IDictionary;
+                if (environment != null)
+                {
+                    //res = environment["LOCAL_ADDR"] + System.Web.HttpContext.Current.Request.Url.Port;
+                    res = string.Concat(environment.GetValue("LOCAL_ADDR"), ":", environment.GetValue("SERVER_PORT"));
+                }
+            }
 
             return res;
         }
