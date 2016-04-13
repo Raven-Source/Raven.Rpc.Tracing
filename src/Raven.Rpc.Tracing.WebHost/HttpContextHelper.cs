@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Raven.Rpc.Tracing;
+using System.Collections.Specialized;
 
 namespace Raven.Rpc.Tracing.WebHost
 {
@@ -79,11 +80,11 @@ namespace Raven.Rpc.Tracing.WebHost
 
             if (RequestScopeContext.Current != null)
             {
-                var environment = RequestScopeContext.Current.Environment as IDictionary;
+                var environment = RequestScopeContext.Current.Environment as NameValueCollection;
                 if (environment != null)
                 {
                     //res = environment["LOCAL_ADDR"] + System.Web.HttpContext.Current.Request.Url.Port;
-                    res = string.Concat(environment.GetValue("LOCAL_ADDR"), ":", environment.GetValue("SERVER_PORT"));
+                    res = string.Concat(environment["LOCAL_ADDR"], ":", environment["SERVER_PORT"]);
                 }
             }
 
