@@ -163,12 +163,12 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             if (rpcContext.ReceiveEndTime.HasValue)
             {
                 sr.EndTime = rpcContext.ReceiveEndTime.Value;
-                sr.TimeLength = (sr.StartTime - sr.EndTime).TotalMilliseconds;
+                sr.TimeLength = (sr.EndTime - sr.StartTime).TotalMilliseconds;
             }
             else if (rpcContext.ExceptionTime.HasValue)
             {
                 sr.EndTime = rpcContext.ExceptionTime.Value;
-                sr.TimeLength = (sr.StartTime - sr.EndTime).TotalMilliseconds;
+                sr.TimeLength = (sr.EndTime - sr.StartTime).TotalMilliseconds;
             }
 
             //sr.TimeLength = sr.ReceiveETime.HasValue ? (sr.ReceiveETime.Value - sr.SendSTime).TotalMilliseconds : 0D;
