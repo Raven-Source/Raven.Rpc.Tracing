@@ -14,22 +14,53 @@ namespace Raven.Rpc.HttpProtocol.Tracing
     public static class RpcHttpClientExtension
     {
         private static ITracingRecord record = ServiceContainer.Resolve<ITracingRecord>();
+        //private static Dictionary<int, Tuple<string, string>> dict = new Dictionary<int, Tuple<string, string>>();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="client"></param>
-        public static void RegistTracing(this RpcHttpClient client)
+        /// <param name="systemID"></param>
+        /// <param name="systemName"></param>
+        public static void RegistTracing(this RpcHttpClient client, string systemID = null, string systemName = null)
         {
+            RpcHttpClient.OnResponseDelegate onResponse = (response, rpcContext) => 
+            {
+                TraceLogs sr = new TraceLogs();
+                sr.IsSuccess = true;
+                sr.IsException = false;
+                sr.SystemID = systemID;
+                sr.SystemName = systemName;
+                FillClientSR(sr, response.RequestMessage, rpcContext);
+
+                Record(sr);
+            };
+            RpcHttpClient.OnErrorDelegate onError = (ex, request, rpcContext) =>
+            {
+                TraceLogs sr = new TraceLogs();
+                sr.IsSuccess = false;
+                sr.IsException = true;
+                sr.SystemID = systemID;
+                sr.SystemName = systemName;
+                FillClientSR(sr, request, rpcContext);
+
+                sr.Extension.Add("Exception", Util.GetFullExceptionMessage(ex));
+
+                Record(sr);
+            };
+
+
             client.RequestContentDataHandler -= Client_RequestContentDataHandler;
-            client.OnRequest -= Client_OnRequest;
-            client.OnResponse -= Client_OnResponse;
-            client.OnError -= Client_OnError;
+            //client.OnRequest -= Client_OnRequest;
+            client.OnResponse -= onResponse;
+            client.OnError -= onError;
 
             client.RequestContentDataHandler += Client_RequestContentDataHandler;
-            client.OnRequest += Client_OnRequest;
-            client.OnResponse += Client_OnResponse;
-            client.OnError += Client_OnError;
+            //client.OnRequest += Client_OnRequest;
+            client.OnResponse += onResponse;
+            client.OnError += onError;
+
+            //dict[client.GetHashCode()] = new Tuple<string, string>(systemID, systemName);
         }
 
         private static void Client_RequestContentDataHandler(ref object data)
@@ -63,33 +94,29 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 reqModel.Header.TraceID = modelHeader.TraceID;
                 reqModel.Header.UUID = modelHeader.UUID;
             }
-        }
+        }        
 
-        private static void Client_OnRequest(System.Net.Http.HttpRequestMessage request)
-        {
-        }
+        //private static void Client_OnResponse(HttpResponseMessage response, RpcContext rpcContext)
+        //{
+        //    TraceLogs sr = new TraceLogs();
+        //    sr.IsSuccess = true;
+        //    sr.IsException = false;
+        //    FillClientSR(sr, response.RequestMessage, rpcContext);
 
-        private static void Client_OnResponse(HttpResponseMessage response, RpcContext rpcContext)
-        {
-            ClientSR sr = new ClientSR();
-            sr.IsSuccess = true;
-            sr.IsException = false;
-            FillClientSR(sr, response.RequestMessage, rpcContext);
+        //    Record(sr);
+        //}
 
-            Record(sr);
-        }
+        //private static void Client_OnError(Exception ex, HttpRequestMessage request, RpcContext rpcContext)
+        //{
+        //    TraceLogs sr = new TraceLogs();
+        //    sr.IsSuccess = false;
+        //    sr.IsException = true;
+        //    FillClientSR(sr, request, rpcContext);
 
-        private static void Client_OnError(Exception ex, HttpRequestMessage request, RpcContext rpcContext)
-        {
-            ClientSR sr = new ClientSR();
-            sr.IsSuccess = false;
-            sr.IsException = true;
-            FillClientSR(sr, request, rpcContext);
+        //    sr.Extension.Add("Exception", Util.GetFullExceptionMessage(ex));
 
-            sr.Extension.Add("Exception", Util.GetFullExceptionMessage(ex));
-
-            Record(sr);
-        }
+        //    Record(sr);
+        //}
 
         /// <summary>
         /// 
@@ -97,8 +124,9 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// <param name="sr"></param>
         /// <param name="request"></param>
         /// <param name="rpcContext"></param>
-        private static void FillClientSR(ClientSR sr, HttpRequestMessage request, RpcContext rpcContext)
+        private static void FillClientSR(TraceLogs sr, HttpRequestMessage request, RpcContext rpcContext)
         {
+            sr.ContextType = ContextType.Client.ToString();
             var modelHeader = HttpContextData.GetRequestHeader();
             var uri = request.RequestUri;
 
@@ -123,22 +151,26 @@ namespace Raven.Rpc.HttpProtocol.Tracing
 
             sr.Extension.Add(nameof(rpcContext.RequestModel), rpcContext.RequestModel);
             sr.Extension.Add(nameof(rpcContext.ResponseModel), rpcContext.ResponseModel);
-            sr.Extension.Add(nameof(rpcContext.ResponseSize), rpcContext.ResponseSize);
+            sr.ResponseSize = rpcContext.ResponseSize;
 
             sr.Protocol = uri.Scheme;
 
-            sr.SendSTime = rpcContext.SendStartTime;
-            sr.ReceiveETime = rpcContext.ReceiveEndTime;
-            sr.ExceptionTime = rpcContext.ExceptionTime;
+            //sr.SendSTime = rpcContext.SendStartTime;
+            //sr.ReceiveETime = rpcContext.ReceiveEndTime;
+            //sr.ExceptionTime = rpcContext.ExceptionTime;
+            sr.StartTime = rpcContext.SendStartTime;
 
-            if (sr.ReceiveETime.HasValue)
+            if (rpcContext.ReceiveEndTime.HasValue)
             {
-                sr.TimeLength = (sr.ReceiveETime.Value - sr.SendSTime).TotalMilliseconds;
+                sr.EndTime = rpcContext.ReceiveEndTime.Value;
+                sr.TimeLength = (sr.StartTime - sr.EndTime).TotalMilliseconds;
             }
-            else if (sr.ExceptionTime.HasValue)
+            else if (rpcContext.ExceptionTime.HasValue)
             {
-                sr.TimeLength = (sr.ExceptionTime.Value - sr.SendSTime).TotalMilliseconds;
+                sr.EndTime = rpcContext.ExceptionTime.Value;
+                sr.TimeLength = (sr.StartTime - sr.EndTime).TotalMilliseconds;
             }
+
             //sr.TimeLength = sr.ReceiveETime.HasValue ? (sr.ReceiveETime.Value - sr.SendSTime).TotalMilliseconds : 0D;
             //sr.RpcId = modelHeader.RpcID;
             var reqModel = rpcContext.RequestModel as IRequestModel<Header>;
@@ -163,9 +195,9 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// 
         /// </summary>
         /// <param name="sr"></param>
-        private static void Record(ClientSR sr)
+        private static void Record(TraceLogs sr)
         {
-            record.RecordClientSR(sr);
+            record.RecordTraceLog(sr);
         }
 
     }

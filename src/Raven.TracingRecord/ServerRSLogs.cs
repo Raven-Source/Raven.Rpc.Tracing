@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Raven.TracingRecord
 {
-    public class ServerRSLogs : ServerRS, IEntity<string>
+    public class TraceLogs : Raven.Rpc.Tracing.TraceLogs, IEntity<string>
     {
         [MongoDB.Bson.Serialization.Attributes.BsonId]
         [MongoDB.Bson.Serialization.Attributes.BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
@@ -29,38 +29,68 @@ namespace Raven.TracingRecord
         /// </summary>
         public MongoDB.Bson.BsonDocument Extensions;
 
-        public ServerRSLogs()
+        /// <summary>
+        /// 
+        /// </summary>
+        public TraceLogs()
         {
             Extensions = new MongoDB.Bson.BsonDocument();
         }
     }
 
-    public class ClientSRLogs : ClientSR, IEntity<string>
-    {
-        [MongoDB.Bson.Serialization.Attributes.BsonId]
-        [MongoDB.Bson.Serialization.Attributes.BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        public string ID
-        {
-            get;
-            set;
-        }
+    //public class ServerRSLogs : ServerRS, IEntity<string>
+    //{
+    //    [MongoDB.Bson.Serialization.Attributes.BsonId]
+    //    [MongoDB.Bson.Serialization.Attributes.BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+    //    public string ID
+    //    {
+    //        get;
+    //        set;
+    //    }
 
-        /// <summary>
-        /// 扩展
-        /// </summary>
-        [MongoDB.Bson.Serialization.Attributes.BsonIgnore]
-        public override Dictionary<string, object> Extension { get; set; }
+    //    /// <summary>
+    //    /// 扩展
+    //    /// </summary>
+    //    [MongoDB.Bson.Serialization.Attributes.BsonIgnore]
+    //    public override Dictionary<string, object> Extension { get; set; }
 
-        /// <summary>
-        /// 扩展
-        /// </summary>
-        public MongoDB.Bson.BsonDocument Extensions;
+    //    /// <summary>
+    //    /// 扩展
+    //    /// </summary>
+    //    public MongoDB.Bson.BsonDocument Extensions;
 
-        public ClientSRLogs()
-        {
-            Extensions = new MongoDB.Bson.BsonDocument();
-        }
+    //    public ServerRSLogs()
+    //    {
+    //        Extensions = new MongoDB.Bson.BsonDocument();
+    //    }
+    //}
+
+    //public class ClientSRLogs : ClientSR, IEntity<string>
+    //{
+    //    [MongoDB.Bson.Serialization.Attributes.BsonId]
+    //    [MongoDB.Bson.Serialization.Attributes.BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+    //    public string ID
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    /// <summary>
+    //    /// 扩展
+    //    /// </summary>
+    //    [MongoDB.Bson.Serialization.Attributes.BsonIgnore]
+    //    public override Dictionary<string, object> Extension { get; set; }
+
+    //    /// <summary>
+    //    /// 扩展
+    //    /// </summary>
+    //    public MongoDB.Bson.BsonDocument Extensions;
+
+    //    public ClientSRLogs()
+    //    {
+    //        Extensions = new MongoDB.Bson.BsonDocument();
+    //    }
 
 
-    }
+    //}
 }

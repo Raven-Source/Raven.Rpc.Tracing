@@ -4,13 +4,15 @@
         <name>Raven.Rpc.HttpProtocol.Tracing</name>
     </assembly>
     <members>
-        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.RegistTracing(Raven.Rpc.HttpProtocol.RpcHttpClient)">
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.RegistTracing(Raven.Rpc.HttpProtocol.RpcHttpClient,System.String,System.String)">
             <summary>
             
             </summary>
             <param name="client"></param>
+            <param name="systemID"></param>
+            <param name="systemName"></param>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.FillClientSR(Raven.Rpc.Tracing.ClientSR,System.Net.Http.HttpRequestMessage,Raven.Rpc.HttpProtocol.RpcContext)">
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.FillClientSR(Raven.Rpc.Tracing.TraceLogs,System.Net.Http.HttpRequestMessage,Raven.Rpc.HttpProtocol.RpcContext)">
             <summary>
             
             </summary>
@@ -18,7 +20,7 @@
             <param name="request"></param>
             <param name="rpcContext"></param>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.Record(Raven.Rpc.Tracing.ClientSR)">
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.Record(Raven.Rpc.Tracing.TraceLogs)">
             <summary>
             
             </summary>

@@ -74,15 +74,15 @@
     <Compile Include="Config.cs" />
     <Compile Include="ContextData\IInitRequestScopeContext.cs" />
     <Compile Include="ContextData\IRequestScopeContext.cs" />
-    <Compile Include="Models\ClientSR.cs" />
     <Compile Include="Helpers\DictionaryHelper.cs" />
     <Compile Include="HttpContextData.cs" />
     <Compile Include="IHttpHelper.cs" />
+    <Compile Include="Models\ContextType.cs" />
+    <Compile Include="Models\TraceLogs.cs" />
     <Compile Include="Record\ITracingRecord.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="Record\TracingRecordRabbitmq.cs" />
     <Compile Include="ServiceContainer.cs" />
-    <Compile Include="Models\ServerRS.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

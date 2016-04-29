@@ -43,24 +43,32 @@ namespace Raven.Rpc.Tracing.Record
             rabbitMQClient = RabbitMQClient.GetInstance(rabbitMQOptions);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        public void RecordClientSR(ClientSR data)
-        {
-            rabbitMQClient.Send(Config.TraceClientSRQueueName, data, true, true);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="data"></param>
+        //public void RecordClientSR(ClientSR data)
+        //{
+        //    rabbitMQClient.Send(Config.TraceClientSRQueueName, data, true, true);
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="data"></param>
+        //public void RecordServerRS(ServerRS data)
+        //{
+        //    rabbitMQClient.Send(Config.TraceServerRSQueueName, data, true, true);
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="data"></param>
-        public void RecordServerRS(ServerRS data)
+        public void RecordTraceLog(TraceLogs data)
         {
-            rabbitMQClient.Send(Config.TraceServerRSQueueName, data, true, true);
+            rabbitMQClient.Send(Config.TraceLogsQueueName, data, true, true);
         }
-
 
     }
 }

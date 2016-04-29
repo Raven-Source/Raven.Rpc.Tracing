@@ -37,8 +37,9 @@ namespace Raven.TracingRecord
         Options rabbitMQOptions;
         RabbitMQClient rabbitMQClient;
 
-        ServerRSLogsRep serverRSlogRep;
-        ClientSRLogsRep clientSRlogRep;
+        //ServerRSLogsRep serverRSlogRep;
+        //ClientSRLogsRep clientSRlogRep;
+        TraceLogsRep traceLogsRep;
 
         public RecordHandle(string serverName)
             : base(serverName, 5000)
@@ -53,10 +54,7 @@ namespace Raven.TracingRecord
                 Loger = new Loger()
             };
             rabbitMQClient = RabbitMQClient.GetInstance(rabbitMQOptions);
-
-
-            serverRSlogRep = new ServerRSLogsRep();
-            clientSRlogRep = new ClientSRLogsRep();
+            traceLogsRep = new TraceLogsRep();
         }
 
         /// <summary>
@@ -64,10 +62,9 @@ namespace Raven.TracingRecord
         /// </summary>
         public void ProcessResetAwardData()
         {
-
             try
             {
-                var list = rabbitMQClient.ReceiveBatch<ServerRSLogs>(Config.TraceServerRSQueueName);
+                var list = rabbitMQClient.ReceiveBatch<TraceLogs>(Config.TraceLogsQueueName);
 
                 if (list != null && list.Count > 0)
                 {
@@ -101,45 +98,82 @@ namespace Raven.TracingRecord
                             //}
                         }
                     }
-                    serverRSlogRep.InsertBatch(list);
+                    traceLogsRep.InsertBatch(list);
                 }
 
-                var list2 = rabbitMQClient.ReceiveBatch<ClientSRLogs>(Config.TraceClientSRQueueName);
+                //var list = rabbitMQClient.ReceiveBatch<ServerRSLogs>(Config.TraceServerRSQueueName);
 
-                if (list2 != null && list2.Count > 0)
-                {
-                    for (var i = 0; i < list2.Count; i++)
-                    {
-                        var l = list2[i];
-                        //List<string> jsonObjectKey = new List<string>();
-                        if (l.Extension != null)
-                        {
-                            foreach (var kv in l.Extension)
-                            {
-                                if (kv.Value.GetType().FullName == "Newtonsoft.Json.Linq.JObject")//"Jil.DeserializeDynamic.JsonObject")
-                                {
-                                    var str = Newtonsoft.Json.JsonConvert.SerializeObject(kv.Value);
-                                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonDocument.Parse(str));
-                                }
-                                else
-                                {
-                                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonValue.Create(kv.Value));
-                                }
-                            }
-                            l.Extension = null;
-                            //if (jsonObjectKey.Count > 0)
-                            //{
-                            //    foreach (var k in jsonObjectKey)
-                            //    {
-                            //        var value = l.Extension[k];
-                            //        var str = Newtonsoft.Json.JsonConvert.SerializeObject(value);
-                            //        l.Extension[k] = MongoDB.Bson.BsonDocument.Parse(str);
-                            //    }
-                            //}
-                        }
-                    }
-                    clientSRlogRep.InsertBatch(list2);
-                }
+                //if (list != null && list.Count > 0)
+                //{
+                //    for (var i = 0; i < list.Count; i++)
+                //    {
+                //        var l = list[i];
+                //        //List<string> jsonObjectKey = new List<string>();
+                //        if (l.Extension != null)
+                //        {
+                //            foreach (var kv in l.Extension)
+                //            {
+                //                if (kv.Value.GetType().FullName == "Newtonsoft.Json.Linq.JObject")//"Jil.DeserializeDynamic.JsonObject")
+                //                {
+                //                    var str = Newtonsoft.Json.JsonConvert.SerializeObject(kv.Value);
+                //                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonDocument.Parse(str));
+                //                }
+                //                else
+                //                {
+                //                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonValue.Create(kv.Value));
+                //                }
+                //            }
+                //            l.Extension = null;
+                //            //if (jsonObjectKey.Count > 0)
+                //            //{
+                //            //    foreach (var k in jsonObjectKey)
+                //            //    {
+                //            //        var value = l.Extension[k];
+                //            //        var str = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+                //            //        l.Extension[k] = MongoDB.Bson.BsonDocument.Parse(str);
+                //            //    }
+                //            //}
+                //        }
+                //    }
+                //    serverRSlogRep.InsertBatch(list);
+                //}
+
+                //var list2 = rabbitMQClient.ReceiveBatch<ClientSRLogs>(Config.TraceClientSRQueueName);
+
+                //if (list2 != null && list2.Count > 0)
+                //{
+                //    for (var i = 0; i < list2.Count; i++)
+                //    {
+                //        var l = list2[i];
+                //        //List<string> jsonObjectKey = new List<string>();
+                //        if (l.Extension != null)
+                //        {
+                //            foreach (var kv in l.Extension)
+                //            {
+                //                if (kv.Value.GetType().FullName == "Newtonsoft.Json.Linq.JObject")//"Jil.DeserializeDynamic.JsonObject")
+                //                {
+                //                    var str = Newtonsoft.Json.JsonConvert.SerializeObject(kv.Value);
+                //                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonDocument.Parse(str));
+                //                }
+                //                else
+                //                {
+                //                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonValue.Create(kv.Value));
+                //                }
+                //            }
+                //            l.Extension = null;
+                //            //if (jsonObjectKey.Count > 0)
+                //            //{
+                //            //    foreach (var k in jsonObjectKey)
+                //            //    {
+                //            //        var value = l.Extension[k];
+                //            //        var str = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+                //            //        l.Extension[k] = MongoDB.Bson.BsonDocument.Parse(str);
+                //            //    }
+                //            //}
+                //        }
+                //    }
+                //    clientSRlogRep.InsertBatch(list2);
+                //}
             }
             catch (Exception ex)
             {

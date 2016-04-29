@@ -107,7 +107,8 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 //Not To Log
                 if (!actionContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
-                    ServerRS srs = new ServerRS();
+                    TraceLogs srs = new TraceLogs();
+                    srs.ContextType = ContextType.Server.ToString();
                     srs.StartTime = DateTime.Now;
                     srs.MachineAddr = Util.HttpHelper.GetServerAddress();
                     srs.TraceId = reqHeader.TraceID;
@@ -149,7 +150,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 if (!actionContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
                     var request = actionExecutedContext.Request;
-                    var srs = Util.HttpHelper.GetHttpContextItem<ServerRS>(Config.ServerRSKey);
+                    var srs = Util.HttpHelper.GetHttpContextItem<TraceLogs>(Config.ServerRSKey);
 
                     srs.EndTime = DateTime.Now;
                     srs.TimeLength = (srs.EndTime - srs.StartTime).TotalMilliseconds;
@@ -195,9 +196,9 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         /// 
         /// </summary>
         /// <param name="srs"></param>
-        private void Record(ServerRS srs)
+        private void Record(TraceLogs srs)
         {
-            ServiceContainer.Resolve<ITracingRecord>().RecordServerRS(srs);
+            ServiceContainer.Resolve<ITracingRecord>().RecordTraceLog(srs);
         }
 
     }

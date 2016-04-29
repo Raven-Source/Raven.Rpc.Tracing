@@ -29,7 +29,7 @@
             系统名称
             </summary>
         </member>
-        <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.Record(Raven.Rpc.Tracing.ServerRS)">
+        <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.Record(Raven.Rpc.Tracing.TraceLogs)">
             <summary>
             
             </summary>

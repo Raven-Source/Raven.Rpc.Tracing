@@ -33,82 +33,6 @@
             Gets the initial timestamp of the current HTTP request.
             </summary>
         </member>
-        <member name="T:Raven.Rpc.Tracing.ClientSR">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.TraceId">
-            <summary>
-            跟踪ID
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.RpcId">
-            <summary>
-            远程服务ID
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.MachineAddr">
-            <summary>
-            服务器IP
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.SendSTime">
-            <summary>
-            请求开始时间
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.ReceiveETime">
-            <summary>
-            响应时间
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.ExceptionTime">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.TimeLength">
-            <summary>
-            TotalMilliseconds
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "F:Raven.Rpc.Tracing.ClientSR.IsSuccess" -->
-        <member name="F:Raven.Rpc.Tracing.ClientSR.IsException">
-            <summary>
-            是否运行异常,true|异常,false|未异常
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.Code">
-            <summary>
-            返回状态值
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.InvokeID">
-            <summary>
-            调用服务方法/url
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.ServerHost">
-            <summary>
-            server host
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ClientSR.Protocol">
-            <summary>
-            协议
-            </summary>
-        </member>
-        <member name="P:Raven.Rpc.Tracing.ClientSR.Extension">
-            <summary>
-            扩展
-            </summary>
-        </member>
-        <member name="M:Raven.Rpc.Tracing.ClientSR.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Raven.Rpc.Tracing.DictionaryHelper">
             <summary>
             
@@ -207,6 +131,97 @@
             <param name="request"></param>
             <returns></returns>
         </member>
+        <member name="T:Raven.Rpc.Tracing.ContextType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.TraceId">
+            <summary>
+            TraceId
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.RpcId">
+            <summary>
+            RpcId
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.MachineAddr">
+            <summary>
+            服务器IP
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.StartTime">
+            <summary>
+            请求开始时间
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.EndTime">
+            <summary>
+            响应时间
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.TimeLength">
+            <summary>
+            TotalMilliseconds
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Raven.Rpc.Tracing.TraceLogs.IsSuccess" -->
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.IsException">
+            <summary>
+            是否运行异常,true|异常,false|未异常
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.Code">
+            <summary>
+            返回状态值
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.InvokeID">
+            <summary>
+            调用ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.ServerHost">
+            <summary>
+            server host
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.SystemID">
+            <summary>
+            系统ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.SystemName">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.Protocol">
+            <summary>
+            协议
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.ContextType">
+            <summary>
+            ContextType
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.ResponseSize">
+            <summary>
+            ResponseSize
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.TraceLogs.Extension">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.TraceLogs.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq">
             <summary>
             
@@ -218,13 +233,7 @@
             </summary>
             <param name="rabbitMQOptions"></param>
         </member>
-        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.RecordClientSR(Raven.Rpc.Tracing.ClientSR)">
-            <summary>
-            
-            </summary>
-            <param name="data"></param>
-        </member>
-        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.RecordServerRS(Raven.Rpc.Tracing.ServerRS)">
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.RecordTraceLog(Raven.Rpc.Tracing.TraceLogs)">
             <summary>
             
             </summary>
@@ -290,87 +299,6 @@
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
-        </member>
-        <member name="T:Raven.Rpc.Tracing.ServerRS">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.TraceId">
-            <summary>
-            TraceId
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.RpcId">
-            <summary>
-            RpcId
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.MachineAddr">
-            <summary>
-            服务器IP
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.StartTime">
-            <summary>
-            请求开始时间
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.EndTime">
-            <summary>
-            响应时间
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.TimeLength">
-            <summary>
-            TotalMilliseconds
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "F:Raven.Rpc.Tracing.ServerRS.IsSuccess" -->
-        <member name="F:Raven.Rpc.Tracing.ServerRS.IsException">
-            <summary>
-            是否运行异常,true|异常,false|未异常
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.Code">
-            <summary>
-            返回状态值
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.InvokeID">
-            <summary>
-            调用ID
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.ServerHost">
-            <summary>
-            server host
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.SystemID">
-            <summary>
-            系统ID
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.SystemName">
-            <summary>
-            系统名称
-            </summary>
-        </member>
-        <member name="F:Raven.Rpc.Tracing.ServerRS.Protocol">
-            <summary>
-            协议
-            </summary>
-        </member>
-        <member name="P:Raven.Rpc.Tracing.ServerRS.Extension">
-            <summary>
-            扩展
-            </summary>
-        </member>
-        <member name="M:Raven.Rpc.Tracing.ServerRS.#ctor">
-            <summary>
-            
-            </summary>
         </member>
         <member name="T:Raven.Rpc.Tracing.Util">
             <summary>

@@ -8,9 +8,10 @@ namespace Raven.Rpc.Tracing.Record
 {
     public interface ITracingRecord
     {
-        void RecordClientSR(ClientSR data);
+        //void RecordClientSR(ClientSR data);
 
-        void RecordServerRS(ServerRS data);
-        
+        //void RecordServerRS(ServerRS data);
+
+        void RecordTraceLog(TraceLogs data);
     }
 }

@@ -7,16 +7,22 @@ using System.Threading.Tasks;
 
 namespace Raven.TracingRecord
 {
-    public class ServerRSLogsRep : MongoRepository<ServerRSLogs, string>
-    {
-        public ServerRSLogsRep() :
-            base(DBConfig.connString, DBConfig.dbName)
-        { }
-    }
+    //public class ServerRSLogsRep : MongoRepository<ServerRSLogs, string>
+    //{
+    //    public ServerRSLogsRep() :
+    //        base(DBConfig.connString, DBConfig.dbName)
+    //    { }
+    //}
 
-    public class ClientSRLogsRep : MongoRepository<ClientSRLogs, string>
+    //public class ClientSRLogsRep : MongoRepository<ClientSRLogs, string>
+    //{
+    //    public ClientSRLogsRep() :
+    //        base(DBConfig.connString, DBConfig.dbName)
+    //    { }
+    //}
+    public class TraceLogsRep : MongoRepository<TraceLogs, string>
     {
-        public ClientSRLogsRep() :
+        public TraceLogsRep() :
             base(DBConfig.connString, DBConfig.dbName)
         { }
     }

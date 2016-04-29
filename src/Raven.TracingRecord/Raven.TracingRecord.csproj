@@ -88,11 +88,8 @@
     <Compile Include="..\Raven.Rpc.Tracing\Config.cs">
       <Link>Config.cs</Link>
     </Compile>
-    <Compile Include="..\Raven.Rpc.Tracing\Models\ClientSR.cs">
-      <Link>ClientSR.cs</Link>
-    </Compile>
-    <Compile Include="..\Raven.Rpc.Tracing\Models\ServerRS.cs">
-      <Link>ServerRS.cs</Link>
+    <Compile Include="..\Raven.Rpc.Tracing\Models\TraceLogs.cs">
+      <Link>TraceLogs.cs</Link>
     </Compile>
     <Compile Include="Handle.cs" />
     <Compile Include="Loger.cs" />

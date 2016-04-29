@@ -9,6 +9,7 @@ namespace Raven.Rpc.Tracing
     /// <summary>
     /// 
     /// </summary>
+    [Obsolete]
     public class ServerRS
     {
         /// <summary>

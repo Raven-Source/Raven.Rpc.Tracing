@@ -6,19 +6,15 @@ using System.Threading.Tasks;
 
 namespace Raven.Rpc.Tracing
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    [Obsolete]
-    public class ClientSR
+    public class TraceLogs
     {
         /// <summary>
-        /// 跟踪ID
+        /// TraceId
         /// </summary>
         public string TraceId;
 
         /// <summary>
-        /// 远程服务ID
+        /// RpcId
         /// </summary>
         public string RpcId;
 
@@ -30,17 +26,12 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 请求开始时间
         /// </summary>
-        public DateTime SendSTime;
+        public DateTime StartTime;
 
         /// <summary>
         /// 响应时间
         /// </summary>
-        public DateTime? ReceiveETime;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? ExceptionTime;
+        public DateTime EndTime;
 
         /// <summary>
         /// TotalMilliseconds
@@ -62,12 +53,17 @@ namespace Raven.Rpc.Tracing
         public string Code;
 
         ///// <summary>
-        ///// 服务方法/url
+        ///// 响应内容
         ///// </summary>
-        //public string ServiceMethod;
+        //public byte[] SendContent;
+
+        ///// <summary>
+        ///// 内容类型
+        ///// </summary>
+        //public string ContentType;
 
         /// <summary>
-        /// 调用服务方法/url
+        /// 调用ID
         /// </summary>
         public string InvokeID;
 
@@ -77,9 +73,34 @@ namespace Raven.Rpc.Tracing
         public string ServerHost;
 
         /// <summary>
+        /// 系统ID
+        /// </summary>
+        public string SystemID;
+
+        /// <summary>
+        /// 系统名称
+        /// </summary>
+        public string SystemName;
+
+        /// <summary>
         /// 协议
         /// </summary>
         public string Protocol;
+
+        /// <summary>
+        /// ContextType
+        /// </summary>
+        public string ContextType;
+
+        /// <summary>
+        /// ResponseSize
+        /// </summary>
+        public long ResponseSize;
+
+        ///// <summary>
+        ///// 扩展
+        ///// </summary>
+        //public List<KeyValue<string, object>> Extension;
 
         /// <summary>
         /// 扩展
@@ -90,10 +111,9 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 
         /// </summary>
-        public ClientSR()
+        public TraceLogs()
         {
             Extension = new Dictionary<string, object>();
         }
-
     }
 }
