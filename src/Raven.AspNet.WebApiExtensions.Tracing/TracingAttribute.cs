@@ -113,7 +113,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     srs.MachineAddr = Util.HttpHelper.GetServerAddress();
                     srs.TraceId = reqHeader.TraceID;
                     srs.RpcId = reqHeader.RpcID;
-                    srs.ServerHost = actionContext.Request.RequestUri.Authority;
+                    srs.ServerHost = actionContext.Request.RequestUri.Host;
                     srs.Protocol = actionContext.Request.RequestUri.Scheme;
 
                     srs.SystemID = this.systemID;

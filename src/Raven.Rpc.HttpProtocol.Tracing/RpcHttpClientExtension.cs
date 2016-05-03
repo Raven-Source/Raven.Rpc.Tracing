@@ -143,7 +143,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             sr.MachineAddr = Util.HttpHelper.GetServerAddress();
 
             sr.InvokeID = uri.AbsolutePath;
-            sr.ServerHost = uri.Authority;
+            sr.ServerHost = uri.Host;
 
             //sr.Extension.Add(nameof(uri.AbsolutePath), uri.AbsolutePath);
             sr.Extension.Add(nameof(uri.PathAndQuery), uri.PathAndQuery);
