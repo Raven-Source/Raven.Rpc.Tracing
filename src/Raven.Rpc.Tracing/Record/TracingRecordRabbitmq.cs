@@ -30,7 +30,10 @@ namespace Raven.Rpc.Tracing.Record
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="rabbitMQOptions"></param>
+        /// <param name="host"></param>
+        /// <param name="userName"></param>
+        /// <param name="pwd"></param>
+        /// <param name="loger"></param>
         public TracingRecordRabbitmq(string host, string userName, string pwd, MessageQueue.ILoger loger = null)
         {
             Raven.MessageQueue.WithRabbitMQ.Options rabbitMQOptions = new Options();

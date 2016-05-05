@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace Raven.Rpc.Tracing.Owin
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class InitRequestScopeContext : IInitRequestScopeContext
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="tracingRecord"></param>
+        /// <param name="context"></param>
         public void BeginRequest(object context)
         {
         }
@@ -21,8 +23,7 @@ namespace Raven.Rpc.Tracing.Owin
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="tracingRecord"></param>
+        /// <param name="context"></param>
         public void EndRequest(object context)
         {
         }

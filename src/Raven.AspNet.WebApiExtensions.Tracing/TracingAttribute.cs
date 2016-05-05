@@ -30,7 +30,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         /// 系统名称
         /// </summary>
         public string systemName;
-        
+
         ///// <summary>
         ///// 构造函数
         ///// </summary>
@@ -43,6 +43,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         //}        
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actionContext"></param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             ServiceContainer.Resolve<IInitRequestScopeContext>().BeginRequest(actionContext.Request);
@@ -142,6 +146,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
             base.OnActionExecuting(actionContext);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actionExecutedContext"></param>
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             var actionContext = actionExecutedContext.ActionContext;

@@ -21,15 +21,18 @@
             
             </summary>
             <param name="app">Owin app.</param>
-            <param name="isThreadsafeItem">OwinRequestScopeContext.Item is threadsafe or not. Default is threadsafe.</param>
             <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Owin.HttpContextHelper">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:Raven.Rpc.Tracing.Owin.HttpContextHelper.GetHttpContextItem``1(System.String)">
             <summary>
             获取 HttpContextItem
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="request"></param>
             <param name="key"></param>
             <returns></returns>
         </member>
@@ -37,7 +40,6 @@
             <summary>
             设置 HttpContextItem
             </summary>
-            <param name="request"></param>
             <param name="key"></param>
             <param name="val"></param>
         </member>
@@ -47,19 +49,40 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Raven.Rpc.Tracing.Owin.InitRequestScopeContext">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Raven.Rpc.Tracing.Owin.InitRequestScopeContext.BeginRequest(System.Object)">
             <summary>
             
             </summary>
-            <param name="app"></param>
-            <param name="tracingRecord"></param>
+            <param name="context"></param>
         </member>
         <member name="M:Raven.Rpc.Tracing.Owin.InitRequestScopeContext.EndRequest(System.Object)">
             <summary>
             
             </summary>
-            <param name="app"></param>
-            <param name="tracingRecord"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Owin.RequestScopeContextMiddleware">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Owin.RequestScopeContextMiddleware.#ctor(System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Owin.RequestScopeContextMiddleware.Invoke(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            
+            </summary>
+            <param name="environment"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

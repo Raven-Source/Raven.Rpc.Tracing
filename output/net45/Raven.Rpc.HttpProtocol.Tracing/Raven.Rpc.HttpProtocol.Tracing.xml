@@ -4,6 +4,11 @@
         <name>Raven.Rpc.HttpProtocol.Tracing</name>
     </assembly>
     <members>
+        <member name="T:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.RegistTracing(Raven.Rpc.HttpProtocol.RpcHttpClient,System.String,System.String)">
             <summary>
             

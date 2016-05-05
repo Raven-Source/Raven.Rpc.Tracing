@@ -44,12 +44,13 @@ namespace Raven.TracingRecord
         public RecordHandle(string serverName)
             : base(serverName, 5000)
         {
+            RabbitMQConfig rabbitMQConfig = new RabbitMQConfig("RabbitMQ_TraceLogs");
             rabbitMQOptions = new Raven.MessageQueue.WithRabbitMQ.Options()
             {
                 SerializerType = SerializerType.NewtonsoftJson,
-                HostName = RabbitMQConfig.hostName,
-                Password = RabbitMQConfig.password,
-                UserName = RabbitMQConfig.username,
+                HostName = rabbitMQConfig.hostName,
+                Password = rabbitMQConfig.password,
+                UserName = rabbitMQConfig.username,
                 //MaxQueueCount = 100000,
                 Loger = new Loger()
             };

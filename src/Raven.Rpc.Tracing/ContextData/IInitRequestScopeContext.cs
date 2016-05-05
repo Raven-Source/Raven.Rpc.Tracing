@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 
 namespace Raven.Rpc.Tracing.ContextData
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal interface IInitRequestScopeContext
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="tracingRecord"></param>
+        /// <param name="context"></param>
         void BeginRequest(object context);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="tracingRecord"></param>
+        /// <param name="context"></param>
         void EndRequest(object context);
     }
 }

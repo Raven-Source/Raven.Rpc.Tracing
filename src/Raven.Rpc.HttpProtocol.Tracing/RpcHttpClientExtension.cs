@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace Raven.Rpc.HttpProtocol.Tracing
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
     public static class RpcHttpClientExtension
     {
         private static ITracingRecord record = ServiceContainer.Resolve<ITracingRecord>();

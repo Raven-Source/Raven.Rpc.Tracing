@@ -12,6 +12,9 @@ using System.Web.Mvc;
 
 namespace Raven.AspNet.MvcExtensions.Tracing
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TracingAttribute : ActionFilterAttribute
     {
         /// <summary>

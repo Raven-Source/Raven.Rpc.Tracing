@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Raven.TracingRecord
 {
-    public static class RabbitMQConfig
+    public class RabbitMQConfig
     {
-        public static readonly string hostName;
-        public static readonly string username;
-        public static readonly string password;
+        public readonly string hostName;
+        public readonly string username;
+        public readonly string password;
 
-        static RabbitMQConfig()
+        public RabbitMQConfig(string appSettingsKey)
         {
-            string[] str = ConfigurationManager.AppSettings["RabbitMQ"].Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] str = ConfigurationManager.AppSettings[appSettingsKey].Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string b in str)
             {
                 var temp = b.Split('=');

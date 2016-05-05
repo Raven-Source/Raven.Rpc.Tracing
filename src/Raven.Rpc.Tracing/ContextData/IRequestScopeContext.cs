@@ -8,15 +8,11 @@ using System.Threading.Tasks;
 
 namespace Raven.Rpc.Tracing.ContextData
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IRequestScopeContext
     {
-        /// <summary>
-        /// <para>Enables an object's Dispose method to be called when the request completed.</para>
-        /// <para>Return value is subscription token. If calle token.Dispose() then canceled register.</para>
-        /// </summary>
-        /// <param name="target">IDisposable item.</param>
-        //IDisposable DisposeOnPipelineCompleted(IDisposable target);
-
         /// <summary>
         /// Raw Owin Environment dictionary.
         /// </summary>
@@ -33,10 +29,16 @@ namespace Raven.Rpc.Tracing.ContextData
         DateTime Timestamp { get; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class RequestScopeContext : IRequestScopeContext
     {
         const string CallContextKey = "raven_request_context";
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static IRequestScopeContext Current
         {
             get
@@ -49,20 +51,39 @@ namespace Raven.Rpc.Tracing.ContextData
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         internal static void FreeContextSlot()
         {
             CallContext.FreeNamedDataSlot(CallContextKey);
         }
-
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
         readonly DateTime utcTimestamp = DateTime.UtcNow;
         //readonly List<UnsubscribeDisposable> disposables;
         //readonly ConcurrentQueue<UnsubscribeDisposable> disposablesThreadsafeQueue;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public object Environment { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<string, object> Items { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime Timestamp { get { return utcTimestamp.ToLocalTime(); } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public RequestScopeContext(object environment)
         {
             this.utcTimestamp = DateTime.UtcNow;

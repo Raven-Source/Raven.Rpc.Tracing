@@ -11,7 +11,13 @@ namespace Raven.Rpc.Tracing
     /// </summary>
     public enum ContextType
     {
+        /// <summary>
+        /// 
+        /// </summary>
         Client = 1,
+        /// <summary>
+        /// 
+        /// </summary>
         Server = 2,
     }
 }
