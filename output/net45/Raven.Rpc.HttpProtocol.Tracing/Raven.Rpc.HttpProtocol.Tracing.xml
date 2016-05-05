@@ -9,13 +9,14 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.RegistTracing(Raven.Rpc.HttpProtocol.RpcHttpClient,System.String,System.String)">
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.RegistTracing(Raven.Rpc.HttpProtocol.RpcHttpClient,System.String,System.String,System.String)">
             <summary>
             
             </summary>
             <param name="client"></param>
             <param name="systemID"></param>
             <param name="systemName"></param>
+            <param name="environment">环境</param>
         </member>
         <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.FillClientSR(Raven.Rpc.Tracing.TraceLogs,System.Net.Http.HttpRequestMessage,Raven.Rpc.HttpProtocol.RpcContext)">
             <summary>

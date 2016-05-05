@@ -50,6 +50,11 @@
             系统名称
             </summary>
         </member>
+        <member name="F:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.environment">
+            <summary>
+            环境类型
+            </summary>
+        </member>
         <member name="M:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
             <summary>
             
