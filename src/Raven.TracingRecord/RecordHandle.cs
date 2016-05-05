@@ -44,7 +44,7 @@ namespace Raven.TracingRecord
         public RecordHandle(string serverName)
             : base(serverName, 5000)
         {
-            RabbitMQConfig rabbitMQConfig = new RabbitMQConfig("RabbitMQ_TraceLogs");
+            RabbitMQConfig rabbitMQConfig = new RabbitMQConfig("RabbitMQ_RavenLogs");
             rabbitMQOptions = new Raven.MessageQueue.WithRabbitMQ.Options()
             {
                 SerializerType = SerializerType.NewtonsoftJson,
