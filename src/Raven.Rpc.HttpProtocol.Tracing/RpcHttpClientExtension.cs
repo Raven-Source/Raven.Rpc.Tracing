@@ -24,15 +24,18 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// <param name="client"></param>
         /// <param name="systemID"></param>
         /// <param name="systemName"></param>
-        public static void RegistTracing(this RpcHttpClient client, string systemID = null, string systemName = null)
+        /// <param name="environment">环境</param>
+        public static void RegistTracing(this RpcHttpClient client, string systemID = null, string systemName = null, string environment = null)
         {
-            RpcHttpClient.OnResponseDelegate onResponse = (response, rpcContext) => 
+            RpcHttpClient.OnResponseDelegate onResponse = (response, rpcContext) =>
             {
                 TraceLogs sr = new TraceLogs();
                 sr.IsSuccess = true;
                 sr.IsException = false;
                 sr.SystemID = systemID;
                 sr.SystemName = systemName;
+                sr.Environment = environment;
+
                 FillClientSR(sr, response.RequestMessage, rpcContext);
 
                 Record(sr);
@@ -96,7 +99,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 reqModel.Header.TraceID = modelHeader.TraceID;
                 reqModel.Header.UUID = modelHeader.UUID;
             }
-        }        
+        }
 
         //private static void Client_OnResponse(HttpResponseMessage response, RpcContext rpcContext)
         //{

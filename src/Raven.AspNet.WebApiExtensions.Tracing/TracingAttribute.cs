@@ -31,6 +31,11 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         /// </summary>
         public string systemName;
 
+        /// <summary>
+        /// 环境类型
+        /// </summary>
+        public string environment;
+
         ///// <summary>
         ///// 构造函数
         ///// </summary>
@@ -113,6 +118,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 {
                     TraceLogs srs = new TraceLogs();
                     srs.ContextType = ContextType.Server.ToString();
+                    srs.Environment = this.environment;
                     srs.StartTime = DateTime.Now;
                     srs.MachineAddr = Util.HttpHelper.GetServerAddress();
                     srs.TraceId = reqHeader.TraceID;

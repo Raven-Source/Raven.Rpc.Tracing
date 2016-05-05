@@ -28,6 +28,11 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         public string systemName;
 
         /// <summary>
+        /// 环境类型
+        /// </summary>
+        public string environment;
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="filterContext"></param>
@@ -49,6 +54,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                 {
                     TraceLogs srs = new TraceLogs();
                     srs.ContextType = ContextType.Server.ToString();
+                    srs.Environment = this.environment;
                     srs.StartTime = DateTime.Now;
                     srs.MachineAddr = Util.HttpHelper.GetServerAddress();
                     srs.TraceId = reqHeader.TraceID;
