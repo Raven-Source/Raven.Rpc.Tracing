@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace Raven.Rpc.HttpProtocol.Tracing
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
     public static class RpcHttpClientExtension
     {
         private static ITracingRecord record = ServiceContainer.Resolve<ITracingRecord>();
@@ -22,15 +24,18 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// <param name="client"></param>
         /// <param name="systemID"></param>
         /// <param name="systemName"></param>
-        public static void RegistTracing(this RpcHttpClient client, string systemID = null, string systemName = null)
+        /// <param name="environment">环境</param>
+        public static void RegistTracing(this RpcHttpClient client, string systemID = null, string systemName = null, string environment = null)
         {
-            RpcHttpClient.OnResponseDelegate onResponse = (response, rpcContext) => 
+            RpcHttpClient.OnResponseDelegate onResponse = (response, rpcContext) =>
             {
                 TraceLogs sr = new TraceLogs();
                 sr.IsSuccess = true;
                 sr.IsException = false;
                 sr.SystemID = systemID;
                 sr.SystemName = systemName;
+                sr.Environment = environment;
+
                 FillClientSR(sr, response.RequestMessage, rpcContext);
 
                 Record(sr);
@@ -94,7 +99,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 reqModel.Header.TraceID = modelHeader.TraceID;
                 reqModel.Header.UUID = modelHeader.UUID;
             }
-        }        
+        }
 
         //private static void Client_OnResponse(HttpResponseMessage response, RpcContext rpcContext)
         //{
@@ -143,7 +148,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             sr.MachineAddr = Util.HttpHelper.GetServerAddress();
 
             sr.InvokeID = uri.AbsolutePath;
-            sr.ServerHost = uri.Authority;
+            sr.ServerHost = uri.Host;
 
             //sr.Extension.Add(nameof(uri.AbsolutePath), uri.AbsolutePath);
             sr.Extension.Add(nameof(uri.PathAndQuery), uri.PathAndQuery);
@@ -163,12 +168,12 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             if (rpcContext.ReceiveEndTime.HasValue)
             {
                 sr.EndTime = rpcContext.ReceiveEndTime.Value;
-                sr.TimeLength = (sr.StartTime - sr.EndTime).TotalMilliseconds;
+                sr.TimeLength = (sr.EndTime - sr.StartTime).TotalMilliseconds;
             }
             else if (rpcContext.ExceptionTime.HasValue)
             {
                 sr.EndTime = rpcContext.ExceptionTime.Value;
-                sr.TimeLength = (sr.StartTime - sr.EndTime).TotalMilliseconds;
+                sr.TimeLength = (sr.EndTime - sr.StartTime).TotalMilliseconds;
             }
 
             //sr.TimeLength = sr.ReceiveETime.HasValue ? (sr.ReceiveETime.Value - sr.SendSTime).TotalMilliseconds : 0D;

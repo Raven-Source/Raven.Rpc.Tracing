@@ -12,8 +12,7 @@ namespace Raven.Rpc.Tracing.WebHost
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="tracingRecord"></param>
+        /// <param name="context"></param>
         public void BeginRequest(object context)
         {
             var environment = System.Web.HttpContext.Current.Request.ServerVariables;
@@ -24,8 +23,7 @@ namespace Raven.Rpc.Tracing.WebHost
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="tracingRecord"></param>
+        /// <param name="context"></param>
         public void EndRequest(object context)
         {
             RequestScopeContext.FreeContextSlot();

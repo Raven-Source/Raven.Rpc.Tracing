@@ -36,16 +36,16 @@
       <HintPath>..\..\packages\Jil.2.12.1\lib\net45\Jil.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.2.0.2\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Host.HttpListener.2.1.0\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Host.HttpListener.2.0.2\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Hosting, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Hosting.2.1.0\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Hosting, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Hosting.2.0.2\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MsgPack, Version=0.6.0.0, Culture=neutral, PublicKeyToken=a2625990d5dc0167, processorArchitecture=MSIL">
@@ -67,9 +67,8 @@
       <HintPath>..\..\packages\Raven.RabbitMQClient.1.0.1\lib\net45\Raven.RabbitMQClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.0.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.2.0.4\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Raven.Rpc.HttpProtocol">
+      <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.2.0.2\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Raven.Rpc.IContractModel.2.1.0\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
@@ -87,8 +86,8 @@
       <HintPath>..\..\packages\Raven.Serializer.WithMsgPack.1.0.1\lib\net45\Raven.Serializer.WithMsgPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.Serializer.WithNewtonsoft.1.0.1\lib\net45\Raven.Serializer.WithNewtonsoft.dll</HintPath>
+    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Serializer.WithNewtonsoft.1.0.0\lib\net45\Raven.Serializer.WithNewtonsoft.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sigil, Version=4.5.0.0, Culture=neutral, PublicKeyToken=2d06c3494341c8ab, processorArchitecture=MSIL">

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Raven.Rpc.Tracing
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IHttpHelper
     {
         /// <summary>
@@ -29,7 +32,6 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="request"></param>
         /// <returns></returns>
         string GetServerAddress();
         

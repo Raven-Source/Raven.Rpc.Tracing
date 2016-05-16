@@ -40,8 +40,8 @@
       <HintPath>..\packages\Raven.Serializer.1.0.1\lib\net45\Raven.Serializer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Serializer.WithNewtonsoft.1.0.1\lib\net45\Raven.Serializer.WithNewtonsoft.dll</HintPath>
+    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Serializer.WithNewtonsoft.1.0.0\lib\net45\Raven.Serializer.WithNewtonsoft.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

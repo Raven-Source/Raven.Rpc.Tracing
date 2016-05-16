@@ -103,7 +103,7 @@ namespace Raven.TracingRecord
                         Reset.WaitOne(GetIntervalMilliseconds());
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                     loger.LogInfo("错误了");
                 }

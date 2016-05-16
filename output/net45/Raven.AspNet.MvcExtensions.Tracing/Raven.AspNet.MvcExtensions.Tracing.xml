@@ -4,6 +4,27 @@
         <name>Raven.AspNet.MvcExtensions.Tracing</name>
     </assembly>
     <members>
+        <member name="T:Raven.AspNet.MvcExtensions.Tracing.FilterContextExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.AspNet.MvcExtensions.Tracing.FilterContextExtensions.HasMarkerAttribute``1(System.Web.Mvc.ActionExecutingContext)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="that"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.AspNet.MvcExtensions.Tracing.FilterContextExtensions.HasMarkerAttribute``1(System.Web.Mvc.ActionExecutedContext)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="that"></param>
+            <returns></returns>
+        </member>
         <member name="T:Raven.AspNet.MvcExtensions.Tracing.NonTracingAttribute">
             <summary>
             NonTracing
@@ -14,6 +35,11 @@
             Not To Log
             </summary>
         </member>
+        <member name="T:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.systemID">
             <summary>
             系统ID
@@ -22,6 +48,11 @@
         <member name="F:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.systemName">
             <summary>
             系统名称
+            </summary>
+        </member>
+        <member name="F:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.environment">
+            <summary>
+            环境类型
             </summary>
         </member>
         <member name="M:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">

@@ -55,7 +55,6 @@ namespace Raven.Rpc.Tracing
         /// 
         /// </summary>
         /// <typeparam name="TKey"></typeparam>
-        /// <typeparam name="TValue"></typeparam>
         /// <param name="dict"></param>
         /// <param name="key"></param>
         /// <returns></returns>

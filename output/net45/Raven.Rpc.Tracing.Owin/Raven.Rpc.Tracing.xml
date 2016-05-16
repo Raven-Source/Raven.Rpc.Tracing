@@ -4,19 +4,62 @@
         <name>Raven.Rpc.Tracing</name>
     </assembly>
     <members>
+        <member name="T:Raven.Rpc.Tracing.Config">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.TraceLogsQueueName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ExceptionKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ParamsKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ResultKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ServerRSKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ResponseHeaderTraceKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ContextData.IInitRequestScopeContext">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Raven.Rpc.Tracing.ContextData.IInitRequestScopeContext.BeginRequest(System.Object)">
             <summary>
             
             </summary>
-            <param name="app"></param>
-            <param name="tracingRecord"></param>
+            <param name="context"></param>
         </member>
         <member name="M:Raven.Rpc.Tracing.ContextData.IInitRequestScopeContext.EndRequest(System.Object)">
             <summary>
             
             </summary>
-            <param name="app"></param>
-            <param name="tracingRecord"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ContextData.IRequestScopeContext">
+            <summary>
+            
+            </summary>
         </member>
         <member name="P:Raven.Rpc.Tracing.ContextData.IRequestScopeContext.Environment">
             <summary>
@@ -31,6 +74,46 @@
         <member name="P:Raven.Rpc.Tracing.ContextData.IRequestScopeContext.Timestamp">
             <summary>
             Gets the initial timestamp of the current HTTP request.
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ContextData.RequestScopeContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.RequestScopeContext.Current">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ContextData.RequestScopeContext.FreeContextSlot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ContextData.RequestScopeContext.utcTimestamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.RequestScopeContext.Environment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.RequestScopeContext.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.RequestScopeContext.Timestamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ContextData.RequestScopeContext.#ctor(System.Object)">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Raven.Rpc.Tracing.DictionaryHelper">
@@ -62,7 +145,6 @@
             
             </summary>
             <typeparam name="TKey"></typeparam>
-            <typeparam name="TValue"></typeparam>
             <param name="dict"></param>
             <param name="key"></param>
             <returns></returns>
@@ -109,6 +191,11 @@
             <param name="header"></param>
             <returns></returns>
         </member>
+        <member name="T:Raven.Rpc.Tracing.IHttpHelper">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Raven.Rpc.Tracing.IHttpHelper.GetHttpContextItem``1(System.String)">
             <summary>
             获取 HttpContextItem
@@ -128,10 +215,24 @@
             <summary>
             
             </summary>
-            <param name="request"></param>
             <returns></returns>
         </member>
         <member name="T:Raven.Rpc.Tracing.ContextType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ContextType.Client">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ContextType.Server">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.TraceLogs">
             <summary>
             
             </summary>
@@ -166,7 +267,11 @@
             TotalMilliseconds
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:Raven.Rpc.Tracing.TraceLogs.IsSuccess" -->
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.IsSuccess">
+            <summary>
+            是否运行成功,true|成功,false|失败
+            </summary>
+        </member>
         <member name="F:Raven.Rpc.Tracing.TraceLogs.IsException">
             <summary>
             是否运行异常,true|异常,false|未异常
@@ -212,6 +317,11 @@
             ResponseSize
             </summary>
         </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.Environment">
+            <summary>
+            环境
+            </summary>
+        </member>
         <member name="P:Raven.Rpc.Tracing.TraceLogs.Extension">
             <summary>
             扩展
@@ -222,6 +332,17 @@
             
             </summary>
         </member>
+        <member name="T:Raven.Rpc.Tracing.Record.ITracingRecord">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.ITracingRecord.RecordTraceLog(Raven.Rpc.Tracing.TraceLogs)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
         <member name="T:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq">
             <summary>
             
@@ -231,7 +352,10 @@
             <summary>
             
             </summary>
-            <param name="rabbitMQOptions"></param>
+            <param name="host"></param>
+            <param name="userName"></param>
+            <param name="pwd"></param>
+            <param name="loger"></param>
         </member>
         <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.RecordTraceLog(Raven.Rpc.Tracing.TraceLogs)">
             <summary>

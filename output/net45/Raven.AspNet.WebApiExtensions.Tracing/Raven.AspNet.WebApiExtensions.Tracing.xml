@@ -4,6 +4,19 @@
         <name>Raven.AspNet.WebApiExtensions.Tracing</name>
     </assembly>
     <members>
+        <member name="T:Raven.AspNet.WebApiExtensions.Tracing.HttpActionContextExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.AspNet.WebApiExtensions.Tracing.HttpActionContextExtensions.HasMarkerAttribute``1(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="that"></param>
+            <returns></returns>
+        </member>
         <member name="T:Raven.AspNet.WebApiExtensions.Tracing.NonTracingAttribute">
             <summary>
             NonTracing
@@ -28,6 +41,23 @@
             <summary>
             系统名称
             </summary>
+        </member>
+        <member name="F:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.environment">
+            <summary>
+            环境类型
+            </summary>
+        </member>
+        <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            
+            </summary>
+            <param name="actionExecutedContext"></param>
         </member>
         <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.Record(Raven.Rpc.Tracing.TraceLogs)">
             <summary>

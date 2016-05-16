@@ -1,0 +1,1705 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MongoDB.Repository</name>
+    </assembly>
+    <members>
+        <member name="T:MongoDB.Repository.MongoReaderRepositoryAsync`2">
+            <summary>
+            异步读取仓储
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="T:MongoDB.Repository.MongoBaseRepository`2">
+            <summary>
+            仓储Base
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="F:MongoDB.Repository.MongoBaseRepository`2._sequence">
+            <summary>
+            Mongo自增长ID数据序列
+            </summary>
+        </member>
+        <member name="F:MongoDB.Repository.MongoBaseRepository`2._mongoSession">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.GetCollection(MongoDB.Driver.MongoCollectionSettings)">
+            <summary>
+            根据数据类型得到集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.GetCollection(MongoDB.Driver.WriteConcern)">
+            <summary>
+            根据数据类型得到集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.GetCollection(MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据数据类型得到集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.#ctor(System.String,System.String,MongoDB.Driver.WriteConcern,MongoDB.Driver.ReadPreference,MongoDB.Repository.MongoSequence)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="connString">数据库连接节点</param>
+            <param name="dbName">数据库名称</param>
+            <param name="writeConcern"></param>
+            <param name="readPreference"></param>
+            <param name="sequence">Mongo自增长ID数据序列对象</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.IncludeFields``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            获取字段
+            </summary>
+            <param name="fieldsExp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.CreateSortDefinition``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},MongoDB.Repository.SortType)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.CreateFindOptions``1(MongoDB.Driver.ProjectionDefinition{``0,``0},MongoDB.Driver.SortDefinition{``0},System.Int32,System.Int32,MongoDB.Bson.BsonValue)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="projection"></param>
+            <param name="sort"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.CreateFindOptions``1(MongoDB.Driver.ProjectionDefinition{``0,``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},MongoDB.Repository.SortType,System.Int32,System.Int32,MongoDB.Bson.BsonValue)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="projection"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.CreateCountOptions(System.Int32,System.Int32,MongoDB.Bson.BsonValue)">
+            <summary>
+            
+            </summary>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoBaseRepository`2.AssignmentEntityID(`0,System.Int64)">
+            <summary>
+            ID赋值
+            </summary>
+            <param name="entity"></param>
+            <param name="id"></param>
+        </member>
+        <member name="P:MongoDB.Repository.MongoBaseRepository`2.Database">
+            <summary>
+            MongoDatabase
+            </summary>
+        </member>
+        <member name="P:MongoDB.Repository.MongoBaseRepository`2.Filter">
+            <summary>
+            get Filter
+            </summary>
+        </member>
+        <member name="P:MongoDB.Repository.MongoBaseRepository`2.Sort">
+            <summary>
+            get Sort
+            </summary>
+        </member>
+        <member name="P:MongoDB.Repository.MongoBaseRepository`2.Update">
+            <summary>
+            get Update
+            </summary>
+        </member>
+        <member name="P:MongoDB.Repository.MongoBaseRepository`2.Projection">
+            <summary>
+            get Projection
+            </summary>
+        </member>
+        <member name="T:MongoDB.Repository.IReaderRepositoryAsync`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.CreateIncIDAsync(System.Int64,System.Int32)">
+            <summary>
+            创建自增长ID
+            <remarks>默认自增ID存放 [Sequence] 集合</remarks>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.CreateIncIDAsync(`0)">
+            <summary>
+            创建自增ID
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.GetAsync(`1,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据id获取实体
+            </summary>
+            <param name="id"></param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.GetAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取实体
+            </summary>
+            <param name="filterExp">查询条件表达式</param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.GetAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.ProjectionDefinition{`0,`0},MongoDB.Driver.SortDefinition{`0},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取实体
+            </summary>
+            <param name="filter"></param>
+            <param name="sort"></param>
+            <param name="projection"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取获取列表
+            </summary>
+            <param name="filterExp">查询条件表达式</param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.GetListAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.ProjectionDefinition{`0,`0},MongoDB.Driver.SortDefinition{`0},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取获取列表
+            </summary>
+            <param name="filter"></param>
+            <param name="projection"></param>
+            <param name="sort"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.CountAsync(MongoDB.Driver.FilterDefinition{`0},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filter"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.CountAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filterExp"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.ExistsAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filter"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepositoryAsync`2.ExistsAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filterExp"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.#ctor(System.String,System.String,MongoDB.Driver.WriteConcern,MongoDB.Driver.ReadPreference,MongoDB.Repository.MongoSequence)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="connString">数据库连接节点</param>
+            <param name="dbName">数据库名称</param>
+            <param name="writeConcern"></param>
+            <param name="readPreference"></param>
+            <param name="sequence">Mongo自增长ID数据序列对象</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.CreateIncIDAsync(System.Int64,System.Int32)">
+            <summary>
+            创建自增长ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.CreateIncIDAsync(`0)">
+            <summary>
+            创建自增ID
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.GetAsync(`1,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据id获取实体
+            </summary>
+            <param name="id"></param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.GetAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取实体
+            </summary>
+            <param name="filterExp">查询条件表达式</param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.GetAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.ProjectionDefinition{`0,`0},MongoDB.Driver.SortDefinition{`0},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取实体
+            </summary>
+            <param name="filter"></param>
+            <param name="sort"></param>
+            <param name="projection"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取获取列表
+            </summary>
+            <param name="filterExp">查询条件表达式</param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.GetListAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.ProjectionDefinition{`0,`0},MongoDB.Driver.SortDefinition{`0},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取获取列表
+            </summary>
+            <param name="filter"></param>
+            <param name="projection"></param>
+            <param name="sort"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.CountAsync(MongoDB.Driver.FilterDefinition{`0},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filter"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.CountAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filterExp"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.ExistsAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filter"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepositoryAsync`2.ExistsAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filterExp"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="T:MongoDB.Repository.MongoRepositoryAsync`2">
+            <summary>
+            异步仓储
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="T:MongoDB.Repository.IRepositoryAsync`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.InsertAsync(`0,MongoDB.Driver.WriteConcern)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="entity">待添加数据</param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.InsertBatchAsync(System.Collections.Generic.IEnumerable{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            批量添加数据
+            </summary>
+            <param name="entitys">待添加数据集合</param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.CreateUpdateDefinitionAsync(`0,System.Boolean)">
+            <summary>
+            根据实体创建UpdateDefinition
+            </summary>
+            <param name="updateEntity"></param>
+            <param name="isUpsert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            如果isUpsert 为 true ，且updateEntity继承IAutoIncr，则ID内部会自增
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateEntity">更新实体（不是replace，updateEntity不会减少原实体字段）</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.UpdateOneAsync(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="updateEntity">更新实体（不是replace，updateEntity不会减少原实体字段）</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateExp">更新内容表达式</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.UpdateOneAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.UpdateManyAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateExp">更新内容表达式</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.FindOneAndUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="update"></param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.FindOneAndUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="updateEntity">更新实体</param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.FindOneAndUpdateAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filter"></param>
+            <param name="update"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.FindOneAndUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="updateExp"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.FindOneAndUpdateAsync(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filter"></param>
+            <param name="updateEntity">更新实体</param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.FindOneAndReplaceAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filterExp"></param>
+            <param name="entity"></param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.FindOneAndReplaceAsync(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filter"></param>
+            <param name="entity"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.FindOneAndDeleteAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filter"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.FindOneAndDeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filterExp"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.DeleteOneAsync(`1,MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除单条数据
+            </summary>
+            <param name="id">ID</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.DeleteOneAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.DeleteOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除多条数据
+            </summary>
+            <param name="filterExp">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.DeleteManyAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除多条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepositoryAsync`2.DeleteManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.#ctor(System.String,System.String,MongoDB.Driver.WriteConcern,MongoDB.Driver.ReadPreference,MongoDB.Repository.MongoSequence)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="connString">数据库连接节点</param>
+            <param name="dbName">数据库名称</param>
+            <param name="writeConcern"></param>
+            <param name="readPreference"></param>
+            <param name="sequence">Mongo自增长ID数据序列对象</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.InsertAsync(`0,MongoDB.Driver.WriteConcern)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="entity">待添加数据</param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.InsertBatchAsync(System.Collections.Generic.IEnumerable{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            批量添加数据
+            </summary>
+            <param name="entitys">待添加数据集合</param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.CreateUpdateDefinitionAsync(`0,System.Boolean)">
+            <summary>
+            根据实体创建UpdateDefinition
+            </summary>
+            <param name="updateEntity"></param>
+            <param name="isUpsert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            如果isUpsert 为 true ，且updateEntity继承IAutoIncr，则ID内部会自增
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateEntity">更新实体（不是replace，updateEntity不会减少原实体字段）</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.UpdateOneAsync(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="updateEntity">更新实体（不是replace，updateEntity不会减少原实体字段）</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.UpdateOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateExp">更新内容表达式</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.UpdateOneAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.UpdateManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateExp">更新内容表达式</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.UpdateManyAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.FindOneAndUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="update"></param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.FindOneAndUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="updateEntity">更新实体</param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.FindOneAndUpdateAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filter"></param>
+            <param name="update"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <!-- 对于成员“M:MongoDB.Repository.MongoRepositoryAsync`2.FindOneAndUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)”忽略有格式错误的 XML 注释 -->
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.FindOneAndUpdateAsync(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filter"></param>
+            <param name="updateEntity">更新实体</param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.FindOneAndReplaceAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filterExp"></param>
+            <param name="entity"></param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.FindOneAndReplaceAsync(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filter"></param>
+            <param name="entity"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.FindOneAndDeleteAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filter"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.FindOneAndDeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filterExp"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.DeleteOneAsync(`1,MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除单条数据
+            </summary>
+            <param name="id">ID</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.DeleteOneAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.DeleteOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除多条数据
+            </summary>
+            <param name="filterExp">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.DeleteManyAsync(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除多条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepositoryAsync`2.DeleteManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="T:MongoDB.Repository.IRepository`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="T:MongoDB.Repository.IReaderRepository`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.CreateIncID(System.Int64,System.Int32)">
+            <summary>
+            创建自增长ID
+            <remarks>默认自增ID存放 [Sequence] 集合</remarks>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.CreateIncID(`0)">
+            <summary>
+            创建自增ID
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.Get(`1,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据id获取实体
+            </summary>
+            <param name="id"></param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取实体
+            </summary>
+            <param name="filterExp">查询条件表达式</param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.Get(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.ProjectionDefinition{`0,`0},MongoDB.Driver.SortDefinition{`0},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取实体
+            </summary>
+            <param name="filter"></param>
+            <param name="sort"></param>
+            <param name="projection"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取获取列表
+            </summary>
+            <param name="filterExp">查询条件表达式</param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.GetList(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.ProjectionDefinition{`0,`0},MongoDB.Driver.SortDefinition{`0},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取获取列表
+            </summary>
+            <param name="filter"></param>
+            <param name="projection"></param>
+            <param name="sort"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.Count(MongoDB.Driver.FilterDefinition{`0},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filter"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filterExp"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.Exists(MongoDB.Driver.FilterDefinition{`0},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            是否存在
+            </summary>
+            <param name="filter"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IReaderRepository`2.Exists(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            是否存在
+            </summary>
+            <param name="filterExp"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.Insert(`0,MongoDB.Driver.WriteConcern)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="entity">待添加数据</param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.InsertBatch(System.Collections.Generic.IEnumerable{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            批量添加数据
+            </summary>
+            <param name="entitys">待添加数据集合</param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.UpdateOne(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            如果isUpsert 为 true ，且updateEntity继承IAutoIncr，则ID内部会自增
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateEntity">更新实体（不是replace，updateEntity不会减少原实体字段）</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.UpdateOne(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="updateEntity">更新实体（不是replace，updateEntity不会减少原实体字段）</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.UpdateOne(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.UpdateOne(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateExp">更新内容表达式</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.UpdateOne(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.UpdateMany(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.UpdateMany(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateExp">更新内容表达式</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.UpdateMany(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.FindOneAndUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="update"></param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.FindOneAndUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="updateEntity">更新实体</param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.FindOneAndUpdate(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filter"></param>
+            <param name="update"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.FindOneAndUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="updateExp"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.FindOneAndUpdate(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filter"></param>
+            <param name="updateEntity">更新实体</param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.FindOneAndReplace(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filterExp"></param>
+            <param name="entity"></param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.FindOneAndReplace(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filter"></param>
+            <param name="entity"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.FindOneAndDelete(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filter"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.FindOneAndDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filterExp"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.DeleteOne(`1,MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除单条数据
+            </summary>
+            <param name="id">ID</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.DeleteOne(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.DeleteOne(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除多条数据
+            </summary>
+            <param name="filterExp">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.DeleteMany(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除多条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.IRepository`2.DeleteMany(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="T:MongoDB.Repository.MongoSequence">
+            <summary>
+            Sequence
+            </summary>
+        </member>
+        <member name="M:MongoDB.Repository.MongoSequence.#ctor(System.String,System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="sequence">序列表名称</param>
+            <param name="collectionName">集合字段名称</param>
+            <param name="incrementID">自增长ID字段名称</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoSequence.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:MongoDB.Repository.MongoSequence.SequenceName">
+            <summary>
+            存储数据的序列
+            </summary>
+        </member>
+        <member name="P:MongoDB.Repository.MongoSequence.CollectionName">
+            <summary>
+            对应的Collection名称,默认为_id
+            </summary>
+        </member>
+        <member name="P:MongoDB.Repository.MongoSequence.IncrementID">
+            <summary>
+            对应Collection的自增长ID
+            </summary>
+        </member>
+        <member name="T:MongoDB.Repository.MongoSession">
+            <summary>
+            MongoSessionAsync
+            </summary>
+        </member>
+        <member name="F:MongoDB.Repository.MongoSession._writeConcern">
+            <summary>
+            MongoDB WriteConcern
+            </summary>
+        </member>
+        <member name="F:MongoDB.Repository.MongoSession._mongoClient">
+            <summary>
+            MongoClient
+            </summary>
+        </member>
+        <member name="M:MongoDB.Repository.MongoSession.#ctor(System.String,System.String,MongoDB.Driver.WriteConcern,System.Boolean,MongoDB.Driver.ReadPreference)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="connString">数据库链接字符串</param>
+            <param name="dbName">数据库名称</param>
+            <param name="writeConcern">WriteConcern选项</param>
+            <param name="isSlaveOK"></param>
+            <param name="readPreference"></param>
+        </member>
+        <member name="P:MongoDB.Repository.MongoSession.Database">
+            <summary>
+            MongoDatabase
+            </summary>
+        </member>
+        <member name="T:MongoDB.Repository.RepositoryContainer">
+            <summary>
+            容器
+            </summary>
+        </member>
+        <member name="M:MongoDB.Repository.RepositoryContainer.Register``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="service"></param>
+        </member>
+        <member name="M:MongoDB.Repository.RepositoryContainer.Register``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:MongoDB.Repository.RepositoryContainer.Register``1(System.Func{System.Object})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="function"></param>
+        </member>
+        <member name="M:MongoDB.Repository.RepositoryContainer.Resolve``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:MongoDB.Repository.SortType">
+            <summary>
+            排序类型
+            </summary>
+        </member>
+        <member name="F:MongoDB.Repository.SortType.Ascending">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MongoDB.Repository.SortType.Descending">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MongoDB.Repository.MongoReaderRepository`2">
+            <summary>
+            读取仓储
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.#ctor(System.String,System.String,MongoDB.Driver.WriteConcern,MongoDB.Driver.ReadPreference,MongoDB.Repository.MongoSequence)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="connString">数据库连接节点</param>
+            <param name="dbName">数据库名称</param>
+            <param name="writeConcern"></param>
+            <param name="readPreference"></param>
+            <param name="sequence">Mongo自增长ID数据序列对象</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.CreateIncID(System.Int64,System.Int32)">
+            <summary>
+            创建自增长ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.CreateIncID(`0)">
+            <summary>
+            创建自增ID
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.Get(`1,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据id获取实体
+            </summary>
+            <param name="id"></param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取实体
+            </summary>
+            <param name="filterExp">查询条件表达式</param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.Get(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.ProjectionDefinition{`0,`0},MongoDB.Driver.SortDefinition{`0},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取实体
+            </summary>
+            <param name="filter"></param>
+            <param name="sort"></param>
+            <param name="projection"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取获取列表
+            </summary>
+            <param name="filterExp">查询条件表达式</param>
+            <param name="includeFieldExp">查询字段表达式</param>
+            <param name="sortExp">排序表达式</param>
+            <param name="sortType">排序方式</param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.GetList(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.ProjectionDefinition{`0,`0},MongoDB.Driver.SortDefinition{`0},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            根据条件获取获取列表
+            </summary>
+            <param name="filter"></param>
+            <param name="projection"></param>
+            <param name="sort"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.Count(MongoDB.Driver.FilterDefinition{`0},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filter"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filterExp"></param>
+            <param name="limit"></param>
+            <param name="skip"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.Exists(MongoDB.Driver.FilterDefinition{`0},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filter"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoReaderRepository`2.Exists(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Bson.BsonValue,MongoDB.Driver.ReadPreference)">
+            <summary>
+            数量
+            </summary>
+            <param name="filterExp"></param>
+            <param name="hint">hint索引</param>
+            <param name="readPreference">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="T:MongoDB.Repository.MongoRepository`2">
+            <summary>
+            仓储
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.#ctor(System.String,System.String,MongoDB.Driver.WriteConcern,MongoDB.Driver.ReadPreference,MongoDB.Repository.MongoSequence)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="connString">数据库连接节点</param>
+            <param name="dbName">数据库名称</param>
+            <param name="writeConcern"></param>
+            <param name="readPreference"></param>
+            <param name="sequence">Mongo自增长ID数据序列对象</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.Insert(`0,MongoDB.Driver.WriteConcern)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="entity">待添加数据</param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.InsertBatch(System.Collections.Generic.IEnumerable{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            批量添加数据
+            </summary>
+            <param name="entitys">待添加数据集合</param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.CreateUpdateDefinition(`0,System.Boolean)">
+            <summary>
+            根据实体创建UpdateDefinition
+            </summary>
+            <param name="updateEntity"></param>
+            <param name="isUpsert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.UpdateOne(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            如果isUpsert 为 true ，且updateEntity继承IAutoIncr，则ID内部会自增
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateEntity">更新实体（不是replace，updateEntity不会减少原实体字段）</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.UpdateOne(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="updateEntity">更新实体（不是replace，updateEntity不会减少原实体字段）</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.UpdateOne(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.UpdateOne(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateExp">更新内容表达式</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.UpdateOne(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.UpdateMany(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.UpdateMany(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filterExp">查询表达式</param>
+            <param name="updateExp">更新内容表达式</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.UpdateMany(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改多条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="update">更新内容</param>
+            <param name="isUpsert">如果文档不存在，是否插入数据</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.FindOneAndUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="update"></param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.FindOneAndUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="updateEntity">更新实体</param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.FindOneAndUpdate(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.UpdateDefinition{`0},System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filter"></param>
+            <param name="update"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.FindOneAndUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{MongoDB.Driver.UpdateDefinitionBuilder{`0},MongoDB.Driver.UpdateDefinition{`0}},System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filterExp"></param>
+            <param name="updateExp"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.FindOneAndUpdate(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并更新
+            </summary>
+            <param name="filter"></param>
+            <param name="updateEntity">更新实体</param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.FindOneAndReplace(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Boolean,System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filterExp"></param>
+            <param name="entity"></param>
+            <param name="isUpsert"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.FindOneAndReplace(MongoDB.Driver.FilterDefinition{`0},`0,System.Boolean,MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filter"></param>
+            <param name="entity"></param>
+            <param name="isUpsert"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.FindOneAndDelete(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.SortDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filter"></param>
+            <param name="sort"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.FindOneAndDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},MongoDB.Repository.SortType,MongoDB.Driver.WriteConcern)">
+            <summary>
+            找到并替换
+            </summary>
+            <param name="filterExp"></param>
+            <param name="sortExp"></param>
+            <param name="sortType"></param>
+            <param name="writeConcern">访问设置</param>
+            <returns></returns>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.DeleteOne(`1,MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除单条数据
+            </summary>
+            <param name="id">ID</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.DeleteOne(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除单条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.DeleteOne(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除多条数据
+            </summary>
+            <param name="filterExp">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.DeleteMany(MongoDB.Driver.FilterDefinition{`0},MongoDB.Driver.WriteConcern)">
+            <summary>
+            删除多条数据
+            </summary>
+            <param name="filter">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+        <member name="M:MongoDB.Repository.MongoRepository`2.DeleteMany(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},MongoDB.Driver.WriteConcern)">
+            <summary>
+            修改单条数据
+            </summary>
+            <param name="filterExp">查询条件</param>
+            <param name="writeConcern">访问设置</param>
+        </member>
+    </members>
+</doc>

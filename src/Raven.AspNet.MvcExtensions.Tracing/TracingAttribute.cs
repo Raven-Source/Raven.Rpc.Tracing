@@ -12,6 +12,9 @@ using System.Web.Mvc;
 
 namespace Raven.AspNet.MvcExtensions.Tracing
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TracingAttribute : ActionFilterAttribute
     {
         /// <summary>
@@ -23,6 +26,11 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// 系统名称
         /// </summary>
         public string systemName;
+
+        /// <summary>
+        /// 环境类型
+        /// </summary>
+        public string environment;
 
         /// <summary>
         /// 
@@ -46,11 +54,12 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                 {
                     TraceLogs srs = new TraceLogs();
                     srs.ContextType = ContextType.Server.ToString();
+                    srs.Environment = this.environment;
                     srs.StartTime = DateTime.Now;
                     srs.MachineAddr = Util.HttpHelper.GetServerAddress();
                     srs.TraceId = reqHeader.TraceID;
                     srs.RpcId = reqHeader.RpcID;
-                    srs.ServerHost = request.Url.Authority;
+                    srs.ServerHost = request.Url.Host;
                     srs.Protocol = request.Url.Scheme;
 
                     srs.SystemID = this.systemID;

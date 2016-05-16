@@ -12,12 +12,14 @@ using System.Web.Http.Controllers;
 
 namespace Raven.Rpc.Tracing.WebHost
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class TracingConfig
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="app"></param>
         /// <param name="tracingRecord"></param>
         public static void UseTracingContext(ITracingRecord tracingRecord)
         {

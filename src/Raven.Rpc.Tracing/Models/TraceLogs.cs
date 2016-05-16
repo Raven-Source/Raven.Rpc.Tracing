@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Raven.Rpc.Tracing
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TraceLogs
     {
         /// <summary>
@@ -38,6 +41,7 @@ namespace Raven.Rpc.Tracing
         /// </summary>
         public double TimeLength;
 
+        /// <summary>
         /// 是否运行成功,true|成功,false|失败
         /// </summary>
         public bool IsSuccess;
@@ -96,6 +100,11 @@ namespace Raven.Rpc.Tracing
         /// ResponseSize
         /// </summary>
         public long ResponseSize;
+
+        /// <summary>
+        /// 环境
+        /// </summary>
+        public string Environment;
 
         ///// <summary>
         ///// 扩展

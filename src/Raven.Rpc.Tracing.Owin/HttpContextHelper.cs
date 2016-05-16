@@ -10,13 +10,15 @@ using Raven.Rpc.Tracing.ContextData;
 
 namespace Raven.Rpc.Tracing.Owin
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class HttpContextHelper : IHttpHelper
     {
         /// <summary>
         /// 获取 HttpContextItem
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="request"></param>
         /// <param name="key"></param>
         /// <returns></returns>
         public T GetHttpContextItem<T>(string key)
@@ -44,7 +46,6 @@ namespace Raven.Rpc.Tracing.Owin
         /// <summary>
         /// 设置 HttpContextItem
         /// </summary>
-        /// <param name="request"></param>
         /// <param name="key"></param>
         /// <param name="val"></param>
         public void SetHttpContextItem(string key, object val)

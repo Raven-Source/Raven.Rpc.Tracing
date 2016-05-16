@@ -30,7 +30,12 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         /// 系统名称
         /// </summary>
         public string systemName;
-        
+
+        /// <summary>
+        /// 环境类型
+        /// </summary>
+        public string environment;
+
         ///// <summary>
         ///// 构造函数
         ///// </summary>
@@ -43,6 +48,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         //}        
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actionContext"></param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             ServiceContainer.Resolve<IInitRequestScopeContext>().BeginRequest(actionContext.Request);
@@ -109,11 +118,12 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 {
                     TraceLogs srs = new TraceLogs();
                     srs.ContextType = ContextType.Server.ToString();
+                    srs.Environment = this.environment;
                     srs.StartTime = DateTime.Now;
                     srs.MachineAddr = Util.HttpHelper.GetServerAddress();
                     srs.TraceId = reqHeader.TraceID;
                     srs.RpcId = reqHeader.RpcID;
-                    srs.ServerHost = actionContext.Request.RequestUri.Authority;
+                    srs.ServerHost = actionContext.Request.RequestUri.Host;
                     srs.Protocol = actionContext.Request.RequestUri.Scheme;
 
                     srs.SystemID = this.systemID;
@@ -142,6 +152,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
             base.OnActionExecuting(actionContext);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actionExecutedContext"></param>
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             var actionContext = actionExecutedContext.ActionContext;

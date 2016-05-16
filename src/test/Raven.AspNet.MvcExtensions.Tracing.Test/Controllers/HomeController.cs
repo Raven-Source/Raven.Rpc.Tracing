@@ -26,7 +26,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing.Test.Controllers
         // GET: Home
         public JsonResult Get2()
         {
-            throw new Exception();
+            //throw new Exception();
             return new JsonResult() { Data = new { id = 1324, name = "ggg" }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }

@@ -26,7 +26,6 @@ namespace Raven.Rpc.Tracing.Owin
         /// 
         /// </summary>
         /// <param name="app">Owin app.</param>
-        /// <param name="isThreadsafeItem">OwinRequestScopeContext.Item is threadsafe or not. Default is threadsafe.</param>
         /// <returns></returns>
         private static IAppBuilder UseRequestScopeContext(this IAppBuilder app)
         {
