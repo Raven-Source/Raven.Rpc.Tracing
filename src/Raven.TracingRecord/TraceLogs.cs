@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Raven.TracingRecord
 {
+    [MongoDB.Bson.Serialization.Attributes.BsonIgnoreExtraElements]
     public class TraceLogs : Raven.Rpc.Tracing.TraceLogs, IEntity<string>
     {
         [MongoDB.Bson.Serialization.Attributes.BsonId]
