@@ -116,25 +116,22 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 //Not To Log
                 if (!actionContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
-                    TraceLogs srs = new TraceLogs();
-                    srs.ContextType = ContextType.Server.ToString();
-                    srs.Environment = this.environment;
-                    srs.StartTime = DateTime.Now;
-                    srs.MachineAddr = Util.HttpHelper.GetServerAddress();
-                    srs.TraceId = reqHeader.TraceID;
-                    srs.RpcId = reqHeader.RpcID;
-                    srs.ServerHost = actionContext.Request.RequestUri.Host;
-                    srs.Protocol = actionContext.Request.RequestUri.Scheme;
+                    TraceLogs trace = new TraceLogs();
+                    trace.ContextType = ContextType.Server.ToString();
+                    trace.Environment = this.environment;
+                    trace.StartTime = DateTime.Now;
+                    trace.MachineAddr = Util.HttpHelper.GetServerAddress();
+                    trace.TraceId = reqHeader.TraceID;
+                    trace.RpcId = reqHeader.RpcID;
+                    trace.ServerHost = actionContext.Request.RequestUri.Host;
+                    trace.Protocol = actionContext.Request.RequestUri.Scheme;
 
-                    srs.SystemID = this.systemID;
-                    srs.SystemName = this.systemName;
+                    trace.SystemID = this.systemID;
+                    trace.SystemName = this.systemName;
 
-                    srs.InvokeID = request.RequestUri.AbsolutePath;
-                    srs.Extension.Add(nameof(request.RequestUri.PathAndQuery), request.RequestUri.PathAndQuery);
-                    if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
-                    {
-                        srs.Extension.Add(Config.ParamsKey, actionContext.ActionArguments);
-                    }
+                    trace.InvokeID = request.RequestUri.AbsolutePath;
+
+                    TraceExtensionOnActionExecuting(actionContext, trace);
 
                     //srs.InvokeID = string.Format("{0}_{1}", actionContext.ControllerContext.ControllerDescriptor.ControllerName.ToLower(), actionContext.ActionDescriptor.ActionName.ToLower());
 
@@ -145,11 +142,25 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
 
                     //ServerRS Log Data TODO
 
-                    Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, srs);
+                    Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, trace);
                 }
             }
 
             base.OnActionExecuting(actionContext);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actionContext"></param>
+        /// <param name="trace"></param>
+        protected virtual void TraceExtensionOnActionExecuting(HttpActionContext actionContext, TraceLogs trace)
+        {
+            trace.Extension.Add(nameof(actionContext.Request.RequestUri.PathAndQuery), actionContext.Request.RequestUri.PathAndQuery);
+            if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
+            {
+                trace.Extension.Add(Config.ParamsKey, actionContext.ActionArguments);
+            }
         }
 
         /// <summary>
@@ -164,46 +175,60 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 if (!actionContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
                     var request = actionExecutedContext.Request;
-                    var srs = Util.HttpHelper.GetHttpContextItem<TraceLogs>(Config.ServerRSKey);
+                    var trace = Util.HttpHelper.GetHttpContextItem<TraceLogs>(Config.ServerRSKey);
 
-                    srs.EndTime = DateTime.Now;
-                    srs.TimeLength = (srs.EndTime - srs.StartTime).TotalMilliseconds;
-                    srs.IsException = false;
-                    srs.IsSuccess = true;
+                    trace.EndTime = DateTime.Now;
+                    trace.TimeLength = (trace.EndTime - trace.StartTime).TotalMilliseconds;
+                    trace.IsException = false;
+                    trace.IsSuccess = true;
 
-                    string traceId = HttpContextData.GetRequestHeader().TraceID;
+                    //string traceId = HttpContextData.GetRequestHeader().TraceID;
+
                     if (actionExecutedContext.Response != null)
                     {
-                        IResponseModel responseModel = null;
-                        if (actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out responseModel))
-                        {
-                            srs.Code = responseModel.GetCode();
-                            srs.Extension.Add(Config.ResultKey, responseModel);
-
-                            if (responseModel.Extension == null)
-                            {
-                                responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
-                            }
-                            responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TraceID), traceId));
-                        }
-                        actionExecutedContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, traceId);
+                        actionExecutedContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, trace.TraceId);
                     }
 
                     //Exception
                     if (actionExecutedContext.Exception != null)
                     {
-                        srs.IsException = true;
-                        srs.IsSuccess = false;
-                        srs.Extension.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(actionExecutedContext.Exception));
+                        trace.IsException = true;
+                        trace.IsSuccess = false;
+                        trace.Extension.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(actionExecutedContext.Exception));
                     }
 
-                    Record(srs);
+                    TraceExtensionOnActionExecuted(actionExecutedContext, trace);
+                    Record(trace);
                 }
 
             }
 
             ServiceContainer.Resolve<IInitRequestScopeContext>().EndRequest(actionContext.Request);
             base.OnActionExecuted(actionExecutedContext);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actionExecutedContext"></param>
+        /// <param name="trace"></param>
+        protected virtual void TraceExtensionOnActionExecuted(HttpActionExecutedContext actionExecutedContext, TraceLogs trace)
+        {
+            if (actionExecutedContext.Response != null)
+            {
+                IResponseModel responseModel = null;
+                if (actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out responseModel))
+                {
+                    trace.Code = responseModel.GetCode();
+                    trace.Extension.Add(Config.ResultKey, responseModel);
+
+                    if (responseModel.Extension == null)
+                    {
+                        responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
+                    }
+                    responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TraceID), trace.TraceId));
+                }
+            }
         }
 
         /// <summary>

@@ -53,11 +53,25 @@
             </summary>
             <param name="actionContext"></param>
         </member>
+        <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.TraceExtensionOnActionExecuting(System.Web.Http.Controllers.HttpActionContext,Raven.Rpc.Tracing.TraceLogs)">
+            <summary>
+            
+            </summary>
+            <param name="actionContext"></param>
+            <param name="trace"></param>
+        </member>
         <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
             <summary>
             
             </summary>
             <param name="actionExecutedContext"></param>
+        </member>
+        <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.TraceExtensionOnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext,Raven.Rpc.Tracing.TraceLogs)">
+            <summary>
+            
+            </summary>
+            <param name="actionExecutedContext"></param>
+            <param name="trace"></param>
         </member>
         <member name="M:Raven.AspNet.WebApiExtensions.Tracing.TracingAttribute.Record(Raven.Rpc.Tracing.TraceLogs)">
             <summary>

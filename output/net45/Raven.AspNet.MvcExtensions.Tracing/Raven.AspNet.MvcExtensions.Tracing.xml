@@ -61,11 +61,25 @@
             </summary>
             <param name="filterContext"></param>
         </member>
+        <member name="M:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.TraceExtensionOnActionExecuting(System.Web.Mvc.ActionExecutingContext,Raven.Rpc.Tracing.TraceLogs)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+            <param name="trace"></param>
+        </member>
         <member name="M:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.OnActionExecuted(System.Web.Mvc.ActionExecutedContext)">
             <summary>
             
             </summary>
             <param name="filterContext"></param>
+        </member>
+        <member name="M:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.TraceExtensionOnActionExecuted(System.Web.Mvc.ActionExecutedContext,Raven.Rpc.Tracing.TraceLogs)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+            <param name="trace"></param>
         </member>
         <member name="M:Raven.AspNet.MvcExtensions.Tracing.TracingAttribute.Record(Raven.Rpc.Tracing.TraceLogs)">
             <summary>
