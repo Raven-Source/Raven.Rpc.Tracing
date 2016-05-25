@@ -78,9 +78,13 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                         }
                     }
                 }
-                if (reqModel == null)
+                if (reqModel == null && actionContext.Request.Content != null && string.Equals(actionContext.Request.Method.Method,"post", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    reqModel = actionContext.Request.Content.ReadAsAsync<RequestModel>().Result;
+                    try
+                    {
+                        reqModel = actionContext.Request.Content.ReadAsAsync<RequestModel>().Result;
+                    }
+                    catch { }
                     if (reqModel != null)
                     {
                         actionContext.ActionArguments.Add(Guid.NewGuid().ToString("N"), reqModel);
