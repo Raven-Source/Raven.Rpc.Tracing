@@ -88,9 +88,6 @@
     <Compile Include="..\Raven.Rpc.Tracing\Config.cs">
       <Link>Config.cs</Link>
     </Compile>
-    <Compile Include="..\Raven.Rpc.Tracing\Models\TraceLogs.cs">
-      <Link>Models\TraceLogs.cs</Link>
-    </Compile>
     <Compile Include="Handle.cs" />
     <Compile Include="Loger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

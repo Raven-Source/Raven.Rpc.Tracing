@@ -18,12 +18,13 @@
             <param name="systemName"></param>
             <param name="environment">环境</param>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.FillClientSR(Raven.Rpc.Tracing.TraceLogs,System.Net.Http.HttpRequestMessage,Raven.Rpc.HttpProtocol.RpcContext)">
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.FillClientSR(Raven.Rpc.Tracing.TraceLogs,System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage,Raven.Rpc.HttpProtocol.RpcContext)">
             <summary>
             
             </summary>
             <param name="sr"></param>
             <param name="request"></param>
+            <param name="response"></param>
             <param name="rpcContext"></param>
         </member>
         <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.Record(Raven.Rpc.Tracing.TraceLogs)">

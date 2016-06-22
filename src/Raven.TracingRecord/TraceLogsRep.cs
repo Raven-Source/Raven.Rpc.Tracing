@@ -1,4 +1,5 @@
-﻿using MongoDB.Repository;
+﻿using MongoDB.Bson;
+using MongoDB.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace Raven.TracingRecord
         public TraceLogsRep() :
             base(DBConfig.connString, DBConfig.dbName)
         { }
+
+        public void InsertBatch(IEnumerable<BsonDocument> documents)
+        {
+            base.Database.GetCollection<BsonDocument>(nameof(TraceLogs)).InsertMany(documents);
+        }
     }
 
     public static class DBConfig

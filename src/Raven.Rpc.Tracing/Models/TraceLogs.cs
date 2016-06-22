@@ -92,6 +92,12 @@ namespace Raven.Rpc.Tracing
         public string Protocol;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public virtual Dictionary<string, object> ProtocolHeader
+        { get; set; }
+
+        /// <summary>
         /// ContextType
         /// </summary>
         public string ContextType;
@@ -114,7 +120,7 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 扩展
         /// </summary>
-        public virtual Dictionary<string, object> Extension
+        public virtual Dictionary<string, object> Extensions
         { get; set; }
 
         /// <summary>
@@ -122,7 +128,8 @@ namespace Raven.Rpc.Tracing
         /// </summary>
         public TraceLogs()
         {
-            Extension = new Dictionary<string, object>();
+            ProtocolHeader = new Dictionary<string, object>();
+            Extensions = new Dictionary<string, object>();
         }
     }
 }

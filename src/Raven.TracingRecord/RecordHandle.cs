@@ -1,4 +1,6 @@
-﻿using Raven.MessageQueue;
+﻿using MongoDB.Bson;
+using Newtonsoft.Json.Linq;
+using Raven.MessageQueue;
 using Raven.MessageQueue.WithRabbitMQ;
 using Raven.Rpc.Tracing;
 using Raven.Serializer;
@@ -25,7 +27,7 @@ namespace Raven.TracingRecord
         }
 
         #endregion
-        
+
         protected override Action ProcessWorkAction
         {
             get
@@ -65,41 +67,32 @@ namespace Raven.TracingRecord
         {
             try
             {
-                var list = rabbitMQClient.ReceiveBatch<TraceLogs>(Config.TraceLogsQueueName);
+                var list = rabbitMQClient.ReceiveBatch<JObject>(Config.TraceLogsQueueName);
+                var logs = new List<MongoDB.Bson.BsonDocument>();
 
                 if (list != null && list.Count > 0)
                 {
                     for (var i = 0; i < list.Count; i++)
                     {
                         var l = list[i];
-                        //List<string> jsonObjectKey = new List<string>();
-                        if (l.Extension != null)
+                        var json = l.ToString(Newtonsoft.Json.Formatting.None);
+                        var log = Raven.TracingRecord.TraceLogs.Parse(json);
+
+                        if (log.Contains("Extension"))
                         {
-                            foreach (var kv in l.Extension)
+                            if (!log.Contains("Extensions"))
                             {
-                                if (kv.Value.GetType().FullName == "Newtonsoft.Json.Linq.JObject")//"Jil.DeserializeDynamic.JsonObject")
-                                {
-                                    var str = Newtonsoft.Json.JsonConvert.SerializeObject(kv.Value);
-                                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonDocument.Parse(str));
-                                }
-                                else
-                                {
-                                    l.Extensions.Add(kv.Key, MongoDB.Bson.BsonValue.Create(kv.Value));
-                                }
+                                var ext = log["Extension"];
+                                log.Add("Extensions", ext);
                             }
-                            l.Extension = null;
-                            //if (jsonObjectKey.Count > 0)
-                            //{
-                            //    foreach (var k in jsonObjectKey)
-                            //    {
-                            //        var value = l.Extension[k];
-                            //        var str = Newtonsoft.Json.JsonConvert.SerializeObject(value);
-                            //        l.Extension[k] = MongoDB.Bson.BsonDocument.Parse(str);
-                            //    }
-                            //}
+                            log.Remove("Extension");
                         }
+
+                        logs.Add(log);
                     }
-                    traceLogsRep.InsertBatch(list);
+
+
+                    traceLogsRep.InsertBatch(logs);
                 }
 
                 //var list = rabbitMQClient.ReceiveBatch<ServerRSLogs>(Config.TraceServerRSQueueName);

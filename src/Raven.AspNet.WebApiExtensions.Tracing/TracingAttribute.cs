@@ -160,10 +160,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         /// <param name="trace"></param>
         protected virtual void TraceExtensionOnActionExecuting(HttpActionContext actionContext, TraceLogs trace)
         {
-            trace.Extension.Add(nameof(actionContext.Request.RequestUri.PathAndQuery), actionContext.Request.RequestUri.PathAndQuery);
+            trace.Extensions.Add(nameof(actionContext.Request.RequestUri.PathAndQuery), actionContext.Request.RequestUri.PathAndQuery);
             if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
             {
-                trace.Extension.Add(Config.ParamsKey, actionContext.ActionArguments);
+                trace.Extensions.Add(Config.ParamsKey, actionContext.ActionArguments);
             }
         }
 
@@ -198,7 +198,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     {
                         trace.IsException = true;
                         trace.IsSuccess = false;
-                        trace.Extension.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(actionExecutedContext.Exception));
+                        trace.Extensions.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(actionExecutedContext.Exception));
                     }
 
                     TraceExtensionOnActionExecuted(actionExecutedContext, trace);
@@ -224,13 +224,13 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 if (actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out responseModel))
                 {
                     trace.Code = responseModel.GetCode();
-                    trace.Extension.Add(Config.ResultKey, responseModel);
+                    trace.Extensions.Add(Config.ResultKey, responseModel);
 
-                    if (responseModel.Extension == null)
-                    {
-                        responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
-                    }
-                    responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TraceID), trace.TraceId));
+                    //if (responseModel.Extension == null)
+                    //{
+                    //    responseModel.Extension = new List<Rpc.IContractModel.KeyValue<string, string>>();
+                    //}
+                    //responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TraceID), trace.TraceId));
                 }
             }
         }

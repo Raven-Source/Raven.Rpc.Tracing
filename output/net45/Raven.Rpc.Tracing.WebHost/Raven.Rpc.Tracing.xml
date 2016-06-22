@@ -307,6 +307,11 @@
             协议
             </summary>
         </member>
+        <member name="P:Raven.Rpc.Tracing.TraceLogs.ProtocolHeader">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Raven.Rpc.Tracing.TraceLogs.ContextType">
             <summary>
             ContextType
@@ -322,7 +327,7 @@
             环境
             </summary>
         </member>
-        <member name="P:Raven.Rpc.Tracing.TraceLogs.Extension">
+        <member name="P:Raven.Rpc.Tracing.TraceLogs.Extensions">
             <summary>
             扩展
             </summary>

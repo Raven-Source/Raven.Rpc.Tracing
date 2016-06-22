@@ -85,11 +85,11 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <param name="trace"></param>
         protected virtual void TraceExtensionOnActionExecuting(ActionExecutingContext filterContext, TraceLogs trace)
         {
-            trace.Extension.Add(nameof(filterContext.HttpContext.Request.Url.PathAndQuery), filterContext.HttpContext.Request.Url.PathAndQuery);
+            trace.Extensions.Add(nameof(filterContext.HttpContext.Request.Url.PathAndQuery), filterContext.HttpContext.Request.Url.PathAndQuery);
 
             if (filterContext.ActionParameters != null && filterContext.ActionParameters.Count > 0)
             {
-                trace.Extension.Add(Config.ParamsKey, filterContext.ActionParameters);
+                trace.Extensions.Add(Config.ParamsKey, filterContext.ActionParameters);
             }
         }
 
@@ -113,7 +113,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
 
                     if (filterContext.HttpContext.Response != null)
                     {
-                        filterContext.HttpContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, HttpContextData.GetRequestHeader().TraceID);
+                        filterContext.HttpContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, trace.TraceId);
                     }
 
 
@@ -122,7 +122,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     {
                         trace.IsException = true;
                         trace.IsSuccess = false;
-                        trace.Extension.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(filterContext.Exception));
+                        trace.Extensions.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(filterContext.Exception));
                     }
 
                     TraceExtensionOnActionExecuted(filterContext, trace);
@@ -149,7 +149,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                 if (responseModel != null)
                 {
                     trace.Code = responseModel.GetCode();
-                    trace.Extension.Add(Config.ResultKey, jResult.Data);
+                    trace.Extensions.Add(Config.ResultKey, jResult.Data);
 
                     //if (responseModel.Extension == null)
                     //{

@@ -36,7 +36,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 sr.SystemName = systemName;
                 sr.Environment = environment;
 
-                FillClientSR(sr, response.RequestMessage, rpcContext);
+                FillClientSR(sr, response.RequestMessage, response, rpcContext);
 
                 Record(sr);
             };
@@ -47,9 +47,9 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 sr.IsException = true;
                 sr.SystemID = systemID;
                 sr.SystemName = systemName;
-                FillClientSR(sr, request, rpcContext);
+                FillClientSR(sr, request, null, rpcContext);
 
-                sr.Extension.Add("Exception", Util.GetFullExceptionMessage(ex));
+                sr.Extensions.Add("Exception", Util.GetFullExceptionMessage(ex));
 
                 Record(sr);
             };
@@ -128,8 +128,9 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// </summary>
         /// <param name="sr"></param>
         /// <param name="request"></param>
+        /// <param name="response"></param>
         /// <param name="rpcContext"></param>
-        private static void FillClientSR(TraceLogs sr, HttpRequestMessage request, RpcContext rpcContext)
+        private static void FillClientSR(TraceLogs sr, HttpRequestMessage request, HttpResponseMessage response, RpcContext rpcContext)
         {
             sr.ContextType = ContextType.Client.ToString();
             var modelHeader = HttpContextData.GetRequestHeader();
@@ -151,14 +152,30 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             sr.ServerHost = uri.Host;
 
             //sr.Extension.Add(nameof(uri.AbsolutePath), uri.AbsolutePath);
-            sr.Extension.Add(nameof(uri.PathAndQuery), uri.PathAndQuery);
+            sr.Extensions.Add(nameof(uri.PathAndQuery), uri.PathAndQuery);
             //sr.Extension.Add(nameof(uri.Host), uri.Host);
 
-            sr.Extension.Add(nameof(rpcContext.RequestModel), rpcContext.RequestModel);
-            sr.Extension.Add(nameof(rpcContext.ResponseModel), rpcContext.ResponseModel);
+            sr.Extensions.Add(nameof(rpcContext.RequestModel), rpcContext.RequestModel);
+            sr.Extensions.Add(nameof(rpcContext.ResponseModel), rpcContext.ResponseModel);
             sr.ResponseSize = rpcContext.ResponseSize;
 
             sr.Protocol = uri.Scheme;
+
+            sr.ProtocolHeader.Add("RequestHeaders", new Dictionary<string, string>
+            {
+                { "Accept", request.Headers.Accept.ToString() },
+                { "Accept-Encoding", request.Headers.AcceptEncoding.ToString() },
+                { "Content-Type", request.Content.Headers.ContentType.ToString() },
+            });
+
+            if (response != null)
+            {
+                sr.ProtocolHeader.Add("ResponseHeaders", new Dictionary<string, string>
+                {
+                    { "Content-Encoding", response.Content.Headers.ContentEncoding.ToString() },
+                    { "Content-Type", response.Content.Headers.ContentType.ToString() },
+                });
+            }
 
             //sr.SendSTime = rpcContext.SendStartTime;
             //sr.ReceiveETime = rpcContext.ReceiveEndTime;
