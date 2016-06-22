@@ -1,4 +1,6 @@
 ﻿using MongoDB.Bson;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Raven.MessageQueue;
 using Raven.MessageQueue.WithRabbitMQ;
@@ -75,7 +77,7 @@ namespace Raven.TracingRecord
                     for (var i = 0; i < list.Count; i++)
                     {
                         var l = list[i];
-                        var json = l.ToString(Newtonsoft.Json.Formatting.None);
+                        var json = JsonConvert.SerializeObject(l, Newtonsoft.Json.Formatting.None, new JavaScriptDateTimeConverter());// l.ToString(Newtonsoft.Json.Formatting.None);
                         var log = Raven.TracingRecord.TraceLogs.Parse(json);
 
                         if (log.Contains("Extension"))
