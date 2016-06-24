@@ -69,7 +69,8 @@ namespace Raven.TracingRecord
         {
             try
             {
-                var list = rabbitMQClient.ReceiveBatch<JObject>(Config.TraceLogsQueueName);
+                //json序列化后，日期为字符串，进mongodb数据库有问题
+                var list = rabbitMQClient.ReceiveBatch<Raven.Rpc.Tracing.TraceLogs>(Config.TraceLogsQueueName);
                 var logs = new List<MongoDB.Bson.BsonDocument>();
 
                 if (list != null && list.Count > 0)
