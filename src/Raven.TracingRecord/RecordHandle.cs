@@ -70,7 +70,7 @@ namespace Raven.TracingRecord
             try
             {
                 //json序列化后，日期为字符串，进mongodb数据库有问题
-                var list = rabbitMQClient.ReceiveBatch<Raven.Rpc.Tracing.TraceLogs>(Config.TraceLogsQueueName);
+                var list = rabbitMQClient.ReceiveBatch<Raven.TracingRecord.Models.TraceLos_Temp>(Config.TraceLogsQueueName);
                 var logs = new List<MongoDB.Bson.BsonDocument>();
 
                 if (list != null && list.Count > 0)
@@ -78,16 +78,22 @@ namespace Raven.TracingRecord
                     for (var i = 0; i < list.Count; i++)
                     {
                         var l = list[i];
+                        if (l.Extension != null && l.Extension.Count > 0)
+                        {
+                            l.Extensions = l.Extension;
+                            l.Extension = null;
+                        }
+
                         var json = JsonConvert.SerializeObject(l, Newtonsoft.Json.Formatting.None, new JavaScriptDateTimeConverter());// l.ToString(Newtonsoft.Json.Formatting.None);
                         var log = Raven.TracingRecord.TraceLogs.Parse(json);
 
                         if (log.Contains("Extension"))
                         {
-                            if (!log.Contains("Extensions"))
-                            {
-                                var ext = log["Extension"];
-                                log.Add("Extensions", ext);
-                            }
+                            //if (!log.Contains("Extensions"))
+                            //{
+                            //    var ext = log["Extension"];
+                            //    log.Add("Extensions", ext);
+                            //}
                             log.Remove("Extension");
                         }
 
