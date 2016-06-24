@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Raven.TracingRecord.Host
 {
-    public partial class Service1 : ServiceBase
+    public partial class TracingRecordService : ServiceBase
     {
-        public Service1()
+        public TracingRecordService()
         {
             InitializeComponent();
         }

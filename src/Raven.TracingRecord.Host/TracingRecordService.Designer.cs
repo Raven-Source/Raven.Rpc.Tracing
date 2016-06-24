@@ -1,6 +1,6 @@
 ﻿namespace Raven.TracingRecord.Host
 {
-    partial class Service1
+    partial class TracingRecordService
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            this.ServiceName = "TracingRecordService";
         }
 
         #endregion
