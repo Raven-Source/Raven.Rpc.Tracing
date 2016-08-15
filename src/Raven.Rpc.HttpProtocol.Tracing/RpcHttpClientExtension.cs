@@ -133,7 +133,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         private static void FillClientSR(TraceLogs sr, HttpRequestMessage request, HttpResponseMessage response, RpcContext rpcContext)
         {
             sr.ContextType = ContextType.Client.ToString();
-            var modelHeader = HttpContextData.GetRequestHeader();
+            var modelHeader = HttpContextData.GetRequestHeader();  //raven Request Header
             var uri = request.RequestUri;
 
             //int index = uri.AbsoluteUri.IndexOf("?");
@@ -200,7 +200,9 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             {
                 sr.RpcId = reqModel.Header.RpcID;
             }
-            sr.TraceId = modelHeader.TraceID;
+
+            //if modelHeader is null, create new traceID
+            sr.TraceId = modelHeader != null ? modelHeader.TraceID : Util.GetUniqueCode32();
 
             if (rpcContext.ResponseModel != null)
             {
