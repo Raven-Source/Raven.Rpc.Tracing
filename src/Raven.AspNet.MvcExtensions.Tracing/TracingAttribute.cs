@@ -44,7 +44,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
             {
                 var request = filterContext.HttpContext.Request;
                 var response = filterContext.HttpContext.Response;
-                
+
                 Header reqHeader = HttpContextData.GetDefaultRequestHeader();
 
                 HttpContextData.SetSubRpcID(reqHeader.RpcID + ".0");
@@ -68,6 +68,12 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     //srs.InvokeID = string.Format("{0}_{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower(), filterContext.ActionDescriptor.ActionName.ToLower());
 
                     trace.InvokeID = request.Url.AbsolutePath;
+                    string val = filterContext.HttpContext.Request.Headers[Config.ResponseHeaderFolderKey];
+                    if (!string.IsNullOrWhiteSpace(val))
+                    {
+                        trace.InvokeID = val.FirstOrDefault() + trace.InvokeID;
+                    }
+
                     TraceExtensionOnActionExecuting(filterContext, trace);
 
                     Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, trace);

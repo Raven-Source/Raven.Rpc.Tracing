@@ -39,6 +39,11 @@
             
             </summary>
         </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ResponseHeaderFolderKey">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Raven.Rpc.Tracing.ContextData.IInitRequestScopeContext">
             <summary>
             

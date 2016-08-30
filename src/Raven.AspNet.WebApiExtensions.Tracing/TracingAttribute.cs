@@ -134,6 +134,11 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     trace.SystemName = this.systemName;
 
                     trace.InvokeID = request.RequestUri.AbsolutePath;
+                    IEnumerable<string> val;
+                    if (actionContext.Request.Headers.TryGetValues(Config.ResponseHeaderFolderKey, out val))
+                    {
+                        trace.InvokeID = val.FirstOrDefault() + trace.InvokeID;
+                    }
 
                     TraceExtensionOnActionExecuting(actionContext, trace);
 
