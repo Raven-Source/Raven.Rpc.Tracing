@@ -97,6 +97,12 @@ namespace Raven.AspNet.MvcExtensions.Tracing
             {
                 trace.Extensions.Add(Config.ParamsKey, filterContext.ActionParameters);
             }
+
+            var form = filterContext.HttpContext.Request.Form;
+            if (form != null)
+            {
+                trace.Extensions.Add(Config.FormKey, form);
+            }
         }
 
         /// <summary>
@@ -155,7 +161,6 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                 if (responseModel != null)
                 {
                     trace.Code = responseModel.GetCode();
-                    trace.Extensions.Add(Config.ResultKey, jResult.Data);
 
                     //if (responseModel.Extension == null)
                     //{
@@ -163,6 +168,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     //}
                     //responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TraceID), HttpContentData.GetRequestHeader().TraceID));
                 }
+                trace.Extensions.Add(Config.ResultKey, jResult.Data);
             }
         }
 

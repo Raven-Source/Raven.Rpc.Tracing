@@ -26,6 +26,12 @@ namespace Raven.Rpc.Tracing
         /// 
         /// </summary>
         public const string ParamsKey = "Params";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string FormKey = "Form";
+
         /// <summary>
         /// 
         /// </summary>
