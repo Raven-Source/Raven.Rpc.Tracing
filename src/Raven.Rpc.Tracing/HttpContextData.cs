@@ -89,7 +89,6 @@ namespace Raven.Rpc.Tracing
                 RpcID = header.RpcID,
                 TraceID = header.TraceID,
                 Token = header.Token,
-                UUID = header.UUID,
             };
         }
         
