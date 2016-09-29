@@ -31,7 +31,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// 环境类型
         /// </summary>
         public string environment;
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -72,7 +72,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     if (!string.IsNullOrWhiteSpace(val))
                     {
                         trace.InvokeID = val.FirstOrDefault() + trace.InvokeID;
-                    }
+                    }                    
 
                     TraceExtensionOnActionExecuting(filterContext, trace);
 
@@ -80,9 +80,8 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                 }
             }
 
-
             base.OnActionExecuting(filterContext);
-        }
+        }        
 
         /// <summary>
         /// 
@@ -127,7 +126,6 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     {
                         filterContext.HttpContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, trace.TraceId);
                     }
-
 
                     //Exception
                     if (filterContext.Exception != null)

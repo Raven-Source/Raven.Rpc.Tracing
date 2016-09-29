@@ -166,6 +166,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         protected virtual void TraceExtensionOnActionExecuting(HttpActionContext actionContext, TraceLogs trace)
         {
             trace.Extensions.Add(nameof(actionContext.Request.RequestUri.PathAndQuery), actionContext.Request.RequestUri.PathAndQuery);
+
             if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
             {
                 trace.Extensions.Add(Config.ParamsKey, actionContext.ActionArguments);

@@ -92,7 +92,12 @@ namespace Raven.Rpc.Tracing
         public string Protocol;
 
         /// <summary>
-        /// 
+        /// SearchKey
+        /// </summary>
+        public string SearchKey;
+
+        /// <summary>
+        /// 协议头
         /// </summary>
         public virtual Dictionary<string, object> ProtocolHeader
         { get; set; }

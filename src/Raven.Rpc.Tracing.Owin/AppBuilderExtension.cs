@@ -17,7 +17,7 @@ namespace Raven.Rpc.Tracing.Owin
         public static void UseTracingContext(this IAppBuilder app, ITracingRecord tracingRecord)
         {
             app.UseRequestScopeContext();
-            ServiceContainer.Register<IHttpHelper>(new HttpContextHelper());
+            ServiceContainer.Register<IHttpContextHelper>(new HttpContextHelper());
             ServiceContainer.Register<ITracingRecord>(tracingRecord);
             ServiceContainer.Register<IInitRequestScopeContext>(new InitRequestScopeContext());
         }

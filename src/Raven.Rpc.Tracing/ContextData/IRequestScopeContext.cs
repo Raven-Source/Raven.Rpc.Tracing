@@ -34,6 +34,9 @@ namespace Raven.Rpc.Tracing.ContextData
     /// </summary>
     public class RequestScopeContext : IRequestScopeContext
     {
+        /// <summary>
+        /// 
+        /// </summary>
         const string CallContextKey = "raven_request_context";
 
         /// <summary>

@@ -91,6 +91,11 @@
             
             </summary>
         </member>
+        <member name="F:Raven.Rpc.Tracing.ContextData.RequestScopeContext.CallContextKey">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Raven.Rpc.Tracing.ContextData.RequestScopeContext.Current">
             <summary>
             
@@ -201,12 +206,12 @@
             <param name="header"></param>
             <returns></returns>
         </member>
-        <member name="T:Raven.Rpc.Tracing.IHttpHelper">
+        <member name="T:Raven.Rpc.Tracing.IHttpContextHelper">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.Tracing.IHttpHelper.GetHttpContextItem``1(System.String)">
+        <member name="M:Raven.Rpc.Tracing.IHttpContextHelper.GetHttpContextItem``1(System.String)">
             <summary>
             获取 HttpContextItem
             </summary>
@@ -214,16 +219,16 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.Tracing.IHttpHelper.SetHttpContextItem(System.String,System.Object)">
+        <member name="M:Raven.Rpc.Tracing.IHttpContextHelper.SetHttpContextItem(System.String,System.Object)">
             <summary>
             设置 HttpContextItem
             </summary>
             <param name="key"></param>
             <param name="val"></param>
         </member>
-        <member name="M:Raven.Rpc.Tracing.IHttpHelper.GetServerAddress">
+        <member name="M:Raven.Rpc.Tracing.IHttpContextHelper.GetServerAddress">
             <summary>
-            
+            获取服务地址
             </summary>
             <returns></returns>
         </member>
@@ -317,9 +322,14 @@
             协议
             </summary>
         </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.SearchKey">
+            <summary>
+            SearchKey
+            </summary>
+        </member>
         <member name="P:Raven.Rpc.Tracing.TraceLogs.ProtocolHeader">
             <summary>
-            
+            协议头
             </summary>
         </member>
         <member name="F:Raven.Rpc.Tracing.TraceLogs.ContextType">

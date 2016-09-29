@@ -13,7 +13,7 @@ namespace Raven.Rpc.Tracing.Owin
     /// <summary>
     /// 
     /// </summary>
-    public class HttpContextHelper : IHttpHelper
+    public class HttpContextHelper : IHttpContextHelper
     {
         /// <summary>
         /// 获取 HttpContextItem

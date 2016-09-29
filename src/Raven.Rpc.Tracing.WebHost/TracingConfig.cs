@@ -23,7 +23,7 @@ namespace Raven.Rpc.Tracing.WebHost
         /// <param name="tracingRecord"></param>
         public static void UseTracingContext(ITracingRecord tracingRecord)
         {
-            ServiceContainer.Register<IHttpHelper>(new HttpContextHelper());
+            ServiceContainer.Register<IHttpContextHelper>(new HttpContextHelper());
             ServiceContainer.Register<ITracingRecord>(tracingRecord);
             ServiceContainer.Register<IInitRequestScopeContext>(new InitRequestScopeContext());
         }

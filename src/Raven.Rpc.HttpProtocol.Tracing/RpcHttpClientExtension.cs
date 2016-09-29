@@ -25,7 +25,8 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// <param name="systemID"></param>
         /// <param name="systemName"></param>
         /// <param name="environment">环境</param>
-        public static void RegistTracing(this RpcHttpClient client, string systemID = null, string systemName = null, string environment = null)
+        /// <param name="searchKeyFunc">keyFunc</param>
+        public static void RegistTracing(this RpcHttpClient client, string systemID = null, string systemName = null, string environment = null, Func<RpcContext, string> searchKeyFunc = null)
         {
             RpcHttpClient.OnResponseDelegate onResponse = (response, rpcContext) =>
             {
@@ -35,6 +36,10 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 sr.SystemID = systemID;
                 sr.SystemName = systemName;
                 sr.Environment = environment;
+                if (searchKeyFunc != null)
+                {
+                    sr.SearchKey = searchKeyFunc(rpcContext);
+                }
 
                 FillClientSR(sr, response.RequestMessage, response, rpcContext);
 

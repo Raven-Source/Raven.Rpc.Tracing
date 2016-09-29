@@ -13,11 +13,12 @@ namespace Raven.Rpc.Tracing
     /// </summary>
     public static class Util
     {
-        private static Lazy<IHttpHelper> _httpHelper = new Lazy<IHttpHelper>(() => ServiceContainer.Resolve<IHttpHelper>());
+
+        private static Lazy<IHttpContextHelper> _httpHelper = new Lazy<IHttpContextHelper>(() => ServiceContainer.Resolve<IHttpContextHelper>());
         /// <summary>
         /// 
         /// </summary>
-        public static IHttpHelper HttpHelper
+        public static IHttpContextHelper HttpHelper
         {
             get
             {
