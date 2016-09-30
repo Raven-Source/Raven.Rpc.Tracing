@@ -20,6 +20,11 @@
             
             </summary>
         </member>
+        <member name="M:Raven.Rpc.IContractModel.RequestModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Raven.Rpc.IContractModel.RequestModel.Header">
             <summary>
             
@@ -45,9 +50,9 @@
             
             </summary>
         </member>
-        <member name="P:Raven.Rpc.IContractModel.Header.UUID">
+        <member name="P:Raven.Rpc.IContractModel.Header.Source">
             <summary>
-            UUID
+            
             </summary>
         </member>
         <member name="T:Raven.Rpc.IContractModel.IResponseModel">
