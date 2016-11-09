@@ -67,13 +67,14 @@ namespace Raven.AspNet.MvcExtensions.Tracing
 
                     //srs.InvokeID = string.Format("{0}_{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower(), filterContext.ActionDescriptor.ActionName.ToLower());
 
+                    //InvokeID
                     trace.InvokeID = request.Url.AbsolutePath;
                     string val = filterContext.HttpContext.Request.Headers[Config.ResponseHeaderFolderKey];
                     if (!string.IsNullOrWhiteSpace(val))
                     {
                         trace.InvokeID = val.FirstOrDefault() + trace.InvokeID;
-                    }                    
-
+                    }
+                    
                     TraceExtensionOnActionExecuting(filterContext, trace);
 
                     Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, trace);

@@ -78,6 +78,7 @@
     <Compile Include="HttpContextData.cs" />
     <Compile Include="IHttpHelper.cs" />
     <Compile Include="Models\ContextType.cs" />
+    <Compile Include="Models\ISearchKey.cs" />
     <Compile Include="Models\TraceLogs.cs" />
     <Compile Include="Record\ITracingRecord.cs" />
     <Compile Include="KeyValue.cs" />

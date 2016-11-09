@@ -247,6 +247,17 @@
             
             </summary>
         </member>
+        <member name="T:Raven.Rpc.Tracing.ISearchKey">
+            <summary>
+            ISearchKey
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ISearchKey.GetSearchKey">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Raven.Rpc.Tracing.TraceLogs">
             <summary>
             
