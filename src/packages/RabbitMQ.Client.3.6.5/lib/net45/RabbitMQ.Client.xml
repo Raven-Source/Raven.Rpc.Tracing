@@ -23,7 +23,20 @@
             a frame handler, and automatic recovery settings.
             </summary>
         </member>
-        <member name="M:RabbitMQ.Client.IProtocol.CreateFrameHandler(RabbitMQ.Client.AmqpTcpEndpoint,System.Func{Windows.Networking.Sockets.StreamSocket},System.Int32,System.Int32,System.Int32)">
+        <member name="M:RabbitMQ.Client.IProtocol.CreateConnection(RabbitMQ.Client.IConnectionFactory,System.Boolean,RabbitMQ.Client.Impl.IFrameHandler,System.String)">
+            <summary>
+            Construct a connection from a given set of parameters,
+            a frame handler, a client-provided name, and no automatic recovery.
+            The "insist" parameter is passed on to the AMQP connection.open method.
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.IProtocol.CreateConnection(RabbitMQ.Client.ConnectionFactory,RabbitMQ.Client.Impl.IFrameHandler,System.Boolean,System.String)">
+            <summary>
+            Construct a connection from a given set of parameters,
+            a frame handler, a client-provided name, and automatic recovery settings.
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.IProtocol.CreateFrameHandler(RabbitMQ.Client.AmqpTcpEndpoint,System.Func{System.Net.Sockets.AddressFamily,RabbitMQ.Client.ITcpClient},System.Int32,System.Int32,System.Int32)">
             <summary>
              Construct a frame handler for a given endpoint.
              </summary>
@@ -2217,12 +2230,12 @@
             Set custom socket options by providing a SocketFactory.
             </summary>
         </member>
-        <member name="M:RabbitMQ.Client.ConnectionFactoryBase.DefaultSocketFactory">
+        <member name="M:RabbitMQ.Client.ConnectionFactoryBase.DefaultSocketFactory(System.Net.Sockets.AddressFamily)">
             <summary>
-            Creates a new instance of the <see cref="!:TcpClient"/>.
+            Creates a new instance of the <see cref="T:System.Net.Sockets.TcpClient"/>.
             </summary>
             <param name="addressFamily">Specifies the addressing scheme.</param>
-            <returns>New instance of a <see cref="!:TcpClient"/>.</returns>
+            <returns>New instance of a <see cref="T:System.Net.Sockets.TcpClient"/>.</returns>
         </member>
         <member name="M:RabbitMQ.Client.IConnectionFactory.AuthMechanismFactory(System.Collections.Generic.IList{System.String})">
             <summary>
@@ -2235,11 +2248,35 @@
             Create a connection to the specified endpoint.
             </summary>
         </member>
+        <member name="M:RabbitMQ.Client.IConnectionFactory.CreateConnection(System.String)">
+            <summary>
+            Create a connection to the specified endpoint.
+            </summary>
+            <param name="clientProvidedName">        /// Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
+            </param>
+            <returns></returns>
+        </member>
         <member name="M:RabbitMQ.Client.IConnectionFactory.CreateConnection(System.Collections.Generic.IList{System.String})">
             <summary>
             Connects to the first reachable hostname from the list.
             </summary>
             <param name="hostnames">List of host names to use</param>
+            <returns></returns>
+        </member>
+        <member name="M:RabbitMQ.Client.IConnectionFactory.CreateConnection(System.Collections.Generic.IList{System.String},System.String)">
+            <summary>
+            Connects to the first reachable hostname from the list.
+            </summary>
+            <param name="hostnames">List of host names to use</param>
+            <param name="clientProvidedName">
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
+            </param>
             <returns></returns>
         </member>
         <member name="P:RabbitMQ.Client.IConnectionFactory.ClientProperties">
@@ -2283,11 +2320,11 @@
             </summary>
         </member>
         <member name="P:RabbitMQ.Client.IConnectionFactory.TaskScheduler">
-            <summary>
-            Advanced option.
+             <summary>
+             Advanced option.
             
-            What task scheduler should consumer dispatcher use.
-            </summary>
+             What task scheduler should consumer dispatcher use.
+             </summary>
         </member>
         <member name="P:RabbitMQ.Client.IConnectionFactory.HandshakeContinuationTimeout">
             <summary>
@@ -2427,6 +2464,20 @@
             When the configured hostname was not reachable.
             </exception>
         </member>
+        <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.String)">
+            <summary>
+            Create a connection to the specified endpoint.
+            </summary>
+            <param name="clientProvidedName">
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
+            </param>
+            <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
+            When the configured hostname was not reachable.
+            </exception>
+        </member>
         <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.Collections.Generic.IList{System.String})">
             <summary>
             Create a connection using a list of hostnames. The first reachable
@@ -2436,6 +2487,63 @@
             <param name="hostnames">
             List of hostnames to use for the initial
             connection and recovery.
+            </param>
+            <returns>Open connection</returns>
+            <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
+            When no hostname was reachable.
+            </exception>
+        </member>
+        <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.Collections.Generic.IList{System.String},System.String)">
+            <summary>
+            Create a connection using a list of hostnames. The first reachable
+            hostname will be used initially. Subsequent hostname picks are determined
+            by the <see cref="T:RabbitMQ.Client.IHostnameSelector"/> configured.
+            </summary>
+            <param name="hostnames">
+            List of hostnames to use for the initial
+            connection and recovery.
+            </param>
+            <param name="clientProvidedName">
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
+            </param>
+            <returns>Open connection</returns>
+            <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
+            When no hostname was reachable.
+            </exception>
+        </member>
+        <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.Collections.Generic.IList{RabbitMQ.Client.AmqpTcpEndpoint})">
+            <summary>
+            Create a connection using a list of hostnames. The first reachable
+            hostname will be used initially. Subsequent hostname picks are determined
+            by the <see cref="T:RabbitMQ.Client.IHostnameSelector"/> configured.
+            </summary>
+            <param name="endpoints">
+            List of endpoints to use for the initial
+            connection and recovery.
+            </param>
+            <returns>Open connection</returns>
+            <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
+            When no hostname was reachable.
+            </exception>
+        </member>
+        <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.Collections.Generic.IList{RabbitMQ.Client.AmqpTcpEndpoint},System.String)">
+            <summary>
+            Create a connection using a list of hostnames. The first reachable
+            hostname will be used initially. Subsequent hostname picks are determined
+            by the <see cref="T:RabbitMQ.Client.IHostnameSelector"/> configured.
+            </summary>
+            <param name="endpoints">
+            List of endpoints to use for the initial
+            connection and recovery.
+            </param>
+            <param name="clientProvidedName">
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
             </param>
             <returns>Open connection</returns>
             <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
@@ -2527,11 +2635,8 @@
             </summary>
             <remarks>
             Note that the "Handle*" methods run in the connection's thread!
-            Consider using <see cref="T:RabbitMQ.Client.QueueingBasicConsumer"/>,  which uses a
-            <see cref="T:RabbitMQ.Util.SharedQueue"/> instance to safely pass received messages across
-            to user threads, or  RabbitMQ.Client.MessagePatterns.Subscription,
-             which manages resource declaration and binding in addition to providing a
-            thread-safe interface.
+            Consider using <see cref="T:RabbitMQ.Client.Events.EventingBasicConsumer"/>,  which exposes
+            events that can be subscribed to consumer messages.
             </remarks>
         </member>
         <member name="T:RabbitMQ.Client.IBasicConsumer">
@@ -2681,57 +2786,6 @@
              for use in acknowledging received messages, for instance.
             </summary>
         </member>
-        <member name="T:RabbitMQ.Client.ExchangeType">
-            <summary>
-            Convenience class providing compile-time names for standard exchange types.
-            </summary>
-            <remarks>
-            Use the static members of this class as values for the
-            "exchangeType" arguments for IModel methods such as
-            ExchangeDeclare. The broker may be extended with additional
-            exchange types that do not appear in this class.
-            </remarks>
-        </member>
-        <member name="F:RabbitMQ.Client.ExchangeType.Direct">
-            <summary>
-            Exchange type used for AMQP direct exchanges.
-            </summary>
-        </member>
-        <member name="F:RabbitMQ.Client.ExchangeType.Fanout">
-            <summary>
-            Exchange type used for AMQP fanout exchanges.
-            </summary>
-        </member>
-        <member name="F:RabbitMQ.Client.ExchangeType.Headers">
-            <summary>
-            Exchange type used for AMQP headers exchanges.
-            </summary>
-        </member>
-        <member name="F:RabbitMQ.Client.ExchangeType.Topic">
-            <summary>
-            Exchange type used for AMQP topic exchanges.
-            </summary>
-        </member>
-        <member name="M:RabbitMQ.Client.ExchangeType.All">
-            <summary>
-            Retrieve a collection containing all standard exchange types.
-            </summary>
-        </member>
-        <member name="M:RabbitMQ.Client.ExternalMechanism.handleChallenge(System.Byte[],RabbitMQ.Client.IConnectionFactory)">
-            <summary>
-            Handle one round of challenge-response.
-            </summary>
-        </member>
-        <member name="M:RabbitMQ.Client.ExternalMechanismFactory.GetInstance">
-            <summary>
-            Return a new authentication mechanism implementation.
-            </summary>
-        </member>
-        <member name="P:RabbitMQ.Client.ExternalMechanismFactory.Name">
-            <summary>
-            The name of the authentication mechanism, as negotiated on the wire.
-            </summary>
-        </member>
         <member name="T:RabbitMQ.Client.Headers">
             <summary>
             Convenience class providing compile-time names for standard headers.
@@ -2786,6 +2840,57 @@
         <member name="F:RabbitMQ.Client.Headers.XPriority">
             <summary>
             x-priority header
+            </summary>
+        </member>
+        <member name="T:RabbitMQ.Client.ExchangeType">
+            <summary>
+            Convenience class providing compile-time names for standard exchange types.
+            </summary>
+            <remarks>
+            Use the static members of this class as values for the
+            "exchangeType" arguments for IModel methods such as
+            ExchangeDeclare. The broker may be extended with additional
+            exchange types that do not appear in this class.
+            </remarks>
+        </member>
+        <member name="F:RabbitMQ.Client.ExchangeType.Direct">
+            <summary>
+            Exchange type used for AMQP direct exchanges.
+            </summary>
+        </member>
+        <member name="F:RabbitMQ.Client.ExchangeType.Fanout">
+            <summary>
+            Exchange type used for AMQP fanout exchanges.
+            </summary>
+        </member>
+        <member name="F:RabbitMQ.Client.ExchangeType.Headers">
+            <summary>
+            Exchange type used for AMQP headers exchanges.
+            </summary>
+        </member>
+        <member name="F:RabbitMQ.Client.ExchangeType.Topic">
+            <summary>
+            Exchange type used for AMQP topic exchanges.
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.ExchangeType.All">
+            <summary>
+            Retrieve a collection containing all standard exchange types.
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.ExternalMechanism.handleChallenge(System.Byte[],RabbitMQ.Client.IConnectionFactory)">
+            <summary>
+            Handle one round of challenge-response.
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.ExternalMechanismFactory.GetInstance">
+            <summary>
+            Return a new authentication mechanism implementation.
+            </summary>
+        </member>
+        <member name="P:RabbitMQ.Client.ExternalMechanismFactory.Name">
+            <summary>
+            The name of the authentication mechanism, as negotiated on the wire.
             </summary>
         </member>
         <member name="T:RabbitMQ.Client.IConnection">
@@ -3041,6 +3146,14 @@
             about any errors reported while closing the connection in the order they appeared
             </summary>
         </member>
+        <member name="P:RabbitMQ.Client.IConnection.ClientProvidedName">
+            <summary>
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
+            </summary>
+        </member>
         <member name="E:RabbitMQ.Client.IConnection.CallbackException">
             <summary>
             Signalled when an exception occurs in a callback invoked by the connection.
@@ -3163,6 +3276,12 @@
             <summary>
             Message timestamp.
             </summary>
+        </member>
+        <member name="T:RabbitMQ.Client.ITcpClient">
+            <summary>
+            Wrapper interface for standard TCP-client. Provides socket for socket frame handler class. 
+            </summary>
+            <remarks>Contains all methods that are currenty in use in rabbitmq client.</remarks>
         </member>
         <member name="M:RabbitMQ.Client.PlainMechanismFactory.GetInstance">
             <summary>
@@ -3466,6 +3585,17 @@
             <see cref="P:RabbitMQ.Client.ShutdownReportEntry.Exception"/> object that occured during shutdown, or null if unspecified.
             </summary>
         </member>
+        <member name="T:RabbitMQ.Client.SslHelper">
+            <summary>
+            Represents an <see cref="T:RabbitMQ.Client.SslHelper"/> which does the actual heavy lifting to set up an SSL connection,
+             using the config options in an <see cref="T:RabbitMQ.Client.SslOption"/> to make things cleaner.
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.SslHelper.TcpUpgrade(System.IO.Stream,RabbitMQ.Client.SslOption)">
+            <summary>
+            Upgrade a Tcp stream to an Ssl stream using the SSL options provided.
+            </summary>
+        </member>
         <member name="T:RabbitMQ.Client.SslOption">
             <summary>
             Represents a configurable SSL option, used in setting up an SSL connection.
@@ -3481,6 +3611,11 @@
             Constructs an <see cref="T:RabbitMQ.Client.SslOption"/> with no parameters set.
             </summary>
         </member>
+        <member name="P:RabbitMQ.Client.SslOption.AcceptablePolicyErrors">
+            <summary>
+            Retrieve or set the set of ssl policy errors that are deemed acceptable.
+            </summary>
+        </member>
         <member name="P:RabbitMQ.Client.SslOption.CertPassphrase">
             <summary>
             Retrieve or set the path to client certificate.
@@ -3489,6 +3624,25 @@
         <member name="P:RabbitMQ.Client.SslOption.CertPath">
             <summary>
             Retrieve or set the path to client certificate.
+            </summary>
+        </member>
+        <member name="P:RabbitMQ.Client.SslOption.CertificateSelectionCallback">
+            <summary>
+            An optional client specified SSL certificate selection callback.  If this is not specified,
+            the first valid certificate found will be used.
+            </summary>
+        </member>
+        <member name="P:RabbitMQ.Client.SslOption.CertificateValidationCallback">
+            <summary>
+            An optional client specified SSL certificate validation callback.  If this is not specified,
+            the default callback will be used in conjunction with the <see cref="P:RabbitMQ.Client.SslOption.AcceptablePolicyErrors"/> property to
+            determine if the remote server certificate is valid.
+            </summary>
+        </member>
+        <member name="P:RabbitMQ.Client.SslOption.Certs">
+            <summary>
+            Retrieve or set the X509CertificateCollection containing the client certificate.
+            If no collection is set, the client will attempt to load one from the specified <see cref="P:RabbitMQ.Client.SslOption.CertPath"/>.
             </summary>
         </member>
         <member name="P:RabbitMQ.Client.SslOption.Enabled">
@@ -3500,6 +3654,11 @@
             <summary>
             Retrieve or set server's Canonical Name.
             This MUST match the CN on the Certificate else the SSL connection will fail.
+            </summary>
+        </member>
+        <member name="P:RabbitMQ.Client.SslOption.Version">
+            <summary>
+            Retrieve or set the Ssl protocol version.
             </summary>
         </member>
         <member name="T:RabbitMQ.Client.Content.BasicMessageBuilder">
@@ -4933,9 +5092,10 @@
              Loop only used while quiescing. Use only to cleanly close connection
             </remarks>
         </member>
-        <member name="M:RabbitMQ.Client.Framing.Impl.Connection.HandleApplicationSuspend(System.Object,Windows.ApplicationModel.SuspendingEventArgs)">
+        <member name="M:RabbitMQ.Client.Framing.Impl.Connection.HandleDomainUnload(System.Object,System.EventArgs)">
             <remarks>
-            We need to close the socket, otherwise suspending the application will take the maximum time allowed
+            We need to close the socket, otherwise attempting to unload the domain
+            could cause a CannotUnloadAppDomainException
             </remarks>
         </member>
         <member name="M:RabbitMQ.Client.Framing.Impl.Connection.OnShutdown">
@@ -5243,6 +5403,117 @@
         <member name="T:RabbitMQ.Client.Impl.SyntaxError">
             <summary> Thrown when our peer sends a frame that contains
             illegal values for one or more fields. </summary>
+        </member>
+        <member name="T:RabbitMQ.Client.TcpClientAdapter">
+            <summary>
+            Simple wrapper around TcpClient.
+            </summary>
+        </member>
+        <member name="T:RabbitMQ.Client.TunneledTcpClient">
+            <summary>
+            TCP-Client with support for http tunnel through http proxy server
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.TunneledTcpClient.#ctor(System.Net.Sockets.AddressFamily,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Constructor.  
+            </summary>
+            <param name="proxyHost">Host name or IP address of the proxy server.</param>
+            <param name="proxyPort">Port number to connect to the proxy server.</param>
+            <param name="proxyUsername">Username for the proxy server.</param>
+            <param name="proxyPassword">Password for the proxy server.</param>
+        </member>
+        <member name="M:RabbitMQ.Client.TunneledTcpClient.BeginConnect(System.String,System.Int32,System.AsyncCallback,System.Object)">
+            <summary>
+            Open TCP connection through HTTP-Tunnel.
+            </summary>
+            <remarks>Method invokes method 'createConnection' asynchronously.</remarks>
+            <param name="host">Destination host name or IP address.</param>
+            <param name="port">Port number to connect to on the destination host.</param>
+            <param name="requestCallback">Callback</param>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RabbitMQ.Client.TunneledTcpClient.createConnection(System.String,System.Int32,System.Net.Sockets.AddressFamily,RabbitMQ.Client.TunneledTcpClient.ProxyInfos)">
+            <summary>
+            Creates a remote TCP connection through a proxy server to the destination host on the destination port.
+            </summary>
+            <param name="destinationHost">Destination host name or IP address.</param>
+            <param name="destinationPort">Port number to connect to on the destination host.</param>
+            <param name="addressFamily">AdressFamliy for tcp client. Currently ignored.</param>
+            <param name="proxyInfos">Dto for all container infos</param>
+            <returns>
+            Returns an open TcpClient object that can be used normally to communicate
+            with the destination server
+            </returns>
+            <remarks>
+            This method creates a connection to the proxy server and instructs the proxy server
+            to make a pass through connection to the specified destination host on the specified
+            port.  
+            </remarks>
+        </member>
+        <member name="T:RabbitMQ.Client.TunneledTcpClient.ProxyInfos">
+            <summary>
+            Container for proxy related information
+            </summary>
+        </member>
+        <member name="T:RabbitMQ.Client.TunneledTcpClient.HttpResponse">
+            <summary>
+            Simple container for response message
+            </summary>
+        </member>
+        <member name="T:RabbitMQ.Client.TunneledTcpClient.CreateConnectionAsyncCompletedEventArgs">
+            <summary>
+            Event arguments class for the EncryptAsyncCompleted event.
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.TunneledTcpClient.CreateConnectionAsyncCompletedEventArgs.#ctor(System.Exception,System.Boolean,System.Net.Sockets.TcpClient)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="error">Exception information generated by the event.</param>
+            <param name="cancelled">Cancelled event flag.  This flag is set to true if the event was cancelled.</param>
+            <param name="proxyConnection">Proxy Connection.  The initialized and open TcpClient proxy connection.</param>
+        </member>
+        <member name="P:RabbitMQ.Client.TunneledTcpClient.CreateConnectionAsyncCompletedEventArgs.TcpClient">
+            <summary>
+            The proxy connection.
+            </summary>
+        </member>
+        <member name="T:RabbitMQ.Client.TunneledTcpClient.ProxyException">
+            <summary>
+            This exception is thrown when a general, unexpected proxy error.   
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.TunneledTcpClient.ProxyException.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.TunneledTcpClient.ProxyException.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="message">Exception message text.</param>
+        </member>
+        <member name="M:RabbitMQ.Client.TunneledTcpClient.ProxyException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="message">Exception message text.</param>
+            <param name="innerException">The inner exception object.</param>
+        </member>
+        <member name="M:RabbitMQ.Client.TunneledTcpClient.ProxyException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="info">Serialization information.</param>
+            <param name="context">Stream context information.</param>
+        </member>
+        <member name="T:RabbitMQ.Client.TunneledTcpClient.Utils">
+            <summary>
+            Collection of helper methods
+            </summary>
         </member>
         <member name="T:RabbitMQ.Client.Impl.UnexpectedFrameException">
             <summary>
@@ -5853,7 +6124,7 @@
             </para>
             <para>
              Once created, the Subscription consumes from a queue (using a
-             QueueingBasicConsumer). Received deliveries can be retrieved
+             EventingBasicConsumer). Received deliveries can be retrieved
              by calling Next(), or by using the Subscription as an
              IEnumerator in, for example, a foreach loop.
             </para>
@@ -6122,6 +6393,9 @@
             Not part of the public API.
             </remarks>
         </member>
+        <member name="M:RabbitMQ.Util.DebugUtil.Dump(System.Byte[])">
+            <summary>Print a hex dump of the supplied bytes to stdout.</summary>
+        </member>
         <member name="M:RabbitMQ.Util.DebugUtil.Dump(System.Byte[],System.IO.TextWriter)">
             <summary>Print a hex dump of the supplied bytes to the supplied TextWriter.</summary>
         </member>
@@ -6346,11 +6620,6 @@
             EndOfStreamException.
             </remarks>
         </member>
-        <member name="M:RabbitMQ.Util.SharedQueue`1.DequeueAsync">
-            <summary>
-            Asynchronously retrieves the first item from the queue.
-            </summary>
-        </member>
         <member name="M:RabbitMQ.Util.SharedQueue`1.Dequeue(System.Int32,`0@)">
             <summary>Retrieve the first item from the queue, or return
             nothing if no items are available after the given
@@ -6448,36 +6717,27 @@
             this method always throws
             InvalidOperationException.</summary>
         </member>
-        <member name="T:RabbitMQ.Client.Impl.SocketFrameHandler">
-            <summary>
-            Implement <see cref="T:RabbitMQ.Client.Impl.IFrameHandler"/> for WinRT.  The significant
-            difference is that TcpClient is not available and the new
-            <see cref="T:Windows.Networking.Sockets.StreamSocket"/> needs to be used.
-            </summary>
+        <member name="T:RabbitMQ.Util.XmlUtil">
+            <summary>Miscellaneous helpful XML utilities.</summary>
         </member>
-        <member name="T:RabbitMQ.Util.SortedList`2">
-            <summary>
-             Represents a collection of associated keys and values
-             that are sorted by the keys and are accessible by key
-             and by index.
-            </summary>
+        <member name="M:RabbitMQ.Util.XmlUtil.#ctor">
+            <summary>Private constructor - this class has no instances</summary>
         </member>
-        <member name="T:System.Threading.Timer">
-            <summary>
-            Provides a mechanism for executing a method at specified intervals.  Adapts to <see cref="T:Windows.System.Threading.ThreadPoolTimer"/> on Windows 8+ platforms.
-            </summary>
+        <member name="M:RabbitMQ.Util.XmlUtil.CreateIndentedXmlWriter">
+            <summary>Constructs an indenting XmlTextWriter that writes to a
+            fresh MemoryStream.</summary>
         </member>
-        <member name="M:System.Threading.Timer.Change(System.Int32,System.Int32)">
-            <summary>
-            Changes the start time and the interval between method invocations for a timer, using 32-bit signed integers to measure time intervals.
-            </summary>
-            <param name="dueTime">
-            The amount of time to delay before the invoking the callback method specified when the Timer was constructed, in milliseconds. Specify Timeout.Infinite to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. 
-            </param>
-            <param name="period">
-            The time interval between invocations of the callback method specified when the Timer was constructed, in milliseconds. Specify Timeout.Infinite to disable periodic signaling.
-            </param>
-            <returns>true if the timer was successfully updated; otherwise, false.</returns>
+        <member name="M:RabbitMQ.Util.XmlUtil.CreateIndentedXmlWriter(System.IO.Stream)">
+            <summary>Constructs an indenting XmlTextWriter that writes to
+            the supplied stream.</summary>
+        </member>
+        <member name="M:RabbitMQ.Util.XmlUtil.CreateIndentedXmlWriter(System.String)">
+            <summary>Constructs an indenting XmlTextWriter that writes to
+            the supplied file name.</summary>
+        </member>
+        <member name="M:RabbitMQ.Util.XmlUtil.SerializeObject(System.Type,System.Object)">
+            <summary>Serializes an arbitrary serializable object to an
+            XML document.</summary>
         </member>
     </members>
 </doc>
