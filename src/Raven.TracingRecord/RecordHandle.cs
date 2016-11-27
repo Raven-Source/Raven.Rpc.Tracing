@@ -46,7 +46,7 @@ namespace Raven.TracingRecord
         TraceLogsRep traceLogsRep;
 
         public RecordHandle(string serverName)
-            : base(serverName, 5000)
+            : base(serverName, 1000)
         {
             RabbitMQConfig rabbitMQConfig = new RabbitMQConfig("RabbitMQ_RavenLogs");
             rabbitMQOptions = new Raven.MessageQueue.WithRabbitMQ.Options()
@@ -70,7 +70,10 @@ namespace Raven.TracingRecord
             try
             {
                 //json序列化后，日期为字符串，进mongodb数据库有问题
-                var list = rabbitMQClient.ReceiveBatch<Raven.TracingRecord.Models.TraceLos_Temp>(Config.TraceLogsQueueName);
+
+                Console.WriteLine("ReceiveBatch:{0}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"));
+                var list = rabbitMQClient.ReceiveBatch<Raven.TracingRecord.Models.TraceLos_Temp>(Config.TraceLogsQueueName, noAck: true);
+                Console.WriteLine("ReceiveBatch End:{0}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"));
                 var logs = new List<MongoDB.Bson.BsonDocument>();
 
                 if (list != null && list.Count > 0)
@@ -101,7 +104,9 @@ namespace Raven.TracingRecord
                     }
 
 
+                    Console.WriteLine("InsertBatch:{0}, Count:{1}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"), logs.Count);
                     traceLogsRep.InsertBatch(logs);
+                    Console.WriteLine("InsertBatch End:{0}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"));
                 }
 
                 //var list = rabbitMQClient.ReceiveBatch<ServerRSLogs>(Config.TraceServerRSQueueName);

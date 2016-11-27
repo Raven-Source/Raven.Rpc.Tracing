@@ -23,6 +23,19 @@
             a frame handler, and automatic recovery settings.
             </summary>
         </member>
+        <member name="M:RabbitMQ.Client.IProtocol.CreateConnection(RabbitMQ.Client.IConnectionFactory,System.Boolean,RabbitMQ.Client.Impl.IFrameHandler,System.String)">
+            <summary>
+            Construct a connection from a given set of parameters,
+            a frame handler, a client-provided name, and no automatic recovery.
+            The "insist" parameter is passed on to the AMQP connection.open method.
+            </summary>
+        </member>
+        <member name="M:RabbitMQ.Client.IProtocol.CreateConnection(RabbitMQ.Client.ConnectionFactory,RabbitMQ.Client.Impl.IFrameHandler,System.Boolean,System.String)">
+            <summary>
+            Construct a connection from a given set of parameters,
+            a frame handler, a client-provided name, and automatic recovery settings.
+            </summary>
+        </member>
         <member name="M:RabbitMQ.Client.IProtocol.CreateFrameHandler(RabbitMQ.Client.AmqpTcpEndpoint,System.Func{System.Net.Sockets.AddressFamily,RabbitMQ.Client.ITcpClient},System.Int32,System.Int32,System.Int32)">
             <summary>
              Construct a frame handler for a given endpoint.
@@ -2235,11 +2248,35 @@
             Create a connection to the specified endpoint.
             </summary>
         </member>
+        <member name="M:RabbitMQ.Client.IConnectionFactory.CreateConnection(System.String)">
+            <summary>
+            Create a connection to the specified endpoint.
+            </summary>
+            <param name="clientProvidedName">        /// Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
+            </param>
+            <returns></returns>
+        </member>
         <member name="M:RabbitMQ.Client.IConnectionFactory.CreateConnection(System.Collections.Generic.IList{System.String})">
             <summary>
             Connects to the first reachable hostname from the list.
             </summary>
             <param name="hostnames">List of host names to use</param>
+            <returns></returns>
+        </member>
+        <member name="M:RabbitMQ.Client.IConnectionFactory.CreateConnection(System.Collections.Generic.IList{System.String},System.String)">
+            <summary>
+            Connects to the first reachable hostname from the list.
+            </summary>
+            <param name="hostnames">List of host names to use</param>
+            <param name="clientProvidedName">
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
+            </param>
             <returns></returns>
         </member>
         <member name="P:RabbitMQ.Client.IConnectionFactory.ClientProperties">
@@ -2283,11 +2320,11 @@
             </summary>
         </member>
         <member name="P:RabbitMQ.Client.IConnectionFactory.TaskScheduler">
-            <summary>
-            Advanced option.
+             <summary>
+             Advanced option.
             
-            What task scheduler should consumer dispatcher use.
-            </summary>
+             What task scheduler should consumer dispatcher use.
+             </summary>
         </member>
         <member name="P:RabbitMQ.Client.IConnectionFactory.HandshakeContinuationTimeout">
             <summary>
@@ -2427,6 +2464,20 @@
             When the configured hostname was not reachable.
             </exception>
         </member>
+        <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.String)">
+            <summary>
+            Create a connection to the specified endpoint.
+            </summary>
+            <param name="clientProvidedName">
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
+            </param>
+            <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
+            When the configured hostname was not reachable.
+            </exception>
+        </member>
         <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.Collections.Generic.IList{System.String})">
             <summary>
             Create a connection using a list of hostnames. The first reachable
@@ -2436,6 +2487,63 @@
             <param name="hostnames">
             List of hostnames to use for the initial
             connection and recovery.
+            </param>
+            <returns>Open connection</returns>
+            <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
+            When no hostname was reachable.
+            </exception>
+        </member>
+        <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.Collections.Generic.IList{System.String},System.String)">
+            <summary>
+            Create a connection using a list of hostnames. The first reachable
+            hostname will be used initially. Subsequent hostname picks are determined
+            by the <see cref="T:RabbitMQ.Client.IHostnameSelector"/> configured.
+            </summary>
+            <param name="hostnames">
+            List of hostnames to use for the initial
+            connection and recovery.
+            </param>
+            <param name="clientProvidedName">
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
+            </param>
+            <returns>Open connection</returns>
+            <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
+            When no hostname was reachable.
+            </exception>
+        </member>
+        <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.Collections.Generic.IList{RabbitMQ.Client.AmqpTcpEndpoint})">
+            <summary>
+            Create a connection using a list of hostnames. The first reachable
+            hostname will be used initially. Subsequent hostname picks are determined
+            by the <see cref="T:RabbitMQ.Client.IHostnameSelector"/> configured.
+            </summary>
+            <param name="endpoints">
+            List of endpoints to use for the initial
+            connection and recovery.
+            </param>
+            <returns>Open connection</returns>
+            <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
+            When no hostname was reachable.
+            </exception>
+        </member>
+        <member name="M:RabbitMQ.Client.ConnectionFactory.CreateConnection(System.Collections.Generic.IList{RabbitMQ.Client.AmqpTcpEndpoint},System.String)">
+            <summary>
+            Create a connection using a list of hostnames. The first reachable
+            hostname will be used initially. Subsequent hostname picks are determined
+            by the <see cref="T:RabbitMQ.Client.IHostnameSelector"/> configured.
+            </summary>
+            <param name="endpoints">
+            List of endpoints to use for the initial
+            connection and recovery.
+            </param>
+            <param name="clientProvidedName">
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
             </param>
             <returns>Open connection</returns>
             <exception cref="T:RabbitMQ.Client.Exceptions.BrokerUnreachableException">
@@ -2527,11 +2635,8 @@
             </summary>
             <remarks>
             Note that the "Handle*" methods run in the connection's thread!
-            Consider using <see cref="T:RabbitMQ.Client.QueueingBasicConsumer"/>,  which uses a
-            <see cref="T:RabbitMQ.Util.SharedQueue"/> instance to safely pass received messages across
-            to user threads, or  RabbitMQ.Client.MessagePatterns.Subscription,
-             which manages resource declaration and binding in addition to providing a
-            thread-safe interface.
+            Consider using <see cref="T:RabbitMQ.Client.Events.EventingBasicConsumer"/>,  which exposes
+            events that can be subscribed to consumer messages.
             </remarks>
         </member>
         <member name="T:RabbitMQ.Client.IBasicConsumer">
@@ -3039,6 +3144,14 @@
             <summary>
             Returns the list of <see cref="T:RabbitMQ.Client.ShutdownReportEntry"/> objects that contain information
             about any errors reported while closing the connection in the order they appeared
+            </summary>
+        </member>
+        <member name="P:RabbitMQ.Client.IConnection.ClientProvidedName">
+            <summary>
+            Application-specific connection name, will be displayed in the management UI
+            if RabbitMQ server supports it. This value doesn't have to be unique and cannot
+            be used as a connection identifier, e.g. in HTTP API requests.
+            This value is supposed to be human-readable.
             </summary>
         </member>
         <member name="E:RabbitMQ.Client.IConnection.CallbackException">
@@ -5293,7 +5406,7 @@
         </member>
         <member name="T:RabbitMQ.Client.TcpClientAdapter">
             <summary>
-            Simple wrapper around TcpClient. 
+            Simple wrapper around TcpClient.
             </summary>
         </member>
         <member name="T:RabbitMQ.Client.TunneledTcpClient">
@@ -6011,7 +6124,7 @@
             </para>
             <para>
              Once created, the Subscription consumes from a queue (using a
-             QueueingBasicConsumer). Received deliveries can be retrieved
+             EventingBasicConsumer). Received deliveries can be retrieved
              by calling Next(), or by using the Subscription as an
              IEnumerator in, for example, a foreach loop.
             </para>

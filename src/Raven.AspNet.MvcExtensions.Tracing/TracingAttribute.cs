@@ -72,7 +72,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     string val = filterContext.HttpContext.Request.Headers[Config.ResponseHeaderFolderKey];
                     if (!string.IsNullOrWhiteSpace(val))
                     {
-                        trace.InvokeID = val.FirstOrDefault() + trace.InvokeID;
+                        trace.InvokeID = val + trace.InvokeID;
                     }
                     
                     TraceExtensionOnActionExecuting(filterContext, trace);
