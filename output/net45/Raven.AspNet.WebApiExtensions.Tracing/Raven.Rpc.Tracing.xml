@@ -502,5 +502,10 @@
             <param name="ex"></param>
             <returns></returns>
         </member>
+        <member name="M:Raven.Rpc.Tracing.Util.SetThreadPool">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>
