@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Raven.Rpc.Tracing
@@ -151,6 +152,25 @@ namespace Raven.Rpc.Tracing
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void SetThreadPool()
+        {
+            int workerThreads, completionPortThreads;
+            ThreadPool.GetMinThreads(out workerThreads, out completionPortThreads);
+            if (workerThreads < defaultMinThreads)
+            {
+                workerThreads = defaultMinThreads;
+            }
+            if (completionPortThreads < defaultMinThreads)
+            {
+                completionPortThreads = defaultMinThreads;
+            }
+            ThreadPool.SetMinThreads(workerThreads, completionPortThreads);
+        }
+
+        private static int defaultMinThreads = Environment.ProcessorCount * 6 + 2;
 
         //public static string GetServerAddress(HttpRequestMessage request)
         //{

@@ -1,6 +1,7 @@
 ﻿using Owin;
 using Raven.Rpc.Tracing.Record;
 using Raven.Rpc.Tracing.ContextData;
+using System.Threading;
 
 namespace Raven.Rpc.Tracing.Owin
 {
@@ -20,6 +21,8 @@ namespace Raven.Rpc.Tracing.Owin
             ServiceContainer.Register<IHttpContextHelper>(new HttpContextHelper());
             ServiceContainer.Register<ITracingRecord>(tracingRecord);
             ServiceContainer.Register<IInitRequestScopeContext>(new InitRequestScopeContext());
+
+            Util.SetThreadPool();
         }
 
         /// <summary>
@@ -33,5 +36,5 @@ namespace Raven.Rpc.Tracing.Owin
         }
     }
 
-    
+
 }

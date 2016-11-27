@@ -26,6 +26,8 @@ namespace Raven.Rpc.Tracing.WebHost
             ServiceContainer.Register<IHttpContextHelper>(new HttpContextHelper());
             ServiceContainer.Register<ITracingRecord>(tracingRecord);
             ServiceContainer.Register<IInitRequestScopeContext>(new InitRequestScopeContext());
+
+            Util.SetThreadPool();
         }
 
     }
