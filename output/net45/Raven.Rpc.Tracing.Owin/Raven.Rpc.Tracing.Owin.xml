@@ -9,12 +9,15 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.Tracing.Owin.AppBuilderExtension.UseTracingContext(Owin.IAppBuilder,Raven.Rpc.Tracing.Record.ITracingRecord)">
+        <member name="M:Raven.Rpc.Tracing.Owin.AppBuilderExtension.UseTracingContext(Owin.IAppBuilder,Raven.Rpc.Tracing.Record.ITracingRecord,System.String,System.String,System.String)">
             <summary>
             
             </summary>
             <param name="app"></param>
             <param name="tracingRecord"></param>
+            <param name="systemID"></param>
+            <param name="systemName"></param>
+            <param name="environment"></param>
         </member>
         <member name="M:Raven.Rpc.Tracing.Owin.AppBuilderExtension.UseRequestScopeContext(Owin.IAppBuilder)">
             <summary>
@@ -28,7 +31,7 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.Tracing.Owin.HttpContextHelper.GetHttpContextItem``1(System.String)">
+        <member name="M:Raven.Rpc.Tracing.Owin.HttpContextHelper.GetContextItem``1(System.String)">
             <summary>
             获取 HttpContextItem
             </summary>
@@ -36,7 +39,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.Tracing.Owin.HttpContextHelper.SetHttpContextItem(System.String,System.Object)">
+        <member name="M:Raven.Rpc.Tracing.Owin.HttpContextHelper.SetContextItem(System.String,System.Object)">
             <summary>
             设置 HttpContextItem
             </summary>

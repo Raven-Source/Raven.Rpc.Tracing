@@ -14,7 +14,7 @@ namespace Raven.Rpc.Tracing.WebHost
     /// <summary>
     /// 
     /// </summary>
-    public class HttpContextHelper : IHttpContextHelper
+    public class HttpContextHelper : ITracingContextHelper
     {
         /// <summary>
         /// 获取 HttpContextItem
@@ -22,7 +22,7 @@ namespace Raven.Rpc.Tracing.WebHost
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public T GetHttpContextItem<T>(string key)
+        public T GetContextItem<T>(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 return default(T);
@@ -49,7 +49,7 @@ namespace Raven.Rpc.Tracing.WebHost
         /// </summary>
         /// <param name="key"></param>
         /// <param name="val"></param>
-        public void SetHttpContextItem(string key, object val)
+        public void SetContextItem(string key, object val)
         {
             if (string.IsNullOrWhiteSpace(key) || RequestScopeContext.Current == null)
                 return;

@@ -16,7 +16,22 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 
         /// </summary>
-        public const string TraceLogsQueueName = "raven_trace_logs";
+        public const string TraceLogsQueueNameV1 = "raven_trace_logs";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string TraceLogsQueueName = "raven_trace_logsv2";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string SystemLogsQueueName = "raven_sys_logs";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string ServerRSKey = "__raven_ServerRS";
+
+        #region TraceLogs Extensions
 
         /// <summary>
         /// 
@@ -37,11 +52,9 @@ namespace Raven.Rpc.Tracing
         /// </summary>
         public const string ResultKey = "Result";
 
+        #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string ServerRSKey = "__raven_ServerRS";
+        #region ResponseHeader
 
         /// <summary>
         /// 
@@ -52,5 +65,13 @@ namespace Raven.Rpc.Tracing
         /// 
         /// </summary>
         public const string ResponseHeaderFolderKey = "R-RootFolder";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string ResponseHeaderNonTracingKey = "R-NonTracing";
+
+        #endregion
+
     }
 }

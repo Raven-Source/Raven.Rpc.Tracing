@@ -33,6 +33,13 @@ namespace Raven.TracingRecord
         }
     }
 
+    public class SystemLogsRep : MongoRepository<SystemLogs, string>
+    {
+        public SystemLogsRep() :
+            base(DBConfig.connString, DBConfig.dbName)
+        { }
+    }
+
     public static class DBConfig
     {
         public static readonly string connString = System.Configuration.ConfigurationManager.AppSettings["MongoDB_RavenLogs"];

@@ -11,11 +11,11 @@ namespace Raven.Rpc.Tracing
     /// <summary>
     /// 
     /// </summary>
-    public static class HttpContextData
+    internal static class TracingContextData
     {
         private const string RequestHeaderKey = "__raven_RequestHeader";
         private const string SubRpcIDKey = "__raven_SubRpcID";
-        //private const string TrackIDKey = "__raven_TrackID";
+        //private const string TraceIDKey = "__raven_TraceID";
 
         /// <summary>
         /// 
@@ -24,7 +24,7 @@ namespace Raven.Rpc.Tracing
         public static Rpc.IContractModel.Header GetRequestHeader()
         {
             //var requestHeader = HttpContext.Current.Items[RequestHeaderKey];
-            var requestHeader = Util.HttpHelper.GetHttpContextItem<Rpc.IContractModel.Header>(RequestHeaderKey);
+            var requestHeader = Util.TracingContextHelper.GetContextItem<Rpc.IContractModel.Header>(RequestHeaderKey);
             if (requestHeader != null)
                 return requestHeader as Rpc.IContractModel.Header;
             else return null;
@@ -36,7 +36,7 @@ namespace Raven.Rpc.Tracing
         /// <param name="header"></param>
         public static void SetRequestHeader(Rpc.IContractModel.Header header)
         {
-            Util.HttpHelper.SetHttpContextItem(RequestHeaderKey, header);
+            Util.TracingContextHelper.SetContextItem(RequestHeaderKey, header);
         }
         
         /// <summary>
@@ -45,11 +45,11 @@ namespace Raven.Rpc.Tracing
         /// <returns></returns>
         public static string GetSubRpcID()
         {
-            var subRpcID = Util.HttpHelper.GetHttpContextItem<string>(SubRpcIDKey);
+            var subRpcID = Util.TracingContextHelper.GetContextItem<string>(SubRpcIDKey);
             if (subRpcID == null)
             {
                 subRpcID = "0";
-                Util.HttpHelper.SetHttpContextItem(SubRpcIDKey, subRpcID);
+                Util.TracingContextHelper.SetContextItem(SubRpcIDKey, subRpcID);
                 //HttpContext.Current.Items[SubRpcIDKey] = subRpcID;
             }
             return subRpcID.ToString();
@@ -61,7 +61,7 @@ namespace Raven.Rpc.Tracing
         /// <param name="val"></param>
         public static void SetSubRpcID(string val)
         {
-            Util.HttpHelper.SetHttpContextItem(SubRpcIDKey, val);
+            Util.TracingContextHelper.SetContextItem(SubRpcIDKey, val);
         }
         
         /// <summary>
@@ -77,20 +77,41 @@ namespace Raven.Rpc.Tracing
             };
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="header"></param>
-        /// <returns></returns>
-        public static Rpc.IContractModel.Header CloneRequestHeader(Rpc.IContractModel.Header header)
-        {
-            return new Rpc.IContractModel.Header()
-            {
-                RpcID = header.RpcID,
-                TraceID = header.TraceID,
-                Token = header.Token,
-            };
-        }
-        
+        //public static void SetTraceID(string val)
+        //{
+        //    Util.TracingContextHelper.SetContextItem(TraceIDKey, val);
+        //}
+
+        ///// <summary>
+        ///// GetTraceID
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetTraceID()
+        //{
+        //    var traceID = Util.TracingContextHelper.GetContextItem<string>(TraceIDKey);
+        //    if (traceID == null)
+        //    {
+        //        traceID = Util.GetUniqueCode32();
+        //        Util.TracingContextHelper.SetContextItem(TraceIDKey, traceID);
+        //        //HttpContext.Current.Items[SubRpcIDKey] = subRpcID;
+        //    }
+        //    return traceID;
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="header"></param>
+        ///// <returns></returns>
+        //public static Rpc.IContractModel.Header CloneRequestHeader(Rpc.IContractModel.Header header)
+        //{
+        //    return new Rpc.IContractModel.Header()
+        //    {
+        //        RpcID = header.RpcID,
+        //        TraceID = header.TraceID,
+        //        Token = header.Token,
+        //    };
+        //}
+
     }
 }

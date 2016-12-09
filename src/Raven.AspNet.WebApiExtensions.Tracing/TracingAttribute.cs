@@ -35,19 +35,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         /// 环境类型
         /// </summary>
         public string environment;
-
-        ///// <summary>
-        ///// 构造函数
-        ///// </summary>
-        ///// <param name="systemID"></param>
-        ///// <param name="systemName"></param>
-        //public TracingAttribute(string systemID = "", string systemName = "")
-        //{
-        //    this.systemID = systemID;
-        //    this.systemName = systemName;
-        //}        
-
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -78,7 +66,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                         }
                     }
                 }
-                if (reqModel == null && actionContext.Request.Content != null && string.Equals(actionContext.Request.Method.Method,"post", StringComparison.CurrentCultureIgnoreCase))
+                if (reqModel == null && actionContext.Request.Content != null && string.Equals(actionContext.Request.Method.Method, "post", StringComparison.CurrentCultureIgnoreCase))
                 {
                     try
                     {
@@ -110,11 +98,11 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 }
                 else
                 {
-                    reqHeader = HttpContextData.GetDefaultRequestHeader();
+                    reqHeader = TracingContextData.GetDefaultRequestHeader();
                     //HttpContentData.SetTrackID(reqHeader.TraceID);
                 }
-                HttpContextData.SetSubRpcID(reqHeader.RpcID + ".0");
-                HttpContextData.SetRequestHeader(reqHeader);
+                TracingContextData.SetSubRpcID(reqHeader.RpcID + ".0");
+                TracingContextData.SetRequestHeader(reqHeader);
                 //HttpContentData.RequestHeader = reqHeader;
 
                 //Not To Log
@@ -122,23 +110,26 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 {
                     TraceLogs trace = new TraceLogs();
                     trace.ContextType = ContextType.Server.ToString();
-                    trace.Environment = this.environment;
                     trace.StartTime = DateTime.Now;
-                    trace.MachineAddr = Util.HttpHelper.GetServerAddress();
+                    trace.MachineAddr = Util.TracingContextHelper.GetServerAddress();
                     trace.TraceId = reqHeader.TraceID;
                     trace.RpcId = reqHeader.RpcID;
-                    trace.ServerHost = actionContext.Request.RequestUri.Host;
                     trace.Protocol = actionContext.Request.RequestUri.Scheme;
 
-                    trace.SystemID = this.systemID;
-                    trace.SystemName = this.systemName;
+                    trace.Environment = this.environment ?? EnvironmentConfig.Environment;
+                    trace.SystemID = this.systemID ?? EnvironmentConfig.SystemID;
+                    trace.SystemName = this.systemName ?? EnvironmentConfig.SystemName;
 
                     //InvokeID
                     trace.InvokeID = request.RequestUri.AbsolutePath;
-                    IEnumerable<string> val;
-                    if (actionContext.Request.Headers.TryGetValues(Config.ResponseHeaderFolderKey, out val))
+                    IEnumerable<string> folder;
+                    if (actionContext.Request.Headers.TryGetValues(Config.ResponseHeaderFolderKey, out folder))
                     {
-                        trace.InvokeID = val.FirstOrDefault() + trace.InvokeID;
+                        trace.ServerHost = actionContext.Request.RequestUri.Host + folder.FirstOrDefault();
+                    }
+                    else
+                    {
+                        trace.ServerHost = actionContext.Request.RequestUri.Host;
                     }
 
                     //SearchKey
@@ -159,7 +150,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
 
                     //ServerRS Log Data TODO
 
-                    Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, trace);
+                    Util.TracingContextHelper.SetContextItem(Config.ServerRSKey, trace);
                 }
             }
 
@@ -193,10 +184,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 if (!actionContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
                     var request = actionExecutedContext.Request;
-                    var trace = Util.HttpHelper.GetHttpContextItem<TraceLogs>(Config.ServerRSKey);
+                    var trace = Util.TracingContextHelper.GetContextItem<TraceLogs>(Config.ServerRSKey);
 
                     trace.EndTime = DateTime.Now;
-                    trace.TimeLength = (trace.EndTime - trace.StartTime).TotalMilliseconds;
+                    trace.TimeLength = Math.Round((trace.EndTime - trace.StartTime).TotalMilliseconds, 4);
                     trace.IsException = false;
                     trace.IsSuccess = true;
 

@@ -37,7 +37,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Rpc.IContractModel.2.1.1\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
+      <HintPath>..\packages\Raven.Rpc.IContractModel.2.2.0\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -81,6 +81,7 @@
     <Compile Include="TracingAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

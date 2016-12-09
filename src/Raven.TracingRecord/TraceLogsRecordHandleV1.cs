@@ -17,13 +17,13 @@ using System.Threading.Tasks;
 namespace Raven.TracingRecord
 {
 
-    public class RecordHandle : Handle
+    public class TraceLogsRecordHandleV1 : Handle
     {
         #region GetInstance
 
-        private static Lazy<RecordHandle> _instance = new Lazy<RecordHandle>(() => new RecordHandle("Raven.TracingRecord"));
+        private static Lazy<TraceLogsRecordHandleV1> _instance = new Lazy<TraceLogsRecordHandleV1>(() => new TraceLogsRecordHandleV1("Raven.TracingRecord"));
 
-        public static RecordHandle GetInstance
+        public static TraceLogsRecordHandleV1 GetInstance
         {
             get { return _instance.Value; }
         }
@@ -36,29 +36,15 @@ namespace Raven.TracingRecord
             {
                 return ProcessResetAwardData;
             }
-        }
-
-        Options rabbitMQOptions;
-        RabbitMQClient rabbitMQClient;
+        }        
 
         //ServerRSLogsRep serverRSlogRep;
         //ClientSRLogsRep clientSRlogRep;
         TraceLogsRep traceLogsRep;
 
-        public RecordHandle(string serverName)
-            : base(serverName, 1000)
+        public TraceLogsRecordHandleV1(string serverName)
+            : base(serverName, 100)
         {
-            RabbitMQConfig rabbitMQConfig = new RabbitMQConfig("RabbitMQ_RavenLogs");
-            rabbitMQOptions = new Raven.MessageQueue.WithRabbitMQ.Options()
-            {
-                SerializerType = SerializerType.NewtonsoftJson,
-                HostName = rabbitMQConfig.hostName,
-                Password = rabbitMQConfig.password,
-                UserName = rabbitMQConfig.username,
-                //MaxQueueCount = 100000,
-                Loger = new Loger()
-            };
-            rabbitMQClient = RabbitMQClient.GetInstance(rabbitMQOptions);
             traceLogsRep = new TraceLogsRep();
         }
 
@@ -72,7 +58,7 @@ namespace Raven.TracingRecord
                 //json序列化后，日期为字符串，进mongodb数据库有问题
 
                 Console.WriteLine("ReceiveBatch:{0}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"));
-                var list = rabbitMQClient.ReceiveBatch<Raven.TracingRecord.Models.TraceLos_Temp>(Config.TraceLogsQueueName, noAck: true);
+                var list = RabbitMQClientManager.GetInstance.rabbitMQClient.ReceiveBatch<Raven.TracingRecord.Models.TraceLos_Temp>(Config.TraceLogsQueueNameV1, noAck: true);
                 Console.WriteLine("ReceiveBatch End:{0}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"));
                 var logs = new List<MongoDB.Bson.BsonDocument>();
 

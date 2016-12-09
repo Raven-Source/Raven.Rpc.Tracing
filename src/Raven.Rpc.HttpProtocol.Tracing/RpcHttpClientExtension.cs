@@ -15,6 +15,8 @@ namespace Raven.Rpc.HttpProtocol.Tracing
     /// </summary>
     public static class RpcHttpClientExtension
     {
+        private const string RpcIDKey = "RpcID";
+        private const string TraceIDKey = "TraceID";
         private static ITracingRecord record = ServiceContainer.Resolve<ITracingRecord>();
         //private static Dictionary<int, Tuple<string, string>> dict = new Dictionary<int, Tuple<string, string>>();
 
@@ -30,191 +32,253 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         {
             RpcHttpClient.OnResponseDelegate onResponse = (response, rpcContext) =>
             {
-                TraceLogs sr = new TraceLogs();
-                sr.IsSuccess = true;
-                sr.IsException = false;
-                sr.SystemID = systemID;
-                sr.SystemName = systemName;
-                sr.Environment = environment;
+                TraceLogs trace = new TraceLogs();
+                trace.IsSuccess = true;
+                trace.IsException = false;
+                trace.SystemID = systemID ?? EnvironmentConfig.SystemID;
+                trace.SystemName = systemName ?? EnvironmentConfig.SystemName;
+                trace.Environment = environment ?? EnvironmentConfig.Environment;
                 if (searchKeyFunc != null)
                 {
-                    sr.SearchKey = searchKeyFunc(rpcContext);
+                    trace.SearchKey = searchKeyFunc(rpcContext);
                 }
 
-                FillClientSR(sr, response.RequestMessage, response, rpcContext);
+                FillClientSR(trace, response.RequestMessage, response, rpcContext);
 
-                Record(sr);
+                Record(trace);
             };
             RpcHttpClient.OnErrorDelegate onError = (ex, request, rpcContext) =>
             {
-                TraceLogs sr = new TraceLogs();
-                sr.IsSuccess = false;
-                sr.IsException = true;
-                sr.SystemID = systemID;
-                sr.SystemName = systemName;
-                FillClientSR(sr, request, null, rpcContext);
+                TraceLogs trace = new TraceLogs();
+                trace.IsSuccess = false;
+                trace.IsException = true;
+                trace.SystemID = systemID ?? EnvironmentConfig.SystemID;
+                trace.SystemName = systemName ?? EnvironmentConfig.SystemName;
+                trace.Environment = environment ?? EnvironmentConfig.Environment;
 
-                sr.Extensions.Add("Exception", Util.GetFullExceptionMessage(ex));
+                FillClientSR(trace, request, null, rpcContext);
 
-                Record(sr);
+                trace.Extensions.Add("Exception", Util.GetFullExceptionMessage(ex));
+
+                Record(trace);
             };
 
 
             client.RequestContentDataHandler -= Client_RequestContentDataHandler;
-            //client.OnRequest -= Client_OnRequest;
+            client.OnRequest -= Client_OnRequest;
             client.OnResponse -= onResponse;
             client.OnError -= onError;
 
             client.RequestContentDataHandler += Client_RequestContentDataHandler;
-            //client.OnRequest += Client_OnRequest;
+            client.OnRequest += Client_OnRequest;
             client.OnResponse += onResponse;
             client.OnError += onError;
 
             //dict[client.GetHashCode()] = new Tuple<string, string>(systemID, systemName);
         }
 
+        private static void Client_OnRequest(HttpRequestMessage request, RpcContext rpcContext)
+        {
+            var rpcId = string.Empty;
+            var requestHeader = TracingContextData.GetRequestHeader();
+            if (requestHeader == null)
+            {
+                requestHeader = TracingContextData.GetDefaultRequestHeader();
+                TracingContextData.SetRequestHeader(requestHeader);
+                //HttpContentData.SetSubRpcID(modelHeader.RpcID + ".0");
+                //rpcId = requestHeader.RpcID + ".0";
+            }
+            //else
+            //{
+            //    rpcId = Util.VersionIncr(TracingContextData.GetSubRpcID());
+            //}
+            rpcId = Util.VersionIncr(TracingContextData.GetSubRpcID());
+            TracingContextData.SetSubRpcID(rpcId);
+
+            rpcContext.Items[TraceIDKey] = requestHeader.TraceID;
+            rpcContext.Items[RpcIDKey] = rpcId;
+
+            //post/put content is ObjectContent
+            var oc = request.Content as ObjectContent;
+            if (oc != null)
+            {
+                var reqModel = oc.Value as IRequestModel<Header>;
+                if (reqModel != null)
+                {
+                    if (reqModel.Header == null)
+                    {
+                        reqModel.Header = new Header();
+                    }
+
+                    reqModel.Header.TraceID = requestHeader.TraceID;
+                    reqModel.Header.RpcID = rpcId;
+                }
+            }
+           
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
         private static void Client_RequestContentDataHandler(ref object data)
         {
+            //var rpcId = string.Empty;
+            //var requestHeader = TracingContextData.GetRequestHeader();
+            //if (requestHeader == null)
+            //{
+            //    requestHeader = TracingContextData.GetDefaultRequestHeader();
+            //    TracingContextData.SetRequestHeader(requestHeader);
+            //    //HttpContentData.SetSubRpcID(modelHeader.RpcID + ".0");
+            //    //rpcId = requestHeader.RpcID + ".0";
+            //}
+            ////else
+            ////{
+            ////    rpcId = Util.VersionIncr(TracingContextData.GetSubRpcID());
+            ////}
+            //rpcId = Util.VersionIncr(TracingContextData.GetSubRpcID());
+            //TracingContextData.SetSubRpcID(rpcId);
+
             if (data == null)
             {
                 data = new RequestModel();
             }
 
-            var reqModel = data as IRequestModel<Header>;
-            if (reqModel != null)
-            {
-                if (reqModel.Header == null)
-                {
-                    reqModel.Header = new Header();
-                }
+            //var reqModel = data as IRequestModel<Header>;
+            //if (reqModel != null)
+            //{
+            //    if (reqModel.Header == null)
+            //    {
+            //        reqModel.Header = new Header();
+            //    }
 
-                var modelHeader = HttpContextData.GetRequestHeader();
-                if (modelHeader == null)
-                {
-                    modelHeader = HttpContextData.GetDefaultRequestHeader();
-                    HttpContextData.SetRequestHeader(modelHeader);
-                    //HttpContentData.SetSubRpcID(modelHeader.RpcID + ".0");
-                    reqModel.Header.RpcID = modelHeader.RpcID + ".0";
-                }
-                else
-                {
-                    reqModel.Header.RpcID = Util.VersionIncr(HttpContextData.GetSubRpcID());
-                }
-                HttpContextData.SetSubRpcID(reqModel.Header.RpcID);
-                reqModel.Header.TraceID = modelHeader.TraceID;
-            }
+            //    reqModel.Header.TraceID = requestHeader.TraceID;
+            //    reqModel.Header.TraceID = rpcId;
+            //}
         }
 
         //private static void Client_OnResponse(HttpResponseMessage response, RpcContext rpcContext)
         //{
-        //    TraceLogs sr = new TraceLogs();
-        //    sr.IsSuccess = true;
-        //    sr.IsException = false;
-        //    FillClientSR(sr, response.RequestMessage, rpcContext);
+        //    TraceLogs trace = new TraceLogs();
+        //    trace.IsSuccess = true;
+        //    trace.IsException = false;
+        //    FillClientSR(trace, response.RequestMessage, rpcContext);
 
-        //    Record(sr);
+        //    Record(trace);
         //}
 
         //private static void Client_OnError(Exception ex, HttpRequestMessage request, RpcContext rpcContext)
         //{
-        //    TraceLogs sr = new TraceLogs();
-        //    sr.IsSuccess = false;
-        //    sr.IsException = true;
-        //    FillClientSR(sr, request, rpcContext);
+        //    TraceLogs trace = new TraceLogs();
+        //    trace.IsSuccess = false;
+        //    trace.IsException = true;
+        //    FillClientSR(trace, request, rpcContext);
 
-        //    sr.Extension.Add("Exception", Util.GetFullExceptionMessage(ex));
+        //    trace.Extension.Add("Exception", Util.GetFullExceptionMessage(ex));
 
-        //    Record(sr);
+        //    Record(trace);
         //}
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sr"></param>
+        /// <param name="trace"></param>
         /// <param name="request"></param>
         /// <param name="response"></param>
         /// <param name="rpcContext"></param>
-        private static void FillClientSR(TraceLogs sr, HttpRequestMessage request, HttpResponseMessage response, RpcContext rpcContext)
+        private static void FillClientSR(TraceLogs trace, HttpRequestMessage request, HttpResponseMessage response, RpcContext rpcContext)
         {
-            sr.ContextType = ContextType.Client.ToString();
-            var modelHeader = HttpContextData.GetRequestHeader();  //raven Request Header
+            trace.ContextType = ContextType.Client.ToString();
+            //var requestHeader = TracingContextData.GetRequestHeader();  //raven Request Header
             var uri = request.RequestUri;
 
             //int index = uri.AbsoluteUri.IndexOf("?");
             //if (index > 0)
             //{
-            //    sr.ServiceMethod = uri.AbsoluteUri.Substring(0, index);
+            //    trace.ServiceMethod = uri.AbsoluteUri.Substring(0, index);
             //}
             //else
             //{
-            //    sr.ServiceMethod = uri.AbsoluteUri;
+            //    trace.ServiceMethod = uri.AbsoluteUri;
             //}
 
-            sr.MachineAddr = Util.HttpHelper.GetServerAddress();
+            trace.MachineAddr = Util.TracingContextHelper.GetServerAddress();
 
-            sr.InvokeID = uri.AbsolutePath;
-            sr.ServerHost = uri.Host;
+            trace.InvokeID = uri.AbsolutePath;
+            trace.ServerHost = uri.Host;
 
-            //sr.Extension.Add(nameof(uri.AbsolutePath), uri.AbsolutePath);
-            sr.Extensions.Add(nameof(uri.PathAndQuery), uri.PathAndQuery);
-            //sr.Extension.Add(nameof(uri.Host), uri.Host);
+            //trace.Extension.Add(nameof(uri.AbsolutePath), uri.AbsolutePath);
+            trace.Extensions.Add(nameof(uri.PathAndQuery), uri.PathAndQuery);
+            //trace.Extension.Add(nameof(uri.Host), uri.Host);
 
-            sr.Extensions.Add(nameof(rpcContext.RequestModel), rpcContext.RequestModel);
-            sr.Extensions.Add(nameof(rpcContext.ResponseModel), rpcContext.ResponseModel);
-            sr.ResponseSize = rpcContext.ResponseSize;
+            trace.Extensions.Add(nameof(rpcContext.RequestModel), rpcContext.RequestModel);
+            trace.Extensions.Add(nameof(rpcContext.ResponseModel), rpcContext.ResponseModel);
+            trace.ResponseSize = rpcContext.ResponseSize;
 
-            sr.Protocol = uri.Scheme;
+            trace.Protocol = uri.Scheme;
 
-            sr.ProtocolHeader.Add("RequestHeaders", new Dictionary<string, string>
+            trace.ProtocolHeader.Add("RequestHeaders", new Dictionary<string, string>
             {
                 { "Accept", request.Headers.Accept.ToString() },
                 { "Accept-Encoding", request.Headers.AcceptEncoding.ToString() },
-                { "Content-Type", request.Content.Headers.ContentType.ToString() },
+                { "Content-Type", request.Content?.Headers?.ContentType?.ToString() },
             });
 
             if (response != null)
             {
-                sr.ProtocolHeader.Add("ResponseHeaders", new Dictionary<string, string>
+                trace.ProtocolHeader.Add("ResponseHeaders", new Dictionary<string, string>
                 {
-                    { "Content-Encoding", response.Content.Headers.ContentEncoding.ToString() },
-                    { "Content-Type", response.Content.Headers.ContentType.ToString() },
+                    { "Content-Encoding", response.Content?.Headers?.ContentEncoding?.ToString() },
+                    { "Content-Type", response.Content?.Headers?.ContentType?.ToString() },
                 });
             }
 
-            //sr.SendSTime = rpcContext.SendStartTime;
-            //sr.ReceiveETime = rpcContext.ReceiveEndTime;
-            //sr.ExceptionTime = rpcContext.ExceptionTime;
-            sr.StartTime = rpcContext.SendStartTime;
+            //trace.SendSTime = rpcContext.SendStartTime;
+            //trace.ReceiveETime = rpcContext.ReceiveEndTime;
+            //trace.ExceptionTime = rpcContext.ExceptionTime;
+            trace.StartTime = rpcContext.SendStartTime;
 
             if (rpcContext.ReceiveEndTime.HasValue)
             {
-                sr.EndTime = rpcContext.ReceiveEndTime.Value;
-                sr.TimeLength = (sr.EndTime - sr.StartTime).TotalMilliseconds;
+                trace.EndTime = rpcContext.ReceiveEndTime.Value;
+                trace.TimeLength = (trace.EndTime - trace.StartTime).TotalMilliseconds;
             }
             else if (rpcContext.ExceptionTime.HasValue)
             {
-                sr.EndTime = rpcContext.ExceptionTime.Value;
-                sr.TimeLength = (sr.EndTime - sr.StartTime).TotalMilliseconds;
+                trace.EndTime = rpcContext.ExceptionTime.Value;
+                trace.TimeLength = (trace.EndTime - trace.StartTime).TotalMilliseconds;
             }
 
-            //sr.TimeLength = sr.ReceiveETime.HasValue ? (sr.ReceiveETime.Value - sr.SendSTime).TotalMilliseconds : 0D;
-            //sr.RpcId = modelHeader.RpcID;
-            var reqModel = rpcContext.RequestModel as IRequestModel<Header>;
-            if (reqModel != null && reqModel.Header != null)
-            {
-                sr.RpcId = reqModel.Header.RpcID;
-            }
+            //trace.TimeLength = trace.ReceiveETime.HasValue ? (trace.ReceiveETime.Value - trace.SendSTime).TotalMilliseconds : 0D;
+            //trace.RpcId = modelHeader.RpcID;
+
+
+
+            //var reqModel = rpcContext.RequestModel as IRequestModel<Header>;
+            //if (reqModel != null && reqModel.Header != null)
+            //{
+            //    trace.RpcId = rpcContext.Items[RpcIDKey].ToString();
+            //}
 
             //if modelHeader is null, create new traceID
-            sr.TraceId = modelHeader != null ? modelHeader.TraceID : Util.GetUniqueCode32();
+            trace.RpcId = rpcContext.Items[RpcIDKey].ToString();
+            trace.TraceId = rpcContext.Items[TraceIDKey].ToString();
 
             if (rpcContext.ResponseModel != null)
             {
                 var resModel = rpcContext.ResponseModel as IResponseModel;
                 if (resModel != null)
                 {
-                    sr.Code = resModel.GetCode();
+                    trace.Code = resModel.GetCode();
                 }
+
+                //SearchKey
+                var searchKey = rpcContext.ResponseModel as ISearchKey;
+                if (searchKey != null)
+                {
+                    trace.SearchKey = searchKey.GetSearchKey();
+                }
+
             }
 
         }
@@ -222,10 +286,10 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sr"></param>
-        private static void Record(TraceLogs sr)
+        /// <param name="trace"></param>
+        private static void Record(TraceLogs trace)
         {
-            record.RecordTraceLog(sr);
+            record.RecordTraceLog(trace);
         }
 
     }

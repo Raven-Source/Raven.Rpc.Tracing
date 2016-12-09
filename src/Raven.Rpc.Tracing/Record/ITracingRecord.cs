@@ -11,14 +11,16 @@ namespace Raven.Rpc.Tracing.Record
     /// </summary>
     public interface ITracingRecord
     {
-        //void RecordClientSR(ClientSR data);
-
-        //void RecordServerRS(ServerRS data);
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="data"></param>
         void RecordTraceLog(TraceLogs data);
+
+        /// <summary>
+        /// 记录系统日志
+        /// </summary>
+        /// <param name="data"></param>
+        void RecordSystemLogs(SystemLogs data);
     }
 }

@@ -70,7 +70,16 @@ namespace Raven.Rpc.Tracing.Record
         /// <param name="data"></param>
         public void RecordTraceLog(TraceLogs data)
         {
-            rabbitMQClient.Send(Config.TraceLogsQueueName, data, true, true);
+            rabbitMQClient.Send(Config.TraceLogsQueueName, data, false, true);
+        }
+
+        /// <summary>
+        /// 记录系统日志
+        /// </summary>
+        /// <param name="data"></param>
+        public void RecordSystemLogs(SystemLogs data)
+        {
+            rabbitMQClient.Send(Config.SystemLogsQueueName, data, false, true);
         }
 
     }

@@ -31,7 +31,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// 环境类型
         /// </summary>
         public string environment;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -45,44 +45,44 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                 var request = filterContext.HttpContext.Request;
                 var response = filterContext.HttpContext.Response;
 
-                Header reqHeader = HttpContextData.GetDefaultRequestHeader();
+                Header reqHeader = TracingContextData.GetDefaultRequestHeader();
 
-                HttpContextData.SetSubRpcID(reqHeader.RpcID + ".0");
-                HttpContextData.SetRequestHeader(reqHeader);
+                TracingContextData.SetSubRpcID(reqHeader.RpcID + ".0");
+                TracingContextData.SetRequestHeader(reqHeader);
 
                 if (!filterContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
                     TraceLogs trace = new TraceLogs();
                     trace.ContextType = ContextType.Server.ToString();
-                    trace.Environment = this.environment;
                     trace.StartTime = DateTime.Now;
-                    trace.MachineAddr = Util.HttpHelper.GetServerAddress();
+                    trace.MachineAddr = Util.TracingContextHelper.GetServerAddress();
                     trace.TraceId = reqHeader.TraceID;
                     trace.RpcId = reqHeader.RpcID;
                     trace.ServerHost = request.Url.Host;
                     trace.Protocol = request.Url.Scheme;
-
-                    trace.SystemID = this.systemID;
-                    trace.SystemName = this.systemName;
+                    
+                    trace.Environment = this.environment ?? EnvironmentConfig.Environment;
+                    trace.SystemID = this.systemID ?? EnvironmentConfig.SystemID;
+                    trace.SystemName = this.systemName ?? EnvironmentConfig.SystemName;
 
                     //srs.InvokeID = string.Format("{0}_{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower(), filterContext.ActionDescriptor.ActionName.ToLower());
 
                     //InvokeID
                     trace.InvokeID = request.Url.AbsolutePath;
-                    string val = filterContext.HttpContext.Request.Headers[Config.ResponseHeaderFolderKey];
-                    if (!string.IsNullOrWhiteSpace(val))
+                    string folder = filterContext.HttpContext.Request.Headers[Config.ResponseHeaderFolderKey];
+                    if (!string.IsNullOrWhiteSpace(folder))
                     {
-                        trace.InvokeID = val + trace.InvokeID;
+                        trace.InvokeID = trace.InvokeID + folder;
                     }
-                    
+
                     TraceExtensionOnActionExecuting(filterContext, trace);
 
-                    Util.HttpHelper.SetHttpContextItem(Config.ServerRSKey, trace);
+                    Util.TracingContextHelper.SetContextItem(Config.ServerRSKey, trace);
                 }
             }
 
             base.OnActionExecuting(filterContext);
-        }        
+        }
 
         /// <summary>
         /// 
@@ -116,10 +116,10 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                 if (!filterContext.HasMarkerAttribute<NotToLogAttribute>())
                 {
                     var request = filterContext.HttpContext.Request;
-                    var trace = Util.HttpHelper.GetHttpContextItem<TraceLogs>(Config.ServerRSKey);
+                    var trace = Util.TracingContextHelper.GetContextItem<TraceLogs>(Config.ServerRSKey);
 
                     trace.EndTime = DateTime.Now;
-                    trace.TimeLength = (trace.EndTime - trace.StartTime).TotalMilliseconds;
+                    trace.TimeLength = Math.Round((trace.EndTime - trace.StartTime).TotalMilliseconds, 4);
                     trace.IsException = false;
                     trace.IsSuccess = true;
 
@@ -167,6 +167,14 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     //}
                     //responseModel.Extension.Add(new Rpc.IContractModel.KeyValue<string, string>(nameof(Raven.Rpc.IContractModel.Header.TraceID), HttpContentData.GetRequestHeader().TraceID));
                 }
+
+                //SearchKey
+                var searchKey = jResult.Data as ISearchKey;
+                if (searchKey != null)
+                {
+                    trace.SearchKey = searchKey.GetSearchKey();
+                }
+
                 trace.Extensions.Add(Config.ResultKey, jResult.Data);
             }
         }

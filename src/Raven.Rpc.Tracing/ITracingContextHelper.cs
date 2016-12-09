@@ -10,7 +10,7 @@ namespace Raven.Rpc.Tracing
     /// <summary>
     /// 
     /// </summary>
-    public interface IHttpContextHelper
+    public interface ITracingContextHelper
     {
         /// <summary>
         /// 获取 HttpContextItem
@@ -18,14 +18,14 @@ namespace Raven.Rpc.Tracing
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        T GetHttpContextItem<T>(string key);
+        T GetContextItem<T>(string key);
 
         /// <summary>
         /// 设置 HttpContextItem
         /// </summary>
         /// <param name="key"></param>
         /// <param name="val"></param>
-        void SetHttpContextItem(string key, object val);
+        void SetContextItem(string key, object val);
 
         /// <summary>
         /// 获取服务地址

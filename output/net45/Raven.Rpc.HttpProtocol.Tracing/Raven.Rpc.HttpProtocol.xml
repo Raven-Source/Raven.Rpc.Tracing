@@ -360,7 +360,7 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.#ctor(System.String,System.String,System.Int32,System.Net.DecompressionMethods)">
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.#ctor(System.String,System.String,System.Int32,System.Net.DecompressionMethods,System.Text.Encoding,System.Net.Http.HttpClientHandler)">
             <summary>
             构造函数
             </summary>
@@ -368,6 +368,8 @@
             <param name="mediaType"></param>
             <param name="timeout">超时时间（毫秒）</param>
             <param name="decompressionMethods"></param>
+            <param name="encoding">默认UTF8</param>
+            <param name="handler">内部调用Dispose</param>
         </member>
         <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.CreateMediaTypeFormatter(System.String)">
             <summary>
@@ -703,13 +705,14 @@
             
             </summary>
             <param name="request">HttpRequestMessage</param>
+            <param name="rpcContext">RpcContext</param>
         </member>
         <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnResponseDelegate">
             <summary>
             
             </summary>
             <param name="response">HttpResponseMessage</param>
-            <param name="rpcContext">rpcContext</param>
+            <param name="rpcContext">RpcContext</param>
         </member>
         <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.OnErrorDelegate">
             <summary>
@@ -717,7 +720,7 @@
             </summary>
             <param name="origEx">original Exception</param>
             <param name="request">HttpResponseMessage</param>
-            <param name="rpcContext">rpcContext</param>
+            <param name="rpcContext">RpcContext</param>
             <returns></returns>
         </member>
         <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.ErrorResponseDelegate">
@@ -725,7 +728,7 @@
             result
             </summary>
             <param name="origEx">original exception</param>
-            <param name="rpcContext">rpcContext</param>
+            <param name="rpcContext">RpcContext</param>
             <returns></returns>
         </member>
         <member name="T:Raven.Rpc.HttpProtocol.RpcHttpClient.DefaultUrlParametersDelegate">
@@ -780,6 +783,11 @@
         <member name="F:Raven.Rpc.HttpProtocol.RpcContext.ExceptionHandled">
             <summary>
             是否已处理异常
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.HttpProtocol.RpcContext.Items">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:Raven.Rpc.HttpProtocol.RpcContext.#ctor">

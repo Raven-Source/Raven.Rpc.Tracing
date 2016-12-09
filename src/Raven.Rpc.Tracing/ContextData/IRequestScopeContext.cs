@@ -11,7 +11,7 @@ namespace Raven.Rpc.Tracing.ContextData
     /// <summary>
     /// 
     /// </summary>
-    public interface IRequestScopeContext
+    internal interface IRequestScopeContext
     {
         /// <summary>
         /// Raw Owin Environment dictionary.
@@ -32,7 +32,7 @@ namespace Raven.Rpc.Tracing.ContextData
     /// <summary>
     /// 
     /// </summary>
-    public class RequestScopeContext : IRequestScopeContext
+    internal class RequestScopeContext : IRequestScopeContext
     {
         /// <summary>
         /// 
@@ -42,7 +42,7 @@ namespace Raven.Rpc.Tracing.ContextData
         /// <summary>
         /// 
         /// </summary>
-        public static IRequestScopeContext Current
+        internal static IRequestScopeContext Current
         {
             get
             {

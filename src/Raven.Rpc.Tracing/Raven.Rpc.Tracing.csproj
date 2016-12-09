@@ -45,7 +45,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Rpc.IContractModel.2.1.1\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
+      <HintPath>..\packages\Raven.Rpc.IContractModel.2.2.0\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Serializer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -75,20 +75,24 @@
     <Compile Include="Config.cs" />
     <Compile Include="ContextData\IInitRequestScopeContext.cs" />
     <Compile Include="ContextData\IRequestScopeContext.cs" />
+    <Compile Include="EnvironmentConfig.cs" />
     <Compile Include="Helpers\DictionaryHelper.cs" />
-    <Compile Include="HttpContextData.cs" />
-    <Compile Include="IHttpHelper.cs" />
+    <Compile Include="TracingContextData.cs" />
+    <Compile Include="ITracingContextHelper.cs" />
     <Compile Include="Models\ContextType.cs" />
-    <Compile Include="Models\ISearchKey.cs" />
+    <Compile Include="Models\LevelEnum.cs" />
+    <Compile Include="Models\SystemLogs.cs" />
     <Compile Include="Models\TraceLogs.cs" />
     <Compile Include="Record\ITracingRecord.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="Record\TracingRecordRabbitmq.cs" />
     <Compile Include="ServiceContainer.cs" />
+    <Compile Include="Helpers\TracingHelper.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

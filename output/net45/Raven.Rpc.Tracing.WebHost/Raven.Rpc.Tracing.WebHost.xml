@@ -9,7 +9,7 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.GetHttpContextItem``1(System.String)">
+        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.GetContextItem``1(System.String)">
             <summary>
             获取 HttpContextItem
             </summary>
@@ -17,7 +17,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.SetHttpContextItem(System.String,System.Object)">
+        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.SetContextItem(System.String,System.Object)">
             <summary>
             设置 HttpContextItem
             </summary>
@@ -47,11 +47,14 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.Tracing.WebHost.TracingConfig.UseTracingContext(Raven.Rpc.Tracing.Record.ITracingRecord)">
+        <member name="M:Raven.Rpc.Tracing.WebHost.TracingConfig.UseTracingContext(Raven.Rpc.Tracing.Record.ITracingRecord,System.String,System.String,System.String)">
             <summary>
             
             </summary>
             <param name="tracingRecord"></param>
+            <param name="systemID"></param>
+            <param name="systemName"></param>
+            <param name="environment"></param>
         </member>
     </members>
 </doc>

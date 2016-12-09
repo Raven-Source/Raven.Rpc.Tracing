@@ -11,7 +11,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.Test.Controllers
     [Tracing]
     public class TestController : ApiController
     {
-        Rpc.HttpProtocol.RpcHttpClient client = new Rpc.HttpProtocol.RpcHttpClient("http://localhost:1688/", timeout:10000000);
+        Rpc.HttpProtocol.RpcHttpClient client = new Rpc.HttpProtocol.RpcHttpClient("http://localhost:1688/", timeout: 10000000);
 
         // GET api/values/5
         [HttpGet]
@@ -28,7 +28,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.Test.Controllers
         public ResponseModel<string> Get2()
         {
             client.RegistTracing();
-            var res = client.Invoke<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get3", new Rpc.IContractModel.RequestModel());
+            var res = client.Invoke<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get3", httpMethod: HttpMethod.Get);
             return new ResponseModel<string>() { Data = Guid.NewGuid().ToString() };
         }
 

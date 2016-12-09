@@ -50,9 +50,9 @@
             
             </summary>
         </member>
-        <member name="P:Raven.Rpc.IContractModel.Header.Source">
+        <member name="P:Raven.Rpc.IContractModel.Header.Version">
             <summary>
-            
+            Version
             </summary>
         </member>
         <member name="T:Raven.Rpc.IContractModel.IResponseModel">
@@ -137,6 +137,17 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Raven.Rpc.IContractModel.ISearchKey">
+            <summary>
+            ISearchKey
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.IContractModel.ISearchKey.GetSearchKey">
+            <summary>
+            GetSearchKey
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Raven.Rpc.IContractModel.KeyValue`2">
             <summary>

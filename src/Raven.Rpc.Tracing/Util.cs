@@ -1,4 +1,5 @@
 ﻿
+using Raven.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +15,22 @@ namespace Raven.Rpc.Tracing
     /// </summary>
     public static class Util
     {
-
-        private static Lazy<IHttpContextHelper> _httpHelper = new Lazy<IHttpContextHelper>(() => ServiceContainer.Resolve<IHttpContextHelper>());
+        private static Lazy<ITracingContextHelper> _tracingContextHelper = new Lazy<ITracingContextHelper>(() => ServiceContainer.Resolve<ITracingContextHelper>());
         /// <summary>
         /// 
         /// </summary>
-        public static IHttpContextHelper HttpHelper
+        public static ITracingContextHelper TracingContextHelper
         {
             get
             {
-                return _httpHelper.Value;
+                return _tracingContextHelper.Value;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private static IDataSerializer serializer = Raven.Serializer.SerializerFactory.Create(SerializerType.NewtonsoftJson);
 
         ///// <summary>
         ///// 注册
@@ -148,7 +153,7 @@ namespace Raven.Rpc.Tracing
             {
                 sb.Append(GetFullExceptionMessage(ex.InnerException));
             }
-            
+
             return sb.ToString();
         }
 
@@ -181,5 +186,21 @@ namespace Raven.Rpc.Tracing
         //    }
         //}
 
+        /// <summary>
+        /// 深拷贝
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static T Clone<T>(T obj)
+        {
+            if (obj != null)
+            {
+                var _temp = serializer.Serialize(obj);
+                var res = serializer.Deserialize<T>(_temp);
+                return res;
+            }
+            return default(T);
+        }
     }
 }

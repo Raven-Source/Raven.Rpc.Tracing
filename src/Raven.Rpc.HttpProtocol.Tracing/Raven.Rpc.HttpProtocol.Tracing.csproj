@@ -35,12 +35,12 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Rpc.HttpProtocol.2.1.1\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
+    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Rpc.HttpProtocol.2.2.0\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Rpc.IContractModel.2.1.1\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
+      <HintPath>..\packages\Raven.Rpc.IContractModel.2.2.0\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Serializer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -62,10 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RpcHttpClientExtension.cs" />
-    <Compile Include="TracingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

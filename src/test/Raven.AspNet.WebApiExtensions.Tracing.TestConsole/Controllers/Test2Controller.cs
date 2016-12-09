@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Raven.Rpc.HttpProtocol.Tracing;
 using Raven.Rpc.IContractModel;
+using System.Net.Http;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
 {
@@ -15,14 +16,16 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
 
         // GET api/values/5
         [HttpGet]
-        public ResponseModel<User> Get()
+        public async Task<ResponseModel<User>> Get()
         {
             client.RegistTracing();
 
             ResponseModel<string> res;
-            res = client.Invoke<RequestModel, ResponseModel<string>>("api/test/get2", new Rpc.IContractModel.RequestModel());
+            res = await client.InvokeAsync<RequestModel, ResponseModel<string>>("api/test/get2", new Rpc.IContractModel.RequestModel());
+            res = client.InvokeAsync<RequestModel, ResponseModel<string>>("api/test/get3", new Rpc.IContractModel.RequestModel()).Result;
 
-            res = client.Invoke<RequestModel, ResponseModel<string>>("api/test/get3", new Rpc.IContractModel.RequestModel());
+            HttpClient client2 = new HttpClient();
+            var res2 = client2.GetAsync("api/test/get3").Result;
 
             return new ResponseModel<User>() { Data = new User { Name = "ResponseModel-Get", Desc = res.Data }, Code = 123 };
         }

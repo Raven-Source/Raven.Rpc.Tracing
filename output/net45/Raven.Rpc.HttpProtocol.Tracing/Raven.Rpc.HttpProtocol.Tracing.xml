@@ -19,11 +19,17 @@
             <param name="environment">环境</param>
             <param name="searchKeyFunc">keyFunc</param>
         </member>
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.Client_RequestContentDataHandler(System.Object@)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
         <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.FillClientSR(Raven.Rpc.Tracing.TraceLogs,System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage,Raven.Rpc.HttpProtocol.RpcContext)">
             <summary>
             
             </summary>
-            <param name="sr"></param>
+            <param name="trace"></param>
             <param name="request"></param>
             <param name="response"></param>
             <param name="rpcContext"></param>
@@ -32,18 +38,7 @@
             <summary>
             
             </summary>
-            <param name="sr"></param>
-        </member>
-        <member name="T:Raven.Rpc.HttpProtocol.Tracing.TracingHandler">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Raven.Rpc.HttpProtocol.Tracing.TracingHandler.RegistTracing(System.Object@)">
-            <summary>
-            
-            </summary>
-            <param name="data"></param>
+            <param name="trace"></param>
         </member>
     </members>
 </doc>

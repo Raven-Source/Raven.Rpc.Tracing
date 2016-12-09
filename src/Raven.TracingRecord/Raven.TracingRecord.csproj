@@ -88,17 +88,27 @@
     <Compile Include="..\Raven.Rpc.Tracing\Config.cs">
       <Link>Config.cs</Link>
     </Compile>
+    <Compile Include="..\Raven.Rpc.Tracing\Models\LevelEnum.cs">
+      <Link>Models\LevelEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\Raven.Rpc.Tracing\Models\SystemLogs.cs">
+      <Link>Models\SystemLogs.cs</Link>
+    </Compile>
     <Compile Include="..\Raven.Rpc.Tracing\Models\TraceLogs.cs">
       <Link>Models\TraceLogs.cs</Link>
     </Compile>
+    <Compile Include="DataAccess\SystemLogs.cs" />
     <Compile Include="Handle.cs" />
     <Compile Include="Loger.cs" />
     <Compile Include="Models\TraceLos_Temp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RabbitMQClientManager.cs" />
     <Compile Include="RabbitMQConfig.cs" />
-    <Compile Include="RecordHandle.cs" />
-    <Compile Include="TraceLogs.cs" />
-    <Compile Include="TraceLogsRep.cs" />
+    <Compile Include="TraceLogsRecordHandle.cs" />
+    <Compile Include="TraceLogsRecordHandleV1.cs" />
+    <Compile Include="DataAccess\TraceLogs.cs" />
+    <Compile Include="DataAccess\TraceLogsRep.cs" />
+    <Compile Include="SystemLogRecordHandle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
