@@ -76,7 +76,7 @@ namespace Raven.Rpc.Tracing.Helpers
             data.SystemID = data.SystemID ?? EnvironmentConfig.SystemID;
             data.SystemName = data.SystemName ?? EnvironmentConfig.SystemName;
             data.Environment = data.Environment ?? EnvironmentConfig.Environment;
-            data.TraceId = TraceId;
+            data.TraceId = data.TraceId ?? TraceId;
 
             ServiceContainer.Resolve<ITracingRecord>().RecordSystemLogs(data);
         }

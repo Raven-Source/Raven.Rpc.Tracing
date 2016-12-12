@@ -58,7 +58,6 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     trace.MachineAddr = Util.TracingContextHelper.GetServerAddress();
                     trace.TraceId = reqHeader.TraceID;
                     trace.RpcId = reqHeader.RpcID;
-                    trace.ServerHost = request.Url.Host;
                     trace.Protocol = request.Url.Scheme;
                     
                     trace.Environment = this.environment ?? EnvironmentConfig.Environment;
@@ -72,7 +71,11 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     string folder = filterContext.HttpContext.Request.Headers[Config.ResponseHeaderFolderKey];
                     if (!string.IsNullOrWhiteSpace(folder))
                     {
-                        trace.InvokeID = trace.InvokeID + folder;
+                        trace.ServerHost = request.Url.Host + folder;
+                    }
+                    else
+                    {
+                        trace.ServerHost = request.Url.Host;
                     }
 
                     TraceExtensionOnActionExecuting(filterContext, trace);

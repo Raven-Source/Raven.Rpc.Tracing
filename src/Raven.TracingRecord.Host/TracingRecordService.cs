@@ -30,8 +30,8 @@ namespace Raven.TracingRecord.Host
         protected override void OnStart(string[] args)
         {
             TraceLogsRecordHandleV1.GetInstance.Run();
-            //TraceLogsRecordHandle.GetInstance.Run();
-            //SystemLogRecordHandle.GetInstance.Run();
+            TraceLogsRecordHandle.GetInstance.Run();
+            SystemLogRecordHandle.GetInstance.Run();
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace Raven.TracingRecord.Host
         protected override void OnStop()
         {
             TraceLogsRecordHandleV1.GetInstance.Stop();
-            //TraceLogsRecordHandle.GetInstance.Stop();
-            //SystemLogRecordHandle.GetInstance.Stop();
+            TraceLogsRecordHandle.GetInstance.Stop();
+            SystemLogRecordHandle.GetInstance.Stop();
         }
     }
 }
