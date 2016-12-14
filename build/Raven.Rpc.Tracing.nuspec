@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Raven.Rpc.Tracing</id>
+        <version>1.1.0</version>
+        <authors>Yi Liang</authors>
+        <owners>indifer@126.com</owners>
+        <iconUrl>http://res-1251080116.costj.myqcloud.com/raven4.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Raven.Rpc.Tracing
+		</description>
+        <releaseNotes>
+		</releaseNotes>
+        <dependencies>
+            <dependency id="Raven.Rpc.IContractModel" version="2.2.0" />			
+            <dependency id="Raven.Serializer" version="1.0.1" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\output\net45\Raven.Rpc.Tracing\Raven.Rpc.Tracing.dll" target="lib\net45\Raven.Rpc.Tracing.dll" />
+        <file src="..\output\net45\Raven.Rpc.Tracing\Raven.Rpc.Tracing.pdb" target="lib\net45\Raven.Rpc.Tracing.pdb" />
+        <file src="..\output\net45\Raven.Rpc.Tracing\Raven.Rpc.Tracing.xml" target="lib\net45\Raven.Rpc.Tracing.xml" />
+    </files>
+</package>
