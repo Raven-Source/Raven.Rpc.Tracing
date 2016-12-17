@@ -9,7 +9,7 @@ using Raven.Rpc.HttpProtocol.Tracing;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
 {
-    [Tracing(systemID = "Tracing.Test", systemName = "Tracing测试")]
+    [Tracing]
     public class TestController : ApiController
     {
         Rpc.HttpProtocol.RpcHttpClient client = new Rpc.HttpProtocol.RpcHttpClient("http://127.0.0.1:9001/");

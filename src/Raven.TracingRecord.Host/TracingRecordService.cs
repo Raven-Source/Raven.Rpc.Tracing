@@ -31,7 +31,7 @@ namespace Raven.TracingRecord.Host
         {
             TraceLogsRecordHandleV1.GetInstance.Run();
             TraceLogsRecordHandle.GetInstance.Run();
-            //SystemLogRecordHandle.GetInstance.Run();
+            SystemLogRecordHandle.GetInstance.Run();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Raven.TracingRecord.Host
         {
             TraceLogsRecordHandleV1.GetInstance.Stop();
             TraceLogsRecordHandle.GetInstance.Stop();
-            //SystemLogRecordHandle.GetInstance.Stop();
+            SystemLogRecordHandle.GetInstance.Stop();
         }
     }
 }

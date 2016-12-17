@@ -15,7 +15,7 @@
             <dependency id="Raven.Rpc.HttpProtocol" version="2.2.0" />
             <dependency id="Raven.Rpc.IContractModel" version="2.2.0" />			
             <dependency id="Raven.Serializer" version="1.0.1" />
-            <dependency id="Raven.Rpc.Tracing" version="1.1.0" />
+            <dependency id="Raven.Rpc.Tracing" version="1.1.1" />
         </dependencies>
     </metadata>
     <files>

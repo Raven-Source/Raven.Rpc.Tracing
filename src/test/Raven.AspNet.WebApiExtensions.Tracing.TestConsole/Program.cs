@@ -62,6 +62,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
         private static readonly string hostName = ConfigurationManager.AppSettings["RabbitMQHost"];
         private static readonly string username = "liangyi";
         private static readonly string password = "123456";
+        private static readonly string systemID = "TracingHost.Test", systemName = "Tracing测试";
 
         // This code configures Web API. The Startup class is specified as a type
         // parameter in the WebApp.Start method.
@@ -79,7 +80,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
             // 默认返回Json数据
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
-            appBuilder.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()));
+            appBuilder.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()), systemID, systemName, "0");
             appBuilder.UseWebApi(config);
 
             //CallContext

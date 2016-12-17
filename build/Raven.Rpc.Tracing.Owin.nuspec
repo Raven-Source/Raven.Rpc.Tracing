@@ -13,7 +13,7 @@
 		</releaseNotes>
         <dependencies>
             <dependency id="Owin" version="1.0.0" />
-            <dependency id="Raven.Rpc.Tracing" version="1.1.0" />
+            <dependency id="Raven.Rpc.Tracing" version="1.1.1" />
         </dependencies>
     </metadata>
     <files>

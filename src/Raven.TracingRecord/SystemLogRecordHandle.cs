@@ -52,7 +52,7 @@ namespace Raven.TracingRecord
             }
             catch (Exception ex)
             {
-
+                Loger.GetInstance.LogError(ex, null);
             }
         }
 
