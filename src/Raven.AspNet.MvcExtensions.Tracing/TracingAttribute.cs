@@ -104,7 +104,12 @@ namespace Raven.AspNet.MvcExtensions.Tracing
             var form = filterContext.HttpContext.Request.Form;
             if (form != null)
             {
-                trace.Extensions.Add(Config.FormKey, form);
+                var dict = new Dictionary<string, object>();
+                foreach (var k in form.AllKeys)
+                {
+                    dict.Add(k, form[k]);
+                }
+                trace.Extensions.Add(Config.FormKey, dict);
             }
         }
 
