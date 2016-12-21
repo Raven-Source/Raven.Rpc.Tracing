@@ -59,7 +59,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     trace.TraceId = reqHeader.TraceID;
                     trace.RpcId = reqHeader.RpcID;
                     trace.Protocol = request.Url.Scheme;
-                    
+
                     trace.Environment = this.environment ?? EnvironmentConfig.Environment;
                     trace.SystemID = this.systemID ?? EnvironmentConfig.SystemID;
                     trace.SystemName = this.systemName ?? EnvironmentConfig.SystemName;
@@ -102,7 +102,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
             }
 
             var form = filterContext.HttpContext.Request.Form;
-            if (form != null)
+            if (form != null && form.Count > 0)
             {
                 var dict = new Dictionary<string, object>();
                 foreach (var k in form.AllKeys)
