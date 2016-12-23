@@ -74,24 +74,42 @@ namespace Raven.TracingRecord
                         }
 
                         var json = JsonConvert.SerializeObject(l, Newtonsoft.Json.Formatting.None, new JavaScriptDateTimeConverter());// l.ToString(Newtonsoft.Json.Formatting.None);
-                        var log = Raven.TracingRecord.TraceLogs.Parse(json);
 
-                        if (log.Contains("Extension"))
+                        try
                         {
-                            //if (!log.Contains("Extensions"))
-                            //{
-                            //    var ext = log["Extension"];
-                            //    log.Add("Extensions", ext);
-                            //}
-                            log.Remove("Extension");
-                        }
+                            var log = Raven.TracingRecord.TraceLogs.Parse(json);
 
-                        logs.Add(log);
+                            if (log.Contains("Extension"))
+                            {
+                                //if (!log.Contains("Extensions"))
+                                //{
+                                //    var ext = log["Extension"];
+                                //    log.Add("Extensions", ext);
+                                //}
+                                log.Remove("Extension");
+                            }
+
+                            logs.Add(log);
+                        }
+                        catch
+                        {
+                            continue;
+
+                        }
                     }
 
-
                     Console.WriteLine("InsertBatch:{0}, Count:{1}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"), logs.Count);
-                    traceLogsRep.InsertBatch(logs);
+
+                    int pi = 0;
+                    int ps = 200;
+                    while (pi * ps < logs.Count)
+                    {
+                        var temp = logs.Skip(pi * ps).Take(ps).ToList();
+                        pi++;
+                        traceLogsRep.InsertBatch(temp);
+                    }
+
+                    //traceLogsRep.InsertBatch(logs);
                     Console.WriteLine("InsertBatch End:{0}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"));
                 }
 

@@ -47,8 +47,20 @@ namespace Raven.TracingRecord
         {
             try
             {
-                var list = RabbitMQClientManager.GetInstance.rabbitMQClient.ReceiveBatch<Raven.TracingRecord.SystemLogs>(Config.SystemLogsQueueName, noAck: true);
-                sysLogsRep.InsertBatch(list);
+                var logs = RabbitMQClientManager.GetInstance.rabbitMQClient.ReceiveBatch<Raven.TracingRecord.SystemLogs>(Config.SystemLogsQueueName, noAck: true);
+                if (logs != null && logs.Count > 0)
+                {
+                    int pi = 0;
+                    int ps = 200;
+                    while (pi * ps < logs.Count)
+                    {
+                        var temp = logs.Skip(pi * ps).Take(ps).ToList();
+                        pi++;
+                        sysLogsRep.InsertBatch(temp);
+                    }
+
+                    //sysLogsRep.InsertBatch(list);
+                }
             }
             catch (Exception ex)
             {
