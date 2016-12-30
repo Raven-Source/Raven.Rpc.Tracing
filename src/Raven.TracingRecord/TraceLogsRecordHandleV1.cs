@@ -106,7 +106,15 @@ namespace Raven.TracingRecord
                     {
                         var temp = logs.Skip(pi * ps).Take(ps).ToList();
                         pi++;
-                        traceLogsRep.InsertBatch(temp);
+                        try
+                        {
+                            traceLogsRep.InsertBatch(temp);
+                        }
+                        catch (Exception ex)
+                        {
+                            Loger.GetInstance.LogError(ex, null);
+                            Loger.GetInstance.LogInfo(temp.ToJson());
+                        }
                     }
 
                     //traceLogsRep.InsertBatch(logs);

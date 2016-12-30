@@ -35,7 +35,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         /// 环境类型
         /// </summary>
         public string environment;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -114,7 +114,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     trace.MachineAddr = Util.TracingContextHelper.GetServerAddress();
                     trace.TraceId = reqHeader.TraceID;
                     trace.RpcId = reqHeader.RpcID;
-                    trace.Protocol = actionContext.Request.RequestUri.Scheme;
+                    trace.Protocol = string.Format("{0}/{1}", actionContext.Request.RequestUri.Scheme, actionContext.Request.Version);
 
                     trace.Environment = this.environment ?? EnvironmentConfig.Environment;
                     trace.SystemID = this.systemID ?? EnvironmentConfig.SystemID;
