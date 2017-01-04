@@ -168,7 +168,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
 
             if (actionContext.ActionArguments != null && actionContext.ActionArguments.Count > 0)
             {
-                trace.Extensions.Add(Config.ParamsKey, actionContext.ActionArguments);
+                trace.Extensions.Add(Config.ParamsKey, Util.Serializer(actionContext.ActionArguments));
             }
         }
 
@@ -229,7 +229,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                 if (actionExecutedContext.Response.TryGetContentValue<IResponseModel>(out responseModel))
                 {
                     trace.Code = responseModel.GetCode();
-                    trace.Extensions.Add(Config.ResultKey, responseModel);
+                    trace.Extensions.Add(Config.ResultKey, Util.Serializer(responseModel));
 
                     //if (responseModel.Extension == null)
                     //{

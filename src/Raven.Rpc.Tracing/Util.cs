@@ -187,6 +187,22 @@ namespace Raven.Rpc.Tracing
         //}
 
         /// <summary>
+        /// 序列化
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string Serializer(object obj)
+        {
+            if (obj is string)
+                return (string)obj;
+
+            var data = serializer.Serialize(obj);
+            Encoding encoding = Encoding.UTF8;
+            var res = encoding.GetString(data);
+            return res;
+        }
+
+        /// <summary>
         /// 深拷贝
         /// </summary>
         /// <typeparam name="T"></typeparam>

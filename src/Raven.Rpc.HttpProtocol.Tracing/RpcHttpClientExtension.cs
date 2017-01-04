@@ -114,7 +114,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                     reqModel.Header.RpcID = rpcId;
                 }
             }
-           
+
         }
 
         /// <summary>
@@ -211,8 +211,8 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             trace.Extensions.Add(nameof(uri.PathAndQuery), uri.PathAndQuery);
             //trace.Extension.Add(nameof(uri.Host), uri.Host);
 
-            trace.Extensions.Add(nameof(rpcContext.RequestModel), rpcContext.RequestModel);
-            trace.Extensions.Add(nameof(rpcContext.ResponseModel), rpcContext.ResponseModel);
+            trace.Extensions.Add(nameof(rpcContext.RequestModel), Util.Serializer(rpcContext.RequestModel));
+            trace.Extensions.Add(nameof(rpcContext.ResponseModel), Util.Serializer(rpcContext.ResponseModel));
             trace.ResponseSize = rpcContext.ResponseSize;
 
             trace.Protocol = uri.Scheme;

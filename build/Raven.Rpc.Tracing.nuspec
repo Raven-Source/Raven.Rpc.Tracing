@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Raven.Rpc.Tracing</id>
-        <version>1.1.1</version>
+        <version>1.2.0</version>
         <authors>Yi Liang</authors>
         <owners>indifer@126.com</owners>
         <iconUrl>http://res-1251080116.costj.myqcloud.com/raven4.png</iconUrl>

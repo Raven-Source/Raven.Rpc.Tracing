@@ -675,6 +675,13 @@
             
             </summary>
         </member>
+        <member name="M:Raven.Rpc.Tracing.Util.Serializer(System.Object)">
+            <summary>
+            序列化
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
         <member name="M:Raven.Rpc.Tracing.Util.Clone``1(``0)">
             <summary>
             深拷贝
