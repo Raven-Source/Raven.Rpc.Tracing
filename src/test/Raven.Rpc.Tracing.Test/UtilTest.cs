@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Raven.Rpc.Tracing.Test
 {
@@ -31,14 +33,52 @@ namespace Raven.Rpc.Tracing.Test
         [TestMethod]
         public void GetUniqueCode16()
         {
-            string res = null;
-            res = Util.GetUniqueCode22();
+            //string res = null;
+            //res = Util.GetUniqueCode22();
 
-            res = new Guid(Util.GetGuidArray()).ToString();
-            res = new Guid(Util.GetGuidArray()).ToString();
-            res = new Guid(Util.GetGuidArray()).ToString();
-            res = new Guid(Util.GetGuidArray()).ToString();
-            res = new Guid(Util.GetGuidArray()).ToString();
+            //res = new Guid(Util.GetGuidArray()).ToString();
+            //res = new Guid(Util.GetGuidArray()).ToString();
+            //res = new Guid(Util.GetGuidArray()).ToString();
+            //res = new Guid(Util.GetGuidArray()).ToString();
+            //res = new Guid(Util.GetGuidArray()).ToString();
+
+            System.Collections.Concurrent.ConcurrentDictionary<string, string> dict = new System.Collections.Concurrent.ConcurrentDictionary<string, string>();
+            System.Collections.Concurrent.ConcurrentQueue<string> queue = new System.Collections.Concurrent.ConcurrentQueue<string>();
+                //Dictionary<string, string> dict = new Dictionary<string, string>(10000000);
+            //long ms = 0;
+            int none = 0;
+            Stopwatch w = new Stopwatch();
+            Task[] tasks = new Task[1];
+            w.Start();
+            for (int c = 0; c < tasks.Length; c++)
+            {
+                var t = Task.Run(() =>
+                {
+                    //string id = Guid.NewGuid().ToString();
+                    string id = Generate.GenerateId();
+                    queue.Enqueue(id);
+                    if (dict.TryAdd(id, id))
+                    {
+
+                    }
+                    else
+                    {
+                        none++;
+                    }
+                });
+                tasks[c] = t;
+            }
+            Task.WaitAll(tasks);
+            w.Stop();
+
+            if (none > 0 || dict.Count != tasks.Length)
+            {
+                throw new Exception("ID重复");
+            }
+
+
+            ;
+
         }
     }
 }

@@ -84,7 +84,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     reqHeader = reqModel.Header;
                     if (string.IsNullOrWhiteSpace(reqHeader.TraceID))
                     {
-                        reqHeader.TraceID = Util.GetUniqueCode32();
+                        reqHeader.TraceID = Generate.GenerateId();// Util.GetUniqueCode32();
                     }
                     if (string.IsNullOrWhiteSpace(reqHeader.RpcID))
                     {

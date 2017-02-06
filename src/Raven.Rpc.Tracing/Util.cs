@@ -41,29 +41,29 @@ namespace Raven.Rpc.Tracing
         //    ServiceContainer.Register(httpHelper);
         //}
 
-        /// <summary>
-        /// 获取32位唯一字符串
-        /// </summary>
-        /// <returns></returns>
-        public static string GetUniqueCode32()
-        {
-            var guid1 = GetGuidArray();
-            var guid2 = GetGuidArray();
-            var token1 = Convert.ToBase64String(guid1).TrimEnd('=').Replace("/", "_").Replace("+", "-");
-            var token2 = Convert.ToBase64String(guid2).TrimEnd('=').Replace("/", "_").Replace("+", "-");
-            return (token1 + token2).Substring(0, 32);
-        }
+        ///// <summary>
+        ///// 获取32位唯一字符串
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetUniqueCode32()
+        //{
+        //    var guid1 = GetGuidArray();
+        //    var guid2 = GetGuidArray();
+        //    var token1 = Convert.ToBase64String(guid1).TrimEnd('=').Replace("/", "_").Replace("+", "-");
+        //    var token2 = Convert.ToBase64String(guid2).TrimEnd('=').Replace("/", "_").Replace("+", "-");
+        //    return (token1 + token2).Substring(0, 32);
+        //}
 
-        /// <summary>
-        /// 获取32位唯一字符串
-        /// </summary>
-        /// <returns></returns>
-        public static string GetUniqueCode22()
-        {
-            var guid1 = GetGuidArray();
-            var token1 = Convert.ToBase64String(guid1).TrimEnd('=').Replace("/", "_").Replace("+", "-");
-            return token1;
-        }
+        ///// <summary>
+        ///// 获取32位唯一字符串
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetUniqueCode22()
+        //{
+        //    var guid1 = GetGuidArray();
+        //    var token1 = Convert.ToBase64String(guid1).TrimEnd('=').Replace("/", "_").Replace("+", "-");
+        //    return token1;
+        //}
 
         /// <summary>
         /// 

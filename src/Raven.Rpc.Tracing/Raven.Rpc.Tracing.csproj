@@ -49,6 +49,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
@@ -64,6 +65,7 @@
     <Compile Include="ContextData\IInitRequestScopeContext.cs" />
     <Compile Include="ContextData\IRequestScopeContext.cs" />
     <Compile Include="EnvironmentConfig.cs" />
+    <Compile Include="Generate.cs" />
     <Compile Include="Helpers\DictionaryHelper.cs" />
     <Compile Include="TracingContextData.cs" />
     <Compile Include="ITracingContextHelper.cs" />

@@ -73,7 +73,7 @@ namespace Raven.Rpc.Tracing
             return new Rpc.IContractModel.Header()
             {
                 RpcID = "0",
-                TraceID = Util.GetUniqueCode32()
+                TraceID = Generate.GenerateId() //Util.GetUniqueCode32()
             };
         }
 
