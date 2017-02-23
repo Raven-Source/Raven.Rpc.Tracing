@@ -98,9 +98,7 @@ namespace Raven.Rpc.Tracing
             return (long)(DateTime.UtcNow - _beginTime).TotalSeconds;
         }
 
-
-        private static int testcounter = 0;
-        /// <summary>
+                /// <summary>
         /// 获取服务器hash
         /// </summary>
         /// <remarks>
