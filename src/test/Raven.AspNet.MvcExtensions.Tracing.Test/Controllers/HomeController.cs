@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,14 @@ namespace Raven.AspNet.MvcExtensions.Tracing.Test.Controllers
 {
     public class HomeController : Controller
     {
-        [Tracing]
+        public class A
+        {
+            public int ID;
+        }
+
+        //[Tracing]
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string json)
         {
             return View();
         }

@@ -166,6 +166,57 @@
             
             </summary>
         </member>
+        <member name="T:Raven.Rpc.Tracing.Generate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GenerateId">
+            <summary>
+            生成Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetCounter(System.Int64@)">
+            <summary>
+            获取id计数和时间
+            </summary>
+            <param name="timestamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetMachineHash">
+            <summary>
+            获取服务器hash
+            </summary>
+            <remarks>
+            md5({name}{mac}{ip}{machineIdentity})取后4个字节
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetProcessId">
+            <summary>
+            获取进程Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetMachineName">
+            <summary>
+            获取机器名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetMacAddressByNetworkInformation">
+            <summary>  
+            通过网络适配器获取MAC地址  
+            </summary>  
+            <returns></returns>  
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetIPAddress">
+            <summary>
+            获取本机IP
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Raven.Rpc.Tracing.DictionaryHelper">
             <summary>
             
@@ -637,18 +688,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="M:Raven.Rpc.Tracing.Util.GetUniqueCode32">
-            <summary>
-            获取32位唯一字符串
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Raven.Rpc.Tracing.Util.GetUniqueCode22">
-            <summary>
-            获取32位唯一字符串
-            </summary>
-            <returns></returns>
         </member>
         <member name="M:Raven.Rpc.Tracing.Util.GetGuidArray">
             <summary>
