@@ -76,6 +76,12 @@ namespace Raven.TracingRecord
                         var json = JsonConvert.SerializeObject(l, Newtonsoft.Json.Formatting.None, new JavaScriptDateTimeConverter());// l.ToString(Newtonsoft.Json.Formatting.None);
                         try
                         {
+                            if (json.Length > 16000000)
+                            {
+                                Loger.GetInstance.LogInfo(string.Format("larger json:{0}", json));
+                                continue;
+                            }
+
                             var log = Raven.TracingRecord.TraceLogs.Parse(json);
 
                             if (log.Contains("Extension"))
@@ -90,8 +96,10 @@ namespace Raven.TracingRecord
 
                             logs.Add(log);
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            Loger.GetInstance.LogError(ex, null);
+                            Loger.GetInstance.LogInfo(string.Format("parse error json:{0}", json));
                             continue;
                         }
 
@@ -106,7 +114,16 @@ namespace Raven.TracingRecord
                     {
                         var temp = logs.Skip(pi * ps).Take(ps).ToList();
                         pi++;
-                        traceLogsRep.InsertBatch(temp);
+
+                        try
+                        {
+                            traceLogsRep.InsertBatch(temp);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Loger.GetInstance.LogError(ex, null);
+                        }
                     }
 
                     //traceLogsRep.InsertBatch(logs);
