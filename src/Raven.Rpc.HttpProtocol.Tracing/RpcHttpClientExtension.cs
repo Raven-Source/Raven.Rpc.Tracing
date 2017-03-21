@@ -211,8 +211,8 @@ namespace Raven.Rpc.HttpProtocol.Tracing
             trace.Extensions.Add(nameof(uri.PathAndQuery), uri.PathAndQuery);
             //trace.Extension.Add(nameof(uri.Host), uri.Host);
 
-            trace.Extensions.Add(nameof(rpcContext.RequestModel), Util.Serializer(rpcContext.RequestModel));
-            trace.Extensions.Add(nameof(rpcContext.ResponseModel), Util.Serializer(rpcContext.ResponseModel));
+            trace.Extensions.Add(nameof(rpcContext.RequestModel), Util.SerializerObjToString(rpcContext.RequestModel));
+            trace.Extensions.Add(nameof(rpcContext.ResponseModel), Util.SerializerObjToString(rpcContext.ResponseModel));
             trace.ResponseSize = rpcContext.ResponseSize;
 
             trace.Protocol = uri.Scheme;

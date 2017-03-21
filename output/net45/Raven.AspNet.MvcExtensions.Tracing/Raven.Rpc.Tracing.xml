@@ -714,6 +714,13 @@
             
             </summary>
         </member>
+        <member name="M:Raven.Rpc.Tracing.Util.SerializerObjToString(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
         <member name="M:Raven.Rpc.Tracing.Util.Serializer(System.Object)">
             <summary>
             序列化

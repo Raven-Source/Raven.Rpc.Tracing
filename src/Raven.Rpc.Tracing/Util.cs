@@ -186,12 +186,32 @@ namespace Raven.Rpc.Tracing
         //    }
         //}
 
+        const int MaxSerializerStringSize = 1024 * 512;   //char size, 1MB
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string SerializerObjToString(object obj)
+        {
+            if (obj == null)
+                return string.Empty;
+
+            var res = Serializer(obj);
+            if (res.Length > MaxSerializerStringSize)
+            {
+                res = string.Format("Size {0} is larger than MaxSize {1}", res.Length * 2, MaxSerializerStringSize);
+            }
+            return res;
+        }
+
         /// <summary>
         /// 序列化
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string Serializer(object obj)
+        private static string Serializer(object obj)
         {
             if (obj is string)
                 return (string)obj;

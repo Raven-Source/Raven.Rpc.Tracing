@@ -98,7 +98,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
 
             if (filterContext.ActionParameters != null && filterContext.ActionParameters.Count > 0)
             {
-                trace.Extensions.Add(Config.ParamsKey, Util.Serializer(filterContext.ActionParameters));
+                trace.Extensions.Add(Config.ParamsKey, Util.SerializerObjToString(filterContext.ActionParameters));
             }
 
             var form = filterContext.HttpContext.Request.Form;
@@ -109,7 +109,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                 {
                     dict.Add(k, form[k]);
                 }
-                trace.Extensions.Add(Config.FormKey, Util.Serializer(dict));
+                trace.Extensions.Add(Config.FormKey, Util.SerializerObjToString(dict));
             }
         }
 
@@ -183,7 +183,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     trace.SearchKey = searchKey.GetSearchKey();
                 }
 
-                trace.Extensions.Add(Config.ResultKey, Util.Serializer(jResult.Data));
+                trace.Extensions.Add(Config.ResultKey, Util.SerializerObjToString(jResult.Data));
             }
         }
 
