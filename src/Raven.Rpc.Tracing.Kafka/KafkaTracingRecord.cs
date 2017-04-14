@@ -12,9 +12,14 @@ namespace Raven.Rpc.Tracing.Kafka
     {
         static KafkaTracingRecord()
         {
+            Init();
+        }
+
+        static void Init()
+        {
             try
             {
-                string fileName = "Raven.Rpc.Tracing.Kafka.config";
+                string fileName = "Raven.Rpc.Tracing.Kafka.dll.config";
                 string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
                 if (!File.Exists(configFile))
                     configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", fileName);
