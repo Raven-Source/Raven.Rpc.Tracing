@@ -1,4 +1,5 @@
-﻿using Raven.Rpc.Tracing.Record;
+﻿using Raven.Message.Kafka.Impl.Configuration.Simple;
+using Raven.Rpc.Tracing.Record;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,25 +11,29 @@ namespace Raven.Rpc.Tracing.Kafka
 {
     public class KafkaTracingRecord : ITracingRecord
     {
-        static KafkaTracingRecord()
+        const string BrokerName = "LogKafkaBroker";
+        public KafkaTracingRecord(string kafkaBrokers, string logType = "Raven.Message.Kafka.Impl.Configuration.App.ClientConfig,Raven.Message.Kafka")
         {
-            Init();
+            if (string.IsNullOrEmpty(kafkaBrokers))
+                throw new ArgumentNullException(nameof(kafkaBrokers));
+
+            var clientConfig = CreateConfig(kafkaBrokers, logType);
+            Message.Kafka.Client.LoadConfig(clientConfig);
         }
 
-        static void Init()
+        ClientConfig CreateConfig(string kafkaBrokers, string logType)
         {
-            try
-            {
-                string fileName = "Raven.Rpc.Tracing.Kafka.dll.config";
-                string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
-                if (!File.Exists(configFile))
-                    configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", fileName);
-                if (!File.Exists(configFile))
-                    throw new FileNotFoundException("kafka config file not found", fileName);
-                Message.Kafka.Impl.Configuration.App.ConfigFactory factory = new Message.Kafka.Impl.Configuration.App.ConfigFactory(configFile, "ravenKafka");
-                Message.Kafka.Client.LoadConfig(factory);
-            }
-            catch { }
+            ClientConfig config = new ClientConfig();
+            config.LogType = logType;
+
+            BrokerConfig brokerConfig = new BrokerConfig();
+            brokerConfig.Name = BrokerName;
+            brokerConfig.SerializerType = Serializer.SerializerType.NewtonsoftJson;
+            brokerConfig.Uri = kafkaBrokers;
+            var brokers = new List<BrokerConfig>(1) { brokerConfig };
+            config.Brokers = brokers;
+
+            return config;
         }
 
         public void RecordSystemLogs(SystemLogs data)
@@ -57,7 +62,7 @@ namespace Raven.Rpc.Tracing.Kafka
                     if (_connection == null)
                         try
                         {
-                            _connection = Message.Kafka.Client.GetConnection("broker");
+                            _connection = Message.Kafka.Client.GetConnection(BrokerName);
                         }
                         catch { }
                 }
