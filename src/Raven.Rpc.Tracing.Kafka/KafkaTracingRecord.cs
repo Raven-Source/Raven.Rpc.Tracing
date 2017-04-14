@@ -17,7 +17,7 @@ namespace Raven.Rpc.Tracing.Kafka
         /// </summary>
         /// <param name="kafkaBrokers">kafka节点，多个节点用逗号分隔，例如ip:port,ip:port</param>
         /// <param name="logType">日志类型，默认不记录任何日志</param>
-        public KafkaTracingRecord(string kafkaBrokers, string logType = "Raven.Message.Kafka.Impl.Configuration.App.ClientConfig,Raven.Message.Kafka")
+        public KafkaTracingRecord(string kafkaBrokers, string logType = "Raven.Rpc.Tracing.Kafka.DefaultLog,Raven.Rpc.Tracing.Kafka")
         {
             if (string.IsNullOrEmpty(kafkaBrokers))
                 throw new ArgumentNullException(nameof(kafkaBrokers));
