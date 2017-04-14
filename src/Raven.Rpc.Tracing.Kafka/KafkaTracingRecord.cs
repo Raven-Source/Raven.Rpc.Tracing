@@ -12,16 +12,37 @@ namespace Raven.Rpc.Tracing.Kafka
     public class KafkaTracingRecord : ITracingRecord
     {
         const string BrokerName = "LogKafkaBroker";
+        /// <summary>
+        /// 创建
+        /// </summary>
+        /// <param name="kafkaBrokers">kafka节点，多个节点用逗号分隔，例如ip:port,ip:port</param>
+        /// <param name="logType">日志类型，默认不记录任何日志</param>
         public KafkaTracingRecord(string kafkaBrokers, string logType = "Raven.Message.Kafka.Impl.Configuration.App.ClientConfig,Raven.Message.Kafka")
         {
             if (string.IsNullOrEmpty(kafkaBrokers))
                 throw new ArgumentNullException(nameof(kafkaBrokers));
-
-            var clientConfig = CreateConfig(kafkaBrokers, logType);
-            Message.Kafka.Client.LoadConfig(clientConfig);
+            Init(kafkaBrokers, logType);
         }
 
-        ClientConfig CreateConfig(string kafkaBrokers, string logType)
+        static bool _inited = false;
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="kafkaBrokers"></param>
+        /// <param name="logType"></param>
+        static void Init(string kafkaBrokers, string logType)
+        {
+            lock (typeof(KafkaTracingRecord))
+            {
+                if (_inited)
+                    return;
+                var clientConfig = CreateConfig(kafkaBrokers, logType);
+                Message.Kafka.Client.LoadConfig(clientConfig);
+                _inited = true;
+            }
+        }
+
+        static ClientConfig CreateConfig(string kafkaBrokers, string logType)
         {
             ClientConfig config = new ClientConfig();
             config.LogType = logType;
