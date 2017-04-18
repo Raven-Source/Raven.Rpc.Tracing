@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Raven.Rpc.Tracing.Record.Kafka</id>
+        <version>1.0.3</version>
+        <title>Raven.Rpc.Tracing.Kafka</title>
+        <authors>klice</authors>
+        <owners>klice</owners>
+        <iconUrl>http://res-1251080116.costj.myqcloud.com/raven4.png</iconUrl>
+        <projectUrl>https://github.com/Raven-Source/Raven.Rpc.Tracing</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>write trace log and system log to kafka</description>
+        <summary>write trace log and system log to kafka</summary>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="Raven.Message.Kafka" version="1.0.0" />
+                <dependency id="Raven.Rpc.Tracing" version="1.2.2" />
+                <dependency id="Confluent.Kafka-fx45" version="0.9.4" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\output\net45\Raven.Rpc.Tracing.Record.Kafka\Raven.Rpc.Tracing.Record.Kafka.dll" target="lib\net45\Raven.Rpc.Tracing.Record.Kafka.dll" />
+        <file src="..\output\net45\Raven.Rpc.Tracing.Record.Kafka\Raven.Rpc.Tracing.Record.Kafka.xml" target="lib\net45\Raven.Rpc.Tracing.Record.Kafka.xml" />
+    </files>
+</package>

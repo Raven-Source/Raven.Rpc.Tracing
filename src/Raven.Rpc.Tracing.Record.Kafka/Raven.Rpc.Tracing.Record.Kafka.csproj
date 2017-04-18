@@ -8,8 +8,8 @@
     <ProjectGuid>{7A1D9E7F-F057-475C-BFE2-A1D9ACC3B103}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Raven.Rpc.Tracing.Kafka</RootNamespace>
-    <AssemblyName>Raven.Rpc.Tracing.Kafka</AssemblyName>
+    <RootNamespace>Raven.Rpc.Tracing.Record</RootNamespace>
+    <AssemblyName>Raven.Rpc.Tracing.Record.Kafka</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -31,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Raven.Rpc.Tracing.Record.Kafka.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Confluent.Kafka">
@@ -53,7 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KafkaTracingRecord.cs" />
+    <Compile Include="TracingRecordKafka.cs" />
     <Compile Include="DefaultLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

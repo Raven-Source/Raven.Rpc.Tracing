@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.Tracing.NoContext
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Record", "Record", "{FB0D446C-79FD-443B-BF73-AC31303F39A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.Tracing.Kafka", "Raven.Rpc.Tracing.Kafka\Raven.Rpc.Tracing.Kafka.csproj", "{7A1D9E7F-F057-475C-BFE2-A1D9ACC3B103}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.Tracing.Record.Kafka", "Raven.Rpc.Tracing.Record.Kafka\Raven.Rpc.Tracing.Record.Kafka.csproj", "{7A1D9E7F-F057-475C-BFE2-A1D9ACC3B103}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
