@@ -6,3 +6,6 @@ TestResults
 .vs
 log
 *.pubxml
+*.idea
+target
+*.iml
