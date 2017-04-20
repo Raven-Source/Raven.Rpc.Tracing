@@ -23,7 +23,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
             var res = client.Invoke<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get2", new Rpc.IContractModel.RequestModel());
             var data = new ResponseModel<User>() { Data = new User { Name = "ResponseModel-Get", Desc = res.Data }, Code = 123 };
 
-            Raven.Rpc.Tracing.Helpers.TracingHelper.AddTraceLogsExtensions("data", data);
+            //Raven.Rpc.Tracing.Helpers.TracingHelper.AddTraceLogsExtensions("data", data);
 
             return data;
         }
