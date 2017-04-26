@@ -45,11 +45,15 @@ public class MongoSinkTask extends SinkTask {
     @Override
     public void put(Collection<SinkRecord> collection) {
         for (SinkRecord record : collection) {
-            byte[] valueBs = (byte[]) record.value();
-            String valueJson = new String(valueBs, Charset.forName("utf-8"));
-            Document document = Document.parse(valueJson);
-            synchronized (dataBuffer) {
-                dataBuffer.add(document);
+            try {
+                byte[] valueBs = (byte[]) record.value();
+                String valueJson = new String(valueBs, Charset.forName("utf-8"));
+                Document document = Document.parse(valueJson);
+                synchronized (dataBuffer) {
+                    dataBuffer.add(document);
+                }
+            }catch (Exception ex){
+                logger.warning(ex.toString());
             }
         }
     }
