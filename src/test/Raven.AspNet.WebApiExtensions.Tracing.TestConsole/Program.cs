@@ -80,7 +80,9 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
             // 默认返回Json数据
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
-            appBuilder.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()), systemID, systemName, "0");
+            //appBuilder.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()), systemID, systemName, "0");
+            appBuilder.UseTracingContext(new Raven.Rpc.Tracing.Record.TracingRecordKafka("121.43.149.229:9092,115.29.199.22:9092,115.29.204.19:9092"), systemID, systemName, "0");
+            
             appBuilder.UseWebApi(config);
 
             //CallContext

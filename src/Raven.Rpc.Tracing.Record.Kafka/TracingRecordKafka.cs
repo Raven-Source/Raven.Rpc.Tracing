@@ -1,15 +1,13 @@
 ﻿using Raven.Message.Kafka.Impl.Configuration.Simple;
-using Raven.Rpc.Tracing.Record;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Raven.Rpc.Tracing.Kafka
+namespace Raven.Rpc.Tracing.Record
 {
-    public class KafkaTracingRecord : ITracingRecord
+    /// <summary>
+    /// 
+    /// </summary>
+    public class TracingRecordKafka : ITracingRecord
     {
         const string BrokerName = "LogKafkaBroker";
         /// <summary>
@@ -17,7 +15,7 @@ namespace Raven.Rpc.Tracing.Kafka
         /// </summary>
         /// <param name="kafkaBrokers">kafka节点，多个节点用逗号分隔，例如ip:port,ip:port</param>
         /// <param name="logType">日志类型，默认不记录任何日志</param>
-        public KafkaTracingRecord(string kafkaBrokers, string logType = "Raven.Rpc.Tracing.Kafka.DefaultLog,Raven.Rpc.Tracing.Kafka")
+        public TracingRecordKafka(string kafkaBrokers, string logType = "Raven.Rpc.Tracing.Record.DefaultLog,Raven.Rpc.Tracing.Record.Kafka")
         {
             if (string.IsNullOrEmpty(kafkaBrokers))
                 throw new ArgumentNullException(nameof(kafkaBrokers));
@@ -32,7 +30,7 @@ namespace Raven.Rpc.Tracing.Kafka
         /// <param name="logType"></param>
         static void Init(string kafkaBrokers, string logType)
         {
-            lock (typeof(KafkaTracingRecord))
+            lock (typeof(TracingRecordKafka))
             {
                 if (_inited)
                     return;
@@ -57,20 +55,28 @@ namespace Raven.Rpc.Tracing.Kafka
             return config;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
         public void RecordSystemLogs(SystemLogs data)
         {
             var connection = GetConnection();
             if (connection == null)
                 return;
-            connection.Producer.ProduceAndForget("syslog", data);
+            connection.Producer.ProduceAndForget(Config.SystemLogsQueueName, data);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
         public void RecordTraceLog(TraceLogs data)
         {
             var connection = GetConnection();
             if (connection == null)
                 return;
-            connection.Producer.ProduceAndForget("tracelog", data);
+            connection.Producer.ProduceAndForget(Config.TraceLogsQueueNameV1, data);
         }
 
         Message.Kafka.Connection _connection = null;
