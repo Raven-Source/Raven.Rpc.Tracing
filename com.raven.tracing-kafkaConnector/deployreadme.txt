@@ -14,6 +14,7 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic raven_sys_logs -
 com.raven.tracing.kafkaConnector-1.0-SNAPSHOT.jar
 mongodb-driver-async-3.4.2.jar
 mongodb-driver-core-3.4.2.jar
+mongo-java-driver-3.4.2.jar
 bson-3.4.2.jar
 
 5、修改connect服务配置文件config/connect-distributed.properties
