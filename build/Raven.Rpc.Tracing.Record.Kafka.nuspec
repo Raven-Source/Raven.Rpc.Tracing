@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Raven.Rpc.Tracing.Record.Kafka</id>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
         <title>Raven.Rpc.Tracing.Kafka</title>
         <authors>klice</authors>
         <owners>klice</owners>
