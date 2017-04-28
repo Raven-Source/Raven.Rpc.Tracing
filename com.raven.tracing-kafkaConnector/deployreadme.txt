@@ -10,7 +10,7 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic tracingconnectst
 bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic raven_trace_logs --partitions 10 --replication-factor 1
 bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic raven_sys_logs --partitions 10 --replication-factor 1
 
-4、拷贝jar到kafka的lib目录下
+4、拷贝jar到kafka的libs目录下
 com.raven.tracing.kafkaConnector-1.0-SNAPSHOT.jar
 mongodb-driver-async-3.4.2.jar
 mongodb-driver-core-3.4.2.jar

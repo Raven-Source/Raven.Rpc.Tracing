@@ -4,6 +4,9 @@ import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.connect.sink.SinkRecord;
 import org.apache.kafka.connect.sink.SinkTask;
+import org.bson.BSONObject;
+import org.bson.BsonDocument;
+import org.bson.BsonDocumentReader;
 import org.bson.Document;
 
 import java.nio.charset.Charset;
@@ -47,8 +50,8 @@ public class MongoSinkTask extends SinkTask {
         for (SinkRecord record : collection) {
             try {
                 byte[] valueBs = (byte[]) record.value();
-                String valueJson = new String(valueBs, Charset.forName("utf-8"));
-                Document document = Document.parse(valueJson);
+                BSONObject bsonObject = org.bson.BSON.decode(valueBs);
+                Document document = new Document(bsonObject.toMap());
                 synchronized (dataBuffer) {
                     dataBuffer.add(document);
                 }

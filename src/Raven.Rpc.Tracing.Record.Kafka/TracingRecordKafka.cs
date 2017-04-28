@@ -22,6 +22,11 @@ namespace Raven.Rpc.Tracing.Record
             Init(kafkaBrokers, logType);
         }
 
+        ~TracingRecordKafka()
+        {
+            Message.Kafka.Client.Release();
+        }
+
         static bool _inited = false;
         /// <summary>
         /// 初始化
@@ -47,7 +52,7 @@ namespace Raven.Rpc.Tracing.Record
 
             BrokerConfig brokerConfig = new BrokerConfig();
             brokerConfig.Name = BrokerName;
-            brokerConfig.SerializerType = Serializer.SerializerType.NewtonsoftJson;
+            brokerConfig.SerializerType = Serializer.SerializerType.NewtonsoftBson;
             brokerConfig.Uri = kafkaBrokers;
             var brokers = new List<BrokerConfig>(1) { brokerConfig };
             config.Brokers = brokers;
