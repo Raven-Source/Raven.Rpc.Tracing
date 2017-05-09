@@ -8,8 +8,7 @@ import org.apache.kafka.connect.sink.SinkTask;
 import org.bson.BSONObject;
 import org.bson.Document;
 
-import java.io.IOException;
-import java.io.InvalidClassException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,7 +61,9 @@ public class MongoSinkTask extends SinkTask {
                     dataBuffer.add(document);
                 }
             }catch (Exception ex){
-                logger.warning(ex.toString());
+                StringWriter writer = new StringWriter();
+                ex.printStackTrace(new PrintWriter(writer));
+                logger.warning(writer.toString());
             }
         }
     }

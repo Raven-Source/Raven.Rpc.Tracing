@@ -11,7 +11,7 @@ public class SystemLogs implements Mapable {
     public String TraceId;
     public double TimeLength;
     public boolean IsException;
-    public Integer Level;
+    public String Level;
     public String SystemID;
     public String SystemName;
     public String Environment;
@@ -47,11 +47,11 @@ public class SystemLogs implements Mapable {
         IsException = exception;
     }
 
-    public Integer getLevel() {
+    public String getLevel() {
         return Level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(String level) {
         Level = level;
     }
 
@@ -152,6 +152,6 @@ public class SystemLogs implements Mapable {
         map.put("StackTrace",StackTrace);
         map.put("CreateTime",CreateTime);
         map.put("SearchKey",SearchKey);
-        return null;
+        return map;
     }
 }

@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Record", "Record", "{FB0D44
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.Tracing.Record.Kafka", "Raven.Rpc.Tracing.Record.Kafka\Raven.Rpc.Tracing.Record.Kafka.csproj", "{7A1D9E7F-F057-475C-BFE2-A1D9ACC3B103}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raven.Rpc.Tracing.TestConsole", "test\Raven.Rpc.Tracing.TestConsole\Raven.Rpc.Tracing.TestConsole.csproj", "{7B1E8C1A-9BB8-43B5-8DD4-7FEA06A794CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,10 @@ Global
 		{7A1D9E7F-F057-475C-BFE2-A1D9ACC3B103}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A1D9E7F-F057-475C-BFE2-A1D9ACC3B103}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A1D9E7F-F057-475C-BFE2-A1D9ACC3B103}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B1E8C1A-9BB8-43B5-8DD4-7FEA06A794CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B1E8C1A-9BB8-43B5-8DD4-7FEA06A794CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B1E8C1A-9BB8-43B5-8DD4-7FEA06A794CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B1E8C1A-9BB8-43B5-8DD4-7FEA06A794CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,5 +128,6 @@ Global
 		{9F38F444-6DBE-45D9-8F08-EEF1A2CE0BF0} = {FB0D446C-79FD-443B-BF73-AC31303F39A4}
 		{1F22B3A0-8A84-45B6-9994-73478969FBEC} = {FB0D446C-79FD-443B-BF73-AC31303F39A4}
 		{106ED743-8A25-4EB6-9A78-945FC5E4848F} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
+		{7B1E8C1A-9BB8-43B5-8DD4-7FEA06A794CC} = {6883D542-C1C8-4E7D-B0D9-AFD61BF35D0D}
 	EndGlobalSection
 EndGlobal
