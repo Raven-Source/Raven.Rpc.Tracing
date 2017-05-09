@@ -91,7 +91,7 @@ namespace Raven.TracingRecord
 
         public void LogError(Exception ex, object dataObj)
         {
-#if DEBUG1
+#if DEBUG
             Console.WriteLine("-----------------------------------");
             Console.WriteLine(ex.Message);
             if (ex != null)

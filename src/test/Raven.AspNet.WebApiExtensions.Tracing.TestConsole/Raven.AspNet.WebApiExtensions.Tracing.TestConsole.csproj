@@ -91,10 +91,6 @@
       <HintPath>..\..\packages\Raven.Rpc.Tracing.1.2.2\lib\net45\Raven.Rpc.Tracing.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Rpc.Tracing.Record.Kafka, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.Rpc.Tracing.Record.Kafka.1.0.3\lib\net45\Raven.Rpc.Tracing.Record.Kafka.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Raven.Serializer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Raven.Serializer.1.0.1\lib\net45\Raven.Serializer.dll</HintPath>
       <Private>True</Private>
@@ -160,6 +156,10 @@
     <ProjectReference Include="..\..\Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.csproj">
       <Project>{d3acd237-2f03-4909-ac7d-7c9f0db8b909}</Project>
       <Name>Raven.Rpc.Tracing.Owin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Raven.Rpc.Tracing.Record.Kafka\Raven.Rpc.Tracing.Record.Kafka.csproj">
+      <Project>{7a1d9e7f-f057-475c-bfe2-a1d9acc3b103}</Project>
+      <Name>Raven.Rpc.Tracing.Record.Kafka</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

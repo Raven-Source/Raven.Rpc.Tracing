@@ -27,6 +27,12 @@ namespace Raven.TracingRecord
             base(DBConfig.connString, DBConfig.dbName)
         { }
 
+
+        public void Insert(BsonDocument document)
+        {
+            base.Database.GetCollection<BsonDocument>(nameof(TraceLogs)).InsertOne(document);
+        }
+
         public void InsertBatch(IEnumerable<BsonDocument> documents)
         {
             base.Database.GetCollection<BsonDocument>(nameof(TraceLogs)).InsertMany(documents);
