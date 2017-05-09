@@ -1,14 +1,15 @@
 package com.raven.tracing.kafkaConnector;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.connect.sink.SinkRecord;
 import org.apache.kafka.connect.sink.SinkTask;
 import org.bson.BSONObject;
-import org.bson.BsonDocument;
-import org.bson.BsonDocumentReader;
 import org.bson.Document;
 
+import java.io.IOException;
+import java.io.InvalidClassException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +25,7 @@ public class MongoSinkTask extends SinkTask {
     String messageDb;
     String messageCollection;
     String batchFlushSize;
+    Class messageClass;
     Logger logger;
 
     MongodbRepository repository;
@@ -39,6 +41,11 @@ public class MongoSinkTask extends SinkTask {
         messageDb = map.get("messageDb");
         messageCollection = map.get("messageCollection");
         batchFlushSize = map.get("batchFlushSize");
+        try {
+            messageClass = Class.forName( map.get("messageClass"));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         repository = new MongodbRepository(this.mongoBrokers, this.messageDb);
         dataBuffer = new ArrayList<>(Integer.parseInt(batchFlushSize) * 2);
@@ -50,8 +57,7 @@ public class MongoSinkTask extends SinkTask {
         for (SinkRecord record : collection) {
             try {
                 byte[] valueBs = (byte[]) record.value();
-                BSONObject bsonObject = org.bson.BSON.decode(valueBs);
-                Document document = new Document(bsonObject.toMap());
+                Document document = convertJsonByteArray(valueBs);
                 synchronized (dataBuffer) {
                     dataBuffer.add(document);
                 }
@@ -59,6 +65,23 @@ public class MongoSinkTask extends SinkTask {
                 logger.warning(ex.toString());
             }
         }
+    }
+
+    Document convertBsonByteArray(byte[] value){
+        BSONObject bsonObject = org.bson.BSON.decode(value);
+        Document document = new Document(bsonObject.toMap());
+        return document;
+    }
+
+    Document convertJsonByteArray(byte[] value) throws IOException {
+        String valueString = new String(value, Charset.forName("utf-8"));
+//        logger.warning(valueString);
+        Object message =  JsonConvert.fromJson(valueString,messageClass);
+        if(message instanceof Mapable){
+            Document document = new Document(((Mapable) message).ToMap());
+            return document;
+        }
+        throw new InvalidClassException(messageClass.getCanonicalName(),"messageClass should implements com.raven.tracing.kafkaConnector.Mapable");
     }
 
     @Override

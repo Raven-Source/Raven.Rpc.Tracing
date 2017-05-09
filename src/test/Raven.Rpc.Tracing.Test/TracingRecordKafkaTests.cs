@@ -16,22 +16,25 @@ namespace Raven.Rpc.Tracing.Record.Tests
         [TestMethod()]
         public void RecordTraceLogTest()
         {
-            record.RecordTraceLog(new TraceLogs()
+            for (int i = 0; i < 10; i++)
             {
-                TraceId = "traceid",
-                RpcId = "rpcid",
-                StartTime = DateTime.Now,
-                EndTime = DateTime.Now,
-                TimeLength = 1.22,
-                IsSuccess = true,
-                IsException = false,
-                ResponseSize = long.MaxValue,
-                Extensions = new Dictionary<string, object>
+                record.RecordTraceLog(new TraceLogs()
+                {
+                    TraceId = "traceid",
+                    RpcId = "rpcid",
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now,
+                    TimeLength = 1.22,
+                    IsSuccess = true,
+                    IsException = false,
+                    ResponseSize = long.MaxValue,
+                    Extensions = new Dictionary<string, object>
                 {
                     {"hello",1 },
                     {"world",DateTime.Now }
                 }
-            });
+                });
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ public class MongoSinkConnector extends SinkConnector {
     String messageCollection;
     String batchFlushSize;
     String messageDb;
+    String messageClass;
 
     @Override
     public String version() {
@@ -29,6 +30,7 @@ public class MongoSinkConnector extends SinkConnector {
         messageCollection = map.get("messageCollection");
         messageDb = map.get("messageDb");
         batchFlushSize = map.get("batchFlushSize");
+        messageClass = map.get("messageClass");
     }
 
     @Override
@@ -46,6 +48,7 @@ public class MongoSinkConnector extends SinkConnector {
             configMap.put("messageCollection",this.messageCollection);
             configMap.put("batchFlushSize",this.batchFlushSize);
             configMap.put("messageDb",this.messageDb);
+            configMap.put("messageClass",this.messageClass);
             taskConfigs.add(j,configMap);
         }
         return taskConfigs;

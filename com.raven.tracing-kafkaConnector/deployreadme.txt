@@ -50,7 +50,8 @@ post http://localhost:8083/connectors （注意需要设置头，Content-Type: A
 	"mongoBrokers":"mongodb://10.161.173.80:27001,10.160.39.59:28002,10.29.186.4:28002/?slaveOk=true",
 	"messageDb":"RavenLogs",
 	"messageCollection":"TraceLogs",
-	"batchFlushSize":10000
+	"batchFlushSize":10000,
+	"messageClass":"com.raven.tracing.kafkaConnector.TraceLogs"
 	}
 }
 post http://localhost:8083/connectors
@@ -63,7 +64,8 @@ post http://localhost:8083/connectors
 	"mongoBrokers":"mongodb://10.161.173.80:27001,10.160.39.59:28002,10.29.186.4:28002/?slaveOk=true",
 	"messageDb":"RavenLogs",
 	"messageCollection":"SystemLogs",
-	"batchFlushSize":10000
+	"batchFlushSize":10000,
+	"messageClass":"com.raven.tracing.kafkaConnector.SystemLogs"
 	}
 }
 
