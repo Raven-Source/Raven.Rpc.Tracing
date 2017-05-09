@@ -22,6 +22,11 @@ namespace Raven.Rpc.Tracing.Record
             Init(kafkaBrokers, logType);
         }
 
+        ~TracingRecordKafka()
+        {
+            Message.Kafka.Client.Release();
+        }
+
         static bool _inited = false;
         /// <summary>
         /// 初始化
@@ -47,7 +52,6 @@ namespace Raven.Rpc.Tracing.Record
 
             BrokerConfig brokerConfig = new BrokerConfig();
             brokerConfig.Name = BrokerName;
-            brokerConfig.SerializerType = Serializer.SerializerType.NewtonsoftJson;
             brokerConfig.Uri = kafkaBrokers;
             var brokers = new List<BrokerConfig>(1) { brokerConfig };
             config.Brokers = brokers;
@@ -90,6 +94,8 @@ namespace Raven.Rpc.Tracing.Record
                         try
                         {
                             _connection = Message.Kafka.Client.GetConnection(BrokerName);
+                            _connection.SetSerializer(Serializer.SerializerFactory.Create(Serializer.SerializerType.Jil, new object[] { new Jil.Options(false, false, false, Jil.DateTimeFormat.MillisecondsSinceUnixEpoch, true, Jil.UnspecifiedDateTimeKindBehavior.IsLocal)
+                            }));
                         }
                         catch { }
                 }

@@ -34,18 +34,33 @@
     <DocumentationFile>bin\Release\Raven.Rpc.Tracing.Record.Kafka.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Confluent.Kafka">
-      <HintPath>..\..\lib\Raven.Message.Kafka\Confluent.Kafka.dll</HintPath>
+    <Reference Include="Confluent.Kafka, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Confluent.Kafka-fx45.0.9.4\lib\net45\Confluent.Kafka.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Message.Kafka">
-      <HintPath>..\..\lib\Raven.Message.Kafka\Raven.Message.Kafka.dll</HintPath>
+    <Reference Include="Jil, Version=2.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jil.2.12.1\lib\net45\Jil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Message.Kafka, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Message.Kafka.1.0.2\lib\net45\Raven.Message.Kafka.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Serializer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Raven.Serializer.1.0.1\lib\net45\Raven.Serializer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Raven.Serializer.WithJil, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Serializer.WithJil.1.0.2\lib\net45\Raven.Serializer.WithJil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sigil, Version=4.5.0.0, Culture=neutral, PublicKeyToken=2d06c3494341c8ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sigil.4.5.0\lib\net45\Sigil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,6 +80,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
