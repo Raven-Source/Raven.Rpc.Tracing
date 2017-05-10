@@ -93,9 +93,10 @@ namespace Raven.Rpc.Tracing.Record
                     if (_connection == null)
                         try
                         {
+                            var serializer = Serializer.SerializerFactory.Create(Serializer.SerializerType.NewtonsoftJson,
+                                new object[] { new Serializer.WithNewtonsoft.SerizlizerSetting() { DateFormatString = "yyyy-MM-dd'T'HH:mm:ss.fffzz00" } });
                             _connection = Message.Kafka.Client.GetConnection(BrokerName);
-                            _connection.SetSerializer(Serializer.SerializerFactory.Create(Serializer.SerializerType.Jil, new object[] { new Jil.Options(false, false, false, Jil.DateTimeFormat.MillisecondsSinceUnixEpoch, true, Jil.UnspecifiedDateTimeKindBehavior.IsLocal)
-                            }));
+                            _connection.SetSerializer(serializer);
                         }
                         catch { }
                 }
