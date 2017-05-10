@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Raven.Rpc.Tracing.Record.Kafka</id>
-        <version>1.0.5</version>
+        <version>1.0.7</version>
         <title>Raven.Rpc.Tracing.Kafka</title>
         <authors>klice</authors>
         <owners>klice</owners>
@@ -16,7 +16,8 @@
                 <dependency id="Raven.Message.Kafka" version="1.0.2" />
                 <dependency id="Raven.Rpc.Tracing" version="1.2.2" />
                 <dependency id="Confluent.Kafka-fx45" version="0.9.4" />
-                <dependency id="Raven.Serializer.WithJil" version="1.0.2" />
+                <dependency id="Raven.Serializer" version="1.0.2" />
+                <dependency id="Raven.Serializer.WithJil" version="1.0.3" />
             </group>
         </dependencies>
     </metadata>
