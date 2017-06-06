@@ -1,4 +1,5 @@
-﻿using Raven.MessageQueue.WithRabbitMQ;
+﻿using RabbitMQ.Client;
+using Raven.MessageQueue.WithRabbitMQ;
 using Raven.Rpc.Tracing;
 using Raven.Serializer;
 using System;
@@ -33,6 +34,7 @@ namespace Raven.TracingRecord
         //ServerRSLogsRep serverRSlogRep;
         //ClientSRLogsRep clientSRlogRep;
         SystemLogsRep sysLogsRep;
+        IDisposable model;
 
         public SystemLogRecordHandle(string serverName)
             : base(serverName, 1000)
@@ -47,20 +49,37 @@ namespace Raven.TracingRecord
         {
             try
             {
-                var logs = RabbitMQClientManager.GetInstance.rabbitMQClient.ReceiveBatch<Raven.TracingRecord.SystemLogs>(Config.SystemLogsQueueName, noAck: true);
-                if (logs != null && logs.Count > 0)
+                if (model != null)
                 {
-                    int pi = 0;
-                    int ps = 200;
-                    while (pi * ps < logs.Count)
-                    {
-                        var temp = logs.Skip(pi * ps).Take(ps).ToList();
-                        pi++;
-                        sysLogsRep.InsertBatch(temp);
-                    }
-
-                    //sysLogsRep.InsertBatch(list);
+                    return;
                 }
+
+                RabbitMQClientManager.GetInstance.rabbitMQClient.RegisterReceive<Raven.TracingRecord.SystemLogs>(Config.SystemLogsQueueName
+                    , (l) =>
+                    {
+                        sysLogsRep.Insert(l);
+
+                    }, noAck: true);
+
+
+                //var logs = RabbitMQClientManager.GetInstance.rabbitMQClient.ReceiveBatch<Raven.TracingRecord.SystemLogs>(Config.SystemLogsQueueName, noAck: true);
+                //if (logs != null && logs.Count > 0)
+                //{
+                //    int pi = 0;
+                //    int ps = 200;
+                //    while (pi * ps < logs.Count)
+                //    {
+                //        var temp = logs.Skip(pi * ps).Take(ps).ToList();
+                //        pi++;
+                //        sysLogsRep.InsertBatch(temp);
+                //    }
+
+                //    //sysLogsRep.InsertBatch(list);
+                //}
+
+                model.Dispose();
+                model = null;
+
             }
             catch (Exception ex)
             {

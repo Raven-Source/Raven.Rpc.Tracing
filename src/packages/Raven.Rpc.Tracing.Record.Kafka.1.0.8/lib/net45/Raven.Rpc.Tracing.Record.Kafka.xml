@@ -40,6 +40,13 @@
             
             </summary>
         </member>
+        <member name="M:Raven.Rpc.Tracing.Record.DefaultLog.DeleteOldLog(System.String,System.DateTime,System.Int32)">
+            <summary>
+            清除旧日志
+            </summary>
+            <param name="path"></param>
+            <param name="folder"></param>
+        </member>
         <member name="M:Raven.Rpc.Tracing.Record.DefaultLog.Debug(System.String,System.Object[])">
             <summary>
             
