@@ -42,7 +42,7 @@ namespace Raven.TracingRecord
         //ServerRSLogsRep serverRSlogRep;
         //ClientSRLogsRep clientSRlogRep;
         TraceLogsRep traceLogsRep;
-        IModel model;
+        IDisposable model;
 
         public TraceLogsRecordHandle(string serverName)
             : base(serverName, 1000)
