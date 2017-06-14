@@ -57,9 +57,19 @@ namespace Raven.TracingRecord
                 model = RabbitMQClientManager.GetInstance.rabbitMQClient.RegisterReceive<Raven.TracingRecord.SystemLogs>(Config.SystemLogsQueueName
                     , (l) =>
                     {
-                        sysLogsRep.Insert(l);
+                        try
+                        {
+                            sysLogsRep.Insert(l);
+                            return true;
 
-                    }, noAck: true);
+                        }
+                        catch (Exception ex)
+                        {
+                            Loger.GetInstance.LogError(ex, null);
+                            return false;
+                        }
+
+                    });
 
 
                 //var logs = RabbitMQClientManager.GetInstance.rabbitMQClient.ReceiveBatch<Raven.TracingRecord.SystemLogs>(Config.SystemLogsQueueName, noAck: true);

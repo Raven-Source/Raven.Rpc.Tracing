@@ -39,18 +39,6 @@
             exchangeType对应数值表
             </summary>
         </member>
-        <member name="T:Raven.MessageQueue.ILoger">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Raven.MessageQueue.ILoger.LogError(System.Exception,System.Object)">
-            <summary>
-            
-            </summary>
-            <param name="ex"></param>
-            <param name="dataObj">1.Dequeue(出队时为BasicGetResult的Body,byte[]类型 或 null);2.Enqueue(入队时为传的dataObj)</param>
-        </member>
         <member name="T:Raven.MessageQueue.WithRabbitMQ.Options">
             <summary>
             
@@ -147,12 +135,15 @@
             <param name="queueName">队列名</param>
             <returns></returns>
         </member>
-        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.RegisterReceive``1(System.String,System.Action{``0},System.String,Raven.MessageQueue.WithRabbitMQ.ExchangeType,System.Boolean)">
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.RegisterReceive``1(System.String,System.Func{``0,System.Boolean},System.String,Raven.MessageQueue.WithRabbitMQ.ExchangeType)">
             <summary>
-            批量接收
+            注册Receive
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="queueName">队列名</param>
+            <param name="queueName"></param>
+            <param name="callback"></param>
+            <param name="exchangeName"></param>
+            <param name="exchangeType"></param>
             <returns></returns>
         </member>
         <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Send(System.String,System.Object,System.Boolean,System.Boolean)">
@@ -222,6 +213,18 @@
             <summary>
             队列消息
             </summary>
+        </member>
+        <member name="T:Raven.MessageQueue.ILoger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.MessageQueue.ILoger.LogError(System.Exception,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="ex"></param>
+            <param name="dataObj">1.Dequeue(出队时为BasicGetResult的Body,byte[]类型 或 null);2.Enqueue(入队时为传的dataObj)</param>
         </member>
     </members>
 </doc>
