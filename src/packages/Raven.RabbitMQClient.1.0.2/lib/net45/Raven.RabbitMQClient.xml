@@ -135,7 +135,7 @@
             <param name="queueName">队列名</param>
             <returns></returns>
         </member>
-        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.RegisterReceive``1(System.String,System.Func{``0,System.Boolean},System.String,Raven.MessageQueue.WithRabbitMQ.ExchangeType)">
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.RegisterReceive``1(System.String,System.Func{``0,System.Boolean},System.String,Raven.MessageQueue.WithRabbitMQ.ExchangeType,System.Boolean)">
             <summary>
             注册Receive
             </summary>

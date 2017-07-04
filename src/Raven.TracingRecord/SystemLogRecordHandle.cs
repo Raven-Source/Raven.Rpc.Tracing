@@ -69,7 +69,7 @@ namespace Raven.TracingRecord
                             return false;
                         }
 
-                    });
+                    }, noAck: true);
 
 
                 //var logs = RabbitMQClientManager.GetInstance.rabbitMQClient.ReceiveBatch<Raven.TracingRecord.SystemLogs>(Config.SystemLogsQueueName, noAck: true);
@@ -87,12 +87,20 @@ namespace Raven.TracingRecord
                 //    //sysLogsRep.InsertBatch(list);
                 //}
 
-                model.Dispose();
-                model = null;
+                if (model != null)
+                {
+                    model.Dispose();
+                    model = null;
+                }
 
             }
             catch (Exception ex)
             {
+                if (model != null)
+                {
+                    model.Dispose();
+                    model = null;
+                }
                 Loger.GetInstance.LogError(ex, null);
             }
         }

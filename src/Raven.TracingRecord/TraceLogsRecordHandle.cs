@@ -119,23 +119,31 @@ namespace Raven.TracingRecord
 
                           Console.WriteLine("InsertBatch End:{0}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"));
                           return true;
-                      });
+                      },noAck:true);
 
-                model.Dispose();
-                model = null;
+                if (model != null)
+                {
+                    model.Dispose();
+                    model = null;
+                }
 
 
             }
             catch (Exception ex)
             {
+                if (model != null)
+                {
+                    model.Dispose();
+                    model = null;
+                }
                 Loger.GetInstance.LogError(ex, null);
             }
         }
 
 
-        /// <summary>
-        /// 调用方法
-        /// </summary>
+        ///// <summary>
+        ///// 调用方法
+        ///// </summary>
         //public void ProcessResetAwardData()
         //{
         //    try
