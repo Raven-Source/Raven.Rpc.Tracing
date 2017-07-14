@@ -66,10 +66,10 @@ namespace Raven.Rpc.Tracing
         /// </summary>
         public const string ResponseHeaderFolderKey = "R-RootFolder";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string ResponseHeaderNonTracingKey = "R-NonTracing";
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public const string ResponseHeaderNonTracingKey = "R-NonTracing";
 
         #endregion
 
