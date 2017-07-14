@@ -9,7 +9,7 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.RegistTracing(Raven.Rpc.HttpProtocol.RpcHttpClient,System.String,System.String,System.String,System.Func{Raven.Rpc.HttpProtocol.RpcContext,System.String})">
+        <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.RegistTracing(Raven.Rpc.HttpProtocol.RpcHttpClient,System.String,System.String,System.String,System.Action{System.Net.Http.HttpResponseMessage,Raven.Rpc.HttpProtocol.RpcContext,Raven.Rpc.Tracing.TraceLogs})">
             <summary>
             
             </summary>
@@ -17,7 +17,7 @@
             <param name="systemID"></param>
             <param name="systemName"></param>
             <param name="environment">环境</param>
-            <param name="searchKeyFunc">keyFunc</param>
+            <param name="TraceExtensionAct">TraceExtensionAct</param>
         </member>
         <member name="M:Raven.Rpc.HttpProtocol.Tracing.RpcHttpClientExtension.Client_RequestContentDataHandler(System.Object@)">
             <summary>

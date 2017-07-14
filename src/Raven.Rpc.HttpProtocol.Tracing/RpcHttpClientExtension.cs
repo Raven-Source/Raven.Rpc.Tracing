@@ -28,7 +28,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
         /// <param name="systemName"></param>
         /// <param name="environment">环境</param>
         /// <param name="TraceExtensionAct">TraceExtensionAct</param>
-        public static void RegistTracing(this RpcHttpClient client, string systemID = null, string systemName = null, string environment = null, Action<RpcContext, TraceLogs> TraceExtensionAct = null)
+        public static void RegistTracing(this RpcHttpClient client, string systemID = null, string systemName = null, string environment = null, Action<HttpResponseMessage, RpcContext, TraceLogs> TraceExtensionAct = null)
         {
             RpcHttpClient.OnResponseDelegate onResponse = (response, rpcContext) =>
             {
@@ -38,7 +38,7 @@ namespace Raven.Rpc.HttpProtocol.Tracing
                 trace.SystemID = systemID ?? EnvironmentConfig.SystemID;
                 trace.SystemName = systemName ?? EnvironmentConfig.SystemName;
                 trace.Environment = environment ?? EnvironmentConfig.Environment;
-                TraceExtensionAct?.Invoke(rpcContext, trace);
+                TraceExtensionAct?.Invoke(response, rpcContext, trace);
 
                 FillClientSR(trace, response.RequestMessage, response, rpcContext);
 
