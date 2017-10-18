@@ -1,5 +1,0 @@
-1.1.0
-调整架构
-1.0.5
-TraceLogs添加SearchKey；
-RequestModel添加ISearchKey标识
