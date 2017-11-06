@@ -1,0 +1,740 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.Rpc.Tracing</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.Rpc.Tracing.Config">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.TraceLogsQueueNameV1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.TraceLogsQueueName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.SystemLogsQueueName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ServerRSKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ExceptionKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ParamsKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.FormKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ResultKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ResponseHeaderTraceKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ResponseHeaderFolderKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Config.ResponseHeaderNonTracingKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ContextData.IInitRequestScopeContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ContextData.IInitRequestScopeContext.BeginRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ContextData.IInitRequestScopeContext.EndRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ContextData.IRequestScopeContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.IRequestScopeContext.Environment">
+            <summary>
+            Raw Owin Environment dictionary.
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.IRequestScopeContext.Items">
+            <summary>
+            Gets a key/value collection that can be used to organize and share data during an HTTP request.
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.IRequestScopeContext.Timestamp">
+            <summary>
+            Gets the initial timestamp of the current HTTP request.
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ContextData.RequestScopeContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ContextData.RequestScopeContext.CallContextKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.RequestScopeContext.Current">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ContextData.RequestScopeContext.FreeContextSlot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ContextData.RequestScopeContext.utcTimestamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.RequestScopeContext.Environment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.RequestScopeContext.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.ContextData.RequestScopeContext.Timestamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ContextData.RequestScopeContext.#ctor(System.Object)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.EnvironmentConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.EnvironmentConfig.Environment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.EnvironmentConfig.SystemID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.EnvironmentConfig.SystemName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Generate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GenerateId">
+            <summary>
+            生成Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetCounter(System.Int64@)">
+            <summary>
+            获取id计数和时间
+            </summary>
+            <param name="timestamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetMachineHash">
+            <summary>
+            获取服务器hash
+            </summary>
+            <remarks>
+            md5({name}{mac}{ip}{machineIdentity})取后4个字节
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetProcessId">
+            <summary>
+            获取进程Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetMachineName">
+            <summary>
+            获取机器名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetMacAddressByNetworkInformation">
+            <summary>  
+            通过网络适配器获取MAC地址  
+            </summary>  
+            <returns></returns>  
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Generate.GetIPAddress">
+            <summary>
+            获取本机IP
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.DictionaryHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.DictionaryHelper.GetKeyValueList``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dict"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.DictionaryHelper.GetValue``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dict"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.DictionaryHelper.GetValue``1(System.Collections.IDictionary,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <param name="dict"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.TracingContextData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.TracingContextData.GetRequestHeader">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.TracingContextData.SetRequestHeader(Raven.Rpc.IContractModel.Header)">
+            <summary>
+            
+            </summary>
+            <param name="header"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.TracingContextData.GetSubRpcID">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.TracingContextData.SetSubRpcID(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.TracingContextData.GetDefaultRequestHeader">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ITracingContextHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ITracingContextHelper.GetContextItem``1(System.String)">
+            <summary>
+            获取 HttpContextItem
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ITracingContextHelper.SetContextItem(System.String,System.Object)">
+            <summary>
+            设置 HttpContextItem
+            </summary>
+            <param name="key"></param>
+            <param name="val"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ITracingContextHelper.GetServerAddress">
+            <summary>
+            获取服务地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ContextType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ContextType.Client">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.ContextType.Server">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.LogsLevel">
+            <summary>
+            日志级别
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.LogsLevel.L1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.LogsLevel.L2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.LogsLevel.L3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.LogsLevel.L4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.SystemLogs">
+            <summary>
+            系统日志
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.TraceId">
+            <summary>
+            TraceId
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.TimeLength">
+            <summary>
+            TotalMilliseconds
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.IsException">
+            <summary>
+            是否运行异常,true|异常,false|未异常
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.Level">
+            <summary>
+            级别
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.SystemID">
+            <summary>
+            系统ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.SystemName">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.Environment">
+            <summary>
+            环境
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.InvokeID">
+            <summary>
+            调用ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.ServerHost">
+            <summary>
+            server host
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.Code">
+            <summary>
+            状态值
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.StackTrace">
+            <summary>
+            调用堆栈
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.SystemLogs.SearchKey">
+            <summary>
+            SearchKey
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.SystemLogs.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.TraceLogs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.TraceId">
+            <summary>
+            TraceId
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.RpcId">
+            <summary>
+            RpcId
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.MachineAddr">
+            <summary>
+            服务器IP
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.StartTime">
+            <summary>
+            请求开始时间
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.EndTime">
+            <summary>
+            响应时间
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.TimeLength">
+            <summary>
+            TotalMilliseconds
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.IsSuccess">
+            <summary>
+            是否运行成功,true|成功,false|失败
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.IsException">
+            <summary>
+            是否运行异常,true|异常,false|未异常
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.Code">
+            <summary>
+            返回状态值
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.InvokeID">
+            <summary>
+            调用ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.ServerHost">
+            <summary>
+            server host
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.SystemID">
+            <summary>
+            系统ID
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.SystemName">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.Protocol">
+            <summary>
+            协议
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.SearchKey">
+            <summary>
+            SearchKey
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.TraceLogs.ProtocolHeader">
+            <summary>
+            协议头
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.ContextType">
+            <summary>
+            ContextType
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.ResponseSize">
+            <summary>
+            ResponseSize
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.TraceLogs.Environment">
+            <summary>
+            环境
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.TraceLogs.Extensions">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.TraceLogs.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Record.ITracingRecord">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.ITracingRecord.RecordTraceLog(Raven.Rpc.Tracing.TraceLogs)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.ITracingRecord.RecordSystemLogs(Raven.Rpc.Tracing.SystemLogs)">
+            <summary>
+            记录系统日志
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.#ctor(System.String,System.String,System.String,Raven.MessageQueue.ILoger)">
+            <summary>
+            
+            </summary>
+            <param name="host"></param>
+            <param name="userName"></param>
+            <param name="pwd"></param>
+            <param name="loger"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.RecordTraceLog(Raven.Rpc.Tracing.TraceLogs)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordRabbitmq.RecordSystemLogs(Raven.Rpc.Tracing.SystemLogs)">
+            <summary>
+            记录系统日志
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.KeyValue`2">
+            <summary>
+            键值对结构
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.KeyValue`2.Key">
+            <summary>
+            获取键/值对中的键
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.KeyValue`2.Value">
+            <summary>
+            获取键/值对中的值
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.KeyValue`2.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.KeyValue`2.#ctor(`0,`1)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.ServiceContainer">
+            <summary>
+            容器
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ServiceContainer.Register``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="service"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ServiceContainer.Register``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ServiceContainer.Register``1(System.Func{System.Object})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="function"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.ServiceContainer.Resolve``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Helpers.TracingHelper">
+            <summary>
+            TracingContextHelper
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.Helpers.TracingHelper.TraceLogs">
+            <summary>
+            TraceContext
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.Helpers.TracingHelper.TraceId">
+            <summary>
+            TraceId
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Helpers.TracingHelper.AddTraceLogsExtensions(System.String,System.Object)">
+            <summary>
+            AddTraceLogsExtensions
+            </summary>
+            <param name="key"></param>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Helpers.TracingHelper.RecordSystemLogs(Raven.Rpc.Tracing.SystemLogs)">
+            <summary>
+            RecordSystemLogs
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Util">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Rpc.Tracing.Util.TracingContextHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Rpc.Tracing.Util.serializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.GetGuidArray">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.VersionIncr(System.String)">
+            <summary>
+            版本号自增（eg:1.4.3）
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.GetFullExceptionMessage(System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.SetThreadPool">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.SerializerObjToString(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.Serializer(System.Object)">
+            <summary>
+            序列化
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Util.Clone``1(``0)">
+            <summary>
+            深拷贝
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

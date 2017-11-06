@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OwinRequestScopeContext</name>
+    </assembly>
+    <members>
+        <member name="T:Owin.IOwinRequestScopeContext">
+            <summary>
+            RequestScopeContext for Owin.
+            </summary>
+        </member>
+        <member name="M:Owin.IOwinRequestScopeContext.DisposeOnPipelineCompleted(System.IDisposable)">
+            <summary>
+            <para>Enables an object's Dispose method to be called when the request completed.</para>
+            <para>Return value is subscription token. If calle token.Dispose() then canceled register.</para>
+            </summary>
+            <param name="target">IDisposable item.</param>
+        </member>
+        <member name="P:Owin.IOwinRequestScopeContext.Environment">
+            <summary>
+            Raw Owin Environment dictionary.
+            </summary>
+        </member>
+        <member name="P:Owin.IOwinRequestScopeContext.Items">
+            <summary>
+            Gets a key/value collection that can be used to organize and share data during an HTTP request.
+            </summary>
+        </member>
+        <member name="P:Owin.IOwinRequestScopeContext.Timestamp">
+            <summary>
+            Gets the initial timestamp of the current HTTP request.
+            </summary>
+        </member>
+        <member name="P:Owin.OwinRequestScopeContext.Current">
+            <summary>
+            Gets or sets the IOwinRequestScopeContext object for the current HTTP request.
+            </summary>
+        </member>
+        <member name="M:Owin.AppBuilderOwinRequestScopeContextMiddlewareExtensions.UseRequestScopeContext(Owin.IAppBuilder,System.Boolean)">
+            <summary>
+            Use OwinRequestScopeContextMiddleware.
+            </summary>
+            <param name="app">Owin app.</param>
+            <param name="isThreadsafeItem">OwinRequestScopeContext.Item is threadsafe or not. Default is threadsafe.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
