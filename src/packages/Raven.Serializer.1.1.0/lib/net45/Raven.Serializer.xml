@@ -116,6 +116,16 @@
             <param name="stream"></param>
             <returns></returns>
         </member>
+        <member name="T:Raven.Serializer.IStringDataSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Serializer.IStringDataSerializer.SerializeToString(System.Object)">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Raven.Serializer.SerializerFactory">
             <summary>
             

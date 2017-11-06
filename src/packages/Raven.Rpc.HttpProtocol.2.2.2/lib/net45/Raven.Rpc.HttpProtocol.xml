@@ -360,7 +360,16 @@
             
             </summary>
         </member>
-        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.#ctor(System.String,System.String,System.Int32,System.Net.DecompressionMethods,System.Text.Encoding,System.Net.Http.HttpClientHandler)">
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.#ctor(System.String,System.String,System.Int32,System.Net.DecompressionMethods)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="baseUrl"></param>
+            <param name="mediaType"></param>
+            <param name="timeout">超时时间（毫秒）</param>
+            <param name="decompressionMethods"></param>
+        </member>
+        <member name="M:Raven.Rpc.HttpProtocol.RpcHttpClient.#ctor(System.String,System.Text.Encoding,System.Net.Http.HttpClientHandler,System.String,System.Int32,System.Net.DecompressionMethods)">
             <summary>
             构造函数
             </summary>

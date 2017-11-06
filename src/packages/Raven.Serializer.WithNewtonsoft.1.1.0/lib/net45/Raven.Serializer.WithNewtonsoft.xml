@@ -85,6 +85,23 @@
             
             </summary>
         </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.GetSetting">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.#ctor(Raven.Serializer.WithNewtonsoft.SerizlizerSetting)">
+            <summary>
+            
+            </summary>
+            <param name="setting"></param>
+        </member>
         <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Serialize(System.Object)">
             <summary>
             
@@ -96,6 +113,11 @@
             </summary>
             <param name="obj"></param>
             <param name="stream"></param>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.SerializeToString(System.Object)">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Deserialize``1(System.Byte[])">
             <summary>

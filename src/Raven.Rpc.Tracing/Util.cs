@@ -216,27 +216,19 @@ namespace Raven.Rpc.Tracing
             if (obj is string)
                 return (string)obj;
 
-            var data = serializer.Serialize(obj);
-            Encoding encoding = Encoding.UTF8;
-            var res = encoding.GetString(data);
-            return res;
-        }
-
-        /// <summary>
-        /// 深拷贝
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static T Clone<T>(T obj)
-        {
-            if (obj != null)
+            if (serializer is Raven.Serializer.IStringDataSerializer stringSerializer)
             {
-                var _temp = serializer.Serialize(obj);
-                var res = serializer.Deserialize<T>(_temp);
-                return res;
+                return stringSerializer.SerializeToString(obj);
             }
-            return default(T);
+            else
+            {
+                throw new Exception("update packages: Raven.Serializer.WithNewtonsoft >= 1.1.0");
+            }
+            //var data = serializer.Serialize(obj);
+            //Encoding encoding = Encoding.UTF8;
+            //var res = encoding.GetString(data);
+            //return res;
         }
+        
     }
 }
