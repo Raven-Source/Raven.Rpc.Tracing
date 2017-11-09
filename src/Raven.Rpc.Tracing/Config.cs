@@ -24,6 +24,10 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 
         /// </summary>
+        public const string TraceLogsQueueNameV3 = "raven_trace_logsv3";
+        /// <summary>
+        /// 
+        /// </summary>
         public const string SystemLogsQueueName = "raven_sys_logs";
 
         /// <summary>
@@ -73,5 +77,16 @@ namespace Raven.Rpc.Tracing
 
         #endregion
 
+        #region limit
+        /// <summary>
+        /// 时间间隔
+        /// </summary>
+        public const int Interval = 2000;
+        /// <summary>
+        /// 批次保存数量
+        /// </summary>
+        public const int BatchSaveCount = 1000;
+
+        #endregion
     }
 }

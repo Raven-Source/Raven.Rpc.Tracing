@@ -33,6 +33,18 @@ namespace Raven.TracingRecord
         }
     }
 
+    public class TraceLogsRepAsync : MongoRepositoryAsync<TraceLogs, string>
+    {
+        public TraceLogsRepAsync() :
+            base(DBConfig.connString, DBConfig.dbName)
+        { }
+
+        public async Task InsertBatchAsync(IEnumerable<BsonDocument> documents)
+        {
+            await Database.GetCollection<BsonDocument>(nameof(TraceLogs)).InsertManyAsync(documents);
+        }
+    }
+
     public class SystemLogsRep : MongoRepository<SystemLogs, string>
     {
         public SystemLogsRep() :

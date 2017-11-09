@@ -58,6 +58,9 @@
       <HintPath>..\packages\RabbitMQ.Client.3.6.5\lib\net45\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Raven.Message.RabbitMQ">
+      <HintPath>..\..\lib\Raven.Message.RabbitMq\Raven.Message.RabbitMQ.dll</HintPath>
+    </Reference>
     <Reference Include="Raven.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Raven.RabbitMQClient.1.0.1\lib\net45\Raven.RabbitMQClient.dll</HintPath>
       <Private>True</Private>
@@ -109,6 +112,11 @@
     <Compile Include="DataAccess\TraceLogs.cs" />
     <Compile Include="DataAccess\TraceLogsRep.cs" />
     <Compile Include="SystemLogRecordHandle.cs" />
+    <Compile Include="TraceLogsRecordHandleV2.cs" />
+    <Compile Include="V2\CacheQueue.cs" />
+    <Compile Include="V2\Log.cs" />
+    <Compile Include="V2\MQBrokerWatcher.cs" />
+    <Compile Include="V2\RabbitTaskChannel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
