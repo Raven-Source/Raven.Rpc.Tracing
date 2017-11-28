@@ -69,6 +69,9 @@
       <HintPath>..\..\packages\Raven.Message.Kafka.1.0.2\lib\net45\Raven.Message.Kafka.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Raven.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.RabbitMQClient.1.0.2\lib\net45\Raven.RabbitMQClient.dll</HintPath>
+    </Reference>
     <Reference Include="Raven.Rpc.HttpProtocol, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.2.2.0\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
       <Private>True</Private>
@@ -125,10 +128,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Raven.RabbitMQClient\src\Raven.RabbitMQClient\Raven.RabbitMQClient.csproj">
-      <Project>{39a443ab-1751-49bf-9d0a-44802ac6e735}</Project>
-      <Name>Raven.RabbitMQClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Raven.AspNet.WebApiExtensions.Tracing\Raven.AspNet.WebApiExtensions.Tracing.csproj">
       <Project>{579db6c5-3baf-406f-81ab-551f5f885a7a}</Project>
       <Name>Raven.AspNet.WebApiExtensions.Tracing</Name>
