@@ -17,7 +17,7 @@ namespace Raven.Rpc.Tracing.WebHost
         {
             var environment = System.Web.HttpContext.Current.Request.ServerVariables;
             var scopeContext = new RequestScopeContext(environment);
-            RequestScopeContext.Current = scopeContext;
+            RequestScopeContext.InitCurrent(scopeContext);
         }
 
         /// <summary>

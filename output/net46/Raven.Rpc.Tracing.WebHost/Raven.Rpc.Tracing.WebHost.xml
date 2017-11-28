@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.Rpc.Tracing.WebHost</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.Rpc.Tracing.WebHost.HttpContextHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.GetContextItem``1(System.String)">
+            <summary>
+            获取 HttpContextItem
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.SetContextItem(System.String,System.Object)">
+            <summary>
+            设置 HttpContextItem
+            </summary>
+            <param name="key"></param>
+            <param name="val"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.WebHost.HttpContextHelper.GetServerAddress">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.WebHost.InitRequestScopeContext.BeginRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.WebHost.InitRequestScopeContext.EndRequest(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.WebHost.TracingConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.WebHost.TracingConfig.UseTracingContext(Raven.Rpc.Tracing.Record.ITracingRecord,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="tracingRecord"></param>
+            <param name="systemID"></param>
+            <param name="systemName"></param>
+            <param name="environment"></param>
+        </member>
+    </members>
+</doc>

@@ -10,10 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Raven.Rpc.Tracing.TestConsole</RootNamespace>
     <AssemblyName>Raven.Rpc.Tracing.TestConsole</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,21 +40,18 @@
       <HintPath>..\..\packages\Confluent.Kafka-fx45.0.9.4\lib\net45\Confluent.Kafka.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Message.Kafka, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Raven.Message.Kafka.1.0.2\lib\net45\Raven.Message.Kafka.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Serializer, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.Serializer.1.0.2\lib\net45\Raven.Serializer.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Raven.Serializer, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Serializer.2.0.2\lib\net46\Raven.Serializer.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.Serializer.WithNewtonsoft.1.0.3\lib\net45\Raven.Serializer.WithNewtonsoft.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Serializer.WithNewtonsoft.2.0.2\lib\net46\Raven.Serializer.WithNewtonsoft.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

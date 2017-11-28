@@ -28,7 +28,8 @@ namespace Raven.Rpc.Tracing.WebHost
                 return default(T);
 
             object obj;
-            if (RequestScopeContext.Current != null && RequestScopeContext.Current.Items.TryGetValue(key, out obj) && obj != null)
+            IRequestScopeContext context = RequestScopeContext.GetCurrent();
+            if (context != null && context.Items.TryGetValue(key, out obj) && obj != null)
             {
                 return (T)obj;
             }
@@ -51,10 +52,16 @@ namespace Raven.Rpc.Tracing.WebHost
         /// <param name="val"></param>
         public void SetContextItem(string key, object val)
         {
-            if (string.IsNullOrWhiteSpace(key) || RequestScopeContext.Current == null)
+            if (string.IsNullOrWhiteSpace(key))
                 return;
 
-            RequestScopeContext.Current.Items[key] = val;
+
+            IRequestScopeContext context = RequestScopeContext.GetCurrent();
+
+            if (context == null)
+                return;
+
+            context.Items[key] = val;
         }
 
 
@@ -79,15 +86,15 @@ namespace Raven.Rpc.Tracing.WebHost
             //return System.Web.HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"];
             //var environment = System.Web.HttpContext.Current.Request.ServerVariables;
 
-            if (RequestScopeContext.Current != null)
-            {
-                var environment = RequestScopeContext.Current.Environment as NameValueCollection;
-                if (environment != null)
-                {
-                    //res = environment["LOCAL_ADDR"] + System.Web.HttpContext.Current.Request.Url.Port;
-                    res = string.Concat(environment["LOCAL_ADDR"], ":", environment["SERVER_PORT"]);
-                }
-            }
+            //if (RequestScopeContext.Current != null)
+            //{
+            //    var environment = RequestScopeContext.Current.Environment as NameValueCollection;
+            //    if (environment != null)
+            //    {
+            //        //res = environment["LOCAL_ADDR"] + System.Web.HttpContext.Current.Request.Url.Port;
+            //        res = string.Concat(environment["LOCAL_ADDR"], ":", environment["SERVER_PORT"]);
+            //    }
+            //}
 
             return res;
         }

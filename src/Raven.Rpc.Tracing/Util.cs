@@ -216,10 +216,17 @@ namespace Raven.Rpc.Tracing
             if (obj is string)
                 return (string)obj;
 
-            var data = serializer.Serialize(obj);
-            Encoding encoding = Encoding.UTF8;
-            var res = encoding.GetString(data);
-            return res;
+            if (serializer is Raven.Serializer.IStringDataSerializer strSerializer)
+            {
+                return strSerializer.SerializeToString(obj);
+            }
+            else
+            {
+                var data = serializer.Serialize(obj);
+                Encoding encoding = Encoding.UTF8;
+                var res = encoding.GetString(data);
+                return res;
+            }
         }
 
         /// <summary>

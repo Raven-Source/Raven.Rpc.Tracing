@@ -27,7 +27,8 @@ namespace Raven.Rpc.Tracing.Owin
                 return default(T);
 
             object obj;
-            if (RequestScopeContext.Current != null && RequestScopeContext.Current.Items.TryGetValue(key, out obj) && obj != null)
+            IRequestScopeContext context = RequestScopeContext.GetCurrent();
+            if (context != null && context.Items.TryGetValue(key, out obj) && obj != null)
             {
                 return (T)obj;
             }
@@ -50,10 +51,16 @@ namespace Raven.Rpc.Tracing.Owin
         /// <param name="val"></param>
         public void SetContextItem(string key, object val)
         {
-            if (string.IsNullOrWhiteSpace(key) || RequestScopeContext.Current == null)
+            if (string.IsNullOrWhiteSpace(key))
                 return;
 
-            RequestScopeContext.Current.Items[key] = val;
+
+            IRequestScopeContext context = RequestScopeContext.GetCurrent();
+
+            if (context == null)
+                return;
+
+            context.Items[key] = val;
         }
 
 
@@ -64,25 +71,15 @@ namespace Raven.Rpc.Tracing.Owin
         public string GetServerAddress()
         {
             string res = string.Empty;
-            //is owin
-            //if (System.Web.HttpContext.Current == null)
-            //{
-            //    var environment = OwinRequestScopeContext.Current.Environment;
-            //    res = string.Concat(environment["server.LocalIpAddress"], ":", environment["server.LocalPort"]);
-            //}
-            //else
-            //{
-            //    return System.Web.HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"];
-            //}
 
-            if (RequestScopeContext.Current != null)
-            {
-                var environment = RequestScopeContext.Current.Environment as IDictionary<string, object>;
-                if (environment != null)
-                {
-                    res = string.Concat(environment.GetValue("server.LocalIpAddress"), ":", environment.GetValue("server.LocalPort"));
-                }
-            }
+            //if (RequestScopeContext.Current != null)
+            //{
+            //    var environment = RequestScopeContext.Current.Environment as IDictionary<string, object>;
+            //    if (environment != null)
+            //    {
+            //        res = string.Concat(environment.GetValue("server.LocalIpAddress"), ":", environment.GetValue("server.LocalPort"));
+            //    }
+            //}
 
             return res;
         }

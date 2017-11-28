@@ -16,7 +16,7 @@ namespace Raven.Rpc.Tracing.ContextData
         /// <summary>
         /// Raw Owin Environment dictionary.
         /// </summary>
-        object Environment { get; }
+        //object Environment { get; }
 
         /// <summary>
         /// Gets a key/value collection that can be used to organize and share data during an HTTP request.
@@ -34,24 +34,47 @@ namespace Raven.Rpc.Tracing.ContextData
     /// </summary>
     internal class RequestScopeContext : IRequestScopeContext
     {
+        private static ConcurrentDictionary<int, IRequestScopeContext> contextDict = new ConcurrentDictionary<int, IRequestScopeContext>();
+
         /// <summary>
         /// 
         /// </summary>
         const string CallContextKey = "raven_request_context";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        internal static IRequestScopeContext Current
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //internal static IRequestScopeContext Current
+        //{
+        //    get
+        //    {
+        //        string key = (string)CallContext.LogicalGetData(CallContextKey);
+        //        IRequestScopeContext context = null;
+        //        contextDict.TryGetValue(key, out context);
+        //        return context;
+        //    }
+        //    set
+        //    {
+        //        string key = (string)CallContext.LogicalGetData(CallContextKey);
+        //        contextDict.TryUpdate(key, value, value);
+        //    }
+        //}
+                       
+
+        internal static IRequestScopeContext GetCurrent()
         {
-            get
-            {
-                return (IRequestScopeContext)CallContext.LogicalGetData(CallContextKey);
-            }
-            set
-            {
-                CallContext.LogicalSetData(CallContextKey, value);
-            }
+            int key = (int)CallContext.LogicalGetData(CallContextKey);
+            IRequestScopeContext context = null;
+            contextDict.TryGetValue(key, out context);
+
+            return context;
+        }
+
+        internal static void InitCurrent(IRequestScopeContext context)
+        {
+            int key = Guid.NewGuid().GetHashCode();
+            CallContext.LogicalSetData(CallContextKey, key);
+            contextDict.AddOrUpdate(key, x => context, (x, y) => context);
         }
 
         /// <summary>
@@ -59,9 +82,11 @@ namespace Raven.Rpc.Tracing.ContextData
         /// </summary>
         internal static void FreeContextSlot()
         {
+            int key = (int)CallContext.LogicalGetData(CallContextKey);
+            contextDict.TryRemove(key, out IRequestScopeContext _);
             CallContext.FreeNamedDataSlot(CallContextKey);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
