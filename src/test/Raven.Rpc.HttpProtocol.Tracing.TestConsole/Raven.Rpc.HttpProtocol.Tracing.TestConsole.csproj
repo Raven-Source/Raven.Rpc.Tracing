@@ -91,6 +91,10 @@
       <Project>{3a1ba3f9-bcc0-4d08-85cd-9f0f0ef623b5}</Project>
       <Name>Raven.Rpc.Tracing.NoContext</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Raven.Rpc.Tracing.Record.RabbitMQ\Raven.Rpc.Tracing.Record.RabbitMQ.csproj">
+      <Project>{df13b623-2fb6-4297-8c81-0ab24a11a564}</Project>
+      <Name>Raven.Rpc.Tracing.Record.RabbitMQ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Raven.Rpc.Tracing\Raven.Rpc.Tracing.csproj">
       <Project>{1fe6df36-a193-4e21-968b-77a970b6e42f}</Project>
       <Name>Raven.Rpc.Tracing</Name>

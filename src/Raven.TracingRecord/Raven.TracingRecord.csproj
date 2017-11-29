@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Raven.TracingRecord</RootNamespace>
     <AssemblyName>Raven.TracingRecord</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,9 +51,8 @@
       <HintPath>..\packages\MongoDB.Repository.2.2.12\lib\net45\MongoDB.Repository.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.6.5.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <HintPath>..\packages\RabbitMQ.Client.3.6.5\lib\net45\RabbitMQ.Client.dll</HintPath>
@@ -62,13 +62,11 @@
       <HintPath>..\packages\Raven.RabbitMQClient.1.0.2\lib\net45\Raven.RabbitMQClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Serializer, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Serializer.1.0.2\lib\net45\Raven.Serializer.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Raven.Serializer, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Serializer.2.0.2\lib\net46\Raven.Serializer.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Serializer.WithNewtonsoft.1.0.3\lib\net45\Raven.Serializer.WithNewtonsoft.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Serializer.WithNewtonsoft.2.0.2\lib\net46\Raven.Serializer.WithNewtonsoft.dll</HintPath>
     </Reference>
     <Reference Include="Repository.IEntity, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Repository.IEntity.1.0.2\lib\net40\Repository.IEntity.dll</HintPath>

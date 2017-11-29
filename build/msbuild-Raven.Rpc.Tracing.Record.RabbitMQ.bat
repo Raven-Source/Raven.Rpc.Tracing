@@ -6,6 +6,6 @@ set fdir="C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild
 ::)
 
 set msbuild=%fdir%\msbuild.exe
-%msbuild% ../src/Raven.Rpc.Tracing.Record.Kafka/Raven.Rpc.Tracing.Record.Kafka.csproj /t:Clean;Rebuild /p:Configuration=Release;OutputPath="..\..\output\net46\Raven.Rpc.Tracing.Record.Kafka"
+%msbuild% ../src/Raven.Rpc.Tracing.Record.RabbitMQ/Raven.Rpc.Tracing.Record.RabbitMQ.csproj /t:Clean;Rebuild /p:Configuration=Release;OutputPath="..\..\output\net46\Raven.Rpc.Tracing.Record.RabbitMQ"
 
 pause

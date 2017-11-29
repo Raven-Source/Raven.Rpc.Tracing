@@ -73,7 +73,6 @@
     <Compile Include="Models\TraceLogs.cs" />
     <Compile Include="Record\ITracingRecord.cs" />
     <Compile Include="KeyValue.cs" />
-    <Compile Include="Record\TracingRecordRabbitmq.cs" />
     <Compile Include="ServiceContainer.cs" />
     <Compile Include="Helpers\TracingHelper.cs" />
     <Compile Include="Util.cs" />

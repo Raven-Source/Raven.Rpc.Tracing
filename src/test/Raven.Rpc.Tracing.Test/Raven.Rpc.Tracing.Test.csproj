@@ -74,6 +74,10 @@
       <Project>{7A1D9E7F-F057-475C-BFE2-A1D9ACC3B103}</Project>
       <Name>Raven.Rpc.Tracing.Record.Kafka</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Raven.Rpc.Tracing.Record.RabbitMQ\Raven.Rpc.Tracing.Record.RabbitMQ.csproj">
+      <Project>{df13b623-2fb6-4297-8c81-0ab24a11a564}</Project>
+      <Name>Raven.Rpc.Tracing.Record.RabbitMQ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Raven.Rpc.Tracing\Raven.Rpc.Tracing.csproj">
       <Project>{1fe6df36-a193-4e21-968b-77a970b6e42f}</Project>
       <Name>Raven.Rpc.Tracing</Name>

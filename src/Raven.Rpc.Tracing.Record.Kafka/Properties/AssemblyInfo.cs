@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 
 //1.0.4.0 kafka tracing日志使用bson序列化， 安全关闭kafka tracing日志记录器
 //1.0.5.0 kafka tracing日志使用jil序列化
-[assembly: AssemblyVersion("1.0.8.0")]
-[assembly: AssemblyFileVersion("1.0.8.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]

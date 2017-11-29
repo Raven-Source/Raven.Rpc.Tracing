@@ -1,5 +1,6 @@
 *.suo
 *.user
+output
 bin
 obj
 TestResults
