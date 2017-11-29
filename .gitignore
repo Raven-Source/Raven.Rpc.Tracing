@@ -1,0 +1,12 @@
+*.suo
+*.user
+output
+bin
+obj
+TestResults
+.vs
+log
+*.pubxml
+*.idea
+target
+*.iml

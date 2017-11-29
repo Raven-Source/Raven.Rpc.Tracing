@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.Rpc.Tracing.Record.Kafka</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.Rpc.Tracing.Record.TracingRecordKafka">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordKafka.#ctor(System.String,System.String)">
+            <summary>
+            创建
+            </summary>
+            <param name="kafkaBrokers">kafka节点，多个节点用逗号分隔，例如ip:port,ip:port</param>
+            <param name="logType">日志类型，默认不记录任何日志</param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordKafka.Init(System.String,System.String)">
+            <summary>
+            初始化
+            </summary>
+            <param name="kafkaBrokers"></param>
+            <param name="logType"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordKafka.RecordSystemLogs(Raven.Rpc.Tracing.SystemLogs)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.TracingRecordKafka.RecordTraceLog(Raven.Rpc.Tracing.TraceLogs)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="T:Raven.Rpc.Tracing.Record.DefaultLog">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.DefaultLog.DeleteOldLog(System.String,System.DateTime,System.Int32)">
+            <summary>
+            清除旧日志
+            </summary>
+            <param name="path"></param>
+            <param name="folder"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.DefaultLog.Debug(System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <param name="pars"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.DefaultLog.Error(System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.DefaultLog.Error(System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <param name="pars"></param>
+        </member>
+        <member name="M:Raven.Rpc.Tracing.Record.DefaultLog.Info(System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <param name="pars"></param>
+        </member>
+    </members>
+</doc>

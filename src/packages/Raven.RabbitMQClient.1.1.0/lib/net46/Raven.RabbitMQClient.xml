@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.RabbitMQClient</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.MessageQueue.WithRabbitMQ.ExchangeType">
+            <summary>
+            路由枚举
+            </summary>
+        </member>
+        <member name="F:Raven.MessageQueue.WithRabbitMQ.ExchangeType.Default">
+            <summary>
+            空值""|0
+            </summary>
+        </member>
+        <member name="F:Raven.MessageQueue.WithRabbitMQ.ExchangeType.Fanout">
+            <summary>
+            不进行路由，将消息分发到所有绑定的队列，此时routingKey无用|1
+            </summary>
+        </member>
+        <member name="F:Raven.MessageQueue.WithRabbitMQ.ExchangeType.Direct">
+            <summary>
+            对exchange进行路由，通过匹配routingKey来将消息分发到绑定的队列中|2
+            </summary>
+        </member>
+        <member name="F:Raven.MessageQueue.WithRabbitMQ.ExchangeType.Topic">
+            <summary>
+            对exchange进行路由，通过模糊匹配routingKey来将消息分发到绑定的队列中，性能比direct低|3
+            </summary>
+        </member>
+        <member name="F:Raven.MessageQueue.WithRabbitMQ.ExchangeType.Headers">
+            <summary>
+            对exchange进行路由，通过对header中参数类型为（键=值）的值进行匹配
+            </summary>
+        </member>
+        <member name="T:Raven.MessageQueue.WithRabbitMQ.ExchangeTypeDataDict">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.MessageQueue.WithRabbitMQ.ExchangeTypeDataDict.ExchangeTypeDict">
+            <summary>
+            exchangeType对应数值表
+            </summary>
+        </member>
+        <member name="T:Raven.MessageQueue.WithRabbitMQ.Options">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.MessageQueue.WithRabbitMQ.Options.DefaultMaxQueueCount">
+            <summary>
+            默认最大队列数
+            </summary>
+        </member>
+        <member name="P:Raven.MessageQueue.WithRabbitMQ.Options.HostName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.MessageQueue.WithRabbitMQ.Options.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.MessageQueue.WithRabbitMQ.Options.Password">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.MessageQueue.WithRabbitMQ.Options.Port">
+            <summary>
+            端口，默认5672
+            </summary>
+        </member>
+        <member name="P:Raven.MessageQueue.WithRabbitMQ.Options.MaxQueueCount">
+            <summary>
+            最大内存队列数,默认100000
+            </summary>
+        </member>
+        <member name="P:Raven.MessageQueue.WithRabbitMQ.Options.SerializerType">
+            <summary>
+            数据格式化方式，对应SerializeType
+            </summary>
+        </member>
+        <member name="P:Raven.MessageQueue.WithRabbitMQ.Options.Loger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.MessageQueue.WithRabbitMQ.Options.WriteWorkerTaskNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.Options.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient._queue">
+            <summary>
+            队列工作线程
+            </summary>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.#ctor(System.String,System.String,System.String,System.Nullable{System.Int32},System.Int32,Raven.Serializer.SerializerType,Raven.MessageQueue.ILoger,System.Int16)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="hostName"></param>
+            <param name="userName"></param>
+            <param name="port"></param>
+            <param name="password"></param>
+            <param name="maxQueueCount"></param>
+            <param name="serializerType"></param>
+            <param name="loger"></param>
+            <param name="writeWorkerTaskNumber"></param>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.GetInstance(Raven.MessageQueue.WithRabbitMQ.Options)">
+            <summary>
+            获取实例
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.CreateConnection">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.ReceiveBatch``1(System.String,System.String,System.Boolean)">
+            <summary>
+            批量接收
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="queueName">队列名</param>
+            <param name="exchangeName"></param>
+            <param name="noAck"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.ReceiveSingle``1(System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="queueName"></param>
+            <param name="exchangeName"></param>
+            <param name="noAck"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.RegisterReceive``1(System.String,System.Func{``0,System.Boolean},System.String,Raven.MessageQueue.WithRabbitMQ.ExchangeType,System.Boolean)">
+            <summary>
+            注册Receive
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="queueName"></param>
+            <param name="callback"></param>
+            <param name="exchangeName"></param>
+            <param name="exchangeType"></param>
+            <param name="noAck"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Send(System.String,System.Object,System.Boolean,System.Boolean)">
+            <summary>
+            异步入队
+            </summary>
+            <param name="queueName">队列名</param>
+            <param name="dataObj">入队数据</param>
+            <param name="persistent">数据是否持久化</param>
+            <param name="durableQueue">队列是否持久化</param>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.SendSync(System.String,System.Object,System.Boolean,System.Boolean)">
+            <summary>
+            异步入队
+            </summary>
+            <param name="queueName">队列名</param>
+            <param name="dataObj">入队数据</param>
+            <param name="persistent">数据是否持久化</param>
+            <param name="durableQueue">队列是否持久化</param>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Publish(System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="exchangeName"></param>
+            <param name="dataObj"></param>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Subscribe``1(System.String,System.Action{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="exchangeName"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.BasicDequeueBatch(System.String,System.String,Raven.MessageQueue.WithRabbitMQ.ExchangeType,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="exchangeName"></param>
+            <param name="queueName"></param>
+            <param name="exchangeType"></param>
+            <param name="noAck"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.BasicDequeue(System.String,System.String,Raven.MessageQueue.WithRabbitMQ.ExchangeType,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="exchangeName"></param>
+            <param name="queueName"></param>
+            <param name="exchangeType"></param>
+            <param name="noAck"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.BasicQueueBind(System.String,System.EventHandler{RabbitMQ.Client.Events.BasicDeliverEventArgs})">
+            <summary>
+            
+            </summary>
+            <param name="exchangeName"></param>
+            <param name="callback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.BasicEnqueue(System.String,System.String,System.Object,System.Boolean,System.Boolean,Raven.MessageQueue.WithRabbitMQ.ExchangeType)">
+            <summary>
+            入队
+            </summary>
+            <param name="exchangeName"></param>
+            <param name="queueName"></param>
+            <param name="dataObj"></param>
+            <param name="persistent">数据是否持久化</param>
+            <param name="durableQueue">队列是否持久化</param>
+            <param name="exchangeType">默认为空，值为fanout是支持订阅发布模型</param>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.QueueToWrite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.RecordException(System.Exception,System.Object)">
+            <summary>
+            记录异常
+            </summary>
+            <param name="ex"></param>
+            <param name="dataObj"></param>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Finalize">
+            <summary>
+            必须，以备程序员忘记了显式调用Dispose方法
+            </summary> 
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Dispose">
+            <summary>
+            实现IDisposable中的Dispose方法
+            </summary>
+        </member>
+        <member name="M:Raven.MessageQueue.WithRabbitMQ.RabbitMQClient.Dispose(System.Boolean)">
+            <summary>
+            非密封类修饰用protected virtual
+            密封类修饰用private
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:Raven.MessageQueue.WithRabbitMQ.QueueMessage">
+            <summary>
+            队列消息
+            </summary>
+        </member>
+        <member name="T:Raven.MessageQueue.ILoger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.MessageQueue.ILoger.LogError(System.Exception,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="ex"></param>
+            <param name="dataObj">1.Dequeue(出队时为BasicGetResult的Body,byte[]类型 或 null);2.Enqueue(入队时为传的dataObj)</param>
+        </member>
+    </members>
+</doc>

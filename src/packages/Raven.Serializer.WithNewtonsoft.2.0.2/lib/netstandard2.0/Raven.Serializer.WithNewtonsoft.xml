@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Raven.Serializer.WithNewtonsoft</name>
+    </assembly>
+    <members>
+        <member name="T:Raven.Serializer.WithNewtonsoft.NewtsBsonSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsBsonSerializer.Serialize(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsBsonSerializer.Serialize(System.Object,System.IO.Stream)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="stream"></param>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsBsonSerializer.Deserialize``1(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsBsonSerializer.Deserialize(System.Type,System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsBsonSerializer.Deserialize``1(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="buffer"></param>
+            <param name="index"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsBsonSerializer.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="buffer"></param>
+            <param name="index"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsBsonSerializer.Deserialize``1(System.IO.Stream)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsBsonSerializer.Deserialize(System.Type,System.IO.Stream)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.DefalutSettings">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.GetSetting">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.#ctor(Raven.Serializer.WithNewtonsoft.SerizlizerSetting)">
+            <summary>
+            
+            </summary>
+            <param name="setting"></param>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Serialize(System.Object)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Serialize(System.Object,System.IO.Stream)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="stream"></param>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.SerializeToString(System.Object)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Deserialize``1(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Deserialize(System.Type,System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Deserialize``1(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="index"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="data"></param>
+            <param name="index"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Deserialize``1(System.IO.Stream)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.NewtsJsonSerializer.Deserialize(System.Type,System.IO.Stream)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Raven.Serializer.WithNewtonsoft.SerizlizerSetting">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Raven.Serializer.WithNewtonsoft.SerizlizerSetting.DateFormatString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Raven.Serializer.WithNewtonsoft.SerizlizerSetting.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

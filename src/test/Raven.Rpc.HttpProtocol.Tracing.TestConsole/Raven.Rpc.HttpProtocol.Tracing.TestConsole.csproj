@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EAB6D763-0F2C-422E-8F97-917E5C4F6312}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Raven.Rpc.HttpProtocol.Tracing.TestConsole</RootNamespace>
+    <AssemblyName>Raven.Rpc.HttpProtocol.Tracing.TestConsole</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.6.5.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RabbitMQ.Client.3.6.5\lib\net45\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.RabbitMQClient.1.0.2\lib\net45\Raven.RabbitMQClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.2.2.0\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Rpc.IContractModel, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Rpc.IContractModel.2.2.0\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Serializer, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Serializer.2.0.2\lib\net46\Raven.Serializer.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Serializer.WithNewtonsoft, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Serializer.WithNewtonsoft.2.0.2\lib\net46\Raven.Serializer.WithNewtonsoft.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Raven.Rpc.HttpProtocol.Tracing\Raven.Rpc.HttpProtocol.Tracing.csproj">
+      <Project>{3413e680-837e-4bd8-9c37-728359b32c13}</Project>
+      <Name>Raven.Rpc.HttpProtocol.Tracing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Raven.Rpc.Tracing.NoContext\Raven.Rpc.Tracing.NoContext.csproj">
+      <Project>{3a1ba3f9-bcc0-4d08-85cd-9f0f0ef623b5}</Project>
+      <Name>Raven.Rpc.Tracing.NoContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Raven.Rpc.Tracing.Record.RabbitMQ\Raven.Rpc.Tracing.Record.RabbitMQ.csproj">
+      <Project>{df13b623-2fb6-4297-8c81-0ab24a11a564}</Project>
+      <Name>Raven.Rpc.Tracing.Record.RabbitMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Raven.Rpc.Tracing\Raven.Rpc.Tracing.csproj">
+      <Project>{1fe6df36-a193-4e21-968b-77a970b6e42f}</Project>
+      <Name>Raven.Rpc.Tracing</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
