@@ -44,7 +44,7 @@ namespace Raven.Rpc.Tracing.Test
 
             System.Collections.Concurrent.ConcurrentDictionary<string, string> dict = new System.Collections.Concurrent.ConcurrentDictionary<string, string>();
             System.Collections.Concurrent.ConcurrentQueue<string> queue = new System.Collections.Concurrent.ConcurrentQueue<string>();
-                //Dictionary<string, string> dict = new Dictionary<string, string>(10000000);
+            //Dictionary<string, string> dict = new Dictionary<string, string>(10000000);
             //long ms = 0;
             int none = 0;
             Stopwatch w = new Stopwatch();
@@ -80,5 +80,27 @@ namespace Raven.Rpc.Tracing.Test
             ;
 
         }
+
+        [TestMethod]
+        public void GuidToInt()
+        {
+            HashSet<long> hs = new HashSet<long>();
+            for (var i = 0; i < 1000000; i++)
+            {
+                Guid guid = Guid.NewGuid();
+                long id = BitConverter.ToInt64(guid.ToByteArray(), 0);
+                if (hs.Contains(id))
+                {
+                    Debug.WriteLine($"在{i}次循环处重复，重复值guid {guid}:{id}");
+                    throw new Exception();
+                }
+                hs.Add(id);
+            }
+        }
+
+
+
+
+
     }
 }

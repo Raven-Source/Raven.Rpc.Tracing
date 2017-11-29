@@ -34,7 +34,7 @@ namespace Raven.Rpc.Tracing.ContextData
     /// </summary>
     internal class RequestScopeContext : IRequestScopeContext
     {
-        private static ConcurrentDictionary<int, IRequestScopeContext> contextDict = new ConcurrentDictionary<int, IRequestScopeContext>();
+        private static ConcurrentDictionary<long, IRequestScopeContext> contextDict = new ConcurrentDictionary<long, IRequestScopeContext>();
 
         /// <summary>
         /// 
@@ -59,11 +59,11 @@ namespace Raven.Rpc.Tracing.ContextData
         //        contextDict.TryUpdate(key, value, value);
         //    }
         //}
-                       
+
 
         internal static IRequestScopeContext GetCurrent()
         {
-            int key = (int)CallContext.LogicalGetData(CallContextKey);
+            long key = (long)CallContext.LogicalGetData(CallContextKey);
             IRequestScopeContext context = null;
             contextDict.TryGetValue(key, out context);
 
@@ -72,7 +72,7 @@ namespace Raven.Rpc.Tracing.ContextData
 
         internal static void InitCurrent(IRequestScopeContext context)
         {
-            int key = Guid.NewGuid().GetHashCode();
+            long key = BitConverter.ToInt64(Guid.NewGuid().ToByteArray(), 0);
             CallContext.LogicalSetData(CallContextKey, key);
             contextDict.AddOrUpdate(key, x => context, (x, y) => context);
         }
@@ -82,7 +82,7 @@ namespace Raven.Rpc.Tracing.ContextData
         /// </summary>
         internal static void FreeContextSlot()
         {
-            int key = (int)CallContext.LogicalGetData(CallContextKey);
+            long key = (long)CallContext.LogicalGetData(CallContextKey);
             contextDict.TryRemove(key, out IRequestScopeContext _);
             CallContext.FreeNamedDataSlot(CallContextKey);
         }
