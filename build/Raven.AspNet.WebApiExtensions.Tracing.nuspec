@@ -17,8 +17,8 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\output\net46\Raven.AspNet.WebApiExtensions.Tracing\Raven.AspNet.WebApiExtensions.Tracing.dll" target="lib\net46\Raven.AspNet.WebApiExtensions.Tracing.dll" />
-        <file src="..\output\net46\Raven.AspNet.WebApiExtensions.Tracing\Raven.AspNet.WebApiExtensions.Tracing.pdb" target="lib\net46\Raven.AspNet.WebApiExtensions.Tracing.pdb" />
-        <file src="..\output\net46\Raven.AspNet.WebApiExtensions.Tracing\Raven.AspNet.WebApiExtensions.Tracing.xml" target="lib\net46\Raven.AspNet.WebApiExtensions.Tracing.xml" />
+        <file src="..\output\net45\Raven.AspNet.WebApiExtensions.Tracing\Raven.AspNet.WebApiExtensions.Tracing.dll" target="lib\net45\Raven.AspNet.WebApiExtensions.Tracing.dll" />
+        <file src="..\output\net45\Raven.AspNet.WebApiExtensions.Tracing\Raven.AspNet.WebApiExtensions.Tracing.pdb" target="lib\net45\Raven.AspNet.WebApiExtensions.Tracing.pdb" />
+        <file src="..\output\net45\Raven.AspNet.WebApiExtensions.Tracing\Raven.AspNet.WebApiExtensions.Tracing.xml" target="lib\net45\Raven.AspNet.WebApiExtensions.Tracing.xml" />
     </files>
 </package>

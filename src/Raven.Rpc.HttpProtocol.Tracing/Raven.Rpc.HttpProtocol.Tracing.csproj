@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Raven.Rpc.HttpProtocol.Tracing</RootNamespace>
     <AssemblyName>Raven.Rpc.HttpProtocol.Tracing</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -35,16 +35,15 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Rpc.HttpProtocol.2.2.0\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.2.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Raven.Rpc.HttpProtocol.2.2.2\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Raven.Rpc.IContractModel.2.2.0\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Serializer, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.Serializer.2.0.2\lib\net46\Raven.Serializer.dll</HintPath>
+      <HintPath>..\packages\Raven.Serializer.2.0.3\lib\net45\Raven.Serializer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -16,8 +16,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\output\net46\Raven.Rpc.Tracing.WebHost\Raven.Rpc.Tracing.WebHost.dll" target="lib\net46\Raven.Rpc.Tracing.WebHost.dll" />
-        <file src="..\output\net46\Raven.Rpc.Tracing.WebHost\Raven.Rpc.Tracing.WebHost.pdb" target="lib\net46\Raven.Rpc.Tracing.WebHost.pdb" />
-        <file src="..\output\net46\Raven.Rpc.Tracing.WebHost\Raven.Rpc.Tracing.WebHost.xml" target="lib\net46\Raven.Rpc.Tracing.WebHost.xml" />
+        <file src="..\output\net45\Raven.Rpc.Tracing.WebHost\Raven.Rpc.Tracing.WebHost.dll" target="lib\net45\Raven.Rpc.Tracing.WebHost.dll" />
+        <file src="..\output\net45\Raven.Rpc.Tracing.WebHost\Raven.Rpc.Tracing.WebHost.xml" target="lib\net45\Raven.Rpc.Tracing.WebHost.xml" />
     </files>
 </package>

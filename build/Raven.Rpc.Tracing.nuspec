@@ -12,13 +12,12 @@
         <dependencies>
             <group targetFramework=".NETFramework4.6" >
 				<dependency id="Raven.Rpc.IContractModel" version="2.2.0" />			
-				<dependency id="Raven.Serializer" version="2.0.2" />
+				<dependency id="Raven.Serializer" version="2.0.3" />
             </group>
         </dependencies>
     </metadata>
     <files>
-        <file src="..\output\net46\Raven.Rpc.Tracing\Raven.Rpc.Tracing.dll" target="lib\net46\Raven.Rpc.Tracing.dll" />
-        <file src="..\output\net46\Raven.Rpc.Tracing\Raven.Rpc.Tracing.pdb" target="lib\net46\Raven.Rpc.Tracing.pdb" />
-        <file src="..\output\net46\Raven.Rpc.Tracing\Raven.Rpc.Tracing.xml" target="lib\net46\Raven.Rpc.Tracing.xml" />
+        <file src="..\output\net45\Raven.Rpc.Tracing\Raven.Rpc.Tracing.dll" target="lib\net45\Raven.Rpc.Tracing.dll" />
+        <file src="..\output\net45\Raven.Rpc.Tracing\Raven.Rpc.Tracing.xml" target="lib\net45\Raven.Rpc.Tracing.xml" />
     </files>
 </package>

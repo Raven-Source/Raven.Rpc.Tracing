@@ -70,25 +70,24 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.RabbitMQClient.1.0.2\lib\net45\Raven.RabbitMQClient.dll</HintPath>
+      <HintPath>..\..\packages\Raven.RabbitMQClient.1.1.1\lib\net46\Raven.RabbitMQClient.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.2.2.0\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Raven.Rpc.HttpProtocol, Version=2.2.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Raven.Rpc.HttpProtocol.2.2.2\lib\net45\Raven.Rpc.HttpProtocol.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Rpc.IContractModel, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Raven.Rpc.IContractModel.2.2.0\lib\net40\Raven.Rpc.IContractModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Serializer, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.Serializer.2.0.2\lib\net46\Raven.Serializer.dll</HintPath>
+      <HintPath>..\..\packages\Raven.Serializer.2.0.3\lib\net45\Raven.Serializer.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Serializer.WithMsgPack, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Raven.Serializer.WithMsgPack.2.0.0\lib\net45\Raven.Serializer.WithMsgPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Serializer.WithNewtonsoft, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Raven.Serializer.WithNewtonsoft.2.0.2\lib\net46\Raven.Serializer.WithNewtonsoft.dll</HintPath>
+      <HintPath>..\..\packages\Raven.Serializer.WithNewtonsoft.2.0.3\lib\net45\Raven.Serializer.WithNewtonsoft.dll</HintPath>
     </Reference>
     <Reference Include="Sigil, Version=4.5.0.0, Culture=neutral, PublicKeyToken=2d06c3494341c8ab, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Sigil.4.5.0\lib\net45\Sigil.dll</HintPath>
@@ -139,10 +138,6 @@
     <ProjectReference Include="..\..\Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.csproj">
       <Project>{d3acd237-2f03-4909-ac7d-7c9f0db8b909}</Project>
       <Name>Raven.Rpc.Tracing.Owin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Raven.Rpc.Tracing.Record.Kafka\Raven.Rpc.Tracing.Record.Kafka.csproj">
-      <Project>{7a1d9e7f-f057-475c-bfe2-a1d9acc3b103}</Project>
-      <Name>Raven.Rpc.Tracing.Record.Kafka</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Raven.Rpc.Tracing.Record.RabbitMQ\Raven.Rpc.Tracing.Record.RabbitMQ.csproj">
       <Project>{df13b623-2fb6-4297-8c81-0ab24a11a564}</Project>

@@ -17,8 +17,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\output\net46\Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.dll" target="lib\net46\Raven.Rpc.Tracing.Owin.dll" />
-        <file src="..\output\net46\Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.pdb" target="lib\net46\Raven.Rpc.Tracing.Owin.pdb" />
-        <file src="..\output\net46\Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.xml" target="lib\net46\Raven.Rpc.Tracing.Owin.xml" />
+        <file src="..\output\net45\Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.dll" target="lib\net45\Raven.Rpc.Tracing.Owin.dll" />
+        <file src="..\output\net45\Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.xml" target="lib\net45\Raven.Rpc.Tracing.Owin.xml" />
     </files>
 </package>

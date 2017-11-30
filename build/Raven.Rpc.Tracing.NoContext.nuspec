@@ -16,8 +16,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\output\net46\Raven.Rpc.Tracing.NoContext\Raven.Rpc.Tracing.NoContext.dll" target="lib\net46\Raven.Rpc.Tracing.NoContext.dll" />
-        <file src="..\output\net46\Raven.Rpc.Tracing.NoContext\Raven.Rpc.Tracing.NoContext.pdb" target="lib\net46\Raven.Rpc.Tracing.NoContext.pdb" />
-        <file src="..\output\net46\Raven.Rpc.Tracing.NoContext\Raven.Rpc.Tracing.NoContext.xml" target="lib\net46\Raven.Rpc.Tracing.NoContext.xml" />
+        <file src="..\output\net45\Raven.Rpc.Tracing.NoContext\Raven.Rpc.Tracing.NoContext.dll" target="lib\net45\Raven.Rpc.Tracing.NoContext.dll" />
+        <file src="..\output\net45\Raven.Rpc.Tracing.NoContext\Raven.Rpc.Tracing.NoContext.xml" target="lib\net45\Raven.Rpc.Tracing.NoContext.xml" />
     </files>
 </package>

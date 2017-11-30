@@ -34,7 +34,7 @@ namespace Raven.TracingRecord
         //ServerRSLogsRep serverRSlogRep;
         //ClientSRLogsRep clientSRlogRep;
         SystemLogsRep sysLogsRep;
-        IDisposable model;
+        //IDisposable model;
 
         public SystemLogRecordHandle(string serverName)
             : base(serverName, 1000)
