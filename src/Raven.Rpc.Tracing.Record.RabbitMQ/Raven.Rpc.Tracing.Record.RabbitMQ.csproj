@@ -38,9 +38,6 @@
     <Reference Include="RabbitMQ.Client, Version=3.6.5.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <HintPath>..\packages\RabbitMQ.Client.3.6.5\lib\net45\RabbitMQ.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Raven.RabbitMQClient.1.1.1\lib\net45\Raven.RabbitMQClient.dll</HintPath>
-    </Reference>
     <Reference Include="Raven.Serializer, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Raven.Serializer.2.0.3\lib\net45\Raven.Serializer.dll</HintPath>
     </Reference>
@@ -57,17 +54,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExchangeType.cs" />
+    <Compile Include="ExchangeTypeDataDict.cs" />
+    <Compile Include="ILoger.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="RabbitMQClient.cs" />
     <Compile Include="TracingRecordRabbitmq.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Raven.Rpc.Tracing\Raven.Rpc.Tracing.csproj">
       <Project>{1fe6df36-a193-4e21-968b-77a970b6e42f}</Project>
       <Name>Raven.Rpc.Tracing</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
