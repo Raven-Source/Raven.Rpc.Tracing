@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Raven.Rpc.IContractModel;
 using System.Web.Http;
-using Raven.Rpc.HttpProtocol.Tracing;
-using Raven.Rpc.IContractModel;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing.Test.Controllers
 {
@@ -17,8 +11,6 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.Test.Controllers
         [HttpGet]
         public ResponseModel<User> Get()
         {
-            client.RegistTracing();
-
             ResponseModel<string> res;
             res = client.Invoke<RequestModel, ResponseModel<string>>("api/test/get2", new Rpc.IContractModel.RequestModel());
 

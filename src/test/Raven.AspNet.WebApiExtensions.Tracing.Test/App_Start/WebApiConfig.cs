@@ -1,12 +1,4 @@
-﻿using Raven.MessageQueue;
-using Raven.Rpc.Tracing.Record;
-using Raven.Rpc.Tracing.WebHost;
-using Raven.Serializer;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing.Test
 {

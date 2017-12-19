@@ -58,10 +58,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TracingConfig.cs" />
     <Compile Include="HttpActionContextExtensions.cs" />
-    <Compile Include="NonTracingAttribute.cs" />
+    <Compile Include="HttpControllerHandler.cs" />
+    <Compile Include="ITracingApiController.cs" />
+    <Compile Include="NotToRecordAttribute.cs" />
     <Compile Include="TracingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TracingDelegatingHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -70,6 +74,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Raven.AspNetUtil\src\Raven.AspNet\Raven.AspNet.WebApiExtensions\Raven.AspNet.WebApiExtensions.csproj">
+      <Project>{1eb9cfb0-4753-4608-875c-0160fa195b5d}</Project>
+      <Name>Raven.AspNet.WebApiExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Raven.Rpc.Tracing\Raven.Rpc.Tracing.csproj">
       <Project>{1fe6df36-a193-4e21-968b-77a970b6e42f}</Project>
       <Name>Raven.Rpc.Tracing</Name>

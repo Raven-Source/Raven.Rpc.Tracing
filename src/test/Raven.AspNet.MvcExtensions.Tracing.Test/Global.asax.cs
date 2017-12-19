@@ -1,11 +1,8 @@
-﻿using Raven.MessageQueue;
-using Raven.Rpc.Tracing.Record;
-using Raven.Rpc.Tracing.WebHost;
+﻿using Raven.Rpc.Tracing.Record;
+using Raven.Rpc.Tracing.Record.Mongo;
+using Raven.Rpc.Tracing.Record.RabbitMQ;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -21,8 +18,9 @@ namespace Raven.AspNet.MvcExtensions.Tracing.Test
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            TracingConfig.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()));
-        }        
+            TracingConfig.UseTracing(ControllerBuilder.Current, RouteTable.Routes, new TracingRecordMongo());
+            //TracingConfig.UseTracing(ControllerBuilder.Current, RouteTable.Routes, new TracingRecordRabbitmq(hostName, username, password, new Loger()));
+        }
     }
 
     public class Loger : ILoger

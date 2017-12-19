@@ -32,8 +32,8 @@ namespace Raven.Rpc.Tracing.Owin
         /// <returns></returns>
         public async Task Invoke(IDictionary<string, object> environment)
         {
-            var scopeContext = new RequestScopeContext(environment);
-            RequestScopeContext.InitCurrent(scopeContext);
+            var scopeContext = new TracingContext();
+            TracingContext.InitCurrent(environment, scopeContext);
 
             try
             {
@@ -41,7 +41,7 @@ namespace Raven.Rpc.Tracing.Owin
             }
             finally
             {
-                RequestScopeContext.FreeContextSlot();
+                TracingContext.FreeContext(environment);
             }
         }
     }

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Raven.Rpc.Tracing.WebHost
 {
-    internal class InitRequestScopeContext : IInitRequestScopeContext
+    internal class InitRequestScopeContext : IInitRequestTracingContext
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public void BeginRequest(object context)
+        public void BeginRequest(ITracingContextHelper contextHelper, IDictionary<string, object> environment)
         {
             var environment = System.Web.HttpContext.Current.Request.ServerVariables;
             var scopeContext = new RequestScopeContext(environment);
@@ -24,7 +24,7 @@ namespace Raven.Rpc.Tracing.WebHost
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public void EndRequest(object context)
+        public void EndRequest(ITracingContextHelper contextHelper, IDictionary<string, object> environment)
         {
             RequestScopeContext.FreeContextSlot();
         }

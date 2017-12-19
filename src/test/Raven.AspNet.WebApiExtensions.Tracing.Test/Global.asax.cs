@@ -1,15 +1,9 @@
-﻿using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-using Raven.MessageQueue;
-using Raven.Rpc.Tracing.Record;
-using Raven.Rpc.Tracing.WebHost;
+﻿using Raven.Rpc.Tracing.Record;
+using Raven.Rpc.Tracing.Record.Mongo;
+using Raven.Rpc.Tracing.Record.RabbitMQ;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing.Test
 {
@@ -21,7 +15,10 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.Test
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            TracingConfig.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()));
+
+
+            GlobalConfiguration.Configuration.UseTracing(new TracingRecordMongo());
+            //GlobalConfiguration.Configuration.UseTracing(new TracingRecordRabbitmq(hostName, username, password, new Loger()));
         }       
 
     }

@@ -29,7 +29,7 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 
         /// </summary>
-        public const string ServerRSKey = "__raven_ServerRS";
+        //public const string ServerRSKey = "__raven_ServerRS";
 
         #region TraceLogs Extensions
 

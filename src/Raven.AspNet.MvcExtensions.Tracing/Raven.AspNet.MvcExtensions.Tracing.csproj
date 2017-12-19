@@ -76,16 +76,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TracingConfig.cs" />
     <Compile Include="FilterContextExtensions.cs" />
-    <Compile Include="NonTracingAttribute.cs" />
+    <Compile Include="ControllerHandler.cs" />
+    <Compile Include="ITracingController.cs" />
+    <Compile Include="NotToRecordAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TracingAttribute.cs" />
+    <Compile Include="TracingMvcHandler.cs" />
+    <Compile Include="TracingRouteHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Raven.AspNetUtil\src\Raven.AspNet\Raven.AspNet.MvcExtensions\Raven.AspNet.MvcExtensions.csproj">
+      <Project>{c08a8b5f-efae-4f0f-9d3f-a5b1d1b54de9}</Project>
+      <Name>Raven.AspNet.MvcExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Raven.Rpc.Tracing\Raven.Rpc.Tracing.csproj">
       <Project>{1fe6df36-a193-4e21-968b-77a970b6e42f}</Project>
       <Name>Raven.Rpc.Tracing</Name>

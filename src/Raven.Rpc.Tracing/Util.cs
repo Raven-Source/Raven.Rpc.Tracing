@@ -15,17 +15,17 @@ namespace Raven.Rpc.Tracing
     /// </summary>
     public static class Util
     {
-        private static Lazy<ITracingContextHelper> _tracingContextHelper = new Lazy<ITracingContextHelper>(() => ServiceContainer.Resolve<ITracingContextHelper>());
-        /// <summary>
-        /// 
-        /// </summary>
-        public static ITracingContextHelper TracingContextHelper
-        {
-            get
-            {
-                return _tracingContextHelper.Value;
-            }
-        }
+        //private static Lazy<IRequestContextHelper> _tracingContextHelper = new Lazy<IRequestContextHelper>(() => ServiceContainer.Resolve<IRequestContextHelper>());
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public static IRequestContextHelper RequestContextHelper
+        //{
+        //    get
+        //    {
+        //        return _tracingContextHelper.Value;
+        //    }
+        //}
 
         /// <summary>
         /// 

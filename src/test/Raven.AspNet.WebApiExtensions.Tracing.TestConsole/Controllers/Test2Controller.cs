@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Raven.Rpc.HttpProtocol.Tracing;
 using Raven.Rpc.IContractModel;
 using System.Net.Http;
+using Raven.Rpc.Tracing;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
 {
-    public class Test2Controller : ApiController
+    public class Test2Controller : ApiController, ITracingApiController
     {
+        public ITracingContextHelper TracingContextHelper { get; set; }
+
         // Rpc.HttpProtocol.RpcHttpClient client = new Rpc.HttpProtocol.RpcHttpClient("http://127.0.0.1:9001/");
 
         // GET api/values/5

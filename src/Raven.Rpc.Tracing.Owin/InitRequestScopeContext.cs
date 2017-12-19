@@ -10,22 +10,28 @@ namespace Raven.Rpc.Tracing.Owin
     /// <summary>
     /// 
     /// </summary>
-    internal class InitRequestScopeContext : IInitRequestScopeContext
+    internal class InitRequestScopeContext : IInitRequestTracingContext
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
-        public void BeginRequest(object context)
-        {
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="context"></param>
+        //public void BeginRequest(ITracingContextHelper contextHelper, IDictionary<string, object> environment)
+        //{
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
-        public void EndRequest(object context)
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="context"></param>
+        //public void EndRequest(ITracingContextHelper contextHelper, IDictionary<string, object> environment)
+        //{
+        //}
+        public ITracingContext GetTracingContext(object requestContext)
         {
+            if(requestContext is System.Web.Http.Owin.OwinHttpRequestContext )
+            return (ITracingContext)environment[TracingContext.CallContextKey];
         }
     }
 }

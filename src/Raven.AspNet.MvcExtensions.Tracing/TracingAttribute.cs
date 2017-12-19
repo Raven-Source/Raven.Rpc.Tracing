@@ -1,6 +1,6 @@
 ﻿using Raven.Rpc.IContractModel;
 using Raven.Rpc.Tracing;
-using Raven.Rpc.Tracing.ContextData;
+using Raven.Rpc.Tracing.Context;
 using Raven.Rpc.Tracing.Record;
 using System;
 using System.Collections.Generic;
@@ -38,24 +38,24 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <param name="filterContext"></param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ServiceContainer.Resolve<IInitRequestScopeContext>().BeginRequest(filterContext.HttpContext.Request);
-
-            if (!filterContext.HasMarkerAttribute<NonTracingAttribute>())
+            if ( //!filterContext.HasMarkerAttribute<NonTracingAttribute>() && 
+                filterContext.Controller is ITracingController tracingController)
             {
+                var tracingContextHelper = tracingController.TracingContextHelper;
                 var request = filterContext.HttpContext.Request;
                 var response = filterContext.HttpContext.Response;
 
-                Header reqHeader = TracingContextData.GetDefaultRequestHeader();
+                Header reqHeader = tracingContextHelper.GetDefaultRequestHeader();
 
-                TracingContextData.SetSubRpcID(reqHeader.RpcID + ".0");
-                TracingContextData.SetRequestHeader(reqHeader);
+                tracingContextHelper.SetSubRpcID(reqHeader.RpcID + ".0");
+                tracingContextHelper.SetRequestHeader(reqHeader);
 
-                if (!filterContext.HasMarkerAttribute<NotToLogAttribute>())
+                if (!filterContext.HasMarkerAttribute<NotToRecordAttribute>())
                 {
                     TraceLogs trace = new TraceLogs();
                     trace.ContextType = ContextType.Server.ToString();
                     trace.StartTime = DateTime.Now;
-                    trace.MachineAddr = Util.TracingContextHelper.GetServerAddress();
+                    //trace.MachineAddr = tracingContextHelper.GetServerAddress();
                     trace.TraceId = reqHeader.TraceID;
                     trace.RpcId = reqHeader.RpcID;
                     trace.Protocol = request.Url.Scheme;
@@ -80,7 +80,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
 
                     TraceExtensionOnActionExecuting(filterContext, trace);
 
-                    Util.TracingContextHelper.SetContextItem(Config.ServerRSKey, trace);
+                    tracingContextHelper.SetTraceLogs(trace);
                 }
             }
 
@@ -119,12 +119,14 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <param name="filterContext"></param>
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            if (!filterContext.HasMarkerAttribute<NonTracingAttribute>())
+            if (//!filterContext.HasMarkerAttribute<NonTracingAttribute>()
+                filterContext.Controller is ITracingController tracingController)
             {
-                if (!filterContext.HasMarkerAttribute<NotToLogAttribute>())
+                if (!filterContext.HasMarkerAttribute<NotToRecordAttribute>())
                 {
+                    var tracingContextHelper = tracingController.TracingContextHelper;
                     var request = filterContext.HttpContext.Request;
-                    var trace = Util.TracingContextHelper.GetContextItem<TraceLogs>(Config.ServerRSKey);
+                    var trace = tracingContextHelper.GetTraceLogs();
 
                     trace.EndTime = DateTime.Now;
                     trace.TimeLength = Math.Round((trace.EndTime - trace.StartTime).TotalMilliseconds, 4);
@@ -149,8 +151,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     Record(trace);
                 }
             }
-
-            ServiceContainer.Resolve<IInitRequestScopeContext>().EndRequest(filterContext.HttpContext.Request);
+            
             base.OnActionExecuted(filterContext);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Raven.Rpc.Tracing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,11 @@ using System.Web.Mvc;
 
 namespace Raven.AspNet.MvcExtensions.Tracing.Test.Controllers
 {
-    public class HomeController : Controller
+    [Tracing]
+    public class HomeController : Controller, Raven.AspNet.MvcExtensions.Tracing.ITracingController
     {
+        public ITracingContextHelper TracingContextHelper { get; set; }
+
         public class A
         {
             public int ID;
@@ -21,14 +25,13 @@ namespace Raven.AspNet.MvcExtensions.Tracing.Test.Controllers
             return View();
         }
 
-        [Tracing]
         // GET: Home
         public JsonResult Get()
         {
             return new JsonResult() { Data = new { id = 1324, name = "ggg" }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        [Tracing]
+        [NotToRecord]
         // GET: Home
         public JsonResult Get2()
         {

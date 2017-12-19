@@ -57,13 +57,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="ContextData\IInitRequestScopeContext.cs" />
-    <Compile Include="ContextData\IRequestScopeContext.cs" />
+    <Compile Include="Context\IInitRequestTracingContext.cs" />
+    <Compile Include="Context\ITracingContext.cs" />
     <Compile Include="EnvironmentConfig.cs" />
     <Compile Include="Generate.cs" />
     <Compile Include="Helpers\DictionaryHelper.cs" />
-    <Compile Include="TracingContextData.cs" />
-    <Compile Include="ITracingContextHelper.cs" />
+    <Compile Include="Helpers\HttpContextHelper.cs" />
+    <Compile Include="Helpers\ITracingContextHelper.cs" />
+    <Compile Include="Helpers\TracingContextHelper.cs" />
+    <Compile Include="Helpers\IRequestContextHelper.cs" />
     <Compile Include="Models\ContextType.cs" />
     <Compile Include="Models\LevelEnum.cs" />
     <Compile Include="Models\SystemLogs.cs" />
@@ -71,7 +73,6 @@
     <Compile Include="Record\ITracingRecord.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="ServiceContainer.cs" />
-    <Compile Include="Helpers\TracingHelper.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

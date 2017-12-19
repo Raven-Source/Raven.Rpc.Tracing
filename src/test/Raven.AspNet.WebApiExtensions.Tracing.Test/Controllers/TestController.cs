@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Raven.Rpc.HttpProtocol.Tracing;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing.Test.Controllers
 {
@@ -17,7 +16,6 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.Test.Controllers
         [HttpGet]
         public ResponseModel<User> Get()
         {
-            client.RegistTracing();
             var res = client.Invoke<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get2", new Rpc.IContractModel.RequestModel());
             return new ResponseModel<User>() { Data = new User { Name = "ResponseModel-Get", Desc = res.Data }, Code = 123 };
         }
@@ -27,7 +25,6 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.Test.Controllers
         [HttpPost]
         public ResponseModel<string> Get2()
         {
-            client.RegistTracing();
             var res = client.Invoke<Raven.Rpc.IContractModel.RequestModel, ResponseModel<string>>("api/test/get3", httpMethod: HttpMethod.Get);
             return new ResponseModel<string>() { Data = Guid.NewGuid().ToString() };
         }

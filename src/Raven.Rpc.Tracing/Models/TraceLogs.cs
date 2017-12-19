@@ -116,12 +116,7 @@ namespace Raven.Rpc.Tracing
         /// 环境
         /// </summary>
         public string Environment;
-
-        ///// <summary>
-        ///// 扩展
-        ///// </summary>
-        //public List<KeyValue<string, object>> Extension;
-
+        
         /// <summary>
         /// 扩展
         /// </summary>

@@ -13,7 +13,7 @@ namespace Raven.Rpc.Tracing.Owin
     /// <summary>
     /// 
     /// </summary>
-    public class HttpContextHelper : ITracingContextHelper
+    public class HttpContextHelper : IRequestContextHelper
     {
         /// <summary>
         /// 获取 HttpContextItem
@@ -21,14 +21,13 @@ namespace Raven.Rpc.Tracing.Owin
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public T GetContextItem<T>(string key)
+        public T GetContextItem<T>(IDictionary<string, object> environment, string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 return default(T);
 
             object obj;
-            IRequestScopeContext context = RequestScopeContext.GetCurrent();
-            if (context != null && context.Items.TryGetValue(key, out obj) && obj != null)
+            if (environment != null && environment.TryGetValue(key, out obj) && obj != null)
             {
                 return (T)obj;
             }
@@ -62,26 +61,6 @@ namespace Raven.Rpc.Tracing.Owin
 
             context.Items[key] = val;
         }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public string GetServerAddress()
-        {
-            string res = string.Empty;
-
-            //if (RequestScopeContext.Current != null)
-            //{
-            //    var environment = RequestScopeContext.Current.Environment as IDictionary<string, object>;
-            //    if (environment != null)
-            //    {
-            //        res = string.Concat(environment.GetValue("server.LocalIpAddress"), ":", environment.GetValue("server.LocalPort"));
-            //    }
-            //}
-
-            return res;
-        }
+        
     }
 }
