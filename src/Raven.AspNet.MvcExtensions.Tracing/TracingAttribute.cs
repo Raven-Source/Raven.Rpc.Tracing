@@ -20,17 +20,17 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <summary>
         /// 系统ID
         /// </summary>
-        public string systemID;
+        public string SystemID { get; set; }
 
         /// <summary>
         /// 系统名称
         /// </summary>
-        public string systemName;
+        public string SystemName { get; set; }
 
         /// <summary>
         /// 环境类型
         /// </summary>
-        public string environment;
+        public string Environment { get; set; }
 
         /// <summary>
         /// 
@@ -38,17 +38,16 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <param name="filterContext"></param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if ( //!filterContext.HasMarkerAttribute<NonTracingAttribute>() && 
-                filterContext.Controller is ITracingController tracingController)
+            if (!filterContext.HasMarkerAttribute<NonTracingAttribute>())
             {
-                var tracingContextHelper = tracingController.TracingContextHelper;
+                var tracingContext = filterContext.HttpContext.GetTracingContext();
                 var request = filterContext.HttpContext.Request;
                 var response = filterContext.HttpContext.Response;
 
-                Header reqHeader = tracingContextHelper.GetDefaultRequestHeader();
+                Header reqHeader = tracingContext.GetDefaultRequestHeader();
 
-                tracingContextHelper.SetSubRpcID(reqHeader.RpcID + ".0");
-                tracingContextHelper.SetRequestHeader(reqHeader);
+                tracingContext.SetSubRpcID(reqHeader.RpcID + ".0");
+                tracingContext.SetRequestHeader(reqHeader);
 
                 if (!filterContext.HasMarkerAttribute<NotToRecordAttribute>())
                 {
@@ -60,9 +59,9 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     trace.RpcId = reqHeader.RpcID;
                     trace.Protocol = request.Url.Scheme;
 
-                    trace.Environment = this.environment ?? EnvironmentConfig.Environment;
-                    trace.SystemID = this.systemID ?? EnvironmentConfig.SystemID;
-                    trace.SystemName = this.systemName ?? EnvironmentConfig.SystemName;
+                    trace.Environment = this.Environment ?? EnvironmentConfig.Environment;
+                    trace.SystemID = this.SystemID ?? EnvironmentConfig.SystemID;
+                    trace.SystemName = this.SystemName ?? EnvironmentConfig.SystemName;
 
                     //srs.InvokeID = string.Format("{0}_{1}", filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower(), filterContext.ActionDescriptor.ActionName.ToLower());
 
@@ -80,7 +79,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
 
                     TraceExtensionOnActionExecuting(filterContext, trace);
 
-                    tracingContextHelper.SetTraceLogs(trace);
+                    tracingContext.SetTraceLogs(trace);
                 }
             }
 
@@ -119,39 +118,38 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <param name="filterContext"></param>
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            if (//!filterContext.HasMarkerAttribute<NonTracingAttribute>()
-                filterContext.Controller is ITracingController tracingController)
+            if (!filterContext.HasMarkerAttribute<NonTracingAttribute>())
             {
+                var tracingContext = filterContext.HttpContext.GetTracingContext();
+                var request = filterContext.HttpContext.Request;
+                var trace = tracingContext.GetTraceLogs();
+
+                trace.EndTime = DateTime.Now;
+                trace.TimeLength = Math.Round((trace.EndTime - trace.StartTime).TotalMilliseconds, 4);
+                trace.IsException = false;
+                trace.IsSuccess = true;
+
+                if (filterContext.HttpContext.Response != null)
+                {
+                    filterContext.HttpContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, trace.TraceId);
+                }
+
+                //Exception
+                if (filterContext.Exception != null)
+                {
+                    trace.IsException = true;
+                    trace.IsSuccess = false;
+                    trace.Extensions.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(filterContext.Exception));
+                }
+
+                TraceExtensionOnActionExecuted(filterContext, trace);
+
                 if (!filterContext.HasMarkerAttribute<NotToRecordAttribute>())
                 {
-                    var tracingContextHelper = tracingController.TracingContextHelper;
-                    var request = filterContext.HttpContext.Request;
-                    var trace = tracingContextHelper.GetTraceLogs();
-
-                    trace.EndTime = DateTime.Now;
-                    trace.TimeLength = Math.Round((trace.EndTime - trace.StartTime).TotalMilliseconds, 4);
-                    trace.IsException = false;
-                    trace.IsSuccess = true;
-
-                    if (filterContext.HttpContext.Response != null)
-                    {
-                        filterContext.HttpContext.Response.Headers.Add(Config.ResponseHeaderTraceKey, trace.TraceId);
-                    }
-
-                    //Exception
-                    if (filterContext.Exception != null)
-                    {
-                        trace.IsException = true;
-                        trace.IsSuccess = false;
-                        trace.Extensions.Add(Config.ExceptionKey, Util.GetFullExceptionMessage(filterContext.Exception));
-                    }
-
-                    TraceExtensionOnActionExecuted(filterContext, trace);
-
                     Record(trace);
                 }
             }
-            
+
             base.OnActionExecuted(filterContext);
         }
 

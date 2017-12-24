@@ -53,16 +53,17 @@ namespace Raven.AspNet.MvcExtensions.Tracing
 
         void IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
         {
-            if (result.AsyncState is HttpContext context)
-            {
-                TracingContext.FreeContext(context.Items);
-            }
             try
             {
                 ((IHttpAsyncHandler)handler).EndProcessRequest(result);
             }
             finally
-            { }
+            {
+                if (result.AsyncState is HttpContext context)
+                {
+                    TracingContext.FreeContext(context.Items);
+                }
+            }
         }
 
         void IHttpHandler.ProcessRequest(HttpContext context)

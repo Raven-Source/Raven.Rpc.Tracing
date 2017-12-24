@@ -14,13 +14,13 @@ namespace Raven.Rpc.Tracing
     /// <summary>
     /// 
     /// </summary>
-    public class HttpContextHelper : IRequestContextHelper
+    public static class HttpContextHelper
     {
-        ITracingContext context;
-        public HttpContextHelper(ITracingContext context)
-        {
-            this.context = context;
-        }
+        //ITracingContext context;
+        //public HttpContextHelper(ITracingContext context)
+        //{
+        //    this.context = context;
+        //}
 
         /// <summary>
         /// 获取 HttpContextItem
@@ -28,7 +28,7 @@ namespace Raven.Rpc.Tracing
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public T GetContextItem<T>(string key)
+        public static T GetContextItem<T>(this ITracingContext context, string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 return default(T);
@@ -56,11 +56,11 @@ namespace Raven.Rpc.Tracing
         /// </summary>
         /// <param name="key"></param>
         /// <param name="val"></param>
-        public void SetContextItem( string key, object val)
+        public static void SetContextItem(this ITracingContext context, string key, object val)
         {
             if (string.IsNullOrWhiteSpace(key))
                 return;
-            
+
 
             if (context.Items == null)
                 return;

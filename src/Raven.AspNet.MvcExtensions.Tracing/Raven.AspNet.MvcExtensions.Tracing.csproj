@@ -76,11 +76,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControllerHandler.cs" />
+    <Compile Include="HttpContextExtensions.cs" />
+    <Compile Include="ITracingController.cs" />
     <Compile Include="TracingConfig.cs" />
     <Compile Include="FilterContextExtensions.cs" />
-    <Compile Include="ControllerHandler.cs" />
-    <Compile Include="ITracingController.cs" />
-    <Compile Include="NotToRecordAttribute.cs" />
+    <Compile Include="NonTracingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TracingAttribute.cs" />
     <Compile Include="TracingMvcHandler.cs" />

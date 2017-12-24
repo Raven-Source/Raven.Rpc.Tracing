@@ -63,9 +63,7 @@
     <Compile Include="Generate.cs" />
     <Compile Include="Helpers\DictionaryHelper.cs" />
     <Compile Include="Helpers\HttpContextHelper.cs" />
-    <Compile Include="Helpers\ITracingContextHelper.cs" />
     <Compile Include="Helpers\TracingContextHelper.cs" />
-    <Compile Include="Helpers\IRequestContextHelper.cs" />
     <Compile Include="Models\ContextType.cs" />
     <Compile Include="Models\LevelEnum.cs" />
     <Compile Include="Models\SystemLogs.cs" />

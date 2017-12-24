@@ -1,4 +1,5 @@
 ﻿using Raven.Rpc.Tracing;
+using Raven.Rpc.Tracing.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
 {
     public interface ITracingApiController
     {
-        ITracingContextHelper TracingContextHelper { get; set; }
+        ITracingContext TracingContext { get; set; }
     }
 }

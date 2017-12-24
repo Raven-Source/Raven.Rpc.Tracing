@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Raven.Rpc.Tracing.Context;
+using Raven.Rpc.Tracing.Record;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -11,7 +13,7 @@ namespace Raven.Rpc.Tracing
     /// <summary>
     /// 
     /// </summary>
-    public class TracingContextHelper : ITracingContextHelper
+    public static class TracingContextHelper
     {
         public const string RequestHeaderKey = "__raven_RequestHeader";
         public const string SubRpcIDKey = "__raven_SubRpcID";
@@ -19,21 +21,14 @@ namespace Raven.Rpc.Tracing
         public const string TraceKey = "__raven_Trace";
         //private const string TraceIDKey = "__raven_TraceID";
 
-        private IRequestContextHelper requestContextHelper;
-
-        public TracingContextHelper(IRequestContextHelper requestContextHelper)
-        {
-            this.requestContextHelper = requestContextHelper;
-        }
-
         /// <summary>
         ///                              
         /// </summary>
         /// <returns></returns>
-        public Rpc.IContractModel.Header GetRequestHeader()
+        public static Rpc.IContractModel.Header GetRequestHeader(this ITracingContext context)
         {
             //var requestHeader = HttpContext.Current.Items[RequestHeaderKey];
-            var requestHeader = this.requestContextHelper.GetContextItem<Rpc.IContractModel.Header>(RequestHeaderKey);
+            var requestHeader = context.GetContextItem<Rpc.IContractModel.Header>(RequestHeaderKey);
             if (requestHeader != null)
                 return requestHeader as Rpc.IContractModel.Header;
             else return null;
@@ -43,22 +38,22 @@ namespace Raven.Rpc.Tracing
         /// 
         /// </summary>
         /// <param name="header"></param>
-        public void SetRequestHeader(Rpc.IContractModel.Header header)
+        public static void SetRequestHeader(this ITracingContext context, Rpc.IContractModel.Header header)
         {
-            this.requestContextHelper.SetContextItem(RequestHeaderKey, header);
+            context.SetContextItem(RequestHeaderKey, header);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetSubRpcID()
+        public static string GetSubRpcID(this ITracingContext context)
         {
-            var subRpcID = this.requestContextHelper.GetContextItem<string>(SubRpcIDKey);
+            var subRpcID = context.GetContextItem<string>(SubRpcIDKey);
             if (subRpcID == null)
             {
                 subRpcID = "0";
-                this.requestContextHelper.SetContextItem(SubRpcIDKey, subRpcID);
+                context.SetContextItem(SubRpcIDKey, subRpcID);
                 //HttpContext.Current.Items[SubRpcIDKey] = subRpcID;
             }
             return subRpcID.ToString();
@@ -68,16 +63,16 @@ namespace Raven.Rpc.Tracing
         /// 
         /// </summary>
         /// <param name="val"></param>
-        public void SetSubRpcID(string val)
+        public static void SetSubRpcID(this ITracingContext context, string val)
         {
-            this.requestContextHelper.SetContextItem(SubRpcIDKey, val);
+            context.SetContextItem(SubRpcIDKey, val);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public Rpc.IContractModel.Header GetDefaultRequestHeader()
+        public static Rpc.IContractModel.Header GetDefaultRequestHeader(this ITracingContext context)
         {
             return new Rpc.IContractModel.Header()
             {
@@ -90,28 +85,85 @@ namespace Raven.Rpc.Tracing
         /// 
         /// </summary>
         /// <param name="trace"></param>
-        public void SetTraceLogs(TraceLogs trace)
+        public static void SetTraceLogs(this ITracingContext context, TraceLogs trace)
         {
-            this.requestContextHelper.SetContextItem(TraceKey, trace);
+            context.SetContextItem(TraceKey, trace);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public TraceLogs GetTraceLogs()
+        public static TraceLogs GetTraceLogs(this ITracingContext context)
         {
-            return this.requestContextHelper.GetContextItem<TraceLogs>(TraceKey);
+            return context.GetContextItem<TraceLogs>(TraceKey);
         }
 
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="context"></param>
         /// <returns></returns>
-        public string GetServerAddress()
+        public static string GetTraceId(this ITracingContext context)
         {
-            return this.requestContextHelper.GetContextItem<string>(LocalAddressKey);
-
+            var trace = GetTraceLogs(context);
+            if (trace != null)
+            {
+                return trace.TraceId;
+            }
+            return string.Empty;
         }
+
+        /// <summary>
+        /// AddTraceLogsExtensions
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static bool AddTraceLogsExtensions(this ITracingContext context, string key, object val)
+        {
+            var trace = GetTraceLogs(context);
+            if (trace != null)
+            {
+                //Extensions Max Count
+                if (trace.Extensions.Count < 50 && !trace.Extensions.ContainsKey(key))
+                {
+                    trace.Extensions[key] = val;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// RecordSystemLogs
+        /// </summary>
+        /// <param name="data"></param>
+        public static void RecordSystemLogs(this ITracingContext context, SystemLogs data)
+        {
+            data.SystemID = data.SystemID ?? EnvironmentConfig.SystemID;
+            data.SystemName = data.SystemName ?? EnvironmentConfig.SystemName;
+            data.Environment = data.Environment ?? EnvironmentConfig.Environment;
+            data.TraceId = data.TraceId ?? GetTraceId(context);
+
+            ServiceContainer.Resolve<ITracingRecord>().RecordSystemLogs(data);
+        }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetServerAddress(this ITracingContext context)
+        //{
+        //    return this.requestContextHelper.GetContextItem<string>(LocalAddressKey);
+
+        //}
     }
 }

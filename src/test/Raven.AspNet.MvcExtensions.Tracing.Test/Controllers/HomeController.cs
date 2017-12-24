@@ -9,9 +9,8 @@ using System.Web.Mvc;
 namespace Raven.AspNet.MvcExtensions.Tracing.Test.Controllers
 {
     [Tracing]
-    public class HomeController : Controller, Raven.AspNet.MvcExtensions.Tracing.ITracingController
+    public class HomeController : Controller
     {
-        public ITracingContextHelper TracingContextHelper { get; set; }
 
         public class A
         {

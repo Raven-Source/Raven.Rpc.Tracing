@@ -18,12 +18,12 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         /// <param name="environment"></param>
         public static void UseTracing(this HttpConfiguration config, ITracingRecord tracingRecord, string systemID = null, string systemName = null, string environment = null)
         {
-            HttpControllerHandler.Register();
-
-            //ServiceContainer.Register<ITracingContextHelper>(new HttpContextHelper());
             ServiceContainer.Register<ITracingRecord>(tracingRecord);
+
+            HttpControllerHandler.Register();
             config.UseHandlerHttpControllerActivator();
             config.MessageHandlers.Add(new TracingDelegatingHandler());
+            //ServiceContainer.Register<ITracingContextHelper>(new HttpContextHelper());
             //ServiceContainer.Register<IInitRequestScopeContext>(new InitRequestScopeContext());
 
             EnvironmentConfig.SystemID = systemID;

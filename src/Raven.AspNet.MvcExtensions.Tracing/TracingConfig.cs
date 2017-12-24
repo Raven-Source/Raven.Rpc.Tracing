@@ -28,6 +28,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
         /// <param name="environment"></param>
         public static void UseTracing(ControllerBuilder builder, RouteCollection routes , ITracingRecord tracingRecord, string systemID = null, string systemName = null, string environment = null)
         {
+            ServiceContainer.Register<ITracingRecord>(tracingRecord);
             ControllerHandler.Register();
             foreach (RouteBase routeBase in routes)
             {
@@ -39,10 +40,9 @@ namespace Raven.AspNet.MvcExtensions.Tracing
                     }
                 }
             }
-            //ServiceContainer.Register<ITracingContextHelper>(new HttpContextHelper());
-            ServiceContainer.Register<ITracingRecord>(tracingRecord);
-            //ServiceContainer.Register<IInitRequestScopeContext>(new InitRequestScopeContext());
             builder.UseHandlerControllerFactory();
+            //ServiceContainer.Register<ITracingContextHelper>(new HttpContextHelper());
+            //ServiceContainer.Register<IInitRequestScopeContext>(new InitRequestScopeContext());
 
             EnvironmentConfig.SystemID = systemID;
             EnvironmentConfig.SystemName = systemName;

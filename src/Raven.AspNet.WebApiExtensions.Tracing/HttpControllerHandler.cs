@@ -19,8 +19,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
             {
                 if (httpController is ITracingApiController tracingController)
                 {
-                    var context = TracingContext.GetContext(request.Properties);
-                    tracingController.TracingContextHelper = new TracingContextHelper(new HttpContextHelper(context));
+                    tracingController.TracingContext = TracingContext.GetContext(request.Properties);
                 }
             };
 
