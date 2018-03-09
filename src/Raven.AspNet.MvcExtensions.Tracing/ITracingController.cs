@@ -9,8 +9,14 @@ using System.Web.Mvc;
 
 namespace Raven.AspNet.MvcExtensions.Tracing
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ITracingController
     {
+        /// <summary>
+        /// 
+        /// </summary>
         ITracingContext TracingContext { get; set; }
 
         

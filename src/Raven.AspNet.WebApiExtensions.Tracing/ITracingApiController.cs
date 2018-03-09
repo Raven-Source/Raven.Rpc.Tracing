@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ITracingApiController
     {
+        /// <summary>
+        /// 
+        /// </summary>
         ITracingContext TracingContext { get; set; }
     }
 }

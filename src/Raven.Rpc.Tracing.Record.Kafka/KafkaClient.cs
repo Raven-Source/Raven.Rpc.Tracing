@@ -13,7 +13,6 @@ namespace Raven.Rpc.Tracing.Record
 
         public void ProduceAsync()
         {
-            Producer producer = new Producer(config);
 
         }
 

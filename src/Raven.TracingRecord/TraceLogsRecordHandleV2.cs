@@ -18,13 +18,13 @@ using System.Threading.Tasks;
 namespace Raven.TracingRecord
 {
 
-    public class TraceLogsRecordHandle : Handle
+    public class TraceLogsRecordHandleV2 : Handle
     {
         #region GetInstance
 
-        private static Lazy<TraceLogsRecordHandle> _instance = new Lazy<TraceLogsRecordHandle>(() => new TraceLogsRecordHandle("Raven.TracingRecord"));
+        private static Lazy<TraceLogsRecordHandleV2> _instance = new Lazy<TraceLogsRecordHandleV2>(() => new TraceLogsRecordHandleV2("Raven.TracingRecord"));
 
-        public static TraceLogsRecordHandle GetInstance
+        public static TraceLogsRecordHandleV2 GetInstance
         {
             get { return _instance.Value; }
         }
@@ -44,7 +44,7 @@ namespace Raven.TracingRecord
         TraceLogsRep traceLogsRep;
         IDisposable model;
 
-        public TraceLogsRecordHandle(string serverName)
+        public TraceLogsRecordHandleV2(string serverName)
             : base(serverName, 1000)
         {
             traceLogsRep = new TraceLogsRep();
@@ -140,6 +140,7 @@ namespace Raven.TracingRecord
         //    }
         //}
 
+        private const string raven_trace_logs = "raven_trace_logsv2";
 
         /// <summary>
         /// 调用方法
@@ -151,7 +152,7 @@ namespace Raven.TracingRecord
                 //json序列化后，日期为字符串，进mongodb数据库有问题
 
                 Console.WriteLine("ReceiveBatch:{0}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"));
-                var list = RabbitMQClientManager.GetInstance.rabbitMQClient.ReceiveBatch<Raven.TracingRecord.Models.TraceLos_Temp>(Config.TraceLogsQueueName, noAck: true);
+                var list = RabbitMQClientManager.GetInstance.rabbitMQClient.ReceiveBatch<Raven.TracingRecord.Models.TraceLos_Temp>(raven_trace_logs, noAck: true);
                 Console.WriteLine("ReceiveBatch End:{0}", DateTime.Now.ToString("yyyyMMdd HH:mm:ss.fff"));
                 var logs = new List<MongoDB.Bson.BsonDocument>();
 

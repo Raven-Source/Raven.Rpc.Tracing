@@ -100,7 +100,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RabbitMQClientManager.cs" />
     <Compile Include="RabbitMQConfig.cs" />
-    <Compile Include="TraceLogsRecordHandle.cs" />
+    <Compile Include="TraceLogsRecordHandleV3.cs" />
+    <Compile Include="TraceLogsRecordHandleV2.cs" />
     <Compile Include="TraceLogsRecordHandleV1.cs" />
     <Compile Include="DataAccess\TraceLogs.cs" />
     <Compile Include="DataAccess\TraceLogsRep.cs" />

@@ -16,15 +16,17 @@ namespace Raven.Rpc.Tracing
         /// <summary>
         /// 
         /// </summary>
-        public const string TraceLogsQueueNameV1 = "raven_trace_logs";
+        //public const string TraceLogsQueueNameV1 = "raven_trace_logs";
+        
+        /// <summary>
+        /// 
+        /// </summary
+        public static readonly string TraceLogsQueueName = "raven_trace_logs_v3";
+
         /// <summary>
         /// 
         /// </summary>
-        public const string TraceLogsQueueName = "raven_trace_logsv2";
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string SystemLogsQueueName = "raven_sys_logs";
+        public static readonly string SystemLogsQueueName = "raven_sys_logs";
 
         /// <summary>
         /// 

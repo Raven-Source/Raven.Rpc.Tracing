@@ -10,13 +10,13 @@ namespace Raven.TracingRecord.HostConsole
     {
         static void Main(string[] args)
         {
-            TraceLogsRecordHandle.GetInstance.Run();
+            TraceLogsRecordHandleV2.GetInstance.Run();
             //TraceLogsRecordHandleV1.GetInstance.Run();
             SystemLogRecordHandle.GetInstance.Run();
 
             Console.WriteLine("start...");
             Console.ReadLine();
-            TraceLogsRecordHandle.GetInstance.Stop();
+            TraceLogsRecordHandleV2.GetInstance.Stop();
             //TraceLogsRecordHandleV1.GetInstance.Stop();
             SystemLogRecordHandle.GetInstance.Stop();
             Console.WriteLine("stop...");
