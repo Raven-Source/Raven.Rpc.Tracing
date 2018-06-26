@@ -56,11 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\HexUtil.cs" />
+    <Compile Include="Common\SerialVersion.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Context\IInitRequestTracingContext.cs" />
     <Compile Include="Context\ITracingContext.cs" />
     <Compile Include="EnvironmentConfig.cs" />
-    <Compile Include="Generate.cs" />
     <Compile Include="Helpers\DictionaryHelper.cs" />
     <Compile Include="Helpers\HttpContextHelper.cs" />
     <Compile Include="Helpers\TracingContextHelper.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Models\LevelEnum.cs" />
     <Compile Include="Models\SystemLogs.cs" />
     <Compile Include="Models\TraceLogs.cs" />
+    <Compile Include="Common\GenerateId.cs" />
     <Compile Include="Record\ITracingRecord.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="ServiceContainer.cs" />

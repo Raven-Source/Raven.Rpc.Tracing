@@ -54,16 +54,14 @@ namespace Raven.Rpc.Tracing
         //    return (token1 + token2).Substring(0, 32);
         //}
 
-        ///// <summary>
-        ///// 获取32位唯一字符串
-        ///// </summary>
-        ///// <returns></returns>
-        //public static string GetUniqueCode22()
-        //{
-        //    var guid1 = GetGuidArray();
-        //    var token1 = Convert.ToBase64String(guid1).TrimEnd('=').Replace("/", "_").Replace("+", "-");
-        //    return token1;
-        //}
+        /// <summary>
+        /// 获取24位唯一字符串
+        /// </summary>
+        /// <returns></returns>
+        public static string GetGenerateId()
+        {
+            return GenerateId.GenerateNewId().ToString();
+        }
 
         /// <summary>
         /// 
@@ -90,35 +88,35 @@ namespace Raven.Rpc.Tracing
             return guidArray;
         }
 
-        /// <summary>
-        /// 版本号自增（eg:1.4.3）
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
-        public static string VersionIncr(string val)
-        {
-            if (string.IsNullOrWhiteSpace(val))
-                return "1";
+        ///// <summary>
+        ///// 版本号自增（eg:1.4.3）
+        ///// </summary>
+        ///// <param name="val"></param>
+        ///// <returns></returns>
+        //public static string VersionIncr(string val)
+        //{
+        //    if (string.IsNullOrWhiteSpace(val))
+        //        return "1";
 
-            var i = val.LastIndexOf('.');
-            if (i >= 0)
-            {
-                var ver = val.Substring(i + 1);
-                if (string.IsNullOrEmpty(ver))
-                {
-                    val = val.Substring(0, i + 1) + "1";
-                }
-                else
-                {
-                    val = val.Substring(0, i + 1) + (int.Parse(ver) + 1);
-                }
-                return val;
-            }
-            else
-            {
-                return (int.Parse(val) + 1).ToString();
-            }
-        }
+        //    var i = val.LastIndexOf('.');
+        //    if (i >= 0)
+        //    {
+        //        var ver = val.Substring(i + 1);
+        //        if (string.IsNullOrEmpty(ver))
+        //        {
+        //            val = val.Substring(0, i++) + "1";
+        //        }
+        //        else
+        //        {
+        //            val = val.Substring(0, i++) + (int.Parse(ver) + 1);
+        //        }
+        //        return val;
+        //    }
+        //    else
+        //    {
+        //        return (int.Parse(val) + 1).ToString();
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -245,5 +243,6 @@ namespace Raven.Rpc.Tracing
             }
             return default(T);
         }
+
     }
 }

@@ -58,8 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpControllerHandler.cs" />
-    <Compile Include="HttpRequestMessageExtensions.cs" />
+    <Compile Include="TracingContextExtensions.cs" />
     <Compile Include="ITracingApiController.cs" />
     <Compile Include="TracingConfig.cs" />
     <Compile Include="HttpActionContextExtensions.cs" />

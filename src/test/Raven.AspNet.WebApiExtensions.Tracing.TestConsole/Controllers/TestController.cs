@@ -13,7 +13,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole.Controllers
     [Tracing]
     public class TestController : ApiController, ITracingApiController
     {
-        Rpc.HttpProtocol.RpcHttpClient client = new Rpc.HttpProtocol.RpcHttpClient("http://127.0.0.1:9001/");
+        private static Rpc.HttpProtocol.RpcHttpClient client = new Rpc.HttpProtocol.RpcHttpClient("http://127.0.0.1:9001/");
 
         public ITracingContext TracingContext { get; set; }
 

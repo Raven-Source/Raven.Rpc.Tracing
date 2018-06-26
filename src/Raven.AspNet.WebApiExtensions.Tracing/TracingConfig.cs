@@ -20,8 +20,8 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         {
             ServiceContainer.Register<ITracingRecord>(tracingRecord);
 
-            HttpControllerHandler.Register();
-            config.UseHandlerHttpControllerActivator();
+            //HttpControllerHandler.Register();
+            //config.UseHandlerHttpControllerActivator();
             config.MessageHandlers.Add(new TracingDelegatingHandler());
             //ServiceContainer.Register<ITracingContextHelper>(new HttpContextHelper());
             //ServiceContainer.Register<IInitRequestScopeContext>(new InitRequestScopeContext());

@@ -1,4 +1,5 @@
 ﻿using System.Web.Http.Controllers;
+using System.Linq;
 
 namespace Raven.AspNet.WebApiExtensions.Tracing
 {
@@ -16,8 +17,8 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
         public static bool HasMarkerAttribute<T>(this HttpActionContext that)
             where T : class
         {
-            return that.ActionDescriptor.GetCustomAttributes<T>().Count > 0
-                || that.ActionDescriptor.ControllerDescriptor.GetCustomAttributes<T>().Count > 0;
+            return that.ActionDescriptor.GetCustomAttributes<T>().Any()
+                || that.ActionDescriptor.ControllerDescriptor.GetCustomAttributes<T>().Any();
         }
         
     }

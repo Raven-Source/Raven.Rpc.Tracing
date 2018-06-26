@@ -46,7 +46,7 @@ namespace Raven.AspNet.MvcExtensions.Tracing
 
                 Header reqHeader = tracingContext.GetDefaultRequestHeader();
 
-                tracingContext.SetSubRpcID(reqHeader.RpcID + ".0");
+                tracingContext.SetSubRpcID(SerialVersion.Parse(reqHeader.RpcID).AugmentSerialNum());
                 tracingContext.SetRequestHeader(reqHeader);
 
                 if (!filterContext.HasMarkerAttribute<NotToRecordAttribute>())

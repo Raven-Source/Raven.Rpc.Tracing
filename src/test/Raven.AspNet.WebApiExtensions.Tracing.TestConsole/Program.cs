@@ -1,4 +1,5 @@
 ﻿using Owin;
+using Raven.Rpc.Tracing;
 using Raven.Rpc.Tracing.Record;
 using Raven.Rpc.Tracing.Record.Mongo;
 using Raven.Rpc.Tracing.Record.RabbitMQ;
@@ -13,7 +14,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
     {
         static void Main(string[] args)
         {
-            var host = "http://127.0.0.1:9001/";
+            var host = "http://*:9001/";
             Console.WriteLine("host: " + host);
             using (Microsoft.Owin.Hosting.WebApp.Start<Startup>(host))
             {
@@ -73,7 +74,8 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
             // 默认返回Json数据
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
-            config.UseTracing(new TracingRecordMongo());
+            //config.UseTracing(new TracingRecordMongo());
+            config.UseTracing(new NoneTracingRecord());
             //config.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()), systemID, systemName, "0");
             //appBuilder.UseTracingContext(new Raven.Rpc.Tracing.Record.TracingRecordKafka("121.43.149.229:9092,115.29.199.22:9092,115.29.204.19:9092"), systemID, systemName, "0");
 
@@ -83,4 +85,16 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
             //appBuilder.Use(
         }
     }
+
+    public class NoneTracingRecord : ITracingRecord
+    {
+        public void RecordSystemLogs(SystemLogs data)
+        {
+        }
+
+        public void RecordTraceLog(TraceLogs data)
+        {
+        }
+    }
+
 }

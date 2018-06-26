@@ -50,7 +50,7 @@ namespace Raven.TracingRecord
             traceLogsRep = new TraceLogsRep();
         }
 
-        private const string raven_trace_logs = Config.TraceLogsQueueName;
+        private readonly string raven_trace_logs = Config.TraceLogsQueueName;
 
         /// <summary>
         /// 调用方法

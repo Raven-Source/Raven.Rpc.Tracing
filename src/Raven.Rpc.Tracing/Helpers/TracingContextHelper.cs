@@ -47,23 +47,23 @@ namespace Raven.Rpc.Tracing
         /// 
         /// </summary>
         /// <returns></returns>
-        public static string GetSubRpcID(this ITracingContext context)
+        public static SerialVersion GetSubRpcID(this ITracingContext context)
         {
-            var subRpcID = context.GetContextItem<string>(SubRpcIDKey);
+            var subRpcID = context.GetContextItem<SerialVersion>(SubRpcIDKey);
             if (subRpcID == null)
             {
-                subRpcID = "0";
+                subRpcID = SerialVersion.GetDefalut();
                 context.SetContextItem(SubRpcIDKey, subRpcID);
                 //HttpContext.Current.Items[SubRpcIDKey] = subRpcID;
             }
-            return subRpcID.ToString();
+            return subRpcID;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="val"></param>
-        public static void SetSubRpcID(this ITracingContext context, string val)
+        public static void SetSubRpcID(this ITracingContext context, SerialVersion val)
         {
             context.SetContextItem(SubRpcIDKey, val);
         }
@@ -77,7 +77,7 @@ namespace Raven.Rpc.Tracing
             return new Rpc.IContractModel.Header()
             {
                 RpcID = "0",
-                TraceID = Generate.GenerateId() //Util.GetUniqueCode32()
+                TraceID = Util.GetGenerateId()// Generate.GenerateId() //Util.GetUniqueCode32()
             };
         }
 

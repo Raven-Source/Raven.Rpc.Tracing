@@ -3,36 +3,68 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Raven.Rpc.Tracing.Test
 {
     [TestClass]
     public class UtilTest
     {
+        //[TestMethod]
+        //public void VersionIncr()
+        //{
+        //    string res = null;
+        //    res = Util.VersionIncr("");
+
+        //    StringAssert.Equals(res, "1");
+
+        //    res = Util.VersionIncr("5");
+        //    StringAssert.Equals(res, "6");
+
+        //    res = Util.VersionIncr("1.2.5");
+        //    StringAssert.Equals(res, "1.2.6");
+
+        //    res = Util.VersionIncr("1.2.0");
+        //    StringAssert.Equals(res, "1.2.1");
+
+        //    res = Util.VersionIncr("1.2.");
+        //    StringAssert.Equals(res, "1.2.1");
+        //}
+
+
         [TestMethod]
-        public void VersionIncr()
+        public void SerialVersionTest()
         {
-            string res = null;
-            res = Util.VersionIncr("");
+            SerialVersion res = null;
+            res = SerialVersion.Parse("");
+            res.IncreaseLeastNum();
 
             StringAssert.Equals(res, "1");
 
-            res = Util.VersionIncr("5");
+            res = SerialVersion.Parse("5");
+            res.IncreaseLeastNum();
             StringAssert.Equals(res, "6");
 
-            res = Util.VersionIncr("1.2.5");
+            res = SerialVersion.Parse("1.2.5");
+            res.IncreaseLeastNum();
             StringAssert.Equals(res, "1.2.6");
 
-            res = Util.VersionIncr("1.2.0");
+            res = SerialVersion.Parse("1.2.0");
+            res.IncreaseLeastNum();
             StringAssert.Equals(res, "1.2.1");
 
-            res = Util.VersionIncr("1.2.");
+            res = SerialVersion.Parse("1.2.");
+            res.IncreaseLeastNum();
             StringAssert.Equals(res, "1.2.1");
         }
 
         [TestMethod]
         public void GetUniqueCode16()
         {
+            int code = int.MaxValue;
+            int increment = Interlocked.Increment(ref code) & 0x00ffffff;
+
+
             //string res = null;
             //res = Util.GetUniqueCode22();
 
@@ -55,7 +87,7 @@ namespace Raven.Rpc.Tracing.Test
                 var t = Task.Run(() =>
                 {
                     //string id = Guid.NewGuid().ToString();
-                    string id = Generate.GenerateId();
+                    string id = Util.GetGenerateId(); //Generate.GenerateId();
                     queue.Enqueue(id);
                     if (dict.TryAdd(id, id))
                     {

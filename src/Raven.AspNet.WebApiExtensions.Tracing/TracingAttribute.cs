@@ -79,7 +79,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     reqHeader = reqModel.Header;
                     if (string.IsNullOrWhiteSpace(reqHeader.TraceID))
                     {
-                        reqHeader.TraceID = Generate.GenerateId();// Util.GetUniqueCode32();
+                        reqHeader.TraceID = Util.GetGenerateId(); //Generate.GenerateId();// Util.GetUniqueCode32();
                     }
                     if (string.IsNullOrWhiteSpace(reqHeader.RpcID))
                     {
@@ -96,7 +96,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing
                     reqHeader = tracingContext.GetDefaultRequestHeader();
                     //HttpContentData.SetTrackID(reqHeader.TraceID);
                 }
-                tracingContext.SetSubRpcID(reqHeader.RpcID + ".0");
+                tracingContext.SetSubRpcID(SerialVersion.Parse(reqHeader.RpcID).AugmentSerialNum());
                 tracingContext.SetRequestHeader(reqHeader);
                 //HttpContentData.RequestHeader = reqHeader;
 
