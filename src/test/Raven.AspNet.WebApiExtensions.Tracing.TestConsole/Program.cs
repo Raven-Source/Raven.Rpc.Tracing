@@ -76,7 +76,7 @@ namespace Raven.AspNet.WebApiExtensions.Tracing.TestConsole
 
             //config.UseTracing(new TracingRecordMongo());
             config.UseTracing(new NoneTracingRecord());
-            //config.UseTracingContext(new TracingRecordRabbitmq(hostName, username, password, new Loger()), systemID, systemName, "0");
+            //config.UseTracing(new TracingRecordRabbitmq(hostName, username, password, new Loger()), systemID, systemName, "0");
             //appBuilder.UseTracingContext(new Raven.Rpc.Tracing.Record.TracingRecordKafka("121.43.149.229:9092,115.29.199.22:9092,115.29.204.19:9092"), systemID, systemName, "0");
 
             appBuilder.UseWebApi(config);

@@ -580,7 +580,6 @@ namespace Raven.Rpc.Tracing.Record.RabbitMQ
             while (true)
             {
                 StrongBox<QueueMessage> item = _queue.Take();
-                Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
                 QueueMessage qm = item.Value;
                 item.Value = null;
 
