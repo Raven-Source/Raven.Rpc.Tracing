@@ -120,10 +120,6 @@
       <Project>{579db6c5-3baf-406f-81ab-551f5f885a7a}</Project>
       <Name>Raven.AspNet.WebApiExtensions.Tracing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Raven.Rpc.HttpProtocol.Tracing\Raven.Rpc.HttpProtocol.Tracing.csproj">
-      <Project>{3413e680-837e-4bd8-9c37-728359b32c13}</Project>
-      <Name>Raven.Rpc.HttpProtocol.Tracing</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Raven.Rpc.Tracing.Owin\Raven.Rpc.Tracing.Owin.csproj">
       <Project>{d3acd237-2f03-4909-ac7d-7c9f0db8b909}</Project>
       <Name>Raven.Rpc.Tracing.Owin</Name>
